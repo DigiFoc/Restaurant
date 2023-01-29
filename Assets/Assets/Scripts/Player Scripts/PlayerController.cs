@@ -58,11 +58,35 @@ public class PlayerController : MonoBehaviour
                 SetDestination(Destinations[2]);
             }
         }
+
+        //For Reaching the nearest Customer
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            GoToCustomer();
+        }
     }
 
     public void SetDestination(Transform destination)
     {
         theAgent.SetDestination(destination.position);
+    }
+
+    public void GoToCustomer()
+    {
+        GameObject[] allCustomers = GameObject.FindGameObjectsWithTag("Customer");
+        float minDistance = 100000;
+        int customerNo = 0;
+        for (int i = 0; i < allCustomers.Length; i++)
+        {
+            float distance = Vector3.Distance(allCustomers[i].transform.position, this.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                customerNo = i;
+            }
+        }
+
+        SetDestination(allCustomers[customerNo].transform);
     }
 
     

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb4989377ebf474c850a7d39051da1f, type: 3}
+  m_Name: CustomersData
+  m_EditorClassIdentifier: 
+  maleCustomersModel:
+  - {fileID: 919132149155446097, guid: f78c644d6081dca4fa01e40c0cb050a1, type: 3}
+  - {fileID: 919132149155446097, guid: c2d406c28bfe0cc43ac126b7b7a8588d, type: 3}
+  - {fileID: 919132149155446097, guid: cbbb7a5986450e34e90ccd468e219f61, type: 3}
+  femaleCustomersModel:
+  - {fileID: 919132149155446097, guid: 811878eff63616346b9cd58278b9f7f8, type: 3}
+  - {fileID: 919132149155446097, guid: eabcc7bcef0a2a64ab5fbf96bfdf853d, type: 3}
+  - {fileID: 919132149155446097, guid: dd8b1686761668744a1d87da969299c2, type: 3}
+  maleCustomerNames:
+  - Balveer
+  - Nitin
+  - Paras
+  - Amman
+  - Ayush
+  femaleCustomersNames:
+  - Kriti
+  - Radhika
