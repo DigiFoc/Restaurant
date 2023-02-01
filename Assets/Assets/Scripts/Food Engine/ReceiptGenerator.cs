@@ -2,427 +2,281 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
-
 
 public class ReceiptGenerator : MonoBehaviour
 {
-    [Header("Connect it to level Manager")]
-    public int maxSlots = 2; 
-    [System.Serializable]
-    public class Slot
-    {
-        public bool isOccupied = false;
-        public string name = "";
-        public int quantity = 0;
-        public int amount = 0;
-    }
-    [SerializeField]
-
-    public TMP_Text[] slotsText = new TMP_Text[4] ;
-
-    public Slot[] slots = new Slot[4];
-
+    int MaxSlots = 2;
+    int CurrSlots = 0;
+    public Transform TextHolder;
+    public GameObject ItemPrefab;
+    public TMP_Text GrandTotal;
+    int amount = 0;
     public GameObject limitWarning;
-    public GameObject totalAmount;
-    public int total; //This is total Amount
-    int i = 0;
-    
-    
-     
+
+    public static ReceiptGenerator Instance { get; set; }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     void Start()
     {
-        
+        GrandTotal.text = "Total Rs. 0";
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MakeAmount()
     {
-        
+        StartCoroutine(FetchAmount());
     }
 
-   
-
-    public void GetPotato(int quantity)
+    public IEnumerator FetchAmount()
     {
-         i = 0;
-
-        //Find If Any Is Already Present
-        foreach (Slot  slot in slots)
+        yield return new WaitForSeconds(0.2f);
+        int childrenCount = TextHolder.transform.childCount;
+        amount = 0;
+        for (int i = 0; i < childrenCount; i++)
         {
-            i += 1;
-            if (slot.name.Equals("Potato    "))
-            {
-                slot.quantity += quantity;
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.potato;
-             
-                UpdateUI(i);
-                DoTotal();
-                return;
-            }
-           
+            amount = amount + TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().amount;
+            Debug.Log(amount);
         }
-        i = 0;
+        GrandTotal.text = "Total Rs. " + amount.ToString();
+        CurrSlots = childrenCount;
 
-        foreach (Slot slot in slots)
-        {
-            i = i + 1;
-            if (!slot.isOccupied)
-            {
-                if (i > maxSlots)
-                {
-                    StartCoroutine(ShowWarning());
-                    return;
-                }
-                slot.isOccupied = true;
-                slot.name = "Potato    ";
-                slot.quantity += quantity;
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.potato;
-                UpdateUI(i);
-                DoTotal();
-                return;
-            }
-        }
+
     }
 
-    public void GetFlour(int quantity)
+    public void AddPotato(int count)
     {
-         i = 0;
-
-        //Find If Any Is Already Present
-        foreach (Slot slot in slots)
+        string Objname = "Potato";
+        int childrenCount = TextHolder.transform.childCount;
+        for (int i = 0; i < childrenCount; i++)
         {
-            i += 1;
-            if (slot.name.Equals("Flour     "))
+            if (TextHolder.transform.GetChild(i).name == Objname)
             {
-                slot.isOccupied = true;
-                slot.quantity += quantity;
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.flour;
-                UpdateUI(i);
-                DoTotal();
-                return;
-            }
-
-        }
-        i = 0;
-
-        foreach (Slot slot in slots)
-        {
-            i = i + 1;
-            if (!slot.isOccupied)
-            {
-                if(i > maxSlots)
-                {
-                    
-                    StartCoroutine(ShowWarning());
-                    return;
-                }
-                slot.isOccupied = true;
-                slot.name = "Flour     ";
-                slot.quantity += quantity;
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.flour;
-                UpdateUI(i);
-                DoTotal();
+                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
                 return;
             }
         }
+        if (CurrSlots < MaxSlots)
+        {
+            GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
+            ItemManager.name = Objname;
+            ItemManager.GetComponent<ItemHandler>().name = Objname;
+            ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=0>");
+            ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+        }
+        else
+        {
+            StartCoroutine(ShowWarning());
+        }
+
     }
 
-    public void GetSpice(int quantity)
+    public void AddFlour(int count)
     {
-         i = 0;
-
-        //Find If Any Is Already Present
-        foreach (Slot slot in slots)
+        string Objname = "Flour";
+        int childrenCount = TextHolder.transform.childCount;
+        for (int i = 0; i < childrenCount; i++)
         {
-            i += 1;
-            if (slot.name.Equals("Spice     "))
+            if (TextHolder.transform.GetChild(i).name == Objname)
             {
-                slot.isOccupied = true;
-                slot.quantity += quantity;
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.spice;
-                UpdateUI(i);
-                DoTotal();
-                return;
-            }
-
-        }
-        i = 0;
-
-        foreach (Slot slot in slots)
-        {
-            i = i + 1;
-            if (!slot.isOccupied)
-            {
-                if (i > maxSlots)
-                {
-                    StartCoroutine(ShowWarning());
-                    return;
-                }
-                slot.isOccupied = true;
-                slot.name = "Spice     ";
-                slot.quantity += quantity;
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.spice;
-                UpdateUI(i);
-                DoTotal();
+                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
                 return;
             }
         }
+        if (CurrSlots < MaxSlots)
+        {
+            GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
+            ItemManager.name = Objname;
+            ItemManager.GetComponent<ItemHandler>().name = Objname;
+            ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=1>");
+            ItemManager.GetComponent<ItemHandler>().AssignPrice(30);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+        }
+        else
+        {
+            StartCoroutine(ShowWarning());
+        }
+
     }
 
-    public void GetOil(int quantity)
+    public void AddSpice(int count)
     {
-        i = 0;
-
-        //Find If Any Is Already Present
-        foreach (Slot slot in slots)
+        string Objname = "Spice";
+        int childrenCount = TextHolder.transform.childCount;
+        for (int i = 0; i < childrenCount; i++)
         {
-            i += 1;
-            if (slot.name.Equals("Oil       "))
+            if (TextHolder.transform.GetChild(i).name == Objname)
             {
-                slot.isOccupied = true;
-                slot.quantity += quantity;
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.oil;
-                UpdateUI(i);
-                DoTotal();
-                return;
-            }
-
-        }
-        i = 0;
-
-        foreach (Slot slot in slots)
-        {
-            i = i + 1;
-            if (!slot.isOccupied)
-            {
-                if (i > maxSlots)
-                {
-                    StartCoroutine(ShowWarning());
-                    return;
-                }
-                slot.isOccupied = true;
-                slot.name = "Oil       ";
-                slot.quantity += quantity;
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.oil;
-                UpdateUI(i);
-                DoTotal();
+                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
                 return;
             }
         }
+        if (CurrSlots < MaxSlots)
+        {
+            GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
+            ItemManager.name = Objname;
+            ItemManager.GetComponent<ItemHandler>().name = Objname;
+            ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=2>");
+            ItemManager.GetComponent<ItemHandler>().AssignPrice(1);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+        }
+        else
+        {
+            StartCoroutine(ShowWarning());
+        }
+
     }
 
-    public void GetBesan(int quantity)
+    public void AddOil(int count)
     {
-        i = 0;
-
-        //Find If Any Is Already Present
-        foreach (Slot slot in slots)
+        string Objname = "Oil";
+        int childrenCount = TextHolder.transform.childCount;
+        for (int i = 0; i < childrenCount; i++)
         {
-            i += 1;
-            if (slot.name.Equals("Besan     "))
+            if (TextHolder.transform.GetChild(i).name == Objname)
             {
-                slot.isOccupied = true;
-                slot.quantity += quantity;
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.besan;
-                UpdateUI(i);
-                DoTotal();
-                return;
-            }
-
-        }
-        i = 0;
-
-        foreach (Slot slot in slots)
-        {
-            i = i + 1;
-            if (!slot.isOccupied)
-            {
-                if (i > maxSlots)
-                {
-                    StartCoroutine(ShowWarning());
-                    return;
-                }
-                slot.isOccupied = true;
-                slot.name = "Besan     ";
-                slot.quantity += quantity;
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.besan;
-                UpdateUI(i);
-                DoTotal();
+                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
                 return;
             }
         }
+        if (CurrSlots < MaxSlots)
+        {
+            GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
+            ItemManager.name = Objname;
+            ItemManager.GetComponent<ItemHandler>().name = Objname;
+            ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=3>");
+            ItemManager.GetComponent<ItemHandler>().AssignPrice(180);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+        }
+        else
+        {
+            StartCoroutine(ShowWarning());
+        }
+
     }
 
-    public void GetSugar(int quantity)
+    public void AddBesan(int count)
     {
-        i = 0;
-
-        //Find If Any Is Already Present
-        foreach (Slot slot in slots)
+        string Objname = "Besan";
+        int childrenCount = TextHolder.transform.childCount;
+        for (int i = 0; i < childrenCount; i++)
         {
-            i += 1;
-            if (slot.name.Equals("Sugar     "))
+            if (TextHolder.transform.GetChild(i).name == Objname)
             {
-                slot.isOccupied = true;
-                slot.quantity += quantity;
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.sugar;
-                UpdateUI(i);
-                DoTotal();
-                return;
-            }
-
-        }
-        i = 0;
-
-        foreach (Slot slot in slots)
-        {
-            i = i + 1;
-            if (!slot.isOccupied)
-            {
-                if (i > maxSlots)
-                {
-                    StartCoroutine(ShowWarning());
-                    return;
-                }
-                slot.isOccupied = true;
-                slot.name = "Sugar     ";
-                slot.quantity += quantity;
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.sugar;
-                UpdateUI(i);
-                DoTotal();
+                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
                 return;
             }
         }
+        if (CurrSlots < MaxSlots)
+        {
+            GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
+            ItemManager.name = Objname;
+            ItemManager.GetComponent<ItemHandler>().name = Objname;
+            ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=4>");
+            ItemManager.GetComponent<ItemHandler>().AssignPrice(80);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+        }
+        else
+        {
+            StartCoroutine(ShowWarning());
+        }
+
     }
 
-    public void GetTeaLeaves(int quantity)
+    public void AddSugar(int count)
     {
-        i = 0;
-
-        //Find If Any Is Already Present
-        foreach (Slot slot in slots)
+        string Objname = "Sugar";
+        int childrenCount = TextHolder.transform.childCount;
+        for (int i = 0; i < childrenCount; i++)
         {
-            i += 1;
-            if (slot.name.Equals("Tea Leaves"))
+            if (TextHolder.transform.GetChild(i).name == Objname)
             {
-                slot.isOccupied = true;
-                slot.quantity += quantity;
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.tea_leaves;
-                UpdateUI(i);
-                DoTotal();
-                return;
-            }
-
-        }
-        i = 0;
-
-        foreach (Slot slot in slots)
-        {
-            i = i + 1;
-            if (!slot.isOccupied)
-            {
-                if (i > maxSlots)
-                {
-                    StartCoroutine(ShowWarning());
-                    return;
-                }
-                slot.isOccupied = true;
-                slot.name = "Tea Leaves";
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.tea_leaves;
-                slot.quantity += quantity;
-                UpdateUI(i);
-                DoTotal();
+                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
                 return;
             }
         }
+        if (CurrSlots < MaxSlots)
+        {
+            GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
+            ItemManager.name = Objname;
+            ItemManager.GetComponent<ItemHandler>().name = Objname;
+            ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=5>");
+            ItemManager.GetComponent<ItemHandler>().AssignPrice(40);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+        }
+        else
+        {
+            StartCoroutine(ShowWarning());
+        }
     }
 
-    public void GetMilk(int quantity)
+    public void AddTeaLeaves(int count)
     {
-        i = 0;
-
-        //Find If Any Is Already Present
-        foreach (Slot slot in slots)
+        string Objname = "TeaLeaves";
+        int childrenCount = TextHolder.transform.childCount;
+        for (int i = 0; i < childrenCount; i++)
         {
-            i += 1;
-            if (slot.name.Equals("Milk      "))
+            if (TextHolder.transform.GetChild(i).name == Objname)
             {
-                slot.isOccupied = true;
-                slot.quantity += quantity;
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.milk;
-                UpdateUI(i);
-                DoTotal();
-                return;
-            }
-
-        }
-        i = 0;
-
-        foreach (Slot slot in slots)
-        {
-            i = i + 1;
-            if (!slot.isOccupied)
-            {
-                if (i > maxSlots)
-                {
-                    StartCoroutine(ShowWarning());
-                    return;
-                }
-                slot.isOccupied = true;
-                slot.name = "Milk      ";
-                slot.quantity += quantity;
-                slot.amount = slot.quantity * StockInventory.Instance.ingredientsPrice.milk;
-                UpdateUI(i);
-                DoTotal();
+                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
                 return;
             }
         }
-    }
-
-
-    void UpdateUI(int slotNo)
-    {
-
-       
-        slotsText[slotNo-1].text =   slots[slotNo-1].name.ToString() + " \t" + slots[slotNo-1].quantity.ToString() +"\t \t"+ slots[slotNo-1].amount.ToString();
-
-        
-    }
-
-    void DoTotal()
-    {
-        total = 0;
-        foreach (Slot slot in slots)
+        if (CurrSlots < MaxSlots)
         {
-            total += slot.amount;
-
+            GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
+            ItemManager.name = Objname;
+            ItemManager.GetComponent<ItemHandler>().name = Objname;
+            ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=6>");
+            ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
         }
-        totalAmount.GetComponent<Text>().text = "Total :- " + total.ToString();
-    }
-
-    public void RemoveAll()
-    {
-        i = 0;
-        foreach (Slot slot in slots)
+        else
         {
-            i++;
-            slot.isOccupied = false;
-            slot.name = string.Empty;
-            slot.quantity = 0;
-            slot.amount = 0;
-            UpdateUI(i);
-            total = 0;
-            DoTotal();
+            StartCoroutine(ShowWarning());
         }
     }
 
+    public void AddMilk(int count)
+    {
+        string Objname = "Milk";
+        int childrenCount = TextHolder.transform.childCount;
+        for (int i = 0; i < childrenCount; i++)
+        {
+            if (TextHolder.transform.GetChild(i).name == Objname)
+            {
+                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+                return;
+            }
+        }
+        if (CurrSlots < MaxSlots)
+        {
+            GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
+            ItemManager.name = Objname;
+            ItemManager.GetComponent<ItemHandler>().name = Objname;
+            ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=7>");
+            ItemManager.GetComponent<ItemHandler>().AssignPrice(80);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+        }
+        else
+        {
+            StartCoroutine(ShowWarning());
+        }
+
+    }
 
     IEnumerator ShowWarning()
     {
         limitWarning.SetActive(true);
-        Debug.Log("Hello");
         yield return new WaitForSeconds(4);
         limitWarning.SetActive(false);
 
