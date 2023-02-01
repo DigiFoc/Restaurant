@@ -27,9 +27,26 @@ public class StockInventory : MonoBehaviour
         public int tealeaves = 1;
         public TMP_Text TeaLeavesText;
     }
+
+
+    [SerializeField]
+
+    [System.Serializable]
+    public class IngredientsPrice
+    {
+        public int potato = 10;
+        public int flour = 30;
+        public int spice = 1;
+        public int oil = 180;
+        public int besan = 80;
+        public int tea_leaves = 10;
+        public int sugar = 40;
+        public int milk = 60;
+    }
     [SerializeField]
 
     public IngredientStocks currentIngredientStocks;
+    public IngredientsPrice ingredientsPrice;
 
     [System.Serializable]
     public class FoodStock

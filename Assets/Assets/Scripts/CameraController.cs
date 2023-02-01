@@ -29,6 +29,7 @@ public class CameraController : MonoBehaviour
     void LateUpdate()
     {
         YAxis += Input.GetAxis("Mouse X")*RotationSensitivity;
+
         XAxis -= Input.GetAxis("Mouse Y")*RotationSensitivity; 
 
         XAxis = Mathf.Clamp(XAxis,RotationMin,RotationMax);

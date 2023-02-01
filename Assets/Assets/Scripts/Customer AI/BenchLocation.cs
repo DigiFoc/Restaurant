@@ -11,6 +11,7 @@ public class BenchLocation : MonoBehaviour
     public Transform lookAtPoint;
     bool lookAt;
     GameObject other;
+    public GameObject curtain;
     void Start()
     {
         
@@ -35,6 +36,7 @@ public class BenchLocation : MonoBehaviour
             lookAt = true;
             this.other = other.gameObject;
             anim.SetBool("Sit", true);
+            curtain.GetComponent<Animator>().enabled = true;
 
         }
     }
