@@ -10,21 +10,21 @@ public class StockInventory : MonoBehaviour
     [System.Serializable]
     public class IngredientStocks
     {
-        public int potato = 1;
+        public float potato = 1;
         public TMP_Text PotatoText;
-        public int flour = 1;
+        public float flour = 1;
         public TMP_Text FlourText;
-        public int spice = 1;
+        public float spice = 1;
         public TMP_Text SpiceText;
-        public int oil = 1;
+        public float oil = 1;
         public TMP_Text OilText;
-        public int besan = 1;
+        public float besan = 1;
         public TMP_Text BesanText;
-        public int sugar = 1;
+        public float sugar = 1;
         public TMP_Text SugarText;
-        public int milk = 1;
+        public float milk = 1;
         public TMP_Text MilkText;
-        public int tealeaves = 1;
+        public float tealeaves = 1;
         public TMP_Text TeaLeavesText;
     }
 
