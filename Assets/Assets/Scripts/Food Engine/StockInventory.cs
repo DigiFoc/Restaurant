@@ -59,6 +59,19 @@ public class StockInventory : MonoBehaviour
     }
     [SerializeField]
 
+    [System.Serializable]
+    public class FoodCost
+    {
+        public int samosa = 5;
+        public int paneerTikka = 10;
+        public int tea = 25;
+        public int pakora = 10;
+       
+    }
+    [SerializeField]
+
+    public FoodCost costOfFoods;
+
     public FoodStock currentFoodStocks;
 
     public static StockInventory Instance { get; set; }
@@ -102,6 +115,66 @@ public class StockInventory : MonoBehaviour
         currentIngredientStocks.SugarText.text = "<sprite=5>" + currentIngredientStocks.sugar.ToString();
         currentIngredientStocks.MilkText.text = "<sprite=6>" + currentIngredientStocks.milk.ToString();
         currentIngredientStocks.TeaLeavesText.text = "<sprite=7>" + currentIngredientStocks.tealeaves.ToString();
+    }
+
+
+    public int GenerateRandomFood()
+    {
+        int foodNo = Random.Range(1, 4);
+        string foodItem = "";
+        switch(foodNo)
+        { 
+            case 1:
+            foodItem = "samosa";
+            break;
+            case 2:
+                foodItem = "paneerTikka";
+                break;
+            case 3:
+                foodItem = "tea";
+                break;
+            case 4:
+                foodItem = "pakora";
+                break;
+        }
+
+        int quantity = Random.Range(1, 5);
+        int amount = CalculateAmount(foodItem, quantity);
+        Debug.Log("Food Ordered"+foodItem);
+        Debug.Log("Food Quantity" + quantity);
+
+        AddAmountToCoin(amount);
+        return amount;
+
+    }
+
+    int CalculateAmount(string foodItem, int quantity)
+    {
+
+        if(foodItem == "samosa")
+        {
+            return quantity * costOfFoods.samosa;
+        }
+        if (foodItem == "pakora")
+        {
+            return quantity * costOfFoods.pakora;
+        }
+        if (foodItem == "paneerTikka")
+        {
+            return quantity * costOfFoods.paneerTikka;
+        }
+        if (foodItem == "tea")
+        {
+            return quantity * costOfFoods.tea;
+        }
+
+        return 0;
+
+    }
+
+    public void AddAmountToCoin(int amount)
+    {
+        Debug.Log("Amount Added"+amount);
     }
 
 }

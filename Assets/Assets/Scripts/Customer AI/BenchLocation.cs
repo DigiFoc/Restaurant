@@ -37,7 +37,7 @@ public class BenchLocation : MonoBehaviour
             this.other = other.gameObject;
             anim.SetBool("Sit", true);
             curtain.GetComponent<Animator>().enabled = true;
-
+            other.GetComponent<CustomerAI>().OrderFood();
         }
     }
 }

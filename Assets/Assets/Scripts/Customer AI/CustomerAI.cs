@@ -35,6 +35,8 @@ public class CustomerAI : MonoBehaviour
     public Information AI_Information;
     public DestinationsInfo destinations;
     public HutsManager hutManager;
+ 
+    public int amount;
 
     private void Awake()
     {
@@ -56,6 +58,7 @@ public class CustomerAI : MonoBehaviour
     void Update()
     {
         HandleAnimations();
+        
     }
 
     public void SetDestination(Transform destination)
@@ -79,8 +82,6 @@ public class CustomerAI : MonoBehaviour
         hutNo = FindEmptyHut();
         if (hutNo == 0)
             Debug.Log("No Hut Is Empty");
-
-
     }
     public int FindEmptyHut()
     {
@@ -116,6 +117,11 @@ public class CustomerAI : MonoBehaviour
 
         return 0;
 
+    }
+
+    public void  OrderFood()
+    {
+        amount = StockInventory.Instance.GenerateRandomFood();
     }
     
 
