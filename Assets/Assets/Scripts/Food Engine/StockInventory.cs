@@ -118,7 +118,7 @@ public class StockInventory : MonoBehaviour
     }
 
 
-    public int GenerateRandomFood()
+    public string GenerateRandomFood()
     {
         int foodNo = Random.Range(1, 4);
         string foodItem = "";
@@ -138,17 +138,17 @@ public class StockInventory : MonoBehaviour
                 break;
         }
 
-        int quantity = Random.Range(1, 5);
-        int amount = CalculateAmount(foodItem, quantity);
-        Debug.Log("Food Ordered"+foodItem);
-        Debug.Log("Food Quantity" + quantity);
+        return foodItem;
 
-        AddAmountToCoin(amount);
-        return amount;
+      
+
+      
 
     }
 
-    int CalculateAmount(string foodItem, int quantity)
+    
+
+    public int CalculateAmount(string foodItem, int quantity)
     {
 
         if(foodItem == "samosa")

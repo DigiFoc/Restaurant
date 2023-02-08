@@ -20,6 +20,11 @@ public class CustomerAI : MonoBehaviour
     {
         public string Gender;
         public string name;
+        public int hutNo;
+        public string emotion;
+        public string foodOrder;
+        public int quantity;
+        public int amountToPay;
     }
     [SerializeField]
 
@@ -82,6 +87,7 @@ public class CustomerAI : MonoBehaviour
         hutNo = FindEmptyHut();
         if (hutNo == 0)
             Debug.Log("No Hut Is Empty");
+        AI_Information.hutNo = hutNo;
     }
     public int FindEmptyHut()
     {
@@ -119,10 +125,64 @@ public class CustomerAI : MonoBehaviour
 
     }
 
+    public void SetEmotion(string Emotion)
+    {
+        string emotionString = "";
+        if (Emotion == "Thinking")  //Index ID = 12
+        {
+            emotionString = "<sprite=12>";            
+        }
+        if (Emotion == "Happy")   //Index ID = 04
+        {
+            emotionString = "<sprite=4>";
+        }
+        if (Emotion == "Sad")     //IndexID = 15
+        {
+            emotionString = "<sprite=15>";
+        }
+        if (Emotion == "Frustrated") //IndexID = 10
+        {
+            emotionString = "<sprite=10>";
+        }
+
+        hutManager.SetEmotionStatus(AI_Information.hutNo, emotionString);
+    }
+
     public void  OrderFood()
     {
-        amount = StockInventory.Instance.GenerateRandomFood();
+        AI_Information.foodOrder = StockInventory.Instance.GenerateRandomFood();
+        AI_Information.quantity = Random.Range(1, 5);
+        AI_Information.amountToPay = StockInventory.Instance.CalculateAmount(AI_Information.foodOrder,AI_Information.quantity);
+
+
+        SetFoodOrderDisplay(AI_Information.foodOrder,AI_Information.quantity);
+
     }
+
+    public void SetFoodOrderDisplay(string food,int quantity)
+    {
+        string foodString = "";
+        if (food == "samosa")
+        {
+            foodString = "<sprite=8>";
+        }
+        if (food == "paneerTikka")
+        {
+            foodString = "<sprite=9>";
+        }
+        if (food == "pakori")
+        {
+            foodString = "<sprite=10>";
+        }
+        if (food == "tea")
+        {
+            foodString = "<sprite=11>";
+        }
+
+        hutManager.SetHutStatus(AI_Information.hutNo, foodString, AI_Information.quantity);
+    }
+
+   
     
 
     

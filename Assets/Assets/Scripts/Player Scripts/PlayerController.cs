@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetDestination(Transform destination)
     {
+        transform.LookAt(destination.transform.position);
         theAgent.SetDestination(destination.position);
     }
 

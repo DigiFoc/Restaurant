@@ -37,7 +37,19 @@ public class BenchLocation : MonoBehaviour
             this.other = other.gameObject;
             anim.SetBool("Sit", true);
             curtain.GetComponent<Animator>().enabled = true;
-            other.GetComponent<CustomerAI>().OrderFood();
+            StartCoroutine(ThinkAndOrder(other));
+         
         }
     }
+
+    IEnumerator ThinkAndOrder(Collider other)
+    {
+        int RandomThinkingTime = Random.Range(2, 5);
+        
+        other.GetComponent<CustomerAI>().SetEmotion("Thinking");
+        yield return new WaitForSeconds(RandomThinkingTime);
+        other.GetComponent<CustomerAI>().OrderFood();
+        other.GetComponent<CustomerAI>().SetEmotion("Happy");
+    }
+
 }
