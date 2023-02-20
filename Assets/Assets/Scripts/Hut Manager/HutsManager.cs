@@ -16,6 +16,7 @@ public class HutsManager : MonoBehaviour
         public string Gender;
         public TMP_Text emotion;
         public TMP_Text order;
+        public GameObject hutMarker;
 
 
     }
@@ -57,6 +58,10 @@ public class HutsManager : MonoBehaviour
         if (hutNo == 1)
         {
             hut1.order.text = food + quantity;
+            Debug.Log("Camed Here");
+            hut1.hutMarker.SetActive(true);
+            hut1.hutMarker.GetComponent<MarkerTrigger>().foodName = food;
+            hut1.hutMarker.GetComponent<MarkerTrigger>().quntity = quantity;
         }
         if (hutNo == 2)
         {

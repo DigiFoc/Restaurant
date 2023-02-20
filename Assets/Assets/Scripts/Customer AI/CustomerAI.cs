@@ -157,6 +157,27 @@ public class CustomerAI : MonoBehaviour
 
         SetFoodOrderDisplay(AI_Information.foodOrder,AI_Information.quantity);
 
+        if (AI_Information.hutNo == 1)
+        {
+            hutManager.hut1.hutMarker.SetActive(true);
+           
+           
+           hutManager.hut1.hutMarker.GetComponent<MarkerTrigger>().foodName = AI_Information.foodOrder;
+           hutManager.hut1.hutMarker.GetComponent<MarkerTrigger>().quntity = AI_Information.quantity;
+        }
+        if (AI_Information.hutNo == 2)
+        {
+            hutManager.hut2.hutMarker.SetActive(true);
+            hutManager.hut2.hutMarker.GetComponent<MarkerTrigger>().foodName = AI_Information.foodOrder;
+            hutManager.hut2.hutMarker.GetComponent<MarkerTrigger>().quntity = AI_Information.quantity;
+        }
+        if (AI_Information.hutNo == 3)
+        {
+            hutManager.hut3.hutMarker.SetActive(true);
+            hutManager.hut3.hutMarker.GetComponent<MarkerTrigger>().foodName = AI_Information.foodOrder;
+            hutManager.hut3.hutMarker.GetComponent<MarkerTrigger>().quntity = AI_Information.quantity;
+        }
+
     }
 
     public void SetFoodOrderDisplay(string food,int quantity)
