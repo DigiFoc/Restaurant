@@ -15,36 +15,36 @@ MonoBehaviour:
   forTea:
     potato: 0
     flour: 0
-    spice: 0
+    spice: 1
     milk: 1
     sugar: 1
     tea_leaves: 1
     oil: 0
     besan: 0
   forPakora:
-    potato: 0
+    potato: 1
     flour: 0
-    spice: 0
+    spice: 1
     milk: 0
     sugar: 0
     tea_leaves: 0
-    oil: 0
-    besan: 0
+    oil: 2
+    besan: 1
   forPaneerTikka:
     potato: 0
     flour: 0
-    spice: 0
-    milk: 0
+    spice: 1
+    milk: 5
     sugar: 0
     tea_leaves: 0
-    oil: 0
+    oil: 2
     besan: 0
   forSamosa:
-    potato: 0
-    flour: 0
-    spice: 0
+    potato: 1
+    flour: 1
+    spice: 1
     milk: 0
     sugar: 0
     tea_leaves: 0
-    oil: 0
+    oil: 2
     besan: 0

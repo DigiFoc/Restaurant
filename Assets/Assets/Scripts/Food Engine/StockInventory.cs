@@ -34,38 +34,38 @@ public class StockInventory : MonoBehaviour
     [System.Serializable]
     public class IngredientsPrice
     {
-        public int potato = 10;
-        public int flour = 30;
+        public int potato = 1;  
+        public int flour = 1;
         public int spice = 1;
-        public int oil = 180;
-        public int besan = 80;
-        public int tea_leaves = 10;
-        public int sugar = 40;
-        public int milk = 60;
+        public int oil = 2;
+        public int besan = 2;
+        public int tea_leaves = 2;
+        public int sugar = 1;
+        public int milk = 2;
     }
     [SerializeField]
 
     public IngredientStocks currentIngredientStocks;
     public IngredientsPrice ingredientsPrice;
-
+   
     [System.Serializable]
     public class FoodStock
     {
-        public int samosa = 1;
-        public int paneerTikka = 1;
-        public int tea = 1;
-        public int pakora = 1;
-        public TMP_Text FoodItemsText;
+        public int samosa = 1;   //Cost = 5  //Selling price = 10 (Reqiurements = 1Potato,1 flour, 1 spice,2oil)
+        public int paneerTikka = 1; //Cost =15   //Selling Price =30  (Rq= 5milk,1 spice,2oil)
+        public int tea = 1;//Cost=6   //Selling Price=20      (Rq= 1milk,1tealeaves,1sugar,1spice)
+        public int pakora = 1;//Cost = 6   //Selling Price =15       (Reqiurements = 1Potato,1 besan, 1 spice,2oil)
+        public TMP_Text FoodItemsText;//Cost=   //Selling Price =
     }
     [SerializeField]
 
     [System.Serializable]
     public class FoodCost
     {
-        public int samosa = 5;
-        public int paneerTikka = 10;
-        public int tea = 25;
-        public int pakora = 10;
+        public int samosa = 10;
+        public int paneerTikka = 30;
+        public int tea = 20;
+        public int pakora = 15;
        
     }
     [SerializeField]
@@ -74,10 +74,14 @@ public class StockInventory : MonoBehaviour
 
     public FoodStock currentFoodStocks;
 
+    public int coins = 100;
+    public Text coinText;
+
+
     public static StockInventory Instance { get; set; }
     void Start()
     {
-        
+        coinText.text = coins.ToString();
     }
 
     private void Awake()
@@ -175,6 +179,51 @@ public class StockInventory : MonoBehaviour
     public void AddAmountToCoin(int amount)
     {
         Debug.Log("Amount Added"+amount);
+    }
+
+
+    public void AddStocks(string item, int quantity)
+    {
+        if (item == "potato")
+        {
+            currentIngredientStocks.potato += quantity;
+        }
+        if (item == "besan")
+        {
+            currentIngredientStocks.besan += quantity;
+        }
+        if (item == "milk" )
+        {
+            currentIngredientStocks.milk += quantity;
+        }
+        if (item == "tea_leaves")
+        {
+            currentIngredientStocks.tealeaves += quantity;
+        }
+        if (item == "oil")
+        {
+            currentIngredientStocks.oil += quantity;
+        }
+        if (item == "sugar")
+        {
+            currentIngredientStocks.sugar += quantity;
+        }
+        if (item == "spice")
+        {
+            currentIngredientStocks.spice += quantity;
+        }
+
+        UpdateIngredientStockUI();
+    }
+
+
+    public void ChangeCoinsTo(int newCoins)
+    {
+        float temp;
+        temp = Mathf.Lerp(coins, newCoins, 1.0f);
+
+        coinText.text = temp.ToString();
+
     }
 
 }

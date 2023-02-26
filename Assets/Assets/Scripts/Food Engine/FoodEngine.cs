@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FoodEngine : MonoBehaviour
 {
@@ -10,6 +11,16 @@ public class FoodEngine : MonoBehaviour
    
 
     public Conditions conditions;
+
+    [System.Serializable]
+    public class currentFoodUI
+    {
+        public Text SamosaText, TeaText, PakoraText, PaneerTikka;
+    }
+    [SerializeField]
+
+    public currentFoodUI currenttFoodUI;
+    
     public static FoodEngine Instance  { get; set;}
 
     private void Awake()
@@ -41,7 +52,7 @@ public class FoodEngine : MonoBehaviour
             bool isValid = checkConditionForSamosa(quantity);
             if (isValid)
             {
-              
+               
                 return true;
             }
             else
@@ -52,7 +63,7 @@ public class FoodEngine : MonoBehaviour
             bool isValid = checkConditionForPaneerTikka(quantity);
             if (isValid)
             {
-               
+              
                 return true;
             }
             else
@@ -64,7 +75,7 @@ public class FoodEngine : MonoBehaviour
             bool isValid = checkConditionForTea(quantity);
             if (isValid)
             {
-                StockInventory.Instance.currentFoodStocks.tea += 1;
+               
                 return true;
             }
             else
@@ -72,17 +83,18 @@ public class FoodEngine : MonoBehaviour
                 return false;
             }
 
-            bool isAvailable = checkConditionForSamosa();
-            StockInventory.Instance.currentFoodStocks.samosa += 1;
+            //bool isAvailable = checkConditionForSamosa();
+            //StockInventory.Instance.currentFoodStocks.samosa += 1;
 
         }
 
         if (food == "Pakori")
         {
             bool isValid = checkConditionForPakora(quantity);
-            Debug.Log("Pakora valid" + isValid);
+            //Debug.Log("Pakora valid" + isValid);
             if (isValid)
             {
+              
                 return true;
                
             }
@@ -101,25 +113,39 @@ public class FoodEngine : MonoBehaviour
     {
         if(food == "Samosa")
         {
+
+           
             StockInventory.Instance.currentFoodStocks.samosa += quantity;
+            currenttFoodUI.SamosaText.text = StockInventory.Instance.currentFoodStocks.samosa.ToString();
+            removeSamosaIngredients(quantity);
+            
         }
 
         if (food == "PaneerTikka")
         {
             StockInventory.Instance.currentFoodStocks.paneerTikka += quantity;
+            currenttFoodUI.PaneerTikka.text = StockInventory.Instance.currentFoodStocks.paneerTikka.ToString();
+            removePaneerTikkaIngredients(quantity);
         }
 
 
         if (food == "Tea")
         {
+            Debug.Log("Tea is added");
             StockInventory.Instance.currentFoodStocks.tea += quantity;
+            currenttFoodUI.TeaText.text = StockInventory.Instance.currentFoodStocks.tea.ToString();
+            removeTeaIngredients(quantity);
         }
 
         if(food == "Pakora")
         {
-
             StockInventory.Instance.currentFoodStocks.pakora += quantity;
+            currenttFoodUI.PakoraText.text = StockInventory.Instance.currentFoodStocks.pakora.ToString();
+            removePakoraIngredients(quantity);
+            
         }
+
+        StockInventory.Instance.UpdateIngredientStockUI();
     }
     bool checkConditionForSamosa(int quantity)
     {

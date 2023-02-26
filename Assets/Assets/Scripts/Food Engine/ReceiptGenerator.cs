@@ -19,7 +19,7 @@ public class ReceiptGenerator : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            //Destroy(this);
         }
         else
         {
@@ -55,7 +55,7 @@ public class ReceiptGenerator : MonoBehaviour
 
     public void AddPotato(int count)
     {
-        string Objname = "Potato";
+        string Objname = "potato";
         int childrenCount = TextHolder.transform.childCount;
         for (int i = 0; i < childrenCount; i++)
         {
@@ -83,7 +83,7 @@ public class ReceiptGenerator : MonoBehaviour
 
     public void AddFlour(int count)
     {
-        string Objname = "Flour";
+        string Objname = "flour";
         int childrenCount = TextHolder.transform.childCount;
         for (int i = 0; i < childrenCount; i++)
         {
@@ -111,7 +111,7 @@ public class ReceiptGenerator : MonoBehaviour
 
     public void AddSpice(int count)
     {
-        string Objname = "Spice";
+        string Objname = "spice";
         int childrenCount = TextHolder.transform.childCount;
         for (int i = 0; i < childrenCount; i++)
         {
@@ -139,7 +139,7 @@ public class ReceiptGenerator : MonoBehaviour
 
     public void AddOil(int count)
     {
-        string Objname = "Oil";
+        string Objname = "oil";
         int childrenCount = TextHolder.transform.childCount;
         for (int i = 0; i < childrenCount; i++)
         {
@@ -167,7 +167,7 @@ public class ReceiptGenerator : MonoBehaviour
 
     public void AddBesan(int count)
     {
-        string Objname = "Besan";
+        string Objname = "besan";
         int childrenCount = TextHolder.transform.childCount;
         for (int i = 0; i < childrenCount; i++)
         {
@@ -195,7 +195,7 @@ public class ReceiptGenerator : MonoBehaviour
 
     public void AddSugar(int count)
     {
-        string Objname = "Sugar";
+        string Objname = "sugar";
         int childrenCount = TextHolder.transform.childCount;
         for (int i = 0; i < childrenCount; i++)
         {
@@ -222,7 +222,7 @@ public class ReceiptGenerator : MonoBehaviour
 
     public void AddTeaLeaves(int count)
     {
-        string Objname = "TeaLeaves";
+        string Objname = "tea_leaves";
         int childrenCount = TextHolder.transform.childCount;
         for (int i = 0; i < childrenCount; i++)
         {
@@ -249,7 +249,7 @@ public class ReceiptGenerator : MonoBehaviour
 
     public void AddMilk(int count)
     {
-        string Objname = "Milk";
+        string Objname = "milk";
         int childrenCount = TextHolder.transform.childCount;
         for (int i = 0; i < childrenCount; i++)
         {
@@ -381,7 +381,7 @@ public class ReceiptGenerator : MonoBehaviour
 
     public void AddPaneerTikka(int count)
     {
-        string Objname = "Paneer Tikka";
+        string Objname = "PaneerTikka";
         int childrenCount = TextHolder.transform.childCount;
         for (int i = 0; i < childrenCount; i++)
         {

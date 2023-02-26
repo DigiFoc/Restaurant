@@ -14,7 +14,7 @@ public class ItemHandler : MonoBehaviour
     public TMP_Text itsText;
     void Start()
     {
-        quantity = 0;
+        //quantity = 0;
     }
 
    

@@ -182,6 +182,8 @@ public class CustomerAI : MonoBehaviour
 
     public void SetFoodOrderDisplay(string food,int quantity)
     {
+        TextManager.Instance.ShowToast("New Customer",5);
+        TextManager.Instance.ShowToast("Please Check",2);
         string foodString = "";
         if (food == "samosa")
         {
