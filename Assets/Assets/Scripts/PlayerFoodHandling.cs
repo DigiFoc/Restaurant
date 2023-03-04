@@ -44,7 +44,7 @@ public class PlayerFoodHandling : MonoBehaviour
             Instance = this;
         }
         anim = this.GetComponent<Animator>();
-        //PickFood("Tea");
+       // PickFood("Tea");
     }
     void Start()
     {
@@ -136,7 +136,7 @@ public class PlayerFoodHandling : MonoBehaviour
 
 
 
-    public void PickFood(string food)
+    public void PickFood(string food)   //Player ke haatho mein food laane key liye ise call kre
     {
         currentFood = food;
 
@@ -162,6 +162,38 @@ public class PlayerFoodHandling : MonoBehaviour
         {
             foodItems.PaneerTikka.SetActive(true);
            
+
+        }
+
+
+    }
+
+    public void RemoveFood(string food)   //Player ke haatho mein food hatane key liye ise call kre
+    {
+        currentFood = food;
+
+        if (food == "Samosa")
+        {
+            foodItems.Samosa.SetActive(false);
+        }
+
+        if (food == "Tea")
+        {
+            foodItems.Tea.SetActive(false);
+
+        }
+
+        if (food == "Pakori")
+        {
+            foodItems.Pakora.SetActive(false);
+
+        }
+
+
+        if (food == "PaneerTikka")
+        {
+            foodItems.PaneerTikka.SetActive(false);
+
 
         }
 
