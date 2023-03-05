@@ -39,9 +39,9 @@ public class BuildFood : MonoBehaviour
             bool isTrue = FoodEngine.Instance.buildFood(foodNames[i], quantities[i]);
             if (isTrue)
             {
-                FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);
                 TextManager.Instance.ShowToast(foodNames[i] + "Starts Cooking", 2);
                 FoodCounter.Instance.AddFood(foodNames[i]);
+             //   FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);
             }
             else
                 TextManager.Instance.ShowToast(foodNames[i] + "Cannot Cook", 3);
@@ -52,5 +52,37 @@ public class BuildFood : MonoBehaviour
 
         
         
+    }
+
+
+    public void PickFoood()
+    {
+        ItemHandler[] items = GetComponentsInChildren<ItemHandler>();
+        foodNames = new string[items.Length + 1];
+        quantities = new int[items.Length + 1];
+
+        for (int i = 0; i < items.Length; i++)
+        {
+
+            foodNames[i] = items[i].name;
+            quantities[i] = items[i].quantity;
+
+        }
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            bool isTrue = FoodEngine.Instance.buildFood(foodNames[i], quantities[i]);
+            if (isTrue)
+            {
+                
+                 FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);
+            }
+        }
+
+
+        StockInventory.Instance.UpdateFoodStockUI();
+
+
+
     }
 }
