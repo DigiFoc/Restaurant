@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class FoodCounter : MonoBehaviour
 {
-
+		bool samosaReady;
+		bool pTikkaReady;
+		bool teaReady;
+		bool pakoriReady;
     public static FoodCounter Instance { get; set; }
     // Start is called before the first frame update
     [System.Serializable]
@@ -52,23 +55,31 @@ public class FoodCounter : MonoBehaviour
 
    public void AddFood(string food)
     {
-        if (food == "Tea")
+        if (food == "Tea"&&samosaReady==false)
         {
-            GameObject.Instantiate(FoodPrefabs.teaPrefab, FoodSlots.teaSlot.transform.position, Quaternion.identity);
+            GameObject g=Instantiate(FoodPrefabs.teaPrefab, FoodSlots.teaSlot.transform.position, Quaternion.identity);
+			g.name="TeaModel";
+			samosaReady=true;
         }
 
-        else if (food == "Pakori")
+        else if (food == "Pakori"&&pakoriReady==false)
         {
-            GameObject.Instantiate(FoodPrefabs.pakoraPrefab, FoodSlots.pakoraSlot.transform.position, Quaternion.identity);
+            GameObject g=Instantiate(FoodPrefabs.pakoraPrefab, FoodSlots.pakoraSlot.transform.position, Quaternion.identity);
+			g.name="PakoriModel";
+			pakoriReady=true;
         }
 
-        else if (food == "PaneerTikka")
+        else if (food == "PaneerTikka"&&pTikkaReady==false)
         {
-            GameObject.Instantiate(FoodPrefabs.paneerTikkaPrefab, FoodSlots.paneerTikkaSlot.transform.position, Quaternion.identity);
+            GameObject g=Instantiate(FoodPrefabs.paneerTikkaPrefab, FoodSlots.paneerTikkaSlot.transform.position, Quaternion.identity);
+			g.name="PTikkaModel";
+			pTikkaReady=true;
         }
-        else if (food == "Samosa")
+        else if (food == "Samosa"&&samosaReady==false)
         {
-            GameObject.Instantiate(FoodPrefabs.samosaPrefab, FoodSlots.samosaSlot.transform.position, Quaternion.identity);
+            GameObject g=Instantiate(FoodPrefabs.samosaPrefab, FoodSlots.samosaSlot.transform.position, Quaternion.identity);
+			g.name="SamosaModel";
+			samosaReady=true;
         }
         else {
             Debug.Log("Wrong Food Passed");
@@ -77,4 +88,34 @@ public class FoodCounter : MonoBehaviour
         
         
     }
+	
+	public void RemoveFood(string food)
+	{
+		 if (food == "Tea"&&teaReady==true)
+        {
+            
+			Destroy(GameObject.Find("TeaModel"),1);
+			teaReady=false;
+        }
+
+        else if (food == "Pakori"&&pakoriReady==false)
+        {
+            Destroy(GameObject.Find("PakoriModel"),1);
+			pakoriReady=false;
+        }
+
+        else if (food == "PaneerTikka"&&pTikkaReady==false)
+        {
+            Destroy(GameObject.Find("pTikkaModel"),1);
+			pTikkaReady=false;
+        }
+        else if (food == "Samosa"&&samosaReady==false)
+        {
+            Destroy(GameObject.Find("SamosaModel"),1);
+			samosaReady=false;
+        }
+        else {
+            Debug.Log("Wrong Food Passed");
+        }
+	}
 }
