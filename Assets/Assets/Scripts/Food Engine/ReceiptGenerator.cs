@@ -6,7 +6,7 @@ using TMPro;
 public class ReceiptGenerator : MonoBehaviour
 {
     int MaxSlots = 2;
-    int CurrSlots = 0;
+    public int CurrSlots = 0;
     public Transform TextHolder;
     public GameObject ItemPrefab;
     public TMP_Text GrandTotal;

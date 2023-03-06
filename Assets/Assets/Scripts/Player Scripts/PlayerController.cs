@@ -83,6 +83,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            if (Destinations.Length > 2 && Destinations[2] != null)
+            {
+                SetDestination(Destinations[6]);
+            }
+        }
+
         //For Reaching the nearest Customer
         if (Input.GetKeyDown(KeyCode.C))
         {

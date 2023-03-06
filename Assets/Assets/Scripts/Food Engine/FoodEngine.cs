@@ -114,7 +114,6 @@ public class FoodEngine : MonoBehaviour
         if(food == "Samosa")
         {
 
-           
             StockInventory.Instance.currentFoodStocks.samosa += quantity;
             currenttFoodUI.SamosaText.text = StockInventory.Instance.currentFoodStocks.samosa.ToString();
             removeSamosaIngredients(quantity);

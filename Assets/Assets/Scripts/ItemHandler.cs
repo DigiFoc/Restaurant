@@ -46,11 +46,9 @@ public class ItemHandler : MonoBehaviour
         ReceiptGenerator.Instance.MakeAmount();
     }
     public void RemoveMe()
-    { 
-    Destroy(gameObject);
-    }
-    void OnDestroy()
     {
         ReceiptGenerator.Instance.MakeAmount();
+        Destroy(gameObject,1f);
     }
+ 
 }

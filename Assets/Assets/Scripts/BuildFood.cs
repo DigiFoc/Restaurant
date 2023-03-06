@@ -6,6 +6,7 @@ public class BuildFood : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject BillHolder;
+    ItemHandler[] items;
     public string[] foodNames;
     public int[] quantities;
     void Start()
@@ -22,16 +23,14 @@ public class BuildFood : MonoBehaviour
 
     public void BuildFoood()
     {
-        ItemHandler[] items = GetComponentsInChildren<ItemHandler>();
+       items = GetComponentsInChildren<ItemHandler>();
         foodNames = new string[items.Length + 1];
         quantities = new int[items.Length + 1];
 
         for (int i = 0; i < items.Length; i++)
-        {
-           
+        { 
             foodNames[i] = items[i].name;
             quantities[i] = items[i].quantity;
-           
         }
 
         for (int i = 0; i < items.Length; i++)
@@ -39,8 +38,10 @@ public class BuildFood : MonoBehaviour
             bool isTrue = FoodEngine.Instance.buildFood(foodNames[i], quantities[i]);
             if (isTrue)
             {
+                Debug.Log(foodNames[i]);
+
                 TextManager.Instance.ShowToast(foodNames[i] + "Starts Cooking", 2);
-                FoodCounter.Instance.AddFood(foodNames[i]);
+                FoodCounter.Instance.AddFood(foodNames[i], quantities[i]);
              //   FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);
             }
             else
@@ -48,16 +49,25 @@ public class BuildFood : MonoBehaviour
         }
 
 
+
         StockInventory.Instance.UpdateFoodStockUI();
 
-        
-        
+        foreach (Transform child in transform) {
+            child.gameObject.GetComponent<ItemHandler>().RemoveMe();
+
+        }
+
+        ReceiptGenerator.Instance.CurrSlots = 0;
+
     }
 
 
     public void PickFoood()
     {
-        ItemHandler[] items = GetComponentsInChildren<ItemHandler>();
+        if (items == null)
+        {
+            return;
+        }
         foodNames = new string[items.Length + 1];
         quantities = new int[items.Length + 1];
 
@@ -76,8 +86,13 @@ public class BuildFood : MonoBehaviour
             {
                 
                  FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);
+
+                FoodCounter.Instance.RemoveFood(foodNames[i]);
             }
         }
+
+        quantities = null;
+        items = null;
 
 
         StockInventory.Instance.UpdateFoodStockUI();
