@@ -25,6 +25,7 @@ public class CustomerAI : MonoBehaviour
         public string foodOrder;
         public int quantity;
         public int amountToPay;
+     
     }
     [SerializeField]
 
@@ -40,16 +41,20 @@ public class CustomerAI : MonoBehaviour
     public Information AI_Information;
     public DestinationsInfo destinations;
     public HutsManager hutManager;
- 
+
+
     public int amount;
+  bool countTime = false;
+    public float WaitingTime;
+    public int ratingStar;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         theAgent = GetComponent<NavMeshAgent>();
         this.gameObject.tag = "Customer";
-        if(hutManager == null)
-        hutManager = GameObject.Find("Huts Manager").GetComponent<HutsManager>();
+        if (hutManager == null)
+            hutManager = GameObject.Find("Huts Manager").GetComponent<HutsManager>();
     }
     void Start()
     {
@@ -63,7 +68,12 @@ public class CustomerAI : MonoBehaviour
     void Update()
     {
         HandleAnimations();
-        
+
+        if (countTime)
+        {
+            WaitingTime += Time.deltaTime;
+        }
+
     }
 
     public void SetDestination(Transform destination)
@@ -130,7 +140,7 @@ public class CustomerAI : MonoBehaviour
         string emotionString = "";
         if (Emotion == "Thinking")  //Index ID = 12
         {
-            emotionString = "<sprite=12>";            
+            emotionString = "<sprite=12>";
         }
         if (Emotion == "Happy")   //Index ID = 04
         {
@@ -148,42 +158,49 @@ public class CustomerAI : MonoBehaviour
         hutManager.SetEmotionStatus(AI_Information.hutNo, emotionString);
     }
 
-    public void  OrderFood()
+    public void OrderFood()
     {
+        
         AI_Information.foodOrder = StockInventory.Instance.GenerateRandomFood();
         AI_Information.quantity = Random.Range(1, 5);
-        AI_Information.amountToPay = StockInventory.Instance.CalculateAmount(AI_Information.foodOrder,AI_Information.quantity);
+        AI_Information.amountToPay = StockInventory.Instance.CalculateAmount(AI_Information.foodOrder, AI_Information.quantity);
 
 
-        SetFoodOrderDisplay(AI_Information.foodOrder,AI_Information.quantity);
+        SetFoodOrderDisplay(AI_Information.foodOrder, AI_Information.quantity);
 
         if (AI_Information.hutNo == 1)
         {
             hutManager.hut1.hutMarker.SetActive(true);
-           
-           
-           hutManager.hut1.hutMarker.GetComponent<MarkerTrigger>().foodName = AI_Information.foodOrder;
-           hutManager.hut1.hutMarker.GetComponent<MarkerTrigger>().quntity = AI_Information.quantity;
+
+
+            hutManager.hut1.hutMarker.GetComponent<MarkerTrigger>().foodName = AI_Information.foodOrder;
+            hutManager.hut1.hutMarker.GetComponent<MarkerTrigger>().quntity = AI_Information.quantity;
+            hutManager.hut1.hutMarker.GetComponent<MarkerTrigger>().customer = this;
+
         }
         if (AI_Information.hutNo == 2)
         {
             hutManager.hut2.hutMarker.SetActive(true);
             hutManager.hut2.hutMarker.GetComponent<MarkerTrigger>().foodName = AI_Information.foodOrder;
             hutManager.hut2.hutMarker.GetComponent<MarkerTrigger>().quntity = AI_Information.quantity;
+            hutManager.hut2.hutMarker.GetComponent<MarkerTrigger>().customer = this;
         }
         if (AI_Information.hutNo == 3)
         {
             hutManager.hut3.hutMarker.SetActive(true);
             hutManager.hut3.hutMarker.GetComponent<MarkerTrigger>().foodName = AI_Information.foodOrder;
             hutManager.hut3.hutMarker.GetComponent<MarkerTrigger>().quntity = AI_Information.quantity;
+            hutManager.hut3.hutMarker.GetComponent<MarkerTrigger>().customer = this;
         }
-
     }
 
-    public void SetFoodOrderDisplay(string food,int quantity)
+
+
+    public void SetFoodOrderDisplay(string food, int quantity)
     {
-        TextManager.Instance.ShowToast("New Customer",5);
-        TextManager.Instance.ShowToast("Please Check",2);
+
+        TextManager.Instance.ShowToast("New Customer", 5);
+        TextManager.Instance.ShowToast("Please Check", 2);
         string foodString = "";
         if (food == "samosa")
         {
@@ -203,10 +220,40 @@ public class CustomerAI : MonoBehaviour
         }
 
         hutManager.SetHutStatus(AI_Information.hutNo, foodString, AI_Information.quantity);
+        countTime = true;
     }
 
-   
-    
 
-    
+    public void ServeFood()
+    {
+        int newCoins = StockInventory.Instance.coins;
+     
+        countTime = false;
+        if (WaitingTime <= 15.0f)
+        {
+            ratingStar = 1;
+            newCoins += (int)(AI_Information.amountToPay * (100 / 100));
+            TextManager.Instance.ShowToast("Order Served,100%", 3);
+        }
+        if (WaitingTime > 15.0f && WaitingTime <= 20.0f)
+        {
+
+            ratingStar = 2;
+            newCoins += (int)(AI_Information.amountToPay * (75 / 100));
+            TextManager.Instance.ShowToast("Order Served,75%", 3);
+        }
+
+        if (WaitingTime > 30.0f)
+        {
+            ratingStar = 3;
+            newCoins += (int)(AI_Information.amountToPay * (50 / 100));
+            TextManager.Instance.ShowToast("Order Served,50%",3);
+        }
+
+
+        StockInventory.Instance.ChangeCoinsTo(newCoins);
+
+
+
+    }
 }

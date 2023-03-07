@@ -37,9 +37,10 @@ public class CameraController : MonoBehaviour
         targetRotation = Vector3.SmoothDamp(targetRotation,new Vector3(XAxis,YAxis),ref currentVel,smoothness);
         transform.eulerAngles = targetRotation;
 
+
         transform.position = target.position - transform.forward * distanceFromPlayer;
     }
-
+     
     public void RagdollEnabled()
     {
         oldTarget = target;

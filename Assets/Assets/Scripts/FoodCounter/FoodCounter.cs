@@ -64,6 +64,7 @@ public class FoodCounter : MonoBehaviour
             }
 
             GameObject g=Instantiate(FoodPrefabs.teaPrefab, FoodSlots.teaSlot.transform.position, Quaternion.identity);
+            g.GetComponent<quantityInfo>().name = "Tea";
             g.GetComponent<quantityInfo>().AddQuantity(Quantity);
 			g.name="TeaModel";
 			teaReady=true;
@@ -77,6 +78,7 @@ public class FoodCounter : MonoBehaviour
                 return;
             }
             GameObject g=Instantiate(FoodPrefabs.pakoraPrefab, FoodSlots.pakoraSlot.transform.position, Quaternion.identity);
+            g.GetComponent<quantityInfo>().name = "Pakora";
             g.GetComponent<quantityInfo>().AddQuantity(Quantity);
             g.name="PakoriModel";
 			pakoriReady=true;
@@ -90,6 +92,7 @@ public class FoodCounter : MonoBehaviour
                 return;
             }
             GameObject g=Instantiate(FoodPrefabs.paneerTikkaPrefab, FoodSlots.paneerTikkaSlot.transform.position, Quaternion.identity);
+            g.GetComponent<quantityInfo>().name = "PaneerTikka";
             g.GetComponent<quantityInfo>().AddQuantity(Quantity); 
             g.name="PTikkaModel";
 			pTikkaReady=true;
@@ -102,6 +105,7 @@ public class FoodCounter : MonoBehaviour
                 return;
             }
             GameObject g=Instantiate(FoodPrefabs.samosaPrefab, FoodSlots.samosaSlot.transform.position, Quaternion.identity);
+            g.GetComponent<quantityInfo>().name = "Samosa";
             g.GetComponent<quantityInfo>().AddQuantity(Quantity);
             g.name="SamosaModel";
 			samosaReady=true;
