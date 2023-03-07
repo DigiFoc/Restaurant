@@ -29,12 +29,12 @@ public class PlayerController : MonoBehaviour
         else
             anim.SetBool("Move", false);
 
-        GetInput();
+      //  GetInput();
     }
 
-    public void GetInput()
+    public void MoveTo(string placeName)
     {
-        if(Input.GetKeyDown(KeyCode.Alpha0))
+        if(placeName=="Hut1")
         {
             if (Destinations.Length > 0 && Destinations[0] != null)
             {
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if(placeName=="Hut2")
         {
             if (Destinations.Length > 1 && Destinations[1] != null)
             {
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha2))
+       if(placeName=="Hut3")
         {
             if (Destinations.Length > 2 && Destinations[2] != null)
             {
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+       if(placeName=="Hut4")
         {
             if (Destinations.Length > 2 && Destinations[2] != null)
             {
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if(placeName=="Hut5")
         {
             if (Destinations.Length > 2 && Destinations[2] != null)
             {
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha5))
+        if(placeName=="Toilet")
         {
             if (Destinations.Length > 2 && Destinations[2] != null)
             {
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha6))
+        if (placeName=="Kitchen")
         {
             if (Destinations.Length > 2 && Destinations[2] != null)
             {
