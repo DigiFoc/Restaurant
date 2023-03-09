@@ -12,6 +12,8 @@ public class MenuManager : MonoBehaviour
 	public GameObject StorageMenu;
 	public GameObject FoodEngineMenu;
 	public GameObject PickupMenu;
+	public GameObject TransformMenu;
+	
 	
 
 	private void Awake()
@@ -54,6 +56,11 @@ public class MenuManager : MonoBehaviour
 			PickupMenu.SetActive(true);
 
 		}
+		if (name == "transform")
+		{
+			TransformMenu.SetActive(true);
+
+		}
 
 
 	}
@@ -65,6 +72,7 @@ public class MenuManager : MonoBehaviour
 		StorageMenu.SetActive(false);
 		FoodEngineMenu.SetActive(false);
 		PickupMenu.SetActive(false);
+		TransformMenu.SetActive(false);
 	}
 
 }
