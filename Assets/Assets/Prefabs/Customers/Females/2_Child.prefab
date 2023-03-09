@@ -2538,7 +2538,7 @@ Transform:
   m_GameObject: {fileID: 4027236719965073879}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.535, y: -0.0287, z: -5.549}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1542583577887211812}
@@ -2625,6 +2625,7 @@ MonoBehaviour:
     foodOrder: 
     quantity: 0
     amountToPay: 0
+    currentDestination: {fileID: 0}
   destinations:
     endPlace: {fileID: 0}
     RandomPlaces: []
