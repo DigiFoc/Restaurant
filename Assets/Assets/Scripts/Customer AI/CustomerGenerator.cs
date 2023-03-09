@@ -6,6 +6,7 @@ public class CustomerGenerator : MonoBehaviour
 {
     public CustomersObject customerDatabase;       //Refers to the database Of the Customer [Scriptable Object]
     public Transform customerGenratingPoint;       //Location Where customers are generated
+    public Transform customerEndingPoint;
 
     [System.Serializable]
     public class CurrentCustomersData
@@ -21,7 +22,7 @@ public class CustomerGenerator : MonoBehaviour
     public CurrentCustomersData currentData;
     void Start()
     {
-        
+        GenerateCustomer(2);
     }
 
     // Update is called once per frame
@@ -35,10 +36,15 @@ public class CustomerGenerator : MonoBehaviour
 
     public void GenerateCustomer(int n)
     {
-        int Gender = Random.Range(1, 2);
-        if (Gender == 1) //Generate a male
+        for (int i = 0; i < n; i++)
         {
-            //GenerateMale(1);
+            int Gender = Random.Range(1, 2);
+            if (Gender == 1) //Generate a male
+            {
+                GenerateMale(1);
+            }
+            if (Gender == 2)
+                GenerateFemale(1);
         }
     }
 
@@ -75,6 +81,30 @@ public class CustomerGenerator : MonoBehaviour
         currentData.totalCustomersPresent += 1;
         currentData.femaleCustomersPresent += 1;
         currentData.namesofCurrentFemale.Add(randomName);
+    }
+
+
+    public void RemoveCustomer(GameObject customer)
+    {
+        string gender = customer.GetComponent<CustomerAI>().AI_Information.Gender;
+        string name = customer.GetComponent<CustomerAI>().AI_Information.name;
+
+        if (gender == "Male")
+        {
+            currentData.maleCustomersPresent -= 1;
+            currentData.namesOfCurrentMale.Remove(name);
+
+        }
+        if (gender == "Female")
+        {
+            currentData.femaleCustomersPresent -= 1;
+            currentData.namesOfCurrentMale.Remove(name);
+        }
+
+        currentData.totalCustomersPresent -= 1;
+        Destroy(customer);
+
+
     }
 
 

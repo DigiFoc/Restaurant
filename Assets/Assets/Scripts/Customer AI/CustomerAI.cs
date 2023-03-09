@@ -25,6 +25,8 @@ public class CustomerAI : MonoBehaviour
         public string foodOrder;
         public int quantity;
         public int amountToPay;
+        public GameObject currentDestination;
+
      
     }
     [SerializeField]
@@ -33,6 +35,7 @@ public class CustomerAI : MonoBehaviour
     [System.Serializable]
     public class DestinationsInfo
     {
+        public GameObject endPlace;
         [Header("The places AI can visit Randomly")]
         public Transform[] RandomPlaces;
     }
@@ -47,6 +50,8 @@ public class CustomerAI : MonoBehaviour
   bool countTime = false;
     public float WaitingTime;
     public int ratingStar;
+    GameObject currentdestination;
+   
 
     private void Awake()
     {
@@ -78,7 +83,9 @@ public class CustomerAI : MonoBehaviour
 
     public void SetDestination(Transform destination)
     {
+        this.currentdestination = destination.gameObject;
         theAgent.SetDestination(destination.position);
+        AI_Information.currentDestination = destination.gameObject;
     }
 
     public void HandleAnimations()
@@ -253,7 +260,21 @@ public class CustomerAI : MonoBehaviour
 
         StockInventory.Instance.ChangeCoinsTo(newCoins);
 
+        Invoke("CurtainOut", 5);
 
+    }
 
+    public void CurtainOut()
+    {
+        anim.SetBool("Sit", false);
+        currentdestination.GetComponent<BenchLocation>().curtainOff();
+        Invoke("GetOut", 2);
+     
+
+    }
+    public void GetOut()
+    {
+        theAgent.enabled = true;
+        theAgent.SetDestination(destinations.endPlace.transform.position);
     }
 }

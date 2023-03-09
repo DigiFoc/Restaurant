@@ -28,9 +28,6 @@ public class FoodCounter : MonoBehaviour
 
     public foodSlots FoodSlots;
     public foodPrefabs FoodPrefabs;
-
-
-   
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -110,7 +107,8 @@ public class FoodCounter : MonoBehaviour
             g.name="SamosaModel";
 			samosaReady=true;
         }
-        else {
+        else
+        {
             Debug.Log("Wrong Food Passed");
         }
 
@@ -143,7 +141,9 @@ public class FoodCounter : MonoBehaviour
             Destroy(GameObject.Find("SamosaModel"));
 			samosaReady=false;
         }
-        else {
+        else 
+        {
+
             Debug.Log("Wrong Food Passed");
         }
 	}
