@@ -35,7 +35,7 @@ public class CustomerAI : MonoBehaviour
     [System.Serializable]
     public class DestinationsInfo
     {
-        public GameObject endPlace;
+        public Transform endPlace;
         [Header("The places AI can visit Randomly")]
         public Transform[] RandomPlaces;
     }
@@ -239,25 +239,26 @@ public class CustomerAI : MonoBehaviour
         if (WaitingTime <= 15.0f)
         {
             ratingStar = 1;
-            newCoins += (int)(AI_Information.amountToPay * (100 / 100));
+         
             TextManager.Instance.ShowToast("Order Served,100%", 3);
         }
         if (WaitingTime > 15.0f && WaitingTime <= 20.0f)
         {
 
             ratingStar = 2;
-            newCoins += (int)(AI_Information.amountToPay * (75 / 100));
+          
             TextManager.Instance.ShowToast("Order Served,75%", 3);
         }
 
         if (WaitingTime > 30.0f)
         {
             ratingStar = 3;
-            newCoins += (int)(AI_Information.amountToPay * (50 / 100));
+          
             TextManager.Instance.ShowToast("Order Served,50%",3);
         }
 
-
+        Debug.Log("New coins are" + newCoins);
+        newCoins += AI_Information.amountToPay;
         StockInventory.Instance.ChangeCoinsTo(newCoins);
 
         Invoke("CurtainOut", 5);

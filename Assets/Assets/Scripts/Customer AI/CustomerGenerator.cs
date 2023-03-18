@@ -59,6 +59,8 @@ public class CustomerGenerator : MonoBehaviour
         //Setting the name and gender to AI
         AI.GetComponent<CustomerAI>().AI_Information.name = randomName;
         AI.GetComponent<CustomerAI>().AI_Information.Gender = "Male";
+        AI.GetComponent<CustomerAI>().destinations.endPlace= customerEndingPoint.transform;
+
 
 
         currentData.totalCustomersPresent += 1;
@@ -77,7 +79,7 @@ public class CustomerGenerator : MonoBehaviour
 
         AI.GetComponent<CustomerAI>().AI_Information.name = randomName;
         AI.GetComponent<CustomerAI>().AI_Information.Gender = "Female";
-
+        AI.GetComponent<CustomerAI>().destinations.endPlace= customerEndingPoint.transform;
         currentData.totalCustomersPresent += 1;
         currentData.femaleCustomersPresent += 1;
         currentData.namesofCurrentFemale.Add(randomName);
