@@ -15,5 +15,6 @@ public class quantityInfo : MonoBehaviour
     private void Awake()
     {
         this.gameObject.tag = tag;
+       
     }
 }

@@ -112,6 +112,7 @@ public class CustomerAI : MonoBehaviour
         {
             SetDestination(hutManager.hut1.locationOfHut);
             hutManager.hut1.isOccupied = true;
+            hutManager.hut1.customer = this.gameObject;
             hutManager.hut1.customerName = AI_Information.name;
 
             return 1;
@@ -120,6 +121,7 @@ public class CustomerAI : MonoBehaviour
         {
             SetDestination(hutManager.hut2.locationOfHut);
             hutManager.hut2.isOccupied = true;
+            hutManager.hut2.customer = this.gameObject;
             hutManager.hut2.customerName = AI_Information.name;
             return 2;
         }
@@ -127,6 +129,7 @@ public class CustomerAI : MonoBehaviour
         {
             SetDestination(hutManager.hut3.locationOfHut);
             hutManager.hut3.isOccupied = true;
+            hutManager.hut3.customer = this.gameObject;
             hutManager.hut3.customerName = AI_Information.name;
             return 3;
         }
@@ -134,9 +137,19 @@ public class CustomerAI : MonoBehaviour
         {
             SetDestination(hutManager.hut4.locationOfHut);
             hutManager.hut4.isOccupied = true;
+            hutManager.hut4.customer = this.gameObject;
             hutManager.hut4.customerName = AI_Information.name;
             return 4;
         }
+        if (!hutManager.hut5.isOccupied)
+        {
+            SetDestination(hutManager.hut5.locationOfHut);
+            hutManager.hut5.isOccupied = true;
+            hutManager.hut5.customer = this.gameObject;
+            hutManager.hut5.customerName = AI_Information.name;
+            return 5;
+        }
+
 
         return 0;
 
@@ -277,5 +290,79 @@ public class CustomerAI : MonoBehaviour
     {
         theAgent.enabled = true;
         theAgent.SetDestination(destinations.endPlace.transform.position);
+        Invoke("ResetValues", 2);
     }
+
+    public void ResetValues()
+    {
+     
+
+        if(AI_Information.hutNo == 1)
+        {
+            hutManager.hut1.cashToPay = 0;
+            hutManager.hut1.customer = null;
+            hutManager.hut1.customerName = null;
+            hutManager.hut1.Gender = null;
+            hutManager.hut1.isOccupied = false;
+            hutManager.hut1.Statusorder.text = "Empty";
+            hutManager.hut1.TimeLeft.text = "";
+            hutManager.ResetHutStatus(1);
+
+        }
+
+
+        if (AI_Information.hutNo == 2)
+        {
+            hutManager.hut2.cashToPay = 0;
+            hutManager.hut2.customer = null;
+            hutManager.hut2.customerName = null;
+            hutManager.hut2.Gender = null;
+            hutManager.hut2.TimeLeft.text = "";
+            hutManager.hut2.Statusorder.text = "Empty";
+
+            hutManager.hut2.isOccupied = false;
+            hutManager.ResetHutStatus(2);
+        }
+
+        if (AI_Information.hutNo == 3)
+        {
+            hutManager.hut3.cashToPay = 0;
+            hutManager.hut3.customer = null;
+            hutManager.hut3.customerName = null;
+            hutManager.hut3.Gender = null;
+            hutManager.hut3.TimeLeft.text = "";
+            hutManager.hut3.Statusorder.text = "Empty";
+            hutManager.hut3.isOccupied = false;
+            hutManager.ResetHutStatus(3);
+        }
+
+        if (AI_Information.hutNo == 4)
+        {
+            hutManager.hut4.cashToPay = 0;
+            hutManager.hut4.customer = null;
+            hutManager.hut4.customerName = null;
+            hutManager.hut4.Gender = null;
+            hutManager.hut4.TimeLeft.text = "";
+            hutManager.hut4.Statusorder.text = "Empty";
+            hutManager.hut4.isOccupied = false;
+            hutManager.ResetHutStatus(4);
+        }
+
+        if (AI_Information.hutNo == 5)
+        {
+            hutManager.hut5.cashToPay = 0;
+            hutManager.hut5.customer = null;
+            hutManager.hut5.customerName = null;
+            hutManager.hut5.TimeLeft.text = "";
+            hutManager.hut5.Statusorder.text = "Empty";
+            hutManager.hut5.Gender = null;
+            hutManager.hut5.isOccupied = false;
+            hutManager.ResetHutStatus(5);
+        }
+
+       
+
+    }
+
+   
 }

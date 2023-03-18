@@ -20,9 +20,11 @@ public class CustomerGenerator : MonoBehaviour
     [SerializeField]
 
     public CurrentCustomersData currentData;
+    public int startingCustomers = 3;
+    
     void Start()
     {
-        GenerateCustomer(2);
+        GenerateCustomer(startingCustomers);
     }
 
     // Update is called once per frame
