@@ -46,7 +46,7 @@ public class CustomerGenerator : MonoBehaviour
                 GenerateFemale(1);
         }
     }
-
+                                                  
     public void GenerateMale(int n)
     {
         int randomMaleNo = Random.Range(0, customerDatabase.maleCustomersModel.Length);
