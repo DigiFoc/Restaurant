@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     {
         theAgent = this.GetComponent<NavMeshAgent>();
         anim = this.GetComponent<Animator>();
+        SetDestination(Destinations[7]);
+        transform.rotation = new Quaternion(0, 180, 0,1);
     }
 
     // Update is called once per frame

@@ -20,27 +20,24 @@ public class CustomerGenerator : MonoBehaviour
     [SerializeField]
 
     public CurrentCustomersData currentData;
-    public int startingCustomers = 3;
+    public int startingCustomers = 1;
     
     void Start()
     {
-        GenerateCustomer(startingCustomers);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentData.totalCustomersPresent == 0)
-        {
-            GenerateCustomer(1);
-        }
+       
     }
 
     public void GenerateCustomer(int n)
     {
         for (int i = 0; i < n; i++)
         {
-            int Gender = Random.Range(1, 2);
+            int Gender = Random.Range(1, 3);
+            Debug.Log(Gender);
             if (Gender == 1) //Generate a male
             {
                 GenerateMale(1);

@@ -18,7 +18,10 @@ public class DestroyTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<CustomerAI>())
-        Destroy(other);
+        if (other.GetComponent<CustomerAI>())
+        {
+            other.GetComponent<CustomerAI>().SendReachSignal();
+        Destroy(other.gameObject);
+        }
     }
 }

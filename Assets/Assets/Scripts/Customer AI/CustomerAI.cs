@@ -251,11 +251,11 @@ public class CustomerAI : MonoBehaviour
         countTime = false;
         if (WaitingTime <= 15.0f)
         {
-            ratingStar = 1;
+            ratingStar = 3;
          
             TextManager.Instance.ShowToast("Order Served,100%", 3);
         }
-        if (WaitingTime > 15.0f && WaitingTime <= 20.0f)
+        if (WaitingTime > 15.0f && WaitingTime <= 30.0f)
         {
 
             ratingStar = 2;
@@ -265,7 +265,7 @@ public class CustomerAI : MonoBehaviour
 
         if (WaitingTime > 30.0f)
         {
-            ratingStar = 3;
+            ratingStar = 1;
           
             TextManager.Instance.ShowToast("Order Served,50%",3);
         }
@@ -360,9 +360,12 @@ public class CustomerAI : MonoBehaviour
             hutManager.ResetHutStatus(5);
         }
 
-       
 
     }
 
+    public void SendReachSignal()
+    {
+        LevelManager.Instance.CustomerReached(ratingStar);
+    }
    
 }
