@@ -70,6 +70,8 @@ public class LevelManager : MonoBehaviour
     }
     IEnumerator CountTime()
     {
+        yield return new WaitForSeconds(1); //To Remove the Glitch of Divide by Zero\
+        Debug.Log(currentLevel.totalLevelTime);
         yield return new WaitForSeconds(currentLevel.totalLevelTime);
         string levelStatus = ((isLevelCompleted()) ? "Level Passes" : "Level Failed");
         Debug.Log(levelStatus);
