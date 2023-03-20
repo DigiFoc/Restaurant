@@ -41,6 +41,26 @@ public class TextManager : MonoBehaviour
             Invoke("ChangePriority", 1f);
         }
     }
+
+    public void Show2SecondNotification(string incomingText)
+    {
+        if (transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text == string.Empty)
+        {
+            transform.GetComponent<Animator>().Play("FadeIn");
+            transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text = incomingText;
+            //Debug.Log(incomingText);
+            Invoke("FadeOut", 2);
+        }
+        else
+        {
+            //Debug.Log(incomingText);
+            tempText = incomingText;
+            tempTime = 2;
+            Invoke("ChangePriority", 1f);
+        }
+    }
+
+
     void ChangePriority()
     {
         ShowToast(tempText, tempTime);

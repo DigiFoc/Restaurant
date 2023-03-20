@@ -41,14 +41,15 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        SetLevel(LevelNo);
-        customerGenerator.GenerateCustomer(currentLevel.totalCustomers);
+        //SetLevel(LevelNo);
+        //customerGenerator.GenerateCustomer(currentLevel.totalCustomers);
     }
 
     // Update is called once per frame
-    void SetLevel(int levelNumber)
+   public void SetLevel(int levelNumber)
     {
         currentLevel = levels[levelNumber - 1];
+        customerGenerator.GenerateCustomer(currentLevel.totalCustomers);
         StartCoroutine(CountTime());
     }
 
