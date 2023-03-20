@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class LevelManager : MonoBehaviour
     public int currentTime;
     public int currentReached;
     public int LevelNo;
+    public TMP_Text timeRequired;
+    public TMP_Text totalCustomerstext;
+    public TMP_Text ratingRequired;
 
     private void Awake()
     {
@@ -49,10 +53,21 @@ public class LevelManager : MonoBehaviour
    public void SetLevel(int levelNumber)
     {
         currentLevel = levels[levelNumber - 1];
+
+        float min = 0;
+        float sec=0;
+        min = Mathf.Floor(currentLevel.totalLevelTime / 60);
+        sec = currentLevel.totalLevelTime % 60;
+        timeRequired.text = min.ToString("00")+":"+ sec.ToString("00");
+        totalCustomerstext.text = currentLevel.totalCustomers.ToString();
+        ratingRequired.text = currentLevel.avgRatingReq.ToString();
+
+    }
+    public void StartLevel()
+    {
         customerGenerator.GenerateCustomer(currentLevel.totalCustomers);
         StartCoroutine(CountTime());
     }
-
     IEnumerator CountTime()
     {
         yield return new WaitForSeconds(currentLevel.totalLevelTime);
