@@ -226,4 +226,45 @@ public class StockInventory : MonoBehaviour
 
     }
 
+    public bool CheckCurrentFoodStock(string foodName, int quantity)
+    {
+        if (foodName.Equals("Samosa", System.StringComparison.OrdinalIgnoreCase))
+        {
+            if (currentFoodStocks.samosa >= quantity)
+                return true;
+            else
+                return false;
+        }
+
+        if (foodName.Equals("Pakori", System.StringComparison.OrdinalIgnoreCase))
+        {
+            if (currentFoodStocks.pakora >= quantity)
+                return true;
+            else
+                return false;
+        }
+
+        if (foodName.Equals("PaneerTikka", System.StringComparison.OrdinalIgnoreCase))
+        {
+            if (currentFoodStocks.paneerTikka>= quantity)
+                return true;
+            else
+                return false;
+        }
+        if (foodName.Equals("Tea", System.StringComparison.OrdinalIgnoreCase))
+        {
+            if (currentFoodStocks.tea >= quantity)
+                return true;
+            else
+                return false;
+        }
+        else
+        {
+            Debug.Log("Wrong Food Passed For" + foodName);
+            return false;
+        }
+
+
+
+    }
 }

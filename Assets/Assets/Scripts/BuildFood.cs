@@ -44,6 +44,7 @@ public class BuildFood : MonoBehaviour
 
                 TextManager.Instance.ShowToast(foodNames[i] + "Starts Cooking", 2);
                 FoodCounter.Instance.AddFood(foodNames[i], quantities[i]);
+                FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);
              //   FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);
             }
             else
@@ -94,6 +95,7 @@ public class BuildFood : MonoBehaviour
         // }
 
         GameObject[] items = GameObject.FindGameObjectsWithTag("foodModel");
+
 
         for (int i = 0; i < items.Length; i++)
         {

@@ -52,8 +52,9 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
    public void SetLevel(int levelNumber)
     {
-        currentLevel = levels[levelNumber - 1];
-
+        int currentNumber = levelNumber - 1;
+        currentLevel = levels[currentNumber];
+        Debug.Log(currentLevel);
         float min = 0;
         float sec=0;
         min = Mathf.Floor(currentLevel.totalLevelTime / 60);
@@ -65,6 +66,7 @@ public class LevelManager : MonoBehaviour
     }
     public void StartLevel()
     {
+        
         customerGenerator.GenerateCustomer(currentLevel.totalCustomers);
         StartCoroutine(CountTime());
     }

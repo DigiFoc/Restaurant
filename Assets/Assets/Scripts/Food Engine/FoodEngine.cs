@@ -111,7 +111,7 @@ public class FoodEngine : MonoBehaviour
 
     public void AddFood(string food,int quantity)
     {
-        if(food == "Samosa")
+        if(food.Equals("Samosa",System.StringComparison.OrdinalIgnoreCase))
         {
 
             StockInventory.Instance.currentFoodStocks.samosa += quantity;
@@ -120,7 +120,7 @@ public class FoodEngine : MonoBehaviour
             
         }
 
-        if (food == "PaneerTikka")
+        if (food.Equals("PaneerTikka",System.StringComparison.OrdinalIgnoreCase))
         {
             StockInventory.Instance.currentFoodStocks.paneerTikka += quantity;
             currenttFoodUI.PaneerTikka.text = StockInventory.Instance.currentFoodStocks.paneerTikka.ToString();
@@ -128,7 +128,7 @@ public class FoodEngine : MonoBehaviour
         }
 
 
-        if (food == "Tea")
+        if (food.Equals("Tea",System.StringComparison.OrdinalIgnoreCase))
         {
             Debug.Log("Tea is added");
             StockInventory.Instance.currentFoodStocks.tea += quantity;
@@ -136,7 +136,7 @@ public class FoodEngine : MonoBehaviour
             removeTeaIngredients(quantity);
         }
 
-        if(food == "Pakora")
+        if(food.Equals("Pakora",System.StringComparison.OrdinalIgnoreCase))
         {
             StockInventory.Instance.currentFoodStocks.pakora += quantity;
             currenttFoodUI.PakoraText.text = StockInventory.Instance.currentFoodStocks.pakora.ToString();

@@ -6,12 +6,12 @@ public class PlayerFoodHandling : MonoBehaviour
 {
     string currentFood;
     public bool isHolding = false;
-
+    public string itemName = "";
     [System.Serializable]
     public class FoodPrefabs
     {
         public GameObject Tea;
-        public GameObject Pakora, Samosa, PaneerTikka;
+        public GameObject Pakora, Samosa, PaneerTikka,UniversalTray;
     }
     [SerializeField]
 
@@ -28,6 +28,7 @@ public class PlayerFoodHandling : MonoBehaviour
     public IKConstraints SamosaIK;
     public IKConstraints PaneerTikkaIK;
     public IKConstraints PakoriIK;
+    public IKConstraints UniversalTrayIK;
 
     public static PlayerFoodHandling Instance { get; set; }
 
@@ -120,6 +121,19 @@ public class PlayerFoodHandling : MonoBehaviour
             anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
 
         }
+        if (currentFood == "UniversalFood")
+        {
+            //For Right Hand
+            anim.SetIKPosition(AvatarIKGoal.RightHand, UniversalTrayIK.RightHandEffector.transform.position);
+            anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
+            anim.SetIKRotation(AvatarIKGoal.RightHand, UniversalTrayIK.RightHandEffector.transform.rotation);
+            anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+            //For Left Hand
+            anim.SetIKPosition(AvatarIKGoal.LeftHand, UniversalTrayIK.LeftHandEffector.transform.position);
+            anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
+            anim.SetIKRotation(AvatarIKGoal.LeftHand, UniversalTrayIK.LeftHandEffector.transform.rotation);
+            anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
+        }
         else
         {
         
@@ -139,7 +153,7 @@ public class PlayerFoodHandling : MonoBehaviour
     public void PickFood(string food)   //Player ke haatho mein food laane key liye ise call kre
     {
         currentFood = food;
-
+        
         if (food == "Samosa")
         {
             foodItems.Samosa.SetActive(true);
@@ -165,12 +179,15 @@ public class PlayerFoodHandling : MonoBehaviour
 
         }
 
+        if (food == "UniversalFood")
+            foodItems.UniversalTray.SetActive(true);
+
 
     }
 
     public void RemoveFood(string food)   //Player ke haatho mein food hatane key liye ise call kre
     {
-        currentFood = food;
+        currentFood = "";
 
         if (food == "Samosa")
         {
@@ -196,6 +213,9 @@ public class PlayerFoodHandling : MonoBehaviour
 
 
         }
+
+        if (food == "UniversalFood")
+            foodItems.UniversalTray.SetActive(false);
 
 
     }

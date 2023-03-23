@@ -25,16 +25,24 @@ public class MarkerTrigger : MonoBehaviour
         if (other.tag == "Player")
         {
             bool isTrue =  CheckConditionSuccessful();
-            if (isTrue)
+            if (isTrue )
             {
-                SubtractFoodItems();
-                StockInventory.Instance.UpdateFoodStockUI();
-                customer.ServeFood();
-                
-                
-                Debug.Log("COnditions Satisfied");
-                TextManager.Instance.ShowToast("FOOD SERVED",3);
-                this.gameObject.SetActive(false);
+                if (PlayerFoodHandling.Instance.itemName.Equals(foodName, System.StringComparison.OrdinalIgnoreCase))
+                {
+                    SubtractFoodItems();
+                    StockInventory.Instance.UpdateFoodStockUI();
+                    customer.ServeFood();
+
+                    PlayerFoodHandling.Instance.RemoveFood("UniversalFood");
+                    Debug.Log("COnditions Satisfied");
+                    TextManager.Instance.ShowToast("FOOD SERVED", 3);
+                    this.gameObject.SetActive(false);
+                }
+                else
+                {
+                    Debug.Log("Wrong Tray Delivered");
+                    TextManager.Instance.ShowToast("Wrong Tray", 1);
+                }
             }
             else
                 Debug.Log("Condtions Not Matched");
