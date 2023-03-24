@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerFoodHandling : MonoBehaviour
 {
-    string currentFood;
+    public string currentFood;
     public bool isHolding = false;
     public string itemName = "";
     [System.Serializable]

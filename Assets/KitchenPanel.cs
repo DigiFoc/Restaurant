@@ -25,6 +25,11 @@ public class KitchenPanel : MonoBehaviour
        
         if (col.tag == "Player")
         {
+            if (PlayerFoodHandling.Instance.currentFood.Equals("UniversalFood", System.StringComparison.OrdinalIgnoreCase))
+            {
+                TextManager.Instance.ShowToast("You Already Have A Tray", 2);
+                return;
+            }
             CalculateHutInfo();
             SetHutInfo();
             //CheckConditons();
@@ -191,27 +196,72 @@ public class KitchenPanel : MonoBehaviour
         if (hut1.quantity > 0)
             hut1UI.text = hut1.quantity + hut1.item;
         else
-            hut1UI.text = "No Coustomer";
+        {
+            if(hutsManager.hut1.customerName != null || hutsManager.hut2.customerName.Equals(""))
+            {
+                hut1UI.text = "Requirements Fullfilled";
+            }
+            else
+            {
+                hut1UI.text = "No Coustomer";
+            }
+        }
 
         if (hut2.quantity >0)
             hut2UI.text = hut2.quantity + hut2.item;
         else
-            hut2UI.text = "No Coustomer";
+        {
+            if (hutsManager.hut2.customerName != null || hutsManager.hut2.customerName.Equals(""))
+            {
+                hut2UI.text = "Requirements Fullfilled";
+            }
+            else
+            {
+                hut2UI.text = "No Coustomer";
+            }
+        }
 
         if (hut3.quantity >0)
             hut3UI.text = hut3.quantity + hut3.item;
         else
-            hut3UI.text = "No Coustomer";
+        {
+            if (hutsManager.hut3.customerName != null || hutsManager.hut3.customerName.Equals(""))
+            {
+                hut3UI.text = "Requirements Fullfilled";
+            }
+            else
+            {
+                hut3UI.text = "No Coustomer";
+            }
+        }
 
         if (hut4.quantity > 0)
             hut4UI.text = hut4.quantity + hut4.item;
         else
-            hut4UI.text = "No Coustomer";
+        {
+            if (hutsManager.hut4.customerName != null || hutsManager.hut4.customerName.Equals(""))
+            {
+                hut4UI.text = "Requirements Fullfilled";
+            }
+            else
+            {
+                hut4UI.text = "No Coustomer";
+            }
+        }   
 
         if (hut5.quantity > 0)
             hut5UI.text = hut5.quantity + hut5.item;
         else
-            hut5UI.text = "No Coustomer";
+        {
+            if (hutsManager.hut5.customerName != null || hutsManager.hut5.customerName.Equals(""))
+            {
+                hut5UI.text = "Requirements Fullfilled";
+            }
+            else
+            {
+                hut5UI.text = "No Coustomer";
+            }
+        }//Test kro bahiya 
     }
 
 
@@ -222,7 +272,7 @@ public class KitchenPanel : MonoBehaviour
     {
         if (hutNo == 1 && condition1.isOn)
         {
-          
+            buildTray1.SetActive(false);
             TextManager.Instance.ShowToast(hut1.item + " Is ADDED", 2);
             PlayerFoodHandling.Instance.PickFood("UniversalFood");
             PlayerFoodHandling.Instance.itemName = hut1.item;
@@ -231,7 +281,7 @@ public class KitchenPanel : MonoBehaviour
 
         if (hutNo == 2 && condition2.isOn)
         {
-          
+            buildTray2.SetActive(false);
             TextManager.Instance.ShowToast(hut2.item + " Is ADDED", 2);
             PlayerFoodHandling.Instance.PickFood("UniversalFood");
             PlayerFoodHandling.Instance.itemName = hut2.item;
@@ -240,7 +290,7 @@ public class KitchenPanel : MonoBehaviour
 
         if (hutNo == 3 && condition3.isOn)
         {
-         
+            buildTray3.SetActive(false);
             PlayerFoodHandling.Instance.PickFood("UniversalFood");
             TextManager.Instance.ShowToast(hut3.item + " Is ADDED", 2);
             PlayerFoodHandling.Instance.itemName = hut3.item;
@@ -249,7 +299,8 @@ public class KitchenPanel : MonoBehaviour
 
         if (hutNo == 4 && condition4.isOn)
         {
-         
+
+            buildTray4.SetActive(false);
             PlayerFoodHandling.Instance.PickFood("UniversalFood");
             TextManager.Instance.ShowToast(hut4.item + " Is ADDED", 2);
             PlayerFoodHandling.Instance.itemName = hut4.item;
@@ -259,7 +310,7 @@ public class KitchenPanel : MonoBehaviour
 
         if (hutNo == 5 && condition5.isOn)
         {
-          
+            buildTray5.SetActive(false);
             PlayerFoodHandling.Instance.PickFood("UniversalFood");
             PlayerFoodHandling.Instance.itemName = hut5.item;
             TextManager.Instance.ShowToast(hut5.item + " Is ADDED", 2);

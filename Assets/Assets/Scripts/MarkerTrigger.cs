@@ -32,7 +32,8 @@ public class MarkerTrigger : MonoBehaviour
                     SubtractFoodItems();
                     StockInventory.Instance.UpdateFoodStockUI();
                     customer.ServeFood();
-
+                    foodName = "";
+                    quntity = 0;
                     PlayerFoodHandling.Instance.RemoveFood("UniversalFood");
                     Debug.Log("COnditions Satisfied");
                     TextManager.Instance.ShowToast("FOOD SERVED", 3);
