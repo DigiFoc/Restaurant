@@ -10,7 +10,7 @@ public class ReceiptGenerator : MonoBehaviour
     public Transform TextHolder;
     public GameObject ItemPrefab;
     public TMP_Text GrandTotal;
-    int amount = 0;
+    public int amount = 0;
     public GameObject limitWarning;
     
 

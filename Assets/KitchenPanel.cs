@@ -13,6 +13,8 @@ public class KitchenPanel : MonoBehaviour
     public Toggle condition1, condition2, condition3, condition4,condition5;
     public GameObject buildTray1, buildTray2, buildTray3, buildTray4, buildTray5;
     public Color forSatisfied;
+    public GameObject openButton;
+    
     void Start()
     {
         KPanel.SetActive(false);
@@ -44,6 +46,7 @@ public class KitchenPanel : MonoBehaviour
         if (col.tag == "Player")
         {
             KPanel.SetActive(false);
+            openButton.SetActive(false);
         }
     }
 
@@ -197,7 +200,7 @@ public class KitchenPanel : MonoBehaviour
             hut1UI.text = hut1.quantity + hut1.item;
         else
         {
-            if(hutsManager.hut1.customerName != null || hutsManager.hut2.customerName.Equals(""))
+            if(hutsManager.hut1.isOccupied)
             {
                 hut1UI.text = "Requirements Fullfilled";
             }
@@ -211,7 +214,7 @@ public class KitchenPanel : MonoBehaviour
             hut2UI.text = hut2.quantity + hut2.item;
         else
         {
-            if (hutsManager.hut2.customerName != null || hutsManager.hut2.customerName.Equals(""))
+            if (hutsManager.hut2.isOccupied)
             {
                 hut2UI.text = "Requirements Fullfilled";
             }
@@ -225,7 +228,7 @@ public class KitchenPanel : MonoBehaviour
             hut3UI.text = hut3.quantity + hut3.item;
         else
         {
-            if (hutsManager.hut3.customerName != null || hutsManager.hut3.customerName.Equals(""))
+            if (hutsManager.hut3.isOccupied)
             {
                 hut3UI.text = "Requirements Fullfilled";
             }
@@ -239,7 +242,7 @@ public class KitchenPanel : MonoBehaviour
             hut4UI.text = hut4.quantity + hut4.item;
         else
         {
-            if (hutsManager.hut4.customerName != null || hutsManager.hut4.customerName.Equals(""))
+            if (hutsManager.hut4.isOccupied)
             {
                 hut4UI.text = "Requirements Fullfilled";
             }
@@ -253,7 +256,7 @@ public class KitchenPanel : MonoBehaviour
             hut5UI.text = hut5.quantity + hut5.item;
         else
         {
-            if (hutsManager.hut5.customerName != null || hutsManager.hut5.customerName.Equals(""))
+            if (hutsManager.hut5.isOccupied)
             {
                 hut5UI.text = "Requirements Fullfilled";
             }
@@ -319,6 +322,29 @@ public class KitchenPanel : MonoBehaviour
 
     
 
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (KPanel.active)
+        {
+            openButton.SetActive(false);
+        }
+        else
+            openButton.SetActive(true);
+    }
+
+    public void OpenKitchen()
+    {
+        if (PlayerFoodHandling.Instance.currentFood.Equals("UniversalFood", System.StringComparison.OrdinalIgnoreCase))
+        {
+            TextManager.Instance.ShowToast("You Already Have A Tray", 2);
+            return;
+        }
+        CalculateHutInfo();
+        SetHutInfo();
+        //CheckConditons();
+        KPanel.SetActive(true);
     }
 
 

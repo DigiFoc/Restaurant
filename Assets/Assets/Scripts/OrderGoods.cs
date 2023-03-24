@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class OrderGoods : MonoBehaviour
 {
     // Start is called before the first frame update
     string[] itemNames;
     int[] quantities;
-   public int totalPrice;
-
+    public int totalPrice;
+    public TMP_Text totalPriceText;
     void Start()
     {
         
@@ -21,11 +22,14 @@ public class OrderGoods : MonoBehaviour
     }
 
 
-   public void OrderGooods()
+    public void OrderGooods()
     {
         bool temp = BuildFoood();
         if (!temp)
-            TextManager.Instance.ShowToast("Coins are not enough",2);
+        {
+            TextManager.Instance.ShowToast("Coins are not enough", 2);
+            return;
+        }
 
         int newCoins = StockInventory.Instance.coins - totalPrice;
        
@@ -45,6 +49,7 @@ public class OrderGoods : MonoBehaviour
             itemNames[i] = items[i].name;
             quantities[i] = items[i].quantity;
             totalPrice += items[i].amount;
+            totalPriceText.text = "Total Rs:- " + totalPrice.ToString();
 
         }
 

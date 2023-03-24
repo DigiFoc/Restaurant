@@ -117,8 +117,8 @@ public class StockInventory : MonoBehaviour
         currentIngredientStocks.OilText.text = "<sprite=3>" + currentIngredientStocks.oil.ToString();
         currentIngredientStocks.BesanText.text = "<sprite=4>" + currentIngredientStocks.besan.ToString();
         currentIngredientStocks.SugarText.text = "<sprite=5>" + currentIngredientStocks.sugar.ToString();
-        currentIngredientStocks.MilkText.text = "<sprite=6>" + currentIngredientStocks.milk.ToString();
-        currentIngredientStocks.TeaLeavesText.text = "<sprite=7>" + currentIngredientStocks.tealeaves.ToString();
+        currentIngredientStocks.MilkText.text = "<sprite=7>" + currentIngredientStocks.milk.ToString();
+        currentIngredientStocks.TeaLeavesText.text = "<sprite=6>" + currentIngredientStocks.tealeaves.ToString();
     }
 
 
@@ -223,7 +223,7 @@ public class StockInventory : MonoBehaviour
         temp = Mathf.Lerp(coins, newCoins, 1.0f);
 
         coinText.text = temp.ToString();
-
+        coins = newCoins;
     }
 
     public bool CheckCurrentFoodStock(string foodName, int quantity)

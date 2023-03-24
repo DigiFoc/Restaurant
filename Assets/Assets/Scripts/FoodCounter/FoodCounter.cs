@@ -85,7 +85,7 @@ public class FoodCounter : MonoBehaviour
         {
             if (pTikkaReady)
             {
-                GameObject.Find("pTikkaModel").GetComponent<quantityInfo>().AddQuantity(Quantity);
+                GameObject.Find("PTikkaModel").GetComponent<quantityInfo>().AddQuantity(Quantity);
                 return;
             }
             GameObject g=Instantiate(FoodPrefabs.paneerTikkaPrefab, FoodSlots.paneerTikkaSlot.transform.position, Quaternion.identity);
