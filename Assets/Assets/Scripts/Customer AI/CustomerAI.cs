@@ -295,9 +295,9 @@ public class CustomerAI : MonoBehaviour
 
     public void ResetValues()
     {
-     
 
-        if(AI_Information.hutNo == 1)
+        SendReachSignal();
+        if (AI_Information.hutNo == 1)
         {
             hutManager.hut1.cashToPay = 0;
             hutManager.hut1.customer = null;

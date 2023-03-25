@@ -20,7 +20,7 @@ public class DestroyTrigger : MonoBehaviour
     {
         if (other.GetComponent<CustomerAI>())
         {
-            other.GetComponent<CustomerAI>().SendReachSignal();
+           // other.GetComponent<CustomerAI>().SendReachSignal();
         Destroy(other.gameObject);
         }
     }

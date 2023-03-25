@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -17,8 +18,40 @@ public class LevelManager : MonoBehaviour
     public int currentReached;
     public int LevelNo;
     public TMP_Text timeRequired;
+    public TMP_Text levelNumbertext;
     public TMP_Text totalCustomerstext;
     public TMP_Text ratingRequired;
+    public string levelStatusText;
+    public string reason;
+    public bool levelStarted;
+    public TMP_Text ObjtimeRequired;
+    public TMP_Text ObjtimeCurrent;
+    public TMP_Text ObjRatingRequired;
+    public TMP_Text ObjRatingCurrent;
+    public TMP_Text ObjCustRequired;
+    public TMP_Text ObjCustCurrent;
+    public TMP_Text EndScreentimeRequired;
+    public TMP_Text EndScreentimeCurrent;
+    public TMP_Text EndScreenRatingRequired;
+    public TMP_Text EndScreenRatingCurrent;
+    public TMP_Text EndScreenCustRequired;
+    public TMP_Text EndScreenCustCurrent;
+    public TMP_Text TimeOutScreenRatingRequired;
+    public TMP_Text TimeOutScreenRatingCurrent;
+    public TMP_Text TimeOutScreenCustRequired;
+    public TMP_Text TimeOutScreenCustCurrent;
+    float timecurrent = 0;
+    float min = 0;
+    float sec = 0;
+    float currMin = 0;
+    float currSec = 0;
+    public GameObject EndScreen;
+    public GameObject TimeOutScreen;
+    public GameObject[] statusesEndScreen,statusesTimeOutScreen;
+
+
+    public Sprite passTextures;
+    public Sprite failTextures;
 
     private void Awake()
     {
@@ -45,38 +78,57 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+        levelStarted = false;
         //SetLevel(LevelNo);
         //customerGenerator.GenerateCustomer(currentLevel.totalCustomers);
     }
-
+    private void Update()
+    {
+        if(levelStarted)
+            {
+            timecurrent += Time.deltaTime;
+            currMin = Mathf.Floor(timecurrent / 60);
+            currSec = timecurrent % 60;
+            ObjtimeCurrent.text = currMin.ToString("00") + ":" + currSec.ToString("00");
+            ObjRatingCurrent.text = currentRating.ToString();
+            ObjCustCurrent.text = currentReached.ToString();
+            if (timecurrent >= currentLevel.totalLevelTime)
+            {
+                levelStarted = false; }
+        }
+    }
     // Update is called once per frame
-   public void SetLevel(int levelNumber)
+    public void SetLevel(int levelNumber)
     {
         int currentNumber = levelNumber - 1;
         currentLevel = levels[currentNumber];
         Debug.Log(currentLevel);
-        float min = 0;
-        float sec=0;
         min = Mathf.Floor(currentLevel.totalLevelTime / 60);
         sec = currentLevel.totalLevelTime % 60;
         timeRequired.text = min.ToString("00")+":"+ sec.ToString("00");
         totalCustomerstext.text = currentLevel.totalCustomers.ToString();
         ratingRequired.text = currentLevel.avgRatingReq.ToString();
+        levelNumbertext.text = currentLevel.levelNum.ToString();
 
     }
     public void StartLevel()
     {
         
         customerGenerator.GenerateCustomer(currentLevel.totalCustomers);
+        levelStarted = true;
         StartCoroutine(CountTime());
     }
     IEnumerator CountTime()
     {
         yield return new WaitForSeconds(1); //To Remove the Glitch of Divide by Zero\
         Debug.Log(currentLevel.totalLevelTime);
+        ObjtimeRequired.text = min.ToString("00") + ":" + sec.ToString("00");
+        ObjRatingRequired.text = currentLevel.avgRatingReq.ToString();
+        ObjCustRequired.text= currentLevel.totalCustomers.ToString();
         yield return new WaitForSeconds(currentLevel.totalLevelTime);
         string levelStatus = ((isLevelCompleted()) ? "Level Passes" : "Level Failed");
-        Debug.Log(levelStatus);
+        if (levelStatus.Equals("Level Failed"))
+            ShowTimeOutScreen();
     }
 
 
@@ -100,6 +152,87 @@ public class LevelManager : MonoBehaviour
         {
             string levelStatus = ((isLevelCompleted()) ? "Level Passes" : "Level Failed");
             Debug.Log(levelStatus);
+            ShowEndScreen();
         } 
     }
+
+
+    void ShowEndScreen()
+    {
+        EndScreen.SetActive(true);
+        EndScreentimeCurrent.text = currMin.ToString("00") + ":" + currSec.ToString("00");
+        EndScreentimeRequired.text = min.ToString("00") + ":" + sec.ToString("00");
+
+        EndScreenRatingRequired.text = currentLevel.avgRatingReq.ToString();
+        EndScreenRatingCurrent.text = currentRating.ToString();
+        EndScreenCustRequired.text= currentLevel.totalCustomers.ToString();
+        EndScreenCustCurrent.text= currentReached.ToString();
+
+        if(currentTime < currentLevel.totalLevelTime)
+        {
+
+            statusesEndScreen[0].GetComponent<Image>().sprite = passTextures;
+
+        }
+        else
+        {
+            statusesEndScreen[0].GetComponent<Image>().sprite = failTextures;
+        }
+
+
+        if (currentReached >= currentLevel.totalCustomers)
+        {
+            statusesEndScreen[1].GetComponent<Image>().sprite = passTextures;
+        }
+        else
+        {
+            statusesEndScreen[1].GetComponent<Image>().sprite = failTextures;
+        }
+
+
+        if (currentRating >= currentLevel.avgRatingReq)
+        {
+            statusesEndScreen[2].GetComponent<Image>().sprite = passTextures;
+        }
+        else
+        {
+            statusesEndScreen[2].GetComponent<Image>().sprite = failTextures;
+        }
+
+    }
+
+
+    void ShowTimeOutScreen()
+    {
+        TimeOutScreen.SetActive(true);
+       
+        TimeOutScreenRatingRequired.text = currentLevel.avgRatingReq.ToString();
+        TimeOutScreenRatingCurrent.text = currentRating.ToString();
+        TimeOutScreenCustRequired.text = currentLevel.totalCustomers.ToString();
+        TimeOutScreenCustCurrent.text = currentReached.ToString();
+
+     
+
+
+        if (currentReached >= currentLevel.totalCustomers)
+        {
+            statusesTimeOutScreen[0].GetComponent<Image>().sprite = passTextures;
+        }
+        else
+        {
+            statusesTimeOutScreen[0].GetComponent<Image>().sprite = failTextures;
+        }
+
+
+        if (currentRating >= currentLevel.avgRatingReq)
+        {
+            statusesTimeOutScreen[1].GetComponent<Image>().sprite = passTextures;
+        }
+        else
+        {
+            statusesTimeOutScreen[1].GetComponent<Image>().sprite = failTextures;
+        }
+
+    }
+
 }
