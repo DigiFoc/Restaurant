@@ -163,7 +163,26 @@ public class ExtShopManager : MonoBehaviour
 
     public void Awake()
     {
-        
+        StartCoroutine(loadUpgrades());  
+    }
+    IEnumerator loadUpgrades()
+    {
+        yield return new WaitForSeconds(1);
+        tv.currentUpgradeNo = GameManager.Instance.currentTVUpgrade;
+        decoration.currentUpgradeNo = GameManager.Instance.currentHeartUpgrade;
+        soundSystem.currentUpgradeNo = GameManager.Instance.currentSpeakerUpgrade;
+        vegetation.currentUpgradeNo = GameManager.Instance.currentVaseUpgrade;
+        wallArt.currentUpgradeNo = GameManager.Instance.currentWallArtUpgrade;
+        vehicle.currentUpgradeNo = GameManager.Instance.currentVehicleUpgrade;
+        foodMachine.currentUpgradeNo = GameManager.Instance.currentMachineUpgrade;
+  
+        UpdateTVVisuals(tv.currentUpgradeNo-1);
+        UpdatedecorationVisuals(decoration.currentUpgradeNo - 1);
+        UpdateSoundSystemVisuals(soundSystem.currentUpgradeNo - 1);
+        UpdateVegetationVisuals(vegetation.currentUpgradeNo - 1);
+        UpdateWallArtVisuals(wallArt.currentUpgradeNo - 1);
+        UpdateVehicleVisuals(vehicle.currentUpgradeNo - 1);
+        UpdateFoodMachineVisuals(foodMachine.currentUpgradeNo - 1);
     }
 
 
@@ -188,6 +207,7 @@ public class ExtShopManager : MonoBehaviour
 
                 UpdateTVVisuals(tv.currentUpgradeNo);
                 tv.currentUpgradeNo++;
+                GameManager.Instance.SaveTVUpgrade(tv.currentUpgradeNo);
             }
             else
             {
@@ -254,6 +274,7 @@ public class ExtShopManager : MonoBehaviour
 
                 UpdatedecorationVisuals(decoration.currentUpgradeNo);
                 decoration.currentUpgradeNo++;
+                GameManager.Instance.SaveHeartUpgrade(decoration.currentUpgradeNo);
             }
             else
             {
@@ -319,6 +340,7 @@ public class ExtShopManager : MonoBehaviour
 
                 UpdateSoundSystemVisuals(soundSystem.currentUpgradeNo);
                 soundSystem.currentUpgradeNo++;
+                GameManager.Instance.SaveSpeakerUpgrade(soundSystem.currentUpgradeNo);
             }
             else
             {
@@ -383,6 +405,7 @@ public class ExtShopManager : MonoBehaviour
 
                 UpdateVegetationVisuals(vegetation.currentUpgradeNo);
                 vegetation.currentUpgradeNo++;
+                GameManager.Instance.SaveVaseUpgrade(vegetation.currentUpgradeNo);
             }
             else
             {
@@ -447,6 +470,7 @@ public class ExtShopManager : MonoBehaviour
 
                 UpdateWallArtVisuals(wallArt.currentUpgradeNo);
                 wallArt.currentUpgradeNo++;
+                GameManager.Instance.SaveWallArtUpgrade(wallArt.currentUpgradeNo);
             }
             else
             {
@@ -515,6 +539,7 @@ public class ExtShopManager : MonoBehaviour
 
                 UpdateVehicleVisuals(vehicle.currentUpgradeNo);
                 vehicle.currentUpgradeNo++;
+                GameManager.Instance.SaveVehicleUpgrade(vehicle.currentUpgradeNo);
             }
             else
             {
@@ -575,6 +600,7 @@ public class ExtShopManager : MonoBehaviour
 
                 UpdateFoodMachineVisuals(foodMachine.currentUpgradeNo);
                 foodMachine.currentUpgradeNo++;
+                GameManager.Instance.SaveMachineUpgrade(foodMachine.currentUpgradeNo);
             }
             else
             {
@@ -592,7 +618,7 @@ public class ExtShopManager : MonoBehaviour
     void UpdateFoodMachineVisuals(int upgradeNo)
     {
         //Changing Speed Of Food Machine
-        SetFoodSpeed(foodMachine.speed[upgradeNo]);  //Not completed
+        //SetFoodSpeed(foodMachine.speed[upgradeNo]);  //Not completed
 
         if (upgradeNo + 1 < foodMachine.totalUpdates)
         {
