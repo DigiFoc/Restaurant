@@ -21933,7 +21933,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.6699219, y: -1.0549927}
+  m_AnchoredPosition: {x: 2.6699219, y: -1.0550537}
   m_SizeDelta: {x: 6.379857, y: 3.6499825}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &416584360
@@ -53278,7 +53278,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1071126636
 Transform:
   m_ObjectHideFlags: 0
@@ -59134,7 +59134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1180635872
 Transform:
   m_ObjectHideFlags: 0
@@ -66631,7 +66631,7 @@ MonoBehaviour:
     tea: 0
     pakora: 0
     FoodItemsText: {fileID: 147646687}
-  coins: 1000
+  coins: 100000
   coinText: {fileID: 1552673112}
 --- !u!4 &1328160472
 Transform:
@@ -89914,7 +89914,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5d238c973d496fb4d80bf90ebb40450b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d9c20da051a8cfd4a896cdcc5bd9eadd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -97973,7 +97973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2021491293
 Transform:
   m_ObjectHideFlags: 0

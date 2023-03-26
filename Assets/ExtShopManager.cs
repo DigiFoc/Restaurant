@@ -213,9 +213,9 @@ public class ExtShopManager : MonoBehaviour
 
         if (upgradeNo + 1 < tv.totalUpdates)
         {
-            tv.upgradeImageField.sprite = tv.upgradeSprites[upgradeNo];
+            tv.upgradeImageField.sprite = tv.upgradeSprites[upgradeNo+1];
 
-            tv.priceText.text = tv.coinsRequired[tv.currentUpgradeNo].ToString();
+            tv.priceText.text = tv.coinsRequired[tv.currentUpgradeNo+1].ToString();
         }
         for(int i=0;i<tv.updateDots.Length;i++)
         {
@@ -403,7 +403,7 @@ public class ExtShopManager : MonoBehaviour
         for (int i = 0; i < vegetation.prefab.Length; i++)
         {
             if (i == upgradeNo) vegetation.prefab[i].SetActive(true);
-            else vegetation.prefab[i].SetActive(false);
+            //else vegetation.prefab[i].SetActive(false);
         }
 
         if (upgradeNo + 1 < vegetation.totalUpdates)
@@ -475,9 +475,9 @@ public class ExtShopManager : MonoBehaviour
         }
         if (upgradeNo + 1 < wallArt.totalUpdates)
         {
-            wallArt.upgradeImageField.sprite = wallArt.upgradeSprites[upgradeNo];
+            wallArt.upgradeImageField.sprite = wallArt.upgradeSprites[upgradeNo+1];
 
-            wallArt.priceText.text = (wallArt.coinsRequired[wallArt.currentUpgradeNo]).ToString();
+            wallArt.priceText.text = (wallArt.coinsRequired[wallArt.currentUpgradeNo+1]).ToString();
         }
         for (int i = 0; i < wallArt.updateDots.Length; i++)
         {
