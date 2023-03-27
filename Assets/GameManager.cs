@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         currentMachineUpgrade = PlayerPrefs.GetInt("MachineUpgrade", 0);
         currentSpeakerUpgrade = PlayerPrefs.GetInt("SpeakerUpgrade", 0);
         currentVaseUpgrade = PlayerPrefs.GetInt("VaseUpgrade", 0);
-        currentVehicleUpgrade = PlayerPrefs.GetInt("VehicleUpgrade", 0);
+        currentVehicleUpgrade = PlayerPrefs.GetInt("VehicleUpgrade", 1);
         currentWallArtUpgrade = PlayerPrefs.GetInt("WallArtUpgrade", 0);
         globalCoins = PlayerPrefs.GetInt("globalCoins", 0);
         lastUnlockedLevel = PlayerPrefs.GetInt("Level",1);

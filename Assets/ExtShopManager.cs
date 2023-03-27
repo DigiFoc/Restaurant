@@ -23,7 +23,7 @@ public class ExtShopManager : MonoBehaviour
         public Sprite updateCompleteDot, updateNotCompletedDot;
     }
     [SerializeField]
-   
+
 
     [System.Serializable]
     public class decorationUpgrade
@@ -42,7 +42,7 @@ public class ExtShopManager : MonoBehaviour
         public Sprite updateCompleteDot, updateNotCompletedDot;
     }
     [SerializeField]
-   
+
 
     [System.Serializable]
     public class SoundSystemUpdate
@@ -102,10 +102,12 @@ public class ExtShopManager : MonoBehaviour
     [System.Serializable]
     public class VehicleUpdate
     {
-        public Sprite[] prefabs;
+        public Image[] prefabs;
         public Image imageObjectToUpdate;
         public int[] levelsReq;
+        public int[] speeds;
         public int currentUpgradeNo = 0;
+        public int currentSpeed;
         public int totalUpdates;
         public int[] coinsRequired;
         public Image upgradeImageField;
@@ -163,7 +165,7 @@ public class ExtShopManager : MonoBehaviour
 
     public void Awake()
     {
-        StartCoroutine(loadUpgrades());  
+        StartCoroutine(loadUpgrades());
     }
     IEnumerator loadUpgrades()
     {
@@ -175,21 +177,28 @@ public class ExtShopManager : MonoBehaviour
         wallArt.currentUpgradeNo = GameManager.Instance.currentWallArtUpgrade;
         vehicle.currentUpgradeNo = GameManager.Instance.currentVehicleUpgrade;
         foodMachine.currentUpgradeNo = GameManager.Instance.currentMachineUpgrade;
-  
+
         WriteTVVisuals(tv.currentUpgradeNo);
-       /* UpdatedecorationVisuals(decoration.currentUpgradeNo - 1);
-        UpdateSoundSystemVisuals(soundSystem.currentUpgradeNo - 1);
-        UpdateVegetationVisuals(vegetation.currentUpgradeNo - 1);
-        UpdateWallArtVisuals(wallArt.currentUpgradeNo - 1);
-        UpdateVehicleVisuals(vehicle.currentUpgradeNo - 1);
-        UpdateFoodMachineVisuals(foodMachine.currentUpgradeNo - 1)*/;
+        WriteDecorationVisuals(decoration.currentUpgradeNo);
+        WriteSoundSystemVisuals(soundSystem.currentUpgradeNo);
+        WriteVegetationVisuals(vegetation.currentUpgradeNo);
+        WriteWallArtVisuals(wallArt.currentUpgradeNo);
+        WriteVehicleVisuals(vehicle.currentUpgradeNo);
+        WriteFoodMachineVisuals(foodMachine.currentUpgradeNo);
+        /* UpdatedecorationVisuals(decoration.currentUpgradeNo - 1);
+         UpdateSoundSystemVisuals(soundSystem.currentUpgradeNo - 1);
+         UpdateVegetationVisuals(vegetation.currentUpgradeNo - 1);
+         UpdateWallArtVisuals(wallArt.currentUpgradeNo - 1);
+         UpdateVehicleVisuals(vehicle.currentUpgradeNo - 1);
+         UpdateFoodMachineVisuals(foodMachine.currentUpgradeNo - 1)*/
+        ;
     }
 
 
     #region TVUpdate
     public void UpdateTV()
     {
-     
+
         if (tv.currentUpgradeNo >= tv.totalUpdates)
         {
             Debug.Log("CHAL GYAA TV");
@@ -225,7 +234,7 @@ public class ExtShopManager : MonoBehaviour
     void UpdateTVVisuals(int upgradeNo)
     {
         //Changing Model Of TV
-        for(int i=0;i<tv.prefabs.Length;i++)
+        for (int i = 0; i < tv.prefabs.Length; i++)
         {
             if (i == upgradeNo) tv.prefabs[i].SetActive(true);
             else tv.prefabs[i].SetActive(false);
@@ -233,23 +242,23 @@ public class ExtShopManager : MonoBehaviour
 
         if (upgradeNo + 1 < tv.totalUpdates)
         {
-            tv.upgradeImageField.sprite = tv.upgradeSprites[upgradeNo+1];
+            tv.upgradeImageField.sprite = tv.upgradeSprites[upgradeNo + 1];
 
-            tv.priceText.text = tv.coinsRequired[tv.currentUpgradeNo+1].ToString();
+            tv.priceText.text = tv.coinsRequired[tv.currentUpgradeNo + 1].ToString();
         }
-        for(int i=0;i<tv.updateDots.Length;i++)
+        for (int i = 0; i < tv.updateDots.Length; i++)
         {
-            if(i<=upgradeNo)
+            if (i <= upgradeNo)
             {
                 tv.updateDots[i].sprite = tv.updateCompleteDot;
             }
         }
 
-        if(tv.currentUpgradeNo+1 == tv.totalUpdates)
+        if (tv.currentUpgradeNo + 1 == tv.totalUpdates)
         {
             tv.priceShowingObject.SetActive(false);
             tv.allUpdatesDone.gameObject.SetActive(true);
-            
+
         }
 
 
@@ -261,11 +270,11 @@ public class ExtShopManager : MonoBehaviour
         //Changing Model Of TV
         for (int i = 1; i <= tv.prefabs.Length; i++)
         {
-            
-            if (i == upgradeNo) tv.prefabs[i-1].SetActive(true);
-            else tv.prefabs[i-1].SetActive(false);
+
+            if (i == upgradeNo) tv.prefabs[i - 1].SetActive(true);
+            else tv.prefabs[i - 1].SetActive(false);
         }
-   
+
         if (upgradeNo < tv.totalUpdates)
         {
             tv.priceText.text = tv.coinsRequired[tv.currentUpgradeNo].ToString();
@@ -273,7 +282,7 @@ public class ExtShopManager : MonoBehaviour
         }
         else if (upgradeNo == tv.totalUpdates)
         {
-            tv.upgradeImageField.sprite = tv.upgradeSprites[upgradeNo -1];
+            tv.upgradeImageField.sprite = tv.upgradeSprites[upgradeNo - 1];
         }
         for (int i = 0; i < tv.updateDots.Length; i++)
         {
@@ -283,7 +292,7 @@ public class ExtShopManager : MonoBehaviour
             }
         }
 
-        if (tv.currentUpgradeNo  == tv.totalUpdates)
+        if (tv.currentUpgradeNo == tv.totalUpdates)
         {
             tv.priceShowingObject.SetActive(false);
             tv.allUpdatesDone.gameObject.SetActive(true);
@@ -333,14 +342,14 @@ public class ExtShopManager : MonoBehaviour
         for (int i = 0; i < decoration.prefabs.Length; i++)
         {
             if (i == upgradeNo) decoration.prefabs[i].SetActive(true);
-           
+
         }
 
         if (upgradeNo + 1 < decoration.totalUpdates)
         {
             decoration.upgradeImageField.sprite = decoration.upgradeSprites[upgradeNo];
 
-            decoration.priceText.text = decoration.coinsRequired[decoration.currentUpgradeNo+1].ToString();
+            decoration.priceText.text = decoration.coinsRequired[decoration.currentUpgradeNo + 1].ToString();
         }
         for (int i = 0; i < decoration.updateDots.Length; i++)
         {
@@ -349,7 +358,7 @@ public class ExtShopManager : MonoBehaviour
                 decoration.updateDots[i].sprite = decoration.updateCompleteDot;
             }
         }
-        if (decoration.currentUpgradeNo+1 == decoration.totalUpdates)
+        if (decoration.currentUpgradeNo + 1 == decoration.totalUpdates)
         {
             decoration.priceShowingObject.SetActive(false);
             decoration.allUpdatesDone.gameObject.SetActive(true);
@@ -357,6 +366,46 @@ public class ExtShopManager : MonoBehaviour
         }
 
     }
+
+    void WriteDecorationVisuals(int upgradeNo)
+    {
+        Debug.Log(decoration.totalUpdates);
+        //Changing Model Of TV
+        for (int i = 1; i <= decoration.prefabs.Length; i++)
+        {
+
+            if (i == upgradeNo) decoration.prefabs[i - 1].SetActive(true);
+            else decoration.prefabs[i - 1].SetActive(false);
+        }
+
+        if (upgradeNo < decoration.totalUpdates)
+        {
+            decoration.priceText.text = decoration.coinsRequired[decoration.currentUpgradeNo].ToString();
+            decoration.upgradeImageField.sprite = decoration.upgradeSprites[upgradeNo];
+        }
+        else if (upgradeNo == decoration.totalUpdates)
+        {
+            decoration.upgradeImageField.sprite = decoration.upgradeSprites[upgradeNo - 1];
+        }
+        for (int i = 0; i < decoration.updateDots.Length; i++)
+        {
+            if (i < upgradeNo)
+            {
+                decoration.updateDots[i].sprite = decoration.updateCompleteDot;
+            }
+        }
+
+        if (decoration.currentUpgradeNo == decoration.totalUpdates)
+        {
+            decoration.priceShowingObject.SetActive(false);
+            decoration.allUpdatesDone.gameObject.SetActive(true);
+
+        }
+
+
+    }
+
+
 
     #endregion
 
@@ -405,7 +454,7 @@ public class ExtShopManager : MonoBehaviour
         if (upgradeNo + 1 < soundSystem.totalUpdates)
         {
             soundSystem.upgradeImageField.sprite = soundSystem.upgradeSprites[upgradeNo];
-            soundSystem.priceText.text = (soundSystem.coinsRequired[soundSystem.currentUpgradeNo+1]).ToString();
+            soundSystem.priceText.text = (soundSystem.coinsRequired[soundSystem.currentUpgradeNo + 1]).ToString();
         }
         for (int i = 0; i < soundSystem.updateDots.Length; i++)
         {
@@ -415,12 +464,50 @@ public class ExtShopManager : MonoBehaviour
             }
         }
 
-        if (soundSystem.currentUpgradeNo+1 == soundSystem.totalUpdates)
+        if (soundSystem.currentUpgradeNo + 1 == soundSystem.totalUpdates)
         {
             soundSystem.priceShowingObject.SetActive(false);
             soundSystem.allUpdatesDone.gameObject.SetActive(true);
 
         }
+
+    }
+
+    void WriteSoundSystemVisuals(int upgradeNo)
+    {
+        Debug.Log(soundSystem.totalUpdates);
+        //Changing Model Of TV
+        for (int i = 1; i <= soundSystem.prefab.Length; i++)
+        {
+
+            if (i == upgradeNo) soundSystem.prefab[i - 1].SetActive(true);
+            else soundSystem.prefab[i - 1].SetActive(false);
+        }
+
+        if (upgradeNo < soundSystem.totalUpdates)
+        {
+            soundSystem.priceText.text = soundSystem.coinsRequired[soundSystem.currentUpgradeNo].ToString();
+            soundSystem.upgradeImageField.sprite = soundSystem.upgradeSprites[upgradeNo];
+        }
+        else if (upgradeNo == soundSystem.totalUpdates)
+        {
+            soundSystem.upgradeImageField.sprite = soundSystem.upgradeSprites[upgradeNo - 1];
+        }
+        for (int i = 0; i < soundSystem.updateDots.Length; i++)
+        {
+            if (i < upgradeNo)
+            {
+                soundSystem.updateDots[i].sprite = soundSystem.updateCompleteDot;
+            }
+        }
+
+        if (soundSystem.currentUpgradeNo == soundSystem.totalUpdates)
+        {
+            soundSystem.priceShowingObject.SetActive(false);
+            soundSystem.allUpdatesDone.gameObject.SetActive(true);
+
+        }
+
 
     }
     #endregion
@@ -469,8 +556,8 @@ public class ExtShopManager : MonoBehaviour
 
         if (upgradeNo + 1 < vegetation.totalUpdates)
         {
-            vegetation.upgradeImageField.sprite = vegetation.upgradeSprites[upgradeNo+1];
-            vegetation.priceText.text = (vegetation.coinsRequired[vegetation.currentUpgradeNo+1]).ToString();
+            vegetation.upgradeImageField.sprite = vegetation.upgradeSprites[upgradeNo + 1];
+            vegetation.priceText.text = (vegetation.coinsRequired[vegetation.currentUpgradeNo + 1]).ToString();
         }
         for (int i = 0; i < vegetation.updateDots.Length; i++)
         {
@@ -480,12 +567,49 @@ public class ExtShopManager : MonoBehaviour
             }
         }
 
-        if (vegetation.currentUpgradeNo+1 == vegetation.totalUpdates)
+        if (vegetation.currentUpgradeNo + 1 == vegetation.totalUpdates)
         {
             vegetation.priceShowingObject.SetActive(false);
             vegetation.allUpdatesDone.gameObject.SetActive(true);
 
         }
+
+    }
+    void WriteVegetationVisuals(int upgradeNo)
+    {
+        Debug.Log(vegetation.totalUpdates);
+        //Changing Model Of TV
+        for (int i = 1; i <= vegetation.prefab.Length; i++)
+        {
+
+            if (i == upgradeNo) vegetation.prefab[i - 1].SetActive(true);
+            else vegetation.prefab[i - 1].SetActive(false);
+        }
+
+        if (upgradeNo < vegetation.totalUpdates)
+        {
+            vegetation.priceText.text = vegetation.coinsRequired[vegetation.currentUpgradeNo].ToString();
+            vegetation.upgradeImageField.sprite = vegetation.upgradeSprites[upgradeNo];
+        }
+        else if (upgradeNo == vegetation.totalUpdates)
+        {
+            vegetation.upgradeImageField.sprite = vegetation.upgradeSprites[upgradeNo - 1];
+        }
+        for (int i = 0; i < vegetation.updateDots.Length; i++)
+        {
+            if (i < upgradeNo)
+            {
+                vegetation.updateDots[i].sprite = vegetation.updateCompleteDot;
+            }
+        }
+
+        if (vegetation.currentUpgradeNo == vegetation.totalUpdates)
+        {
+            vegetation.priceShowingObject.SetActive(false);
+            vegetation.allUpdatesDone.gameObject.SetActive(true);
+
+        }
+
 
     }
     #endregion
@@ -528,7 +652,7 @@ public class ExtShopManager : MonoBehaviour
         //Changing Model Of TV
         for (int i = 0; i < wallArt.prefab.Length; i++)
         {
-           if(i<upgradeNo)
+            if (i < upgradeNo)
             {
                 Color temp = wallArt.prefab[i].color;
                 temp.a = 1;
@@ -537,9 +661,9 @@ public class ExtShopManager : MonoBehaviour
         }
         if (upgradeNo + 1 < wallArt.totalUpdates)
         {
-            wallArt.upgradeImageField.sprite = wallArt.upgradeSprites[upgradeNo+1];
+            wallArt.upgradeImageField.sprite = wallArt.upgradeSprites[upgradeNo + 1];
 
-            wallArt.priceText.text = (wallArt.coinsRequired[wallArt.currentUpgradeNo+1]).ToString();
+            wallArt.priceText.text = (wallArt.coinsRequired[wallArt.currentUpgradeNo + 1]).ToString();
         }
         for (int i = 0; i < wallArt.updateDots.Length; i++)
         {
@@ -549,12 +673,65 @@ public class ExtShopManager : MonoBehaviour
             }
         }
 
-        if (wallArt.currentUpgradeNo+1 == wallArt.totalUpdates)
+        if (wallArt.currentUpgradeNo + 1 == wallArt.totalUpdates)
         {
             wallArt.priceShowingObject.SetActive(false);
             wallArt.allUpdatesDone.gameObject.SetActive(true);
 
         }
+
+    }
+
+    void WriteWallArtVisuals(int upgradeNo)
+    {
+        Debug.Log(wallArt.totalUpdates);
+        //Changing Model Of TV
+        //for (int i = 0; i < wallArt.prefab.Length; i++)
+        //{
+        // if (i < upgradeNo)
+        // {
+        //     Color temp = wallArt.prefab[i].color;
+        //    temp.a = 1;
+        //   wallArt.prefab[i].color = temp;
+        //  }
+        // }
+        for (int i = 1; i <= wallArt.prefab.Length; i++)
+        {
+            if (i < upgradeNo)
+            {
+                Color temp = wallArt.prefab[i].color;
+                temp.a = 1;
+                wallArt.prefab[i].color = temp;
+            }
+
+            //if (i == upgradeNo) wallArt.prefab[i - 1].SetActive(true);
+            // else wallArt.prefab[i - 1].SetActive(false);
+        }
+
+        if (upgradeNo < wallArt.totalUpdates)
+        {
+            wallArt.priceText.text = wallArt.coinsRequired[wallArt.currentUpgradeNo].ToString();
+            wallArt.upgradeImageField.sprite = wallArt.upgradeSprites[upgradeNo];
+        }
+        else if (upgradeNo == wallArt.totalUpdates)
+        {
+            wallArt.upgradeImageField.sprite = wallArt.upgradeSprites[upgradeNo - 1];
+        }
+        for (int i = 0; i < wallArt.updateDots.Length; i++)
+        {
+            if (i < upgradeNo)
+            {
+                wallArt.updateDots[i].sprite = wallArt.updateCompleteDot;
+            }
+        }
+
+        if (wallArt.currentUpgradeNo == wallArt.totalUpdates)
+        {
+            wallArt.priceShowingObject.SetActive(false);
+            wallArt.allUpdatesDone.gameObject.SetActive(true);
+
+        }
+
 
     }
     #endregion
@@ -594,28 +771,78 @@ public class ExtShopManager : MonoBehaviour
         //Changing Image Of Vehicle
         for (int i = 0; i < vehicle.prefabs.Length; i++)
         {
-            if (i == upgradeNo) vehicle.imageObjectToUpdate.sprite = vehicle.prefabs[upgradeNo];
+            if (i == upgradeNo)
+            {
+                vehicle.prefabs[i].transform.gameObject.SetActive(true);
+                vehicle.currentSpeed = vehicle.speeds[i];
+            }
+            else vehicle.prefabs[i].transform.gameObject.SetActive(false);
         }
 
         if (upgradeNo + 1 < vehicle.totalUpdates)
         {
-            vehicle.upgradeImageField.sprite = vehicle.upgradeSprites[upgradeNo+1];
+            vehicle.upgradeImageField.sprite = vehicle.upgradeSprites[upgradeNo + 1];
 
-            vehicle.priceText.text = (vehicle.coinsRequired[vehicle.currentUpgradeNo+1]).ToString();
+            vehicle.priceText.text = (vehicle.coinsRequired[vehicle.currentUpgradeNo + 1]).ToString();
         }
         for (int i = 0; i < vehicle.updateDots.Length; i++)
         {
             if (i <= upgradeNo)
             {
-               vehicle.updateDots[i].sprite =vehicle.updateCompleteDot;
+                vehicle.updateDots[i].sprite = vehicle.updateCompleteDot;
             }
         }
-        if (vehicle.currentUpgradeNo+1 == vehicle.totalUpdates)
+        if (vehicle.currentUpgradeNo + 1 == vehicle.totalUpdates)
         {
             vehicle.priceShowingObject.SetActive(false);
             vehicle.allUpdatesDone.gameObject.SetActive(true);
 
         }
+
+    }
+
+    void WriteVehicleVisuals(int upgradeNo)
+    {
+        for (int i = 1; i <= vehicle.prefabs.Length; i++)
+        {
+            if (i == upgradeNo)
+            {
+                vehicle.prefabs[i - 1].transform.gameObject.SetActive(true);
+                vehicle.currentSpeed = vehicle.speeds[i - 1];
+            }
+            else vehicle.prefabs[i - 1].transform.gameObject.SetActive(false);
+        }
+        Debug.Log(vehicle.totalUpdates);
+        //Changing Model Of TV
+
+        Debug.Log("Current Speed is" + vehicle.speeds[vehicle.currentUpgradeNo - 1]);
+
+        vehicle.currentSpeed = vehicle.speeds[vehicle.currentUpgradeNo-1];
+
+        if (upgradeNo < vehicle.totalUpdates)
+        {
+            vehicle.priceText.text = vehicle.coinsRequired[vehicle.currentUpgradeNo - 1].ToString();
+            vehicle.upgradeImageField.sprite = vehicle.upgradeSprites[upgradeNo - 1];
+        }
+        else if (upgradeNo == vehicle.totalUpdates)
+        {
+            vehicle.upgradeImageField.sprite = vehicle.upgradeSprites[upgradeNo - 1];
+        }
+        for (int i = 0; i < vehicle.updateDots.Length; i++)
+        {
+            if (i < upgradeNo)
+            {
+                vehicle.updateDots[i].sprite = vehicle.updateCompleteDot;
+            }
+        }
+
+        if (vehicle.currentUpgradeNo == vehicle.totalUpdates)
+        {
+            vehicle.priceShowingObject.SetActive(false);
+            vehicle.allUpdatesDone.gameObject.SetActive(true);
+
+        }
+
 
     }
     #endregion
@@ -660,9 +887,9 @@ public class ExtShopManager : MonoBehaviour
 
         if (upgradeNo + 1 < foodMachine.totalUpdates)
         {
-            foodMachine.upgradeImageField.sprite = foodMachine.upgradeSprites[upgradeNo+1];
+            foodMachine.upgradeImageField.sprite = foodMachine.upgradeSprites[upgradeNo + 1];
 
-            foodMachine.priceText.text = (foodMachine.coinsRequired[foodMachine.currentUpgradeNo+1]).ToString();
+            foodMachine.priceText.text = (foodMachine.coinsRequired[foodMachine.currentUpgradeNo + 1]).ToString();
         }
 
         for (int i = 0; i < foodMachine.updateDots.Length; i++)
@@ -672,7 +899,7 @@ public class ExtShopManager : MonoBehaviour
                 foodMachine.updateDots[i].sprite = foodMachine.updateCompleteDot;
             }
         }
-        if (foodMachine.currentUpgradeNo+1 == foodMachine.totalUpdates)
+        if (foodMachine.currentUpgradeNo + 1 == foodMachine.totalUpdates)
         {
             foodMachine.priceShowingObject.SetActive(false);
             foodMachine.allUpdatesDone.gameObject.SetActive(true);
@@ -680,8 +907,52 @@ public class ExtShopManager : MonoBehaviour
         }
 
     }
+
+    void WriteFoodMachineVisuals(int upgradeNo)
+    {
+        Debug.Log(foodMachine.totalUpdates);
+        //Changing Model Of TV
+
+        if (upgradeNo < foodMachine.totalUpdates)
+        {
+            foodMachine.upgradeImageField.sprite = foodMachine.upgradeSprites[upgradeNo];
+
+            foodMachine.priceText.text = (foodMachine.coinsRequired[foodMachine.currentUpgradeNo]).ToString();
+        }
+
+
+
+
+        if (upgradeNo < foodMachine.totalUpdates)
+        {
+            foodMachine.priceText.text = foodMachine.coinsRequired[foodMachine.currentUpgradeNo].ToString();
+            foodMachine.upgradeImageField.sprite = foodMachine.upgradeSprites[upgradeNo];
+        }
+        else if (upgradeNo == foodMachine.totalUpdates)
+        {
+            foodMachine.upgradeImageField.sprite = foodMachine.upgradeSprites[upgradeNo - 1];
+        }
+        for (int i = 0; i < foodMachine.updateDots.Length; i++)
+        {
+            if (i < upgradeNo)
+            {
+                foodMachine.updateDots[i].sprite = foodMachine.updateCompleteDot;
+            }
+        }
+
+        if (foodMachine.currentUpgradeNo == foodMachine.totalUpdates)
+        {
+            foodMachine.priceShowingObject.SetActive(false);
+            foodMachine.allUpdatesDone.gameObject.SetActive(true);
+
+        }
+
+
+    }
+
+
     #endregion
-   
+
     #region BasicFunction
     public int GetTotalCoins()
     {
@@ -693,15 +964,15 @@ public class ExtShopManager : MonoBehaviour
     }
     public void SetFoodSpeed(int speed)
     {
-       
+
     }
 
-    public void ShowMessage(string message,int time)
+    public void ShowMessage(string message, int time)
     {
         TextManager.Instance.ShowToast(message, time);
     }
 
-#endregion
+    #endregion
 }
 
 

@@ -10,36 +10,56 @@ public class OrderGoods : MonoBehaviour
     int[] quantities;
     public int totalPrice;
     public TMP_Text totalPriceText;
-    void Start()
+    ItemHandler[] items;
+    public GameObject ItemHolder;
+
+        private void Start()
     {
         
+
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     public void OrderGooods()
     {
+        items = ItemHolder.GetComponentsInChildren<ItemHandler>();
+        StartCoroutine(OrderGoooods());
+    }
+
+    IEnumerator OrderGoooods()
+    {
+        MenuManager.Instance.ChangeMenu("side");
+        yield return new WaitForSeconds(0.5f);
         bool temp = BuildFoood();
+       
         if (!temp)
         {
             TextManager.Instance.ShowToast("Coins are not enough", 2);
-            return;
+            yield return new WaitForSeconds(0.1f);
+        }
+        else
+        {
+            TextManager.Instance.ShowToast("Ordered", 2);
+            int newCoins = StockInventory.Instance.coins - totalPrice;
+
+            StockInventory.Instance.ChangeCoinsTo(newCoins);
+            GetVehicle.Instance.StartRide();
+            Debug.Log(50/(GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1] ));
+
+            yield return new WaitForSeconds(50 / (GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1]));
+            TextManager.Instance.ShowToast("Agya", 2);
+            for (int i = 0; i < items.Length; i++)
+        {
+            StockInventory.Instance.AddStocks(itemNames[i], quantities[i]);
+            TextManager.Instance.ShowToast(quantities[i] + " " + itemNames[i] + " Ordered Recieved",2);
         }
 
-        int newCoins = StockInventory.Instance.coins - totalPrice;
-       
-        StockInventory.Instance.ChangeCoinsTo(newCoins);
+        }
+        
 
     }
 
     public bool BuildFoood()
     {
-        ItemHandler[] items = GetComponentsInChildren<ItemHandler>();
+       
         itemNames = new string[items.Length + 1];
         quantities = new int[items.Length + 1];
 
@@ -58,13 +78,8 @@ public class OrderGoods : MonoBehaviour
             return false;
         }
 
-
-        for (int i = 0; i < items.Length; i++)
-        {
-            StockInventory.Instance.AddStocks(itemNames[i], quantities[i]);
-            TextManager.Instance.ShowToast(quantities[i] + " " + itemNames[i] + " Ordered",2);
-        }
-
+       // yield return new WaitForSeconds((GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1] / 25f) * 2);
+       
 
 
 
