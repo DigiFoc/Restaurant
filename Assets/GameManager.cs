@@ -83,15 +83,15 @@ public class GameManager : MonoBehaviour
     }
     public void LoadUpgrades()
     {
-        currentHeartUpgrade = PlayerPrefs.GetInt("HeartUpgrade");
-        currentTVUpgrade = PlayerPrefs.GetInt("TVUpgrade");
-        currentMachineUpgrade = PlayerPrefs.GetInt("MachineUpgrade");
-        currentSpeakerUpgrade = PlayerPrefs.GetInt("SpeakerUpgrade");
-        currentVaseUpgrade = PlayerPrefs.GetInt("VaseUpgrade");
-        currentVehicleUpgrade = PlayerPrefs.GetInt("VehicleUpgrade");
-        currentWallArtUpgrade = PlayerPrefs.GetInt("WallArtUpgrade");
-        globalCoins = PlayerPrefs.GetInt("globalCoins");
-        lastUnlockedLevel = PlayerPrefs.GetInt("Level");
+        currentHeartUpgrade = PlayerPrefs.GetInt("HeartUpgrade",0);
+        currentTVUpgrade = PlayerPrefs.GetInt("TVUpgrade", 0);
+        currentMachineUpgrade = PlayerPrefs.GetInt("MachineUpgrade", 0);
+        currentSpeakerUpgrade = PlayerPrefs.GetInt("SpeakerUpgrade", 0);
+        currentVaseUpgrade = PlayerPrefs.GetInt("VaseUpgrade", 0);
+        currentVehicleUpgrade = PlayerPrefs.GetInt("VehicleUpgrade", 0);
+        currentWallArtUpgrade = PlayerPrefs.GetInt("WallArtUpgrade", 0);
+        globalCoins = PlayerPrefs.GetInt("globalCoins", 0);
+        lastUnlockedLevel = PlayerPrefs.GetInt("Level",1);
     }
 }
 

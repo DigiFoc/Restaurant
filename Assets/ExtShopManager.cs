@@ -176,13 +176,13 @@ public class ExtShopManager : MonoBehaviour
         vehicle.currentUpgradeNo = GameManager.Instance.currentVehicleUpgrade;
         foodMachine.currentUpgradeNo = GameManager.Instance.currentMachineUpgrade;
   
-        UpdateTVVisuals(tv.currentUpgradeNo-1);
-        UpdatedecorationVisuals(decoration.currentUpgradeNo - 1);
+        WriteTVVisuals(tv.currentUpgradeNo);
+       /* UpdatedecorationVisuals(decoration.currentUpgradeNo - 1);
         UpdateSoundSystemVisuals(soundSystem.currentUpgradeNo - 1);
         UpdateVegetationVisuals(vegetation.currentUpgradeNo - 1);
         UpdateWallArtVisuals(wallArt.currentUpgradeNo - 1);
         UpdateVehicleVisuals(vehicle.currentUpgradeNo - 1);
-        UpdateFoodMachineVisuals(foodMachine.currentUpgradeNo - 1);
+        UpdateFoodMachineVisuals(foodMachine.currentUpgradeNo - 1)*/;
     }
 
 
@@ -250,6 +250,44 @@ public class ExtShopManager : MonoBehaviour
             tv.priceShowingObject.SetActive(false);
             tv.allUpdatesDone.gameObject.SetActive(true);
             
+        }
+
+
+    }
+
+    void WriteTVVisuals(int upgradeNo)
+    {
+        Debug.Log(tv.totalUpdates);
+        //Changing Model Of TV
+        for (int i = 1; i <= tv.prefabs.Length; i++)
+        {
+            
+            if (i == upgradeNo) tv.prefabs[i-1].SetActive(true);
+            else tv.prefabs[i-1].SetActive(false);
+        }
+   
+        if (upgradeNo < tv.totalUpdates)
+        {
+            tv.priceText.text = tv.coinsRequired[tv.currentUpgradeNo].ToString();
+            tv.upgradeImageField.sprite = tv.upgradeSprites[upgradeNo];
+        }
+        else if (upgradeNo == tv.totalUpdates)
+        {
+            tv.upgradeImageField.sprite = tv.upgradeSprites[upgradeNo -1];
+        }
+        for (int i = 0; i < tv.updateDots.Length; i++)
+        {
+            if (i < upgradeNo)
+            {
+                tv.updateDots[i].sprite = tv.updateCompleteDot;
+            }
+        }
+
+        if (tv.currentUpgradeNo  == tv.totalUpdates)
+        {
+            tv.priceShowingObject.SetActive(false);
+            tv.allUpdatesDone.gameObject.SetActive(true);
+
         }
 
 
