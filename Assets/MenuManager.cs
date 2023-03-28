@@ -13,6 +13,8 @@ public class MenuManager : MonoBehaviour
 	public GameObject FoodEngineMenu;
 	public GameObject PickupMenu;
 	public GameObject TransformMenu;
+	public GameObject HeaderMenu;
+	public GameObject AOGMenu;
 	
 	
 
@@ -26,7 +28,7 @@ public class MenuManager : MonoBehaviour
 		{
 			_instance = this;
 		}
-		ChangeMenu("side");
+		
 	}
 
 	public void ChangeMenu(string name)
@@ -49,7 +51,8 @@ public class MenuManager : MonoBehaviour
 		if (name == "side")
 		{
 			SideMenu.SetActive(true);
-			
+			HeaderMenu.SetActive(true);
+			AOGMenu.SetActive(true);
 		}
 		if (name == "pickup")
 		{
@@ -65,7 +68,7 @@ public class MenuManager : MonoBehaviour
 
 	}
 
-	void ResetAll()
+	public void ResetAll()
 	{
 		SideMenu.SetActive(false);
 		ShopMenu.SetActive(false);
@@ -73,6 +76,8 @@ public class MenuManager : MonoBehaviour
 		FoodEngineMenu.SetActive(false);
 		PickupMenu.SetActive(false);
 		TransformMenu.SetActive(false);
+		HeaderMenu.SetActive(false);
+		AOGMenu.SetActive(false);
 	}
 
 }

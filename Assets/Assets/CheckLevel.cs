@@ -8,7 +8,7 @@ public class CheckLevel : MonoBehaviour
     public int levelNo;// Start is called before the first frame update
     public Sprite Locked;
     public Image Frame;// Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(CheckMe());
 

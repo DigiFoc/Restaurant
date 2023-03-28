@@ -16,6 +16,6 @@ MonoBehaviour:
   totalCustomers: 2
   consecCustomers: 1
   timeForCustomers: 100
-  totalLevelTime: 180
+  totalLevelTime: 120
   avgRatingReq: 2
   isCompleted: 0

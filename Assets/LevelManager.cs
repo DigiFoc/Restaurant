@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     private static LevelManager _instance;
     public static LevelManager Instance { get { return _instance; } }
     public CustomerGenerator customerGenerator;
+    public PlayerController PC;
     public List<Level> levels;
     public Level currentLevel;
     public int currentRating;
@@ -113,7 +114,8 @@ public class LevelManager : MonoBehaviour
     }
     public void StartLevel()
     {
-        
+        PC.GetComponent<PlayerController>().enabled = true;
+        MenuManager.Instance.ChangeMenu("side");
         customerGenerator.GenerateCustomer(currentLevel.totalCustomers);
         levelStarted = true;
         StartCoroutine(CountTime());
@@ -198,7 +200,8 @@ public class LevelManager : MonoBehaviour
         {
             statusesEndScreen[2].GetComponent<Image>().sprite = failTextures;
         }
-
+        PC.GetComponent<PlayerController>().enabled = false;
+        MenuManager.Instance.ResetAll();
     }
 
 
@@ -232,7 +235,8 @@ public class LevelManager : MonoBehaviour
         {
             statusesTimeOutScreen[1].GetComponent<Image>().sprite = failTextures;
         }
-
+        PC.GetComponent<PlayerController>().enabled = false;
+        MenuManager.Instance.ResetAll();
     }
 
 }
