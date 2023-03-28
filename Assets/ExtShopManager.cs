@@ -217,6 +217,7 @@ public class ExtShopManager : MonoBehaviour
                 UpdateTVVisuals(tv.currentUpgradeNo);
                 tv.currentUpgradeNo++;
                 GameManager.Instance.SaveTVUpgrade(tv.currentUpgradeNo);
+                AdmobController.Instance.ShowInterstitialAd();
             }
             else
             {
@@ -322,6 +323,7 @@ public class ExtShopManager : MonoBehaviour
                 UpdatedecorationVisuals(decoration.currentUpgradeNo);
                 decoration.currentUpgradeNo++;
                 GameManager.Instance.SaveHeartUpgrade(decoration.currentUpgradeNo);
+                AdmobController.Instance.ShowInterstitialAd();
             }
             else
             {
@@ -428,6 +430,7 @@ public class ExtShopManager : MonoBehaviour
                 UpdateSoundSystemVisuals(soundSystem.currentUpgradeNo);
                 soundSystem.currentUpgradeNo++;
                 GameManager.Instance.SaveSpeakerUpgrade(soundSystem.currentUpgradeNo);
+                AdmobController.Instance.ShowInterstitialAd();
             }
             else
             {
@@ -531,6 +534,7 @@ public class ExtShopManager : MonoBehaviour
                 UpdateVegetationVisuals(vegetation.currentUpgradeNo);
                 vegetation.currentUpgradeNo++;
                 GameManager.Instance.SaveVaseUpgrade(vegetation.currentUpgradeNo);
+                AdmobController.Instance.ShowInterstitialAd();
             }
             else
             {
@@ -633,6 +637,7 @@ public class ExtShopManager : MonoBehaviour
                 UpdateWallArtVisuals(wallArt.currentUpgradeNo);
                 wallArt.currentUpgradeNo++;
                 GameManager.Instance.SaveWallArtUpgrade(wallArt.currentUpgradeNo);
+                AdmobController.Instance.ShowInterstitialAd();
             }
             else
             {
@@ -755,6 +760,7 @@ public class ExtShopManager : MonoBehaviour
                 UpdateVehicleVisuals(vehicle.currentUpgradeNo);
                 vehicle.currentUpgradeNo++;
                 GameManager.Instance.SaveVehicleUpgrade(vehicle.currentUpgradeNo);
+                AdmobController.Instance.ShowInterstitialAd();
             }
             else
             {
@@ -866,6 +872,7 @@ public class ExtShopManager : MonoBehaviour
                 UpdateFoodMachineVisuals(foodMachine.currentUpgradeNo);
                 foodMachine.currentUpgradeNo++;
                 GameManager.Instance.SaveMachineUpgrade(foodMachine.currentUpgradeNo);
+                AdmobController.Instance.ShowInterstitialAd();
             }
             else
             {

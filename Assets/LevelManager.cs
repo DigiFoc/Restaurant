@@ -110,7 +110,7 @@ public class LevelManager : MonoBehaviour
         totalCustomerstext.text = currentLevel.totalCustomers.ToString();
         ratingRequired.text = currentLevel.avgRatingReq.ToString();
         levelNumbertext.text = currentLevel.levelNum.ToString();
-
+        AdmobController.Instance.ShowInterstitialAd();
     }
     public void StartLevel()
     {
