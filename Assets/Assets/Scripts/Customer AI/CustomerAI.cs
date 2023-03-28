@@ -120,7 +120,7 @@ public class CustomerAI : MonoBehaviour
         if (!hutManager.hut2.isOccupied)
         {
             SetDestination(hutManager.hut2.locationOfHut);
-            hutManager.hut2.isOccupied = true;
+           hutManager.hut2.isOccupied = true;
             hutManager.hut2.customer = this.gameObject;
             hutManager.hut2.customerName = AI_Information.name;
             return 2;
@@ -157,6 +157,28 @@ public class CustomerAI : MonoBehaviour
 
     public void SetEmotion(string Emotion)
     {
+
+        //Here we are also changing the values of huts occupied
+        switch (AI_Information.hutNo)
+            {
+            case 1:
+                hutManager.hut1.isAvailable = false ;
+                break;
+            case 2:
+                hutManager.hut2.isAvailable = false;
+                break;
+            case 3:
+                hutManager.hut3.isAvailable = false;
+                break;
+            case 4:
+                hutManager.hut4.isAvailable = false;
+                break;
+            case 5:
+                hutManager.hut5.isAvailable = false;
+                break;
+        }
+
+        //Now Setting the Emotion Of Hut
         string emotionString = "";
         if (Emotion == "Thinking")  //Index ID = 12
         {
@@ -307,6 +329,7 @@ public class CustomerAI : MonoBehaviour
             hutManager.hut1.Statusorder.text = "Empty";
             hutManager.hut1.TimeLeft.text = "";
             hutManager.ResetHutStatus(1);
+            hutManager.hut1.isAvailable = true;
 
         }
 
@@ -319,7 +342,7 @@ public class CustomerAI : MonoBehaviour
             hutManager.hut2.Gender = null;
             hutManager.hut2.TimeLeft.text = "";
             hutManager.hut2.Statusorder.text = "Empty";
-
+            hutManager.hut2.isAvailable = true;
             hutManager.hut2.isOccupied = false;
             hutManager.ResetHutStatus(2);
         }
@@ -333,6 +356,7 @@ public class CustomerAI : MonoBehaviour
             hutManager.hut3.TimeLeft.text = "";
             hutManager.hut3.Statusorder.text = "Empty";
             hutManager.hut3.isOccupied = false;
+            hutManager.hut3.isAvailable = true;
             hutManager.ResetHutStatus(3);
         }
 
@@ -345,6 +369,7 @@ public class CustomerAI : MonoBehaviour
             hutManager.hut4.TimeLeft.text = "";
             hutManager.hut4.Statusorder.text = "Empty";
             hutManager.hut4.isOccupied = false;
+            hutManager.hut4.isAvailable = true;
             hutManager.ResetHutStatus(4);
         }
 
@@ -356,6 +381,7 @@ public class CustomerAI : MonoBehaviour
             hutManager.hut5.TimeLeft.text = "";
             hutManager.hut5.Statusorder.text = "Empty";
             hutManager.hut5.Gender = null;
+            hutManager.hut5.isAvailable = true;
             hutManager.hut5.isOccupied = false;
             hutManager.ResetHutStatus(5);
         }

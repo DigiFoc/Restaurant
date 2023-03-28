@@ -197,10 +197,10 @@ public class KitchenPanel : MonoBehaviour
     public void SetHutInfo()
     {
         if (hut1.quantity > 0)
-            hut1UI.text = hut1.quantity + hut1.item;
+            hut1UI.text = hut1.quantity + "  "+GetFoodCode(hut1.item);
         else
         {
-            if(hutsManager.hut1.isOccupied)
+            if(!hutsManager.hut1.isAvailable)
             {
                 hut1UI.text = "Requirements Fullfilled";
             }
@@ -211,10 +211,10 @@ public class KitchenPanel : MonoBehaviour
         }
 
         if (hut2.quantity >0)
-            hut2UI.text = hut2.quantity + hut2.item;
+            hut2UI.text = hut2.quantity + "  " + GetFoodCode(hut2.item);
         else
         {
-            if (hutsManager.hut2.isOccupied)
+            if (!hutsManager.hut2.isAvailable)
             {
                 hut2UI.text = "Requirements Fullfilled";
             }
@@ -225,10 +225,10 @@ public class KitchenPanel : MonoBehaviour
         }
 
         if (hut3.quantity >0)
-            hut3UI.text = hut3.quantity + hut3.item;
+            hut3UI.text = hut3.quantity + "  " + GetFoodCode(hut3.item);
         else
         {
-            if (hutsManager.hut3.isOccupied)
+            if (!hutsManager.hut3.isAvailable)
             {
                 hut3UI.text = "Requirements Fullfilled";
             }
@@ -239,10 +239,10 @@ public class KitchenPanel : MonoBehaviour
         }
 
         if (hut4.quantity > 0)
-            hut4UI.text = hut4.quantity + hut4.item;
+            hut4UI.text = hut4.quantity + "  " + GetFoodCode(hut4.item);
         else
         {
-            if (hutsManager.hut4.isOccupied)
+            if (!hutsManager.hut4.isAvailable)
             {
                 hut4UI.text = "Requirements Fullfilled";
             }
@@ -253,10 +253,10 @@ public class KitchenPanel : MonoBehaviour
         }   
 
         if (hut5.quantity > 0)
-            hut5UI.text = hut5.quantity + hut5.item;
+            hut5UI.text = hut5.quantity + "  " + GetFoodCode( hut5.item);
         else
         {
-            if (hutsManager.hut5.isOccupied)
+            if (!hutsManager.hut5.isAvailable)
             {
                 hut5UI.text = "Requirements Fullfilled";
             }
@@ -269,7 +269,20 @@ public class KitchenPanel : MonoBehaviour
 
 
 
+    public string GetFoodCode(string food)
+    {
+        if (food.Equals("Samosa", System.StringComparison.OrdinalIgnoreCase))
+            return "<sprite=08>";
+        if (food.Equals("PaneerTikka", System.StringComparison.OrdinalIgnoreCase))
+            return "<sprite=09>";
+        if (food.Equals("Pakori", System.StringComparison.OrdinalIgnoreCase))
+            return "<sprite=10>";
+        if (food.Equals("Tea", System.StringComparison.OrdinalIgnoreCase))
+            return "<sprite=11>";
 
+        Debug.LogWarning("Wrong Food Passed In Get Food Code");
+        return "";
+    }
 
     public void SetTray(int hutNo)
     {

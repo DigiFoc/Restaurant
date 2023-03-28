@@ -20,7 +20,7 @@ public class HutsManager : MonoBehaviour
         public TMP_Text Statusorder;
         public TMP_Text TimeLeft;
         public GameObject hutMarker;
-
+        public bool isAvailable = true;
 
     }
     [SerializeField]

@@ -93,6 +93,8 @@ public class GameManager : MonoBehaviour
         globalCoins = PlayerPrefs.GetInt("globalCoins", 0);
         lastUnlockedLevel = PlayerPrefs.GetInt("Level",1);
     }
+
+    
 }
 
 
