@@ -15,6 +15,10 @@ public class MenuManager : MonoBehaviour
 	public GameObject TransformMenu;
 	public GameObject HeaderMenu;
 	public GameObject AOGMenu;
+	public GameObject StatusMenu;
+	public GameObject MapViewMenu;
+	public GameObject TextViewMenu;
+	public GameObject OpenkitchenMenu;
 	
 	
 
@@ -35,6 +39,14 @@ public class MenuManager : MonoBehaviour
 	{
 		ResetAll();
 
+		if (name == "openkitchen")
+		{
+			OpenkitchenMenu.SetActive(true);
+		}
+		if (name == "status")
+		{
+			StatusMenu.SetActive(true);
+		}
 		if (name == "shop")
 		{
 			ShopMenu.SetActive(true);
@@ -70,14 +82,16 @@ public class MenuManager : MonoBehaviour
 
 	public void ResetAll()
 	{
-		SideMenu.SetActive(false);
+		//SideMenu.SetActive(false);
 		ShopMenu.SetActive(false);
 		StorageMenu.SetActive(false);
 		FoodEngineMenu.SetActive(false);
 		PickupMenu.SetActive(false);
 		TransformMenu.SetActive(false);
-		HeaderMenu.SetActive(false);
-		AOGMenu.SetActive(false);
+		StatusMenu.SetActive(false);
+		MapViewMenu.SetActive(false);
+		TextViewMenu.SetActive(false);
+		OpenkitchenMenu.SetActive(false);
 	}
 
 }

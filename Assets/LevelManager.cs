@@ -101,6 +101,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     public void SetLevel(int levelNumber)
     {
+        SoundManager.Instance.PlaySound("tap");
         int currentNumber = levelNumber - 1;
         currentLevel = levels[currentNumber];
         Debug.Log(currentLevel);
@@ -161,6 +162,7 @@ public class LevelManager : MonoBehaviour
 
     void ShowEndScreen()
     {
+        SoundManager.Instance.PlaySound("success");
         EndScreen.SetActive(true);
         EndScreentimeCurrent.text = currMin.ToString("00") + ":" + currSec.ToString("00");
         EndScreentimeRequired.text = min.ToString("00") + ":" + sec.ToString("00");
@@ -202,11 +204,13 @@ public class LevelManager : MonoBehaviour
         }
         PC.GetComponent<PlayerController>().enabled = false;
         MenuManager.Instance.ResetAll();
+        GameManager.Instance.SaveLevel(currentLevel.levelNum++);
     }
 
 
     void ShowTimeOutScreen()
     {
+        SoundManager.Instance.PlaySound("fail");
         TimeOutScreen.SetActive(true);
        
         TimeOutScreenRatingRequired.text = currentLevel.avgRatingReq.ToString();

@@ -813,6 +813,7 @@ public class ExtShopManager : MonoBehaviour
         {
             if (i == upgradeNo)
             {
+                Debug.Log("Vehcile pic changed");
                 vehicle.prefabs[i - 1].transform.gameObject.SetActive(true);
                 vehicle.currentSpeed = vehicle.speeds[i - 1];
             }

@@ -10,6 +10,7 @@ public class CheckLevel : MonoBehaviour
     public Image Frame;// Start is called before the first frame update
     void OnEnable()
     {
+        GetComponent<Button>().interactable = false;
         StartCoroutine(CheckMe());
 
     }
@@ -27,6 +28,7 @@ public class CheckLevel : MonoBehaviour
         else
         {
             Frame.enabled = false;
+            GetComponent<Button>().interactable = true;
         }
         
        

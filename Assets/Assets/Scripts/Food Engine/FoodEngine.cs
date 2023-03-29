@@ -111,6 +111,7 @@ public class FoodEngine : MonoBehaviour
 
     public void AddFood(string food,int quantity)
     {
+        SoundManager.Instance.PlaySound("ting");
         if(food.Equals("Samosa",System.StringComparison.OrdinalIgnoreCase))
         {
 

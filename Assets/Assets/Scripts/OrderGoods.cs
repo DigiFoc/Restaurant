@@ -46,6 +46,7 @@ public class OrderGoods : MonoBehaviour
 
             yield return new WaitForSeconds(50 / (GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1]));
             TextManager.Instance.ShowToast("Agya", 2);
+            SoundManager.Instance.PlaySound("horn");
             for (int i = 0; i < items.Length; i++)
         {
             StockInventory.Instance.AddStocks(itemNames[i], quantities[i]);

@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     public void SaveLevel(int level)
     {
         PlayerPrefs.SetInt("Level", level);
+        Debug.Log("Saved level"+level);
+
     }
 
     public void SaveTVUpgrade(int level)
@@ -93,8 +95,11 @@ public class GameManager : MonoBehaviour
         globalCoins = PlayerPrefs.GetInt("globalCoins", 0);
         lastUnlockedLevel = PlayerPrefs.GetInt("Level",1);
     }
+    public void Reset()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
-    
 }
 
 
