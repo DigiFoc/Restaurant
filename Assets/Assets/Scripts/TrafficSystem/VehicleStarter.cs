@@ -8,7 +8,7 @@ public class VehicleStarter : MonoBehaviour
     // Start is called before the first frame update
     public VehiclesPrefabs prefabs;
     public GameObject destination;
-    int no;
+
     // Update is called once per frame
 
     public void Awake()
@@ -22,10 +22,10 @@ public class VehicleStarter : MonoBehaviour
 
    public void GenerateNextVehicle()
     {
-        no++;
+      
         int RandomVehicle = Random.Range(0, prefabs.vehicleArray.Length);
         GameObject newVehicle = GameObject.Instantiate(prefabs.vehicleArray[RandomVehicle], this.transform.position,Quaternion.identity);
-        newVehicle.name = "carNo" + no;
+        newVehicle.GetComponent<Vehicle>().starter = this.gameObject;
         newVehicle.GetComponent<NavMeshAgent>().SetDestination(destination.transform.position);
        
     }

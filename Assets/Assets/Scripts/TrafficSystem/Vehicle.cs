@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class Vehicle : MonoBehaviour
 {
     public float speed = 1.5f;
+    public GameObject starter;
     private void Awake()
     {
         this.tag = "TrafficVehicle";

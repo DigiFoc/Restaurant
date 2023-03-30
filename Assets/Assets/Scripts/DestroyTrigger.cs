@@ -23,5 +23,11 @@ public class DestroyTrigger : MonoBehaviour
            // other.GetComponent<CustomerAI>().SendReachSignal();
         Destroy(other.gameObject);
         }
+        if (other.GetComponent<Vehicle>())
+        {
+            // other.GetComponent<CustomerAI>().SendReachSignal();
+            Destroy(other.gameObject);
+        }
+
     }
 }
