@@ -24,6 +24,15 @@ public class OrderGoods : MonoBehaviour
         StartCoroutine(OrderGoooods());
     }
 
+    public void CloseShop()
+    {
+        foreach (Transform child in ItemHolder.transform)
+        {
+            child.gameObject.GetComponent<ItemHandler>().RemoveMe();
+
+        }
+    }
+
     IEnumerator OrderGoooods()
     {
         MenuManager.Instance.ChangeMenu("side");
@@ -34,6 +43,11 @@ public class OrderGoods : MonoBehaviour
         {
             TextManager.Instance.ShowToast("Coins are not enough", 2);
             yield return new WaitForSeconds(0.1f);
+            foreach (Transform child in ItemHolder.transform)
+            {
+                child.gameObject.GetComponent<ItemHandler>().RemoveMe();
+
+            }
         }
         else
         {
@@ -43,6 +57,11 @@ public class OrderGoods : MonoBehaviour
             StockInventory.Instance.ChangeCoinsTo(newCoins);
             GetVehicle.Instance.StartRide();
             Debug.Log(50/(GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1] ));
+            foreach (Transform child in ItemHolder.transform)
+            {
+                child.gameObject.GetComponent<ItemHandler>().RemoveMe();
+
+            }
 
             yield return new WaitForSeconds(50 / (GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1]));
             TextManager.Instance.ShowToast("Agya", 2);
@@ -54,7 +73,9 @@ public class OrderGoods : MonoBehaviour
         }
 
         }
-        
+
+       
+
 
     }
 

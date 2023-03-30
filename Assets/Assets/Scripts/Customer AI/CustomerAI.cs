@@ -294,6 +294,7 @@ public class CustomerAI : MonoBehaviour
 
         Debug.Log("New coins are" + newCoins);
         newCoins += AI_Information.amountToPay;
+        TextManager.Instance.ShowToast("Rs." + AI_Information.amountToPay + " transffered from A/C 5747575 to your Bank Account./n Total Bal: Rs." + newCoins + " CR",3);
         StockInventory.Instance.ChangeCoinsTo(newCoins);
 
         Invoke("CurtainOut", 5);

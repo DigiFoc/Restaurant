@@ -23,6 +23,16 @@ public class BuildFood : MonoBehaviour
     }
 
 
+    public void closeButton()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.GetComponent<ItemHandler>().RemoveMe();
+
+        }
+    }
+
+
     public void BuildFoood()
     {
         items = GetComponentsInChildren<ItemHandler>();

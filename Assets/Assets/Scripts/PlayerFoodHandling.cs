@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerFoodHandling : MonoBehaviour
 {
     public string currentFood;
     public bool isHolding = false;
+    public float speedToDecrese = 1f;
+   
+    public float originalSpeed;
     public string itemName = "";
     [System.Serializable]
     public class FoodPrefabs
@@ -180,8 +184,12 @@ public class PlayerFoodHandling : MonoBehaviour
         }
 
         if (food == "UniversalFood")
+        {
+            originalSpeed = this.GetComponent<NavMeshAgent>().speed;
+            this.GetComponent<NavMeshAgent>().speed = speedToDecrese  ;
             foodItems.UniversalTray.SetActive(true);
-
+            
+        }
 
     }
 
@@ -215,8 +223,10 @@ public class PlayerFoodHandling : MonoBehaviour
         }
 
         if (food == "UniversalFood")
+        {
+            this.GetComponent<NavMeshAgent>().speed = originalSpeed;
             foodItems.UniversalTray.SetActive(false);
-
+        }
 
     }
 
