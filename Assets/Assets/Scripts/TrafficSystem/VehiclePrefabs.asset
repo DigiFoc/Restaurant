@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vehicleArray:
   - {fileID: 8392683478214022110, guid: 7ccde472b7d6fab4ba1e204c69b8cc25, type: 3}
+  - {fileID: 6573641177280941482, guid: 6fef607042e3bbf4c85b920f594adb89, type: 3}
+  - {fileID: 4483681590777702463, guid: ad57aab11d23dcf43a01a8eb51f39e9d, type: 3}
