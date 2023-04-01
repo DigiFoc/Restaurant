@@ -21,7 +21,7 @@ public class CheckPoint : MonoBehaviour
     {
         if(other.gameObject.tag == "TrafficVehicle")
         {
-            Debug.Log(other.gameObject.name);
+          
             GameObject starter = other.gameObject.GetComponent<Vehicle>().starter;
             starter.GetComponent<VehicleStarter>().GenerateNextVehicle();
         }    

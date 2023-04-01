@@ -12,6 +12,9 @@ public class OrderGoods : MonoBehaviour
     public TMP_Text totalPriceText;
     ItemHandler[] items;
     public GameObject ItemHolder;
+	bool isOnRoad;
+	 public GameObject button;
+	 public ReceiptGenerator currSlots;
 
         private void Start()
     {
@@ -21,7 +24,12 @@ public class OrderGoods : MonoBehaviour
     public void OrderGooods()
     {
         items = ItemHolder.GetComponentsInChildren<ItemHandler>();
+		if(ItemHolder.transform.childCount==0)
+		{
+			return;
+		}
         StartCoroutine(OrderGoooods());
+		
     }
 
     public void CloseShop()
@@ -31,6 +39,7 @@ public class OrderGoods : MonoBehaviour
             child.gameObject.GetComponent<ItemHandler>().RemoveMe();
 
         }
+		
     }
 
     IEnumerator OrderGoooods()
@@ -38,6 +47,7 @@ public class OrderGoods : MonoBehaviour
         MenuManager.Instance.ChangeMenu("side");
         yield return new WaitForSeconds(0.5f);
         bool temp = BuildFoood();
+		currSlots.CurrSlots = 0;
        
         if (!temp)
         {
@@ -56,6 +66,7 @@ public class OrderGoods : MonoBehaviour
 
             StockInventory.Instance.ChangeCoinsTo(newCoins);
             GetVehicle.Instance.StartRide();
+			SetButtonStatus(true);
             Debug.Log(50/(GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1] ));
             foreach (Transform child in ItemHolder.transform)
             {
@@ -64,7 +75,8 @@ public class OrderGoods : MonoBehaviour
             }
 
             yield return new WaitForSeconds(50 / (GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1]));
-            TextManager.Instance.ShowToast("Agya", 2);
+            TextManager.Instance.ShowToast("Recieved", 2);
+			SetButtonStatus(false);
             SoundManager.Instance.PlaySound("horn");
             for (int i = 0; i < items.Length; i++)
         {
@@ -110,4 +122,9 @@ public class OrderGoods : MonoBehaviour
 
 
     }
+	
+	void SetButtonStatus(bool value)
+	{
+		button.SetActive(!value);
+	}
 }

@@ -804,6 +804,7 @@ public class ExtShopManager : MonoBehaviour
             vehicle.allUpdatesDone.gameObject.SetActive(true);
 
         }
+		
 
     }
 

@@ -31,9 +31,16 @@ public class GetVehicle : MonoBehaviour
         CurrVehicle[currentVehicle - 1].SetActive(true);
         this.GetComponent<Animator>().speed = speeds[currentVehicle - 1];
     }
-
+		public void Restart()
+    {
+        currentVehicle = GameManager.Instance.currentVehicleUpgrade;
+        Debug.Log(currentVehicle);
+        CurrVehicle[currentVehicle - 1].SetActive(true);
+        this.GetComponent<Animator>().speed = speeds[currentVehicle - 1];
+    }
     public void StartRide()
     {
         this.GetComponent<Animator>().Play("VehicleAnim");
+		Debug.Log("AnimationStart");
     }
 }

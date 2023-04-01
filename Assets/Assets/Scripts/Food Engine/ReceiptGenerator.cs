@@ -50,7 +50,7 @@ public class ReceiptGenerator : MonoBehaviour
         GrandTotal.text = "Total Rs. " + amount.ToString();
         CurrSlots = childrenCount;
 
-
+		
     }
 
     public void AddPotato(int count)
@@ -65,6 +65,7 @@ public class ReceiptGenerator : MonoBehaviour
                 return;
             }
         }
+		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
@@ -73,6 +74,7 @@ public class ReceiptGenerator : MonoBehaviour
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=0>");
             ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
             ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+		
         }
         else
         {
@@ -93,6 +95,7 @@ public class ReceiptGenerator : MonoBehaviour
                 return;
             }
         }
+		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
@@ -120,7 +123,7 @@ public class ReceiptGenerator : MonoBehaviour
                 TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
                 return;
             }
-        }
+        }CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
@@ -149,6 +152,7 @@ public class ReceiptGenerator : MonoBehaviour
                 return;
             }
         }
+		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
@@ -177,6 +181,7 @@ public class ReceiptGenerator : MonoBehaviour
                 return;
             }
         }
+		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
@@ -205,6 +210,7 @@ public class ReceiptGenerator : MonoBehaviour
                 return;
             }
         }
+		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
@@ -232,6 +238,7 @@ public class ReceiptGenerator : MonoBehaviour
                 return;
             }
         }
+		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
@@ -259,6 +266,7 @@ public class ReceiptGenerator : MonoBehaviour
                 return;
             }
         }
+		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
@@ -294,6 +302,7 @@ public class ReceiptGenerator : MonoBehaviour
                 return;
             }
         }
+		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
@@ -330,6 +339,7 @@ public class ReceiptGenerator : MonoBehaviour
                 return;
             }
         }
+		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
@@ -363,6 +373,7 @@ public class ReceiptGenerator : MonoBehaviour
                 return;
             }
         }
+		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
@@ -396,6 +407,7 @@ public class ReceiptGenerator : MonoBehaviour
                 return;
             }
         }
+		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
@@ -419,4 +431,8 @@ public class ReceiptGenerator : MonoBehaviour
         limitWarning.SetActive(false);
 
     }
+	public void DisableWarning()
+	{
+		limitWarning.SetActive(false);
+	}
 }

@@ -44,34 +44,42 @@ public class GameManager : MonoBehaviour
     public void SaveTVUpgrade(int level)
     {
         PlayerPrefs.SetInt("TVUpgrade", level);
+		LoadUpgrades();
     }
     public void SaveHeartUpgrade(int level)
     {
         PlayerPrefs.SetInt("HeartUpgrade", level);
+		LoadUpgrades();
     }
     public void SaveSpeakerUpgrade(int level)
     {
         PlayerPrefs.SetInt("SpeakerUpgrade", level);
+		LoadUpgrades();
     }
     public void SaveVaseUpgrade(int level)
     {
         PlayerPrefs.SetInt("VaseUpgrade", level);
+		LoadUpgrades();
     }
     public void SaveWallArtUpgrade(int level)
     {
         PlayerPrefs.SetInt("WallArtUpgrade", level);
+		LoadUpgrades();
     }
     public void SaveVehicleUpgrade(int level)
     {
         PlayerPrefs.SetInt("VehicleUpgrade", level);
+		LoadUpgrades();
     }
     public void SaveMachineUpgrade(int level)
     {
         PlayerPrefs.SetInt("MachineUpgrade", level);
+		LoadUpgrades();
     }
     public void SaveGlobalCoins(int amount)
     {
         PlayerPrefs.SetInt("globalCoins", amount);
+		LoadUpgrades();
 
     }
     public bool CheckLevel(int levelNo)

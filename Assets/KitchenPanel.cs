@@ -23,8 +23,7 @@ public class KitchenPanel : MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
         GameObject[] items = GameObject.FindGameObjectsWithTag("foodModel");
-        Debug.Log(items);
-       
+      
         if (col.tag == "Player")
         {
             if (PlayerFoodHandling.Instance.currentFood.Equals("UniversalFood", System.StringComparison.OrdinalIgnoreCase))
