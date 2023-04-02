@@ -4745,6 +4745,7 @@ GameObject:
   - component: {fileID: 7912559248252330052}
   - component: {fileID: 7912559248252330051}
   - component: {fileID: 7912559248252330053}
+  - component: {fileID: 4073990408119155866}
   m_Layer: 0
   m_Name: 1
   m_TagString: Untagged
@@ -4779,7 +4780,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4370069572012694992
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4796,7 +4797,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!54 &7912559248252330055
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4878,6 +4880,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
+--- !u!114 &4073990408119155866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993640964980137232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc53aee506f55e043aadeee6e00eada9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds: {fileID: 11400000, guid: 4e5ee6b4b30114e4ba853c5ce28e4dbb, type: 2}
 --- !u!1 &7004834875821478643
 GameObject:
   m_ObjectHideFlags: 0

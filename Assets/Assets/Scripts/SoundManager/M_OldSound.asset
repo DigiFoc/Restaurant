@@ -9,14 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfe6e8626a7cd5f459c6ae268ab83a61, type: 3}
-  m_Name: Level1
+  m_Script: {fileID: 11500000, guid: 95635379f22f20c4eb40d781d7a9c1bf, type: 3}
+  m_Name: M_OldSound
   m_EditorClassIdentifier: 
-  levelNum: 1
-  totalCustomers: 10
-  consecCustomers: 2
-  maxCustomers: 2
-  timeForCustomers: 10
-  totalLevelTime: 190
-  avgRatingReq: 2
-  isCompleted: 0
+  angry: []
+  happy: []
+  satisfied: []
+  notSatisfied: []
+  interaction: []
+  askingForPannerTikka: []
+  askingForSamosa: []
+  askingForTea: []
+  askingForPakori: []

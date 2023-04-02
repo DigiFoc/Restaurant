@@ -49,7 +49,7 @@ public class LevelManager : MonoBehaviour
     public GameObject EndScreen;
     public GameObject TimeOutScreen;
     public GameObject[] statusesEndScreen,statusesTimeOutScreen;
-
+	public int CustNeedToSpawn;
 
     public Sprite passTextures;
     public Sprite failTextures;
@@ -79,6 +79,7 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+		CustNeedToSpawn=0;
         levelStarted = false;
         //SetLevel(LevelNo);
         //customerGenerator.GenerateCustomer(currentLevel.totalCustomers);
@@ -93,12 +94,31 @@ public class LevelManager : MonoBehaviour
             ObjtimeCurrent.text = currMin.ToString("00") + ":" + currSec.ToString("00");
             ObjRatingCurrent.text = currentRating.ToString();
             ObjCustCurrent.text = currentReached.ToString();
+			
             if (timecurrent >= currentLevel.totalLevelTime)
             {
                 levelStarted = false; }
-        }
+			}
     }
     // Update is called once per frame
+	public void ShuruKrvaao()
+	{
+		StartCoroutine(SpawnCust());
+	}
+	public IEnumerator SpawnCust()
+	{
+		if(customerGenerator.currentData.totalCustomersPresent < CustNeedToSpawn   && )
+		for(int i=0;i<(currentLevel.consecCustomers);i++)
+		{
+			customerGenerator.GenerateCustomer();
+			//Debug.Log("Total Customers:"+currentLevel.totalCustomers + "Total Needed " +CustNeedToSpawn);
+			CustNeedToSpawn--;
+			Debug.Log("Total Customers:"+currentLevel.totalCustomers + "Total Needed " +CustNeedToSpawn);
+
+
+			yield return new WaitForSeconds(Random.Range(3,7));
+		}
+	}
     public void SetLevel(int levelNumber)
     {
         SoundManager.Instance.PlaySound("tap");
@@ -111,13 +131,14 @@ public class LevelManager : MonoBehaviour
         totalCustomerstext.text = currentLevel.totalCustomers.ToString();
         ratingRequired.text = currentLevel.avgRatingReq.ToString();
         levelNumbertext.text = currentLevel.levelNum.ToString();
+		CustNeedToSpawn=currentLevel.totalCustomers;
         AdmobController.Instance.ShowInterstitialAd();
     }
     public void StartLevel()
     {
         PC.GetComponent<PlayerController>().enabled = true;
         MenuManager.Instance.ChangeMenu("side");
-        customerGenerator.GenerateCustomer(currentLevel.totalCustomers);
+        StartCoroutine(SpawnCust());
         levelStarted = true;
         StartCoroutine(CountTime());
     }

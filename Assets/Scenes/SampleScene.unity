@@ -54079,6 +54079,12 @@ MonoBehaviour:
   TingSound: {fileID: 8300000, guid: c5cc08273d41e1d4b9a805661f2b263a, type: 3}
   ErrorSound: {fileID: 8300000, guid: 3780bf9621d8ae8469ce0e63a5baa631, type: 3}
   HornSound: {fileID: 8300000, guid: 10ad8cf84a9c16b45b76efb8083a4e5b, type: 3}
+  maleYoungCollection: {fileID: 0}
+  maleKidCollection: {fileID: 0}
+  maleOldCollection: {fileID: 0}
+  femaleYoungCollection: {fileID: 0}
+  femaleKidCollection: {fileID: 0}
+  femaleOldCollection: {fileID: 0}
 --- !u!1 &1009322987
 GameObject:
   m_ObjectHideFlags: 0
@@ -60768,6 +60774,7 @@ MonoBehaviour:
   statusesTimeOutScreen:
   - {fileID: 475341077}
   - {fileID: 190238887}
+  CustNeedToSpawn: 0
   passTextures: {fileID: 21300000, guid: 4a231ba0e81e63849a8f985c228e8acd, type: 3}
   failTextures: {fileID: 21300000, guid: 65f0e363b74cf5845ab8c3fbc14f39ac, type: 3}
 --- !u!4 &1144331034
@@ -97550,6 +97557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1902096886}
   - component: {fileID: 1902096887}
+  - component: {fileID: 1902096888}
   m_Layer: 0
   m_Name: NotificationManager
   m_TagString: Untagged
@@ -97582,6 +97590,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8bd5a5985a19ef429e545c9be4157a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1902096888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902096885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3885a71413d1a84b8dfe847f6346507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1902546465
@@ -110466,7 +110486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2122663315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110474,7 +110494,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122663314}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e33f69f5c03acc43926fc265a28e447, type: 3}
   m_Name: 

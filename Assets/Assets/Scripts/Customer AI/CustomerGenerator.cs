@@ -32,26 +32,25 @@ public class CustomerGenerator : MonoBehaviour
        
     }
 
-    public void GenerateCustomer(int n)
+    public void GenerateCustomer()
     {
-        for (int i = 0; i < n; i++)
-        {
-            int Gender = Random.Range(1, 3);
+        int Gender = Random.Range(1, 3);
+			
             Debug.Log(Gender);
             if (Gender == 1) //Generate a male
             {
-                GenerateMale(1);
+                GenerateMale();
             }
             if (Gender == 2)
-                GenerateFemale(1);
-        }
+                GenerateFemale();
+		
     }
                                                   
-    public void GenerateMale(int n)
+    public void GenerateMale()
     {
         int randomMaleNo = Random.Range(0, customerDatabase.maleCustomersModel.Length);
         GameObject AI = Instantiate(customerDatabase.maleCustomersModel[randomMaleNo], customerGenratingPoint.position, Quaternion.identity) as GameObject;
-
+		
         int randomNameNo = Random.Range(0, customerDatabase.maleCustomerNames.Length);
         string randomName = customerDatabase.maleCustomerNames[randomNameNo];
 
@@ -68,7 +67,7 @@ public class CustomerGenerator : MonoBehaviour
 
     }
 
-    public void GenerateFemale(int n)
+    public void GenerateFemale()
     {
         int randomMaleNo = Random.Range(0, customerDatabase.femaleCustomersModel.Length);
         GameObject AI = Instantiate(customerDatabase.femaleCustomersModel[randomMaleNo], customerGenratingPoint.position, Quaternion.identity) as GameObject;

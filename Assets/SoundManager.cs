@@ -11,6 +11,11 @@ public class SoundManager : MonoBehaviour
     public AudioClip TingSound;
     public AudioClip ErrorSound;
     public AudioClip HornSound;
+	[Header("Male Sound Collections")]
+	public SoundCollection maleYoungCollection,maleKidCollection,maleOldCollection;
+	[Space(5)]
+	[Header("Female Sound Collection")]
+	public SoundCollection femaleYoungCollection,femaleKidCollection,femaleOldCollection;
     public static SoundManager Instance { get; set; }
     private void Awake()
     {

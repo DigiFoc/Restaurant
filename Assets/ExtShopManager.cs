@@ -201,7 +201,7 @@ public class ExtShopManager : MonoBehaviour
 
         if (tv.currentUpgradeNo >= tv.totalUpdates)
         {
-            Debug.Log("CHAL GYAA TV");
+           // Debug.Log("CHAL GYAA TV");
             ShowMessage("All Updates Done", 2);
             return;
         }
@@ -221,13 +221,13 @@ public class ExtShopManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Coins not sufficinet");
+                //Debug.Log("Coins not sufficinet");
                 ShowMessage("Coins Are Not Suffiecient", 2);
             }
         }
         else
         {
-            Debug.Log("Levels not Sufficient");
+           // Debug.Log("Levels not Sufficient");
             ShowMessage("Levels Required :" + tv.levelsReq[0], 2);
         }
     }
@@ -267,7 +267,7 @@ public class ExtShopManager : MonoBehaviour
 
     void WriteTVVisuals(int upgradeNo)
     {
-        Debug.Log(tv.totalUpdates);
+      //  Debug.Log(tv.totalUpdates);
         //Changing Model Of TV
         for (int i = 1; i <= tv.prefabs.Length; i++)
         {
@@ -327,13 +327,13 @@ public class ExtShopManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Coins Not Sufficient");
+              //  Debug.Log("Coins Not Sufficient");
                 ShowMessage("Coins Are Not Suffiecient", 2);
             }
         }
         else
         {
-            Debug.Log("Levels Not Sufficient");
+          //  Debug.Log("Levels Not Sufficient");
             ShowMessage("Levels Required :" + decoration.levelsReq[0], 2);
         }
     }
@@ -371,7 +371,7 @@ public class ExtShopManager : MonoBehaviour
 
     void WriteDecorationVisuals(int upgradeNo)
     {
-        Debug.Log(decoration.totalUpdates);
+      //  Debug.Log(decoration.totalUpdates);
         //Changing Model Of TV
         for (int i = 1; i <= decoration.prefabs.Length; i++)
         {
@@ -434,13 +434,13 @@ public class ExtShopManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Coins are not sufficient");
+              //  Debug.Log("Coins are not sufficient");
                 ShowMessage("Coins Are Not Suffiecient", 2);
             }
         }
         else
         {
-            Debug.Log("Levels are not sufficient");
+           // Debug.Log("Levels are not sufficient");
             ShowMessage("Levels Required :" + decoration.levelsReq[0], 2);
         }
     }
@@ -478,7 +478,7 @@ public class ExtShopManager : MonoBehaviour
 
     void WriteSoundSystemVisuals(int upgradeNo)
     {
-        Debug.Log(soundSystem.totalUpdates);
+     //   Debug.Log(soundSystem.totalUpdates);
         //Changing Model Of TV
         for (int i = 1; i <= soundSystem.prefab.Length; i++)
         {
@@ -544,7 +544,7 @@ public class ExtShopManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Levels are not sufficient");
+          //  Debug.Log("Levels are not sufficient");
             ShowMessage("Levels Required :" + decoration.levelsReq[0], 2);
         }
     }
@@ -581,7 +581,7 @@ public class ExtShopManager : MonoBehaviour
     }
     void WriteVegetationVisuals(int upgradeNo)
     {
-        Debug.Log(vegetation.totalUpdates);
+       // Debug.Log(vegetation.totalUpdates);
         //Changing Model Of TV
         for (int i = 1; i <= vegetation.prefab.Length; i++)
         {
@@ -640,7 +640,7 @@ public class ExtShopManager : MonoBehaviour
                 AdmobController.Instance.ShowInterstitialAd();
             }
             else
-            {
+			{
                 Debug.Log("Coins are not sufficient");
                 ShowMessage("Coins Are Not Suffiecient", 2);
             }
@@ -689,7 +689,7 @@ public class ExtShopManager : MonoBehaviour
 
     void WriteWallArtVisuals(int upgradeNo)
     {
-        Debug.Log(wallArt.totalUpdates);
+     //   Debug.Log(wallArt.totalUpdates);
         //Changing Model Of TV
         //for (int i = 0; i < wallArt.prefab.Length; i++)
         //{
@@ -814,16 +814,16 @@ public class ExtShopManager : MonoBehaviour
         {
             if (i == upgradeNo)
             {
-                Debug.Log("Vehcile pic changed");
+               // Debug.Log("Vehcile pic changed");
                 vehicle.prefabs[i - 1].transform.gameObject.SetActive(true);
                 vehicle.currentSpeed = vehicle.speeds[i - 1];
             }
             else vehicle.prefabs[i - 1].transform.gameObject.SetActive(false);
         }
-        Debug.Log(vehicle.totalUpdates);
+       // Debug.Log(vehicle.totalUpdates);
         //Changing Model Of TV
 
-        Debug.Log("Current Speed is" + vehicle.speeds[vehicle.currentUpgradeNo - 1]);
+       // Debug.Log("Current Speed is" + vehicle.speeds[vehicle.currentUpgradeNo - 1]);
 
         vehicle.currentSpeed = vehicle.speeds[vehicle.currentUpgradeNo-1];
 
@@ -919,8 +919,6 @@ public class ExtShopManager : MonoBehaviour
 
     void WriteFoodMachineVisuals(int upgradeNo)
     {
-        Debug.Log(foodMachine.totalUpdates);
-        //Changing Model Of TV
 
         if (upgradeNo < foodMachine.totalUpdates)
         {

@@ -8,7 +8,7 @@ public class SoundCollection : ScriptableObject
     public AudioClip[] satisfied;
     public AudioClip[] notSatisfied;
     public AudioClip[] interaction;
-    public AudioClip[] askingForPannerTikka,askingForSamosa,askingForTea,askingForPakori;
+    public AudioClip[] askingForPaneerTikka,askingForSamosa,askingForTea,askingForPakori;
 
 
 

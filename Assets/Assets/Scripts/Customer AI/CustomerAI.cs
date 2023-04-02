@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(NavMeshAgent))]
-
+[RequireComponent(typeof(AudioSource))]
 public class CustomerAI : MonoBehaviour
 {
 
@@ -14,6 +14,8 @@ public class CustomerAI : MonoBehaviour
     NavMeshAgent theAgent;
     CapsuleCollider theCollider;
     Animator anim;
+	SoundCollection mySounds;
+	AudioSource src;
 
     [System.Serializable]
     public class Information
@@ -66,6 +68,8 @@ public class CustomerAI : MonoBehaviour
 
         //SetDestination(destinations.RandomPlaces[0]);
         FindHut();
+		mySounds = this.GetComponent<AboutMe>().sounds;
+		src = this.GetComponent<AudioSource>();
 
     }
 
@@ -207,8 +211,10 @@ public class CustomerAI : MonoBehaviour
         AI_Information.quantity = Random.Range(1, 5);
         AI_Information.amountToPay = StockInventory.Instance.CalculateAmount(AI_Information.foodOrder, AI_Information.quantity);
 
-
+		//PlayOrderFoodSound(AI_Information.foodOrder);
+		
         SetFoodOrderDisplay(AI_Information.foodOrder, AI_Information.quantity);
+		LevelManager.Instance.ShuruKrvaao();
 
         if (AI_Information.hutNo == 1)
         {
@@ -403,5 +409,25 @@ public class CustomerAI : MonoBehaviour
     {
         LevelManager.Instance.CustomerReached(ratingStar);
     }
+	
+	public void PlayOrderFoodSound(string food)
+	{
+		if(food.Equals("Samosa",  System.StringComparison.OrdinalIgnoreCase))
+		{
+			src.PlayOneShot(mySounds.askingForSamosa[0]);
+		}
+		if(food.Equals("paneerTikka",  System.StringComparison.OrdinalIgnoreCase))
+		{
+			src.PlayOneShot(mySounds.askingForPaneerTikka[0]);
+		}
+		if(food.Equals("pakori",  System.StringComparison.OrdinalIgnoreCase))
+		{
+			src.PlayOneShot(mySounds.askingForPakori[0]);
+		}
+			if(food.Equals("tea",  System.StringComparison.OrdinalIgnoreCase))
+		{
+			src.PlayOneShot(mySounds.askingForTea[0]);
+		}
+	}
    
 }

@@ -3175,6 +3175,7 @@ GameObject:
   - component: {fileID: 5566559390669770814}
   - component: {fileID: 5566559390669770815}
   - component: {fileID: 5566559390669770809}
+  - component: {fileID: 3338351219542013993}
   m_Layer: 0
   m_Name: Male_Child
   m_TagString: Untagged
@@ -3206,7 +3207,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2029700578639883690
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3223,7 +3224,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!54 &5566559390669770813
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3304,6 +3306,19 @@ MonoBehaviour:
   amount: 0
   WaitingTime: 0
   ratingStar: 0
+--- !u!114 &3338351219542013993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4720068814739451242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc53aee506f55e043aadeee6e00eada9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds: {fileID: 11400000, guid: 9c8be902263846c43a396ea41a23e9b1, type: 2}
 --- !u!1 &5007719339422257274
 GameObject:
   m_ObjectHideFlags: 0

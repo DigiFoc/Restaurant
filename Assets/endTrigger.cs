@@ -25,6 +25,6 @@ public class endTrigger : MonoBehaviour
         }
 
         GameObject generator = GameObject.Find("CUSTOMER GENERATOR");
-        generator.GetComponent<CustomerGenerator>().GenerateCustomer(1);
+        generator.GetComponent<CustomerGenerator>().GenerateCustomer();
     }
 }
