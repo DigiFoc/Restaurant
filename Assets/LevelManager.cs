@@ -107,16 +107,21 @@ public class LevelManager : MonoBehaviour
 	}
 	public IEnumerator SpawnCust()
 	{
-		if(customerGenerator.currentData.totalCustomersPresent < CustNeedToSpawn   && )
-		for(int i=0;i<(currentLevel.consecCustomers);i++)
+		if(customerGenerator.currentData.totalCustomersPresent < 6)
 		{
+		for(int i=0;i<currentLevel.consecCustomers;i++)
+		{
+			if(CustNeedToSpawn>0)
+			{
 			customerGenerator.GenerateCustomer();
+			}
 			//Debug.Log("Total Customers:"+currentLevel.totalCustomers + "Total Needed " +CustNeedToSpawn);
 			CustNeedToSpawn--;
 			Debug.Log("Total Customers:"+currentLevel.totalCustomers + "Total Needed " +CustNeedToSpawn);
 
 
 			yield return new WaitForSeconds(Random.Range(3,7));
+		}
 		}
 	}
     public void SetLevel(int levelNumber)

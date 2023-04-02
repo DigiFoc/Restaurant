@@ -8,7 +8,8 @@ public class Level : ScriptableObject
     public int levelNum;
     public int totalCustomers;
     public int consecCustomers;
-	public int maxCustomers;
+	public int CustomersPresent;
+
     public int timeForCustomers;
     public int totalLevelTime;
     public float avgRatingReq;

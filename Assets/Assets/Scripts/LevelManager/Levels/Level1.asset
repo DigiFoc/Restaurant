@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   levelNum: 1
-  totalCustomers: 10
+  totalCustomers: 3
   consecCustomers: 2
-  maxCustomers: 2
+  CustomersPresent: 0
   timeForCustomers: 10
   totalLevelTime: 190
   avgRatingReq: 2
