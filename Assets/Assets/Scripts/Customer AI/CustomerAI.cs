@@ -294,6 +294,7 @@ public class CustomerAI : MonoBehaviour
 
         Debug.Log("New coins are" + newCoins);
         newCoins += AI_Information.amountToPay;
+        newCoins += CoinsIncreaseDueToUpgrade();//To Increase Amount Due To Upgrade
         TextManager.Instance.ShowToast("Rs." + AI_Information.amountToPay + " transffered from A/C 5747575 to your Bank Account./n Total Bal: Rs." + newCoins + " CR",3);
         StockInventory.Instance.ChangeCoinsTo(newCoins);
 
@@ -390,6 +391,14 @@ public class CustomerAI : MonoBehaviour
 
     }
 
+    int CoinsIncreaseDueToUpgrade()
+    {
+        int coins = 0;
+        coins += GameManager.Instance.currentTVUpgrade + GameManager.Instance.currentHeartUpgrade + GameManager.Instance.currentVehicleUpgrade;
+        coins += GameManager.Instance.currentVaseUpgrade + GameManager.Instance.currentWallArtUpgrade + GameManager.Instance.currentSpeakerUpgrade;
+        coins += GameManager.Instance.currentMachineUpgrade;
+        return coins;
+    }
     public void SendReachSignal()
     {
         LevelManager.Instance.CustomerReached(ratingStar);
