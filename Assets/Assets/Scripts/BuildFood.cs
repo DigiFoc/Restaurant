@@ -6,14 +6,18 @@ using UnityEditor;
 public class BuildFood : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject BillHolder;
+    
     ItemHandler[] items;
     public string[] foodNames;
     public int[] quantities;
-    
+	public float delayTime=10f;
+    public GameObject ItemHolder;
+	public GameObject foodingUI,nonFoodingUI;
+	
     void Start()
     {
-        
+        foodingUI.SetActive(true);
+		nonFoodingUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -25,7 +29,7 @@ public class BuildFood : MonoBehaviour
 
     public void closeButton()
     {
-        foreach (Transform child in transform)
+        foreach (Transform child in ItemHolder.transform)
         {
             child.gameObject.GetComponent<ItemHandler>().RemoveMe();
 
@@ -35,7 +39,14 @@ public class BuildFood : MonoBehaviour
 
     public void BuildFoood()
     {
-        items = GetComponentsInChildren<ItemHandler>();
+		StartCoroutine(foodDelay());
+		
+	}
+		
+	IEnumerator foodDelay()
+	{
+		int temp = 0;
+		items = ItemHolder.GetComponentsInChildren<ItemHandler>();
         foodNames = new string[items.Length + 1];
         quantities = new int[items.Length + 1];
 
@@ -44,32 +55,32 @@ public class BuildFood : MonoBehaviour
             foodNames[i] = items[i].name;
             quantities[i] = items[i].quantity;
         }
-
+		Debug.Log("Name",gameObject);
+		
+		float totalDelay = (int)delayTime/items.Length;
+		
+		foodingUI.SetActive(false);
+		nonFoodingUI.SetActive(true);
+		TextManager.Instance.ShowToast("Starts Cooking", 2);
+		
+		
+		yield return new WaitForSeconds(totalDelay);
         for (int i = 0; i < items.Length; i++)
-        {
-            bool isTrue = FoodEngine.Instance.buildFood(foodNames[i], quantities[i]);
-            if (isTrue)
-            {
-                //Debug.Log(foodNames[i]);
-
-                TextManager.Instance.ShowToast(foodNames[i] + "Starts Cooking", 2);
-                FoodCounter.Instance.AddFood(foodNames[i], quantities[i]);
+        {				
+				FoodCounter.Instance.AddFood(foodNames[i], quantities[i]);
                 FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);
-             //   FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);
-            }
-            else
-                TextManager.Instance.ShowToast(foodNames[i] + "Cannot Cook", 3);
+           
         }
+		TextManager.Instance.ShowToast( "Cooking Done", 2);
 
 
-
+			
         StockInventory.Instance.UpdateFoodStockUI();
 
-        foreach (Transform child in transform) {
-            child.gameObject.GetComponent<ItemHandler>().RemoveMe();
-
-        }
-
+       
+		closeButton();        
+			foodingUI.SetActive(true);
+		nonFoodingUI.SetActive(false);
         ReceiptGenerator.Instance.CurrSlots = 0;
 
     }
