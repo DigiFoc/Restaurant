@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+using UnityEngine.UI;
 
 public class BuildFood : MonoBehaviour
 {
@@ -10,14 +9,17 @@ public class BuildFood : MonoBehaviour
     ItemHandler[] items;
     public string[] foodNames;
     public int[] quantities;
-	public float delayTime=10f;
+	public float delayTime=30f;
     public GameObject ItemHolder;
 	public GameObject foodingUI,nonFoodingUI;
+    public Slider foodSlider;
 	
     void Start()
     {
         foodingUI.SetActive(true);
 		nonFoodingUI.SetActive(false);
+        delayTime = 30f;
+        foodSlider.value = 0;
     }
 
     // Update is called once per frame
@@ -39,13 +41,13 @@ public class BuildFood : MonoBehaviour
 
     public void BuildFoood()
     {
+        SetDelayTime();
 		StartCoroutine(foodDelay());
 		
 	}
 		
 	IEnumerator foodDelay()
 	{
-		int temp = 0;
 		items = ItemHolder.GetComponentsInChildren<ItemHandler>();
         foodNames = new string[items.Length + 1];
         quantities = new int[items.Length + 1];
@@ -63,7 +65,7 @@ public class BuildFood : MonoBehaviour
 		nonFoodingUI.SetActive(true);
 		TextManager.Instance.ShowToast("Starts Cooking", 2);
 		
-		
+		for(int i=0;i<de)
 		yield return new WaitForSeconds(totalDelay);
         for (int i = 0; i < items.Length; i++)
         {				
@@ -84,7 +86,12 @@ public class BuildFood : MonoBehaviour
         ReceiptGenerator.Instance.CurrSlots = 0;
 
     }
-
+    public void SetDelayTime()
+    {
+        delayTime = delayTime/(GameManager.Instance.currentMachineUpgrade+1);
+        Debug.Log("Saved Machine Upgrade=" + GameManager.Instance.currentMachineUpgrade);
+        Debug.Log("Delay Time=" + delayTime);
+    }
 
     public void PickFoood()
     {
