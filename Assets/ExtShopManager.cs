@@ -45,6 +45,25 @@ public class ExtShopManager : MonoBehaviour
 
 
     [System.Serializable]
+    public class StorageUpgrade
+    {
+        public GameObject[] prefabs;
+        public int[] levelsReq;
+        public int currentUpgradeNo = 0;
+        public int totalUpdates;
+        public int[] coinsRequired;
+        public Image upgradeImageField;
+        public Sprite[] upgradeSprites;
+        public Image allUpdatesDone;
+        public GameObject priceShowingObject;
+        public TMP_Text priceText;
+        public Image[] updateDots;
+        public Sprite updateCompleteDot, updateNotCompletedDot;
+    }
+    [SerializeField]
+
+
+    [System.Serializable]
     public class SoundSystemUpdate
     {
         public GameObject[] prefab;
@@ -158,6 +177,9 @@ public class ExtShopManager : MonoBehaviour
     [Space(5)]
     [Header("Food Machine Update")]
     public FoodMachineUpdate foodMachine;
+    [Space(5)]
+    [Header("Storage Update")]
+    public StorageUpgrade storage;
 
 
 
@@ -177,6 +199,7 @@ public class ExtShopManager : MonoBehaviour
         wallArt.currentUpgradeNo = GameManager.Instance.currentWallArtUpgrade;
         vehicle.currentUpgradeNo = GameManager.Instance.currentVehicleUpgrade;
         foodMachine.currentUpgradeNo = GameManager.Instance.currentMachineUpgrade;
+        storage.currentUpgradeNo = GameManager.Instance.currentStorageUpgrade;
 
         WriteTVVisuals(tv.currentUpgradeNo);
         WriteDecorationVisuals(decoration.currentUpgradeNo);
@@ -185,6 +208,7 @@ public class ExtShopManager : MonoBehaviour
         WriteWallArtVisuals(wallArt.currentUpgradeNo);
         WriteVehicleVisuals(vehicle.currentUpgradeNo);
         WriteFoodMachineVisuals(foodMachine.currentUpgradeNo);
+        WriteStorageVisuals(storage.currentUpgradeNo);
         /* UpdatedecorationVisuals(decoration.currentUpgradeNo - 1);
          UpdateSoundSystemVisuals(soundSystem.currentUpgradeNo - 1);
          UpdateVegetationVisuals(vegetation.currentUpgradeNo - 1);
@@ -951,6 +975,111 @@ public class ExtShopManager : MonoBehaviour
         {
             foodMachine.priceShowingObject.SetActive(false);
             foodMachine.allUpdatesDone.gameObject.SetActive(true);
+
+        }
+
+
+    }
+
+
+    #endregion
+
+    #region StorageUpdate
+    public void UpdateStorageMachine()
+    {
+        if (storage.currentUpgradeNo >= storage.totalUpdates)
+        {
+            ShowMessage("All Updates Done", 2);
+            return;
+        }
+
+        int totalCoins = GetTotalCoins();
+
+        if (GetCurrentLevel() >= storage.levelsReq[storage.currentUpgradeNo])
+        {
+            if (totalCoins >= storage.coinsRequired[storage.currentUpgradeNo])
+            {
+
+                UpdateStorageVisuals(storage.currentUpgradeNo);
+                storage.currentUpgradeNo++;
+                GameManager.Instance.SaveStorageUpgrade(storage.currentUpgradeNo);
+                AdmobController.Instance.ShowInterstitialAd();
+            }
+            else
+            {
+                Debug.Log("Coins are not sufficient");
+                ShowMessage("Coins Are Not Suffiecient", 2);
+            }
+        }
+        else
+        {
+            Debug.Log("Levels are not sufficient");
+            ShowMessage("Levels Required :" + storage.levelsReq[0], 2);
+        }
+    }
+
+    void UpdateStorageVisuals(int upgradeNo)
+    {
+        //Changing Speed Of Food Machine
+        //SetFoodSpeed(foodMachine.speed[upgradeNo]);  //Not completed
+
+        if (upgradeNo + 1 < storage.totalUpdates)
+        {
+            storage.upgradeImageField.sprite = storage.upgradeSprites[upgradeNo + 1];
+
+            storage.priceText.text = (storage.coinsRequired[storage.currentUpgradeNo + 1]).ToString();
+        }
+
+        for (int i = 0; i < storage.updateDots.Length; i++)
+        {
+            if (i <= upgradeNo)
+            {
+                storage.updateDots[i].sprite = storage.updateCompleteDot;
+            }
+        }
+        if (storage.currentUpgradeNo + 1 == storage.totalUpdates)
+        {
+            storage.priceShowingObject.SetActive(false);
+            storage.allUpdatesDone.gameObject.SetActive(true);
+
+        }
+
+    }
+
+    void WriteStorageVisuals(int upgradeNo)
+    {
+
+        if (upgradeNo < storage.totalUpdates)
+        {
+            storage.upgradeImageField.sprite = storage.upgradeSprites[upgradeNo];
+
+            storage.priceText.text = (storage.coinsRequired[storage.currentUpgradeNo]).ToString();
+        }
+
+
+
+
+        if (upgradeNo < storage.totalUpdates)
+        {
+            storage.priceText.text = storage.coinsRequired[storage.currentUpgradeNo].ToString();
+            storage.upgradeImageField.sprite = storage.upgradeSprites[upgradeNo];
+        }
+        else if (upgradeNo == storage.totalUpdates)
+        {
+            storage.upgradeImageField.sprite = storage.upgradeSprites[upgradeNo - 1];
+        }
+        for (int i = 0; i < storage.updateDots.Length; i++)
+        {
+            if (i < upgradeNo)
+            {
+                storage.updateDots[i].sprite = storage.updateCompleteDot;
+            }
+        }
+
+        if (storage.currentUpgradeNo == storage.totalUpdates)
+        {
+            storage.priceShowingObject.SetActive(false);
+            storage.allUpdatesDone.gameObject.SetActive(true);
 
         }
 
