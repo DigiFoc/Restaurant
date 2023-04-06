@@ -15,10 +15,10 @@ public class OrderGoods : MonoBehaviour
 	bool isOnRoad;
 	 public GameObject button;
 	 public ReceiptGenerator currSlots;
-
+	public UnityEngine.UI.Slider VehicleSlider;
         private void Start()
     {
-        
+        VehicleSlider.value=0;
 
     }
     public void OrderGooods()
@@ -67,14 +67,19 @@ public class OrderGoods : MonoBehaviour
             StockInventory.Instance.ChangeCoinsTo(newCoins);
             GetVehicle.Instance.StartRide();
 			SetButtonStatus(true);
-            Debug.Log(50/(GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1] ));
+           
             foreach (Transform child in ItemHolder.transform)
             {
                 child.gameObject.GetComponent<ItemHandler>().RemoveMe();
 
             }
-
-            yield return new WaitForSeconds(50 / (GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1]));
+			float reachTime=50 / (GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1]);
+			VehicleSlider.maxValue=(int)reachTime;
+			for(int i=0;i<(int)reachTime;i++)
+				{
+					yield return new WaitForSeconds(1);
+					VehicleSlider.value=i+1;
+				}
             TextManager.Instance.ShowToast("Recieved", 2);
 			SetButtonStatus(false);
             SoundManager.Instance.PlaySound("horn");

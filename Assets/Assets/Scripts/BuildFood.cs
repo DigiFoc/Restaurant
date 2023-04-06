@@ -9,7 +9,7 @@ public class BuildFood : MonoBehaviour
     ItemHandler[] items;
     public string[] foodNames;
     public int[] quantities;
-	public float delayTime=30f;
+	public float delayTime=10f;
     public GameObject ItemHolder;
 	public GameObject foodingUI,nonFoodingUI;
     public Slider foodSlider;
@@ -22,19 +22,12 @@ public class BuildFood : MonoBehaviour
         foodSlider.value = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     public void closeButton()
     {
         foreach (Transform child in ItemHolder.transform)
         {
             child.gameObject.GetComponent<ItemHandler>().RemoveMe();
-
         }
     }
 
@@ -57,31 +50,24 @@ public class BuildFood : MonoBehaviour
             foodNames[i] = items[i].name;
             quantities[i] = items[i].quantity;
         }
-		Debug.Log("Name",gameObject);
-		
-		float totalDelay = (int)delayTime/items.Length;
-		
 		foodingUI.SetActive(false);
 		nonFoodingUI.SetActive(true);
 		TextManager.Instance.ShowToast("Starts Cooking", 2);
-		
-		for(int i=0;i<de)
-		yield return new WaitForSeconds(totalDelay);
+		foodSlider.maxValue=(int)delayTime;
+		for(int i=0;i<delayTime;i++)
+		{
+		yield return new WaitForSeconds(1);
+		foodSlider.value=i+1;
+		}
         for (int i = 0; i < items.Length; i++)
         {				
 				FoodCounter.Instance.AddFood(foodNames[i], quantities[i]);
                 FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);
-           
         }
-		TextManager.Instance.ShowToast( "Cooking Done", 2);
-
-
-			
+		TextManager.Instance.ShowToast( "Cooking Done", 2);	
         StockInventory.Instance.UpdateFoodStockUI();
-
-       
 		closeButton();        
-			foodingUI.SetActive(true);
+		foodingUI.SetActive(true);
 		nonFoodingUI.SetActive(false);
         ReceiptGenerator.Instance.CurrSlots = 0;
 
@@ -89,8 +75,7 @@ public class BuildFood : MonoBehaviour
     public void SetDelayTime()
     {
         delayTime = delayTime/(GameManager.Instance.currentMachineUpgrade+1);
-        Debug.Log("Saved Machine Upgrade=" + GameManager.Instance.currentMachineUpgrade);
-        Debug.Log("Delay Time=" + delayTime);
+		Debug.Log("DelayTime"+delayTime);
     }
 
     public void PickFoood()
