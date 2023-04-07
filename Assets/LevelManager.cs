@@ -50,7 +50,7 @@ public class LevelManager : MonoBehaviour
     public GameObject TimeOutScreen;
     public GameObject[] statusesEndScreen,statusesTimeOutScreen;
 	public int CustNeedToSpawn;
-
+public TMP_Text statusText;
     public Sprite passTextures;
     public Sprite failTextures;
 
@@ -188,7 +188,7 @@ public class LevelManager : MonoBehaviour
 
     void ShowEndScreen()
     {
-        SoundManager.Instance.PlaySound("success");
+        
         EndScreen.SetActive(true);
         EndScreentimeCurrent.text = currMin.ToString("00") + ":" + currSec.ToString("00");
         EndScreentimeRequired.text = min.ToString("00") + ":" + sec.ToString("00");
@@ -197,11 +197,14 @@ public class LevelManager : MonoBehaviour
         EndScreenRatingCurrent.text = currentRating.ToString();
         EndScreenCustRequired.text= currentLevel.totalCustomers.ToString();
         EndScreenCustCurrent.text= currentReached.ToString();
+		
+		
 
         if(currentTime < currentLevel.totalLevelTime)
         {
 
             statusesEndScreen[0].GetComponent<Image>().sprite = passTextures;
+			
 
         }
         else
@@ -230,7 +233,20 @@ public class LevelManager : MonoBehaviour
         }
         PC.GetComponent<PlayerController>().enabled = false;
         MenuManager.Instance.ResetAll();
-        GameManager.Instance.SaveLevel(currentLevel.levelNum++);
+		if(currentTime > currentLevel.totalLevelTime||currentReached < currentLevel.totalCustomers||currentRating < currentLevel.avgRatingReq)
+		{
+			SoundManager.Instance.PlaySound("fail");
+			statusText.text="LEVEL FAILED!";
+		}
+		if(currentTime < currentLevel.totalLevelTime&&currentReached >= currentLevel.totalCustomers&&currentRating >= currentLevel.avgRatingReq)
+		{
+			
+			SoundManager.Instance.PlaySound("success");
+			statusText.text="LEVEL PASSED!";
+			Debug.Log(currentLevel.levelNum);
+			GameManager.Instance.SaveLevel(currentLevel.levelNum);
+		}
+        
     }
 
 

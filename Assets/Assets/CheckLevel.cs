@@ -7,7 +7,8 @@ public class CheckLevel : MonoBehaviour
 {
     public int levelNo;// Start is called before the first frame update
     public Sprite Locked;
-    public Image Frame;// Start is called before the first frame update
+    public Image Frame;
+	public bool Unlocked;// Start is called before the first frame update
     void OnEnable()
     {
         GetComponent<Button>().interactable = false;
@@ -19,7 +20,8 @@ public class CheckLevel : MonoBehaviour
     IEnumerator CheckMe()
     {
         yield return new WaitForSeconds(1);
-        bool Unlocked=GameManager.Instance.CheckLevel(levelNo);
+		
+       Unlocked=GameManager.Instance.CheckLevel(levelNo);
         if (!Unlocked)
         {
             Frame.enabled = true;

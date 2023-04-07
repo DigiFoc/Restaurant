@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public int currentWallArtUpgrade;
     public int currentVehicleUpgrade;
     public int currentMachineUpgrade;
-    public int currentStorageUpgrade;
+   
     public int globalCoins;
     public int lastUnlockedLevel;
 
@@ -37,16 +37,12 @@ public class GameManager : MonoBehaviour
     }
     public void SaveLevel(int level)
     {
-        PlayerPrefs.SetInt("Level", level);
+        PlayerPrefs.SetInt("Level", level+1);
         Debug.Log("Saved level"+level);
 
     }
 
-    public void SaveStorageUpgrade(int level)
-    {
-        PlayerPrefs.SetInt("StorageUpgrade", level);
-        LoadUpgrades();
-    }
+  
 
     public void SaveTVUpgrade(int level)
     {
@@ -100,7 +96,7 @@ public class GameManager : MonoBehaviour
     }
     public void LoadUpgrades()
     {
-        currentStorageUpgrade = PlayerPrefs.GetInt("StorageUpgrade", 0);
+      
         currentHeartUpgrade = PlayerPrefs.GetInt("HeartUpgrade",0);
         currentTVUpgrade = PlayerPrefs.GetInt("TVUpgrade", 0);
         currentMachineUpgrade = PlayerPrefs.GetInt("MachineUpgrade", 0);

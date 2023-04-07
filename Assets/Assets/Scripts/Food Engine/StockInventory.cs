@@ -82,6 +82,7 @@ public class StockInventory : MonoBehaviour
     void Start()
     {
         coinText.text = coins.ToString();
+		
     }
 
     private void Awake()
@@ -99,11 +100,21 @@ public class StockInventory : MonoBehaviour
         UpdateIngredientStockUI();
     }
 
-
+	
     void Update()
     {
         
     }
+	
+	
+	public float totalIngredientStock()
+	{
+		float sum = 0;
+		sum += (currentIngredientStocks.besan + currentIngredientStocks.tealeaves + currentIngredientStocks.sugar);
+		sum += currentIngredientStocks.spice + currentIngredientStocks.milk + currentIngredientStocks.potato;
+		sum += currentIngredientStocks.oil + currentIngredientStocks.flour;
+		return sum;
+	}
 
     public void UpdateFoodStockUI()
     {

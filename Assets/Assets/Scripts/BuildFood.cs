@@ -13,6 +13,7 @@ public class BuildFood : MonoBehaviour
     public GameObject ItemHolder;
 	public GameObject foodingUI,nonFoodingUI;
     public Slider foodSlider;
+	public KitchenPanel kPanel;
 	
     void Start()
     {
@@ -59,11 +60,15 @@ public class BuildFood : MonoBehaviour
 		yield return new WaitForSeconds(1);
 		foodSlider.value=i+1;
 		}
+		
+		
         for (int i = 0; i < items.Length; i++)
         {				
 				FoodCounter.Instance.AddFood(foodNames[i], quantities[i]);
                 FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);
         }
+		kPanel.CalculateHutInfo();
+		kPanel.SetHutInfo();
 		TextManager.Instance.ShowToast( "Cooking Done", 2);	
         StockInventory.Instance.UpdateFoodStockUI();
 		closeButton();        

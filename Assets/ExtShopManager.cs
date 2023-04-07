@@ -191,6 +191,7 @@ public class ExtShopManager : MonoBehaviour
     }
     IEnumerator loadUpgrades()
     {
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
         yield return new WaitForSeconds(1);
         tv.currentUpgradeNo = GameManager.Instance.currentTVUpgrade;
         decoration.currentUpgradeNo = GameManager.Instance.currentHeartUpgrade;
@@ -199,8 +200,8 @@ public class ExtShopManager : MonoBehaviour
         wallArt.currentUpgradeNo = GameManager.Instance.currentWallArtUpgrade;
         vehicle.currentUpgradeNo = GameManager.Instance.currentVehicleUpgrade;
         foodMachine.currentUpgradeNo = GameManager.Instance.currentMachineUpgrade;
-        storage.currentUpgradeNo = GameManager.Instance.currentStorageUpgrade;
-
+       
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
         WriteTVVisuals(tv.currentUpgradeNo);
         WriteDecorationVisuals(decoration.currentUpgradeNo);
         WriteSoundSystemVisuals(soundSystem.currentUpgradeNo);
@@ -208,14 +209,7 @@ public class ExtShopManager : MonoBehaviour
         WriteWallArtVisuals(wallArt.currentUpgradeNo);
         WriteVehicleVisuals(vehicle.currentUpgradeNo);
         WriteFoodMachineVisuals(foodMachine.currentUpgradeNo);
-        WriteStorageVisuals(storage.currentUpgradeNo);
-        /* UpdatedecorationVisuals(decoration.currentUpgradeNo - 1);
-         UpdateSoundSystemVisuals(soundSystem.currentUpgradeNo - 1);
-         UpdateVegetationVisuals(vegetation.currentUpgradeNo - 1);
-         UpdateWallArtVisuals(wallArt.currentUpgradeNo - 1);
-         UpdateVehicleVisuals(vehicle.currentUpgradeNo - 1);
-         UpdateFoodMachineVisuals(foodMachine.currentUpgradeNo - 1)*/
-        ;
+       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     }
 
 
@@ -984,110 +978,7 @@ public class ExtShopManager : MonoBehaviour
 
     #endregion
 
-    #region StorageUpdate
-    public void UpdateStorageMachine()
-    {
-        if (storage.currentUpgradeNo >= storage.totalUpdates)
-        {
-            ShowMessage("All Updates Done", 2);
-            return;
-        }
 
-        int totalCoins = GetTotalCoins();
-
-        if (GetCurrentLevel() >= storage.levelsReq[storage.currentUpgradeNo])
-        {
-            if (totalCoins >= storage.coinsRequired[storage.currentUpgradeNo])
-            {
-
-                UpdateStorageVisuals(storage.currentUpgradeNo);
-                storage.currentUpgradeNo++;
-                GameManager.Instance.SaveStorageUpgrade(storage.currentUpgradeNo);
-                AdmobController.Instance.ShowInterstitialAd();
-            }
-            else
-            {
-                Debug.Log("Coins are not sufficient");
-                ShowMessage("Coins Are Not Suffiecient", 2);
-            }
-        }
-        else
-        {
-            Debug.Log("Levels are not sufficient");
-            ShowMessage("Levels Required :" + storage.levelsReq[0], 2);
-        }
-    }
-
-    void UpdateStorageVisuals(int upgradeNo)
-    {
-        //Changing Speed Of Food Machine
-        //SetFoodSpeed(foodMachine.speed[upgradeNo]);  //Not completed
-
-        if (upgradeNo + 1 < storage.totalUpdates)
-        {
-            storage.upgradeImageField.sprite = storage.upgradeSprites[upgradeNo + 1];
-
-            storage.priceText.text = (storage.coinsRequired[storage.currentUpgradeNo + 1]).ToString();
-        }
-
-        for (int i = 0; i < storage.updateDots.Length; i++)
-        {
-            if (i <= upgradeNo)
-            {
-                storage.updateDots[i].sprite = storage.updateCompleteDot;
-            }
-        }
-        if (storage.currentUpgradeNo + 1 == storage.totalUpdates)
-        {
-            storage.priceShowingObject.SetActive(false);
-            storage.allUpdatesDone.gameObject.SetActive(true);
-
-        }
-
-    }
-
-    void WriteStorageVisuals(int upgradeNo)
-    {
-
-        if (upgradeNo < storage.totalUpdates)
-        {
-            storage.upgradeImageField.sprite = storage.upgradeSprites[upgradeNo];
-
-            storage.priceText.text = (storage.coinsRequired[storage.currentUpgradeNo]).ToString();
-        }
-
-
-
-
-        if (upgradeNo < storage.totalUpdates)
-        {
-            storage.priceText.text = storage.coinsRequired[storage.currentUpgradeNo].ToString();
-            storage.upgradeImageField.sprite = storage.upgradeSprites[upgradeNo];
-        }
-        else if (upgradeNo == storage.totalUpdates)
-        {
-            storage.upgradeImageField.sprite = storage.upgradeSprites[upgradeNo - 1];
-        }
-        for (int i = 0; i < storage.updateDots.Length; i++)
-        {
-            if (i < upgradeNo)
-            {
-                storage.updateDots[i].sprite = storage.updateCompleteDot;
-            }
-        }
-
-        if (storage.currentUpgradeNo == storage.totalUpdates)
-        {
-            storage.priceShowingObject.SetActive(false);
-            storage.allUpdatesDone.gameObject.SetActive(true);
-
-        }
-
-
-    }
-
-
-    #endregion
 
     #region BasicFunction
     public int GetTotalCoins()
