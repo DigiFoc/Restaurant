@@ -55,6 +55,10 @@ public class BuildFood : MonoBehaviour
 		nonFoodingUI.SetActive(true);
 		TextManager.Instance.ShowToast("Starts Cooking", 2);
 		foodSlider.maxValue=(int)delayTime;
+		 for (int i = 0; i < items.Length; i++)
+        {		
+                FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);
+        }
 		for(int i=0;i<delayTime;i++)
 		{
 		yield return new WaitForSeconds(1);
@@ -65,7 +69,7 @@ public class BuildFood : MonoBehaviour
         for (int i = 0; i < items.Length; i++)
         {				
 				FoodCounter.Instance.AddFood(foodNames[i], quantities[i]);
-                FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);
+               
         }
 		kPanel.CalculateHutInfo();
 		kPanel.SetHutInfo();

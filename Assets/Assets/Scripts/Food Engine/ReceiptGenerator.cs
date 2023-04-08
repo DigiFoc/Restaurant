@@ -8,10 +8,12 @@ public class ReceiptGenerator : MonoBehaviour
     int MaxSlots = 2;
     public int CurrSlots = 0;
     public Transform TextHolder;
+    public Transform FoodTextHolder;
     public GameObject ItemPrefab;
     public TMP_Text GrandTotal;
     public int amount = 0;
     public GameObject limitWarning;
+    public GameObject limitWarning2;
     
 
     public static ReceiptGenerator Instance { get; set; }
@@ -53,28 +55,38 @@ public class ReceiptGenerator : MonoBehaviour
 		
     }
 
+	
+
+
+    
+
     public void AddPotato(int count)
     {
+		
         string Objname = "potato";
+		Debug.Log("Yo");
         int childrenCount = TextHolder.transform.childCount;
         for (int i = 0; i < childrenCount; i++)
         {
+			
             if (TextHolder.transform.GetChild(i).name == Objname)
             {
                 TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
                 return;
             }
         }
+		Debug.Log("Yoo");
 		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
+			Debug.Log("Yooo");
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
             ItemManager.name = Objname;
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=0>");
             ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
-            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
-		
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
+			MakeAmount();
         }
         else
         {
@@ -91,7 +103,7 @@ public class ReceiptGenerator : MonoBehaviour
         {
             if (TextHolder.transform.GetChild(i).name == Objname)
             {
-                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
                 return;
             }
         }
@@ -103,7 +115,8 @@ public class ReceiptGenerator : MonoBehaviour
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=1>");
             ItemManager.GetComponent<ItemHandler>().AssignPrice(30);
-            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
+			MakeAmount();
         }
         else
         {
@@ -120,7 +133,7 @@ public class ReceiptGenerator : MonoBehaviour
         {
             if (TextHolder.transform.GetChild(i).name == Objname)
             {
-                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);MakeAmount();
                 return;
             }
         }CurrSlots = childrenCount;
@@ -131,7 +144,8 @@ public class ReceiptGenerator : MonoBehaviour
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=2>");
             ItemManager.GetComponent<ItemHandler>().AssignPrice(1);
-            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);MakeAmount();
+			MakeAmount();
         }
         else
         {
@@ -149,6 +163,7 @@ public class ReceiptGenerator : MonoBehaviour
             if (TextHolder.transform.GetChild(i).name == Objname)
             {
                 TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+				MakeAmount();
                 return;
             }
         }
@@ -161,6 +176,7 @@ public class ReceiptGenerator : MonoBehaviour
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=3>");
             ItemManager.GetComponent<ItemHandler>().AssignPrice(180);
             ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+			MakeAmount();
         }
         else
         {
@@ -177,7 +193,7 @@ public class ReceiptGenerator : MonoBehaviour
         {
             if (TextHolder.transform.GetChild(i).name == Objname)
             {
-                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
                 return;
             }
         }
@@ -189,7 +205,7 @@ public class ReceiptGenerator : MonoBehaviour
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=4>");
             ItemManager.GetComponent<ItemHandler>().AssignPrice(80);
-            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
         }
         else
         {
@@ -206,7 +222,7 @@ public class ReceiptGenerator : MonoBehaviour
         {
             if (TextHolder.transform.GetChild(i).name == Objname)
             {
-                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
                 return;
             }
         }
@@ -218,7 +234,7 @@ public class ReceiptGenerator : MonoBehaviour
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=5>");
             ItemManager.GetComponent<ItemHandler>().AssignPrice(40);
-            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
         }
         else
         {
@@ -234,7 +250,7 @@ public class ReceiptGenerator : MonoBehaviour
         {
             if (TextHolder.transform.GetChild(i).name == Objname)
             {
-                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
                 return;
             }
         }
@@ -246,7 +262,7 @@ public class ReceiptGenerator : MonoBehaviour
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=6>");
             ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
-            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
         }
         else
         {
@@ -262,7 +278,7 @@ public class ReceiptGenerator : MonoBehaviour
         {
             if (TextHolder.transform.GetChild(i).name == Objname)
             {
-                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
                 return;
             }
         }
@@ -274,7 +290,7 @@ public class ReceiptGenerator : MonoBehaviour
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=7>");
             ItemManager.GetComponent<ItemHandler>().AssignPrice(80);
-            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
         }
         else
         {
@@ -288,33 +304,35 @@ public class ReceiptGenerator : MonoBehaviour
     {
        
         string Objname = "Tea";
-        int childrenCount = TextHolder.transform.childCount;
+        int childrenCount = FoodTextHolder.transform.childCount;
         for (int i = 0; i < childrenCount; i++)
         {
-            if (TextHolder.transform.GetChild(i).name == Objname)
+            if (FoodTextHolder.transform.GetChild(i).name == Objname)
             {
-                if (!FoodEngine.Instance.buildFood("Tea", TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
+                if (!FoodEngine.Instance.buildFood("Tea", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
                 {
                     Debug.Log("cannot build food");
                     return;
                 }
-                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+                FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count); 
+				MakeAmount();
                 return;
             }
         }
 		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
-            GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
+            GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
             ItemManager.name = Objname;
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=11>");
             ItemManager.GetComponent<ItemHandler>().AssignPrice(10); //Price to be changed
-            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
+			MakeAmount();
         }
         else
         {
-            StartCoroutine(ShowWarning());
+            StartCoroutine(ShowFoodWarning());
         }
 
     }
@@ -324,34 +342,34 @@ public class ReceiptGenerator : MonoBehaviour
        
         
         string Objname = "Samosa";
-        int childrenCount = TextHolder.transform.childCount;
+        int childrenCount = FoodTextHolder.transform.childCount;
         for (int i = 0; i < childrenCount; i++)
         {
-            if (TextHolder.transform.GetChild(i).name == Objname)
+            if (FoodTextHolder.transform.GetChild(i).name == Objname)
             {
                 
-                if (!FoodEngine.Instance.buildFood("Samosa", TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
+                if (!FoodEngine.Instance.buildFood("Samosa", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
                 {
                     Debug.Log("cannot build food");
                     return;
                 }
-                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+                FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count); 
                 return;
             }
         }
 		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
-            GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
+            GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
             ItemManager.name = Objname;
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=08>");
             ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
-            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
         }
         else
         {
-            StartCoroutine(ShowWarning());
+            StartCoroutine(ShowFoodWarning());
         }
 
     }
@@ -359,33 +377,33 @@ public class ReceiptGenerator : MonoBehaviour
     public void AddPakori(int count)
     {
         string Objname = "Pakori";
-        int childrenCount = TextHolder.transform.childCount;
+        int childrenCount = FoodTextHolder.transform.childCount;
         for (int i = 0; i < childrenCount; i++)
         {
-            if (TextHolder.transform.GetChild(i).name == Objname)
+            if (FoodTextHolder.transform.GetChild(i).name == Objname)
             {
-                if (!FoodEngine.Instance.buildFood("Pakori", TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count  ))
+                if (!FoodEngine.Instance.buildFood("Pakori", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count  ))
                 {
                     Debug.Log("cannot build food");
                     return;
                 }
-                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+                FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count); 
                 return;
             }
         }
 		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
-            GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
+            GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
             ItemManager.name = Objname;
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=10>");
             ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
-            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
         }
         else
         {
-            StartCoroutine(ShowWarning());
+            StartCoroutine(ShowFoodWarning());
         }
 
     }
@@ -393,33 +411,33 @@ public class ReceiptGenerator : MonoBehaviour
     public void AddPaneerTikka(int count)
     {
         string Objname = "PaneerTikka";
-        int childrenCount = TextHolder.transform.childCount;
+        int childrenCount = FoodTextHolder.transform.childCount;
         for (int i = 0; i < childrenCount; i++)
         {
-            if (TextHolder.transform.GetChild(i).name == Objname)
+            if (FoodTextHolder.transform.GetChild(i).name == Objname)
             {
-                if (!FoodEngine.Instance.buildFood("PaneerTikka", TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
+                if (!FoodEngine.Instance.buildFood("PaneerTikka", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
                 {
                     Debug.Log("cannot build food");
                     return;
                 }
-                TextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+                FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
                 return;
             }
         }
 		CurrSlots = childrenCount;
         if (CurrSlots < MaxSlots)
         {
-            GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
+            GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
             ItemManager.name = Objname;
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=09>");
             ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
-            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
         }
         else
         {
-            StartCoroutine(ShowWarning());
+            StartCoroutine(ShowFoodWarning());
         }
 
     }
@@ -434,5 +452,17 @@ public class ReceiptGenerator : MonoBehaviour
 	public void DisableWarning()
 	{
 		limitWarning.SetActive(false);
+	}
+	
+	IEnumerator ShowFoodWarning()
+    {
+        limitWarning2.SetActive(true);
+        yield return new WaitForSeconds(4);
+        limitWarning2.SetActive(false);
+
+    }
+	public void DisableFoodWarning()
+	{
+		limitWarning2.SetActive(false);
 	}
 }

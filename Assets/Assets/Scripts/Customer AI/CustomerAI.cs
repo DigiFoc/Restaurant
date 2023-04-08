@@ -16,6 +16,7 @@ public class CustomerAI : MonoBehaviour
     Animator anim;
 	SoundCollection mySounds;
 	AudioSource src;
+	bool isMoving;
 
     [System.Serializable]
     public class Information
@@ -70,14 +71,21 @@ public class CustomerAI : MonoBehaviour
         FindHut();
 		mySounds = this.GetComponent<AboutMe>().sounds;
 		src = this.GetComponent<AudioSource>();
+		theAgent.updateRotation = false;
 
     }
 
 
     void Update()
     {
-        HandleAnimations();
+        HandleAnimations();	
+		if (theAgent.velocity.sqrMagnitude > Mathf.Epsilon)
+{
+    transform.rotation = Quaternion.LookRotation(theAgent.velocity.normalized);
+}
 
+		
+		 
         if (countTime)
         {
             WaitingTime += Time.deltaTime;
@@ -96,10 +104,14 @@ public class CustomerAI : MonoBehaviour
     {
         if (theAgent.velocity != Vector3.zero)
         {
+			isMoving = true;
             anim.SetBool("Move", true);
         }
         else
+		{
+			isMoving=  false;
             anim.SetBool("Move", false);
+		}
     }
 
     public void FindHut()

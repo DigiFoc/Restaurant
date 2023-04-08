@@ -86,6 +86,8 @@ public class OrderGoods : MonoBehaviour
             for (int i = 0; i < items.Length; i++)
         {
             StockInventory.Instance.AddStocks(itemNames[i], quantities[i]);
+			Debug.Log(itemNames[i]);
+			Debug.Log(quantities[i]);
             TextManager.Instance.ShowToast(quantities[i] + " " + itemNames[i] + " Ordered Recieved",2);
         }
 

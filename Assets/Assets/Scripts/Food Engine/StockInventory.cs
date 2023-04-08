@@ -82,7 +82,7 @@ public class StockInventory : MonoBehaviour
     void Start()
     {
         coinText.text = coins.ToString();
-		
+		Time.timeScale=3f;
     }
 
     private void Awake()
@@ -195,6 +195,10 @@ public class StockInventory : MonoBehaviour
 
     public void AddStocks(string item, int quantity)
     {
+		if (item == "flour")
+        {
+            currentIngredientStocks.flour += quantity;
+        }
         if (item == "potato")
         {
             currentIngredientStocks.potato += quantity;

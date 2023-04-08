@@ -675,7 +675,7 @@ public class ExtShopManager : MonoBehaviour
         //Changing Model Of TV
         for (int i = 0; i < wallArt.prefab.Length; i++)
         {
-            if (i < upgradeNo)
+            if (i <= upgradeNo)
             {
                 Color temp = wallArt.prefab[i].color;
                 temp.a = 1;
@@ -718,7 +718,7 @@ public class ExtShopManager : MonoBehaviour
         //   wallArt.prefab[i].color = temp;
         //  }
         // }
-        for (int i = 1; i <= wallArt.prefab.Length; i++)
+        for (int i = 0; i < wallArt.prefab.Length; i++)
         {
             if (i < upgradeNo)
             {
@@ -726,6 +726,12 @@ public class ExtShopManager : MonoBehaviour
                 temp.a = 1;
                 wallArt.prefab[i].color = temp;
             }
+			else
+			{
+				 Color temp = wallArt.prefab[i].color;
+                temp.a = 0;
+                wallArt.prefab[i].color = temp;
+			}
 
             //if (i == upgradeNo) wallArt.prefab[i - 1].SetActive(true);
             // else wallArt.prefab[i - 1].SetActive(false);

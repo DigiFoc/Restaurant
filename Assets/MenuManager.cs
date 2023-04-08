@@ -42,6 +42,7 @@ public class MenuManager : MonoBehaviour
 		if (name == "openkitchen")
 		{
 			OpenkitchenMenu.SetActive(true);
+			
 		}
 		if (name == "status")
 		{

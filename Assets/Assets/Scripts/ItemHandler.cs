@@ -10,6 +10,7 @@ public class ItemHandler : MonoBehaviour
     public int price;
     public int amount;
     public string SpriteName;
+	
 
     public TMP_Text itsText;
     void Start()
@@ -47,9 +48,14 @@ public class ItemHandler : MonoBehaviour
     }
     public void RemoveMe()
     {
+                Destroy(gameObject,0.0f);
         
-        Destroy(gameObject,0f);
-        ReceiptGenerator.Instance.MakeAmount();
     }
+	
+	public void OnDestroy()
+	{
+		Debug.Log("Destoryedgfhrh");
+		ReceiptGenerator.Instance.MakeAmount();
+	}
  
 }
