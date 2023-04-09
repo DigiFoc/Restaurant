@@ -52,27 +52,32 @@ public class MarkerTrigger : MonoBehaviour
 
     public bool CheckConditionSuccessful()
     {
-        if(foodName == "samosa")
+		Debug.Log("FoodName: "+foodName);
+        if(foodName == "Samosa")
         if (StockInventory.Instance.currentFoodStocks.samosa >= quntity)
         {
+			Debug.Log("Samosa is less than needed");
                 return true;
         }
 
-        if (foodName == "tea")
+        if (foodName == "Tea")
             if (StockInventory.Instance.currentFoodStocks.tea >= quntity)
             {
+				Debug.Log("Tea is less than needed");
                 return true;
             }
 
-        if (foodName == "paneerTikka")
+        if (foodName == "PaneerTikka")
             if (StockInventory.Instance.currentFoodStocks.paneerTikka >= quntity)
             {
+				Debug.Log("PTikka is less than needed");
                 return true;
             }
 
-        if (foodName == "pakori")
+        if (foodName == "Pakori")
             if (StockInventory.Instance.currentFoodStocks.pakora >= quntity)
             {
+				Debug.Log("Pakori is less than needed");
                 return true;
             }
 

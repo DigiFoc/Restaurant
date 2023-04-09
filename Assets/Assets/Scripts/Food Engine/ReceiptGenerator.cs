@@ -85,7 +85,7 @@ public class ReceiptGenerator : MonoBehaviour
             ItemManager.name = Objname;
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=0>");
-            ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
+            ItemManager.GetComponent<ItemHandler>().AssignPrice(2);
             ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
 			MakeAmount();
         }
@@ -115,7 +115,7 @@ public class ReceiptGenerator : MonoBehaviour
             ItemManager.name = Objname;
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=1>");
-            ItemManager.GetComponent<ItemHandler>().AssignPrice(30);
+            ItemManager.GetComponent<ItemHandler>().AssignPrice(1);
             ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
 			MakeAmount();
         }
@@ -175,7 +175,7 @@ public class ReceiptGenerator : MonoBehaviour
             ItemManager.name = Objname;
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=3>");
-            ItemManager.GetComponent<ItemHandler>().AssignPrice(180);
+            ItemManager.GetComponent<ItemHandler>().AssignPrice(2);
             ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
 			MakeAmount();
         }
@@ -205,7 +205,7 @@ public class ReceiptGenerator : MonoBehaviour
             ItemManager.name = Objname;
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=4>");
-            ItemManager.GetComponent<ItemHandler>().AssignPrice(80);
+            ItemManager.GetComponent<ItemHandler>().AssignPrice(1);
             ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
         }
         else
@@ -234,7 +234,7 @@ public class ReceiptGenerator : MonoBehaviour
             ItemManager.name = Objname;
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=5>");
-            ItemManager.GetComponent<ItemHandler>().AssignPrice(40);
+            ItemManager.GetComponent<ItemHandler>().AssignPrice(2);
             ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
         }
         else
@@ -262,7 +262,7 @@ public class ReceiptGenerator : MonoBehaviour
             ItemManager.name = Objname;
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=6>");
-            ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
+            ItemManager.GetComponent<ItemHandler>().AssignPrice(3);
             ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
         }
         else
@@ -290,7 +290,7 @@ public class ReceiptGenerator : MonoBehaviour
             ItemManager.name = Objname;
             ItemManager.GetComponent<ItemHandler>().name = Objname;
             ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=7>");
-            ItemManager.GetComponent<ItemHandler>().AssignPrice(80);
+            ItemManager.GetComponent<ItemHandler>().AssignPrice(5);
             ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); MakeAmount();
         }
         else
@@ -304,149 +304,267 @@ public class ReceiptGenerator : MonoBehaviour
     public void AddTea(int count)
     {
        
+       
+        DisableCookWarning();
         string Objname = "Tea";
         int childrenCount = FoodTextHolder.transform.childCount;
-        for (int i = 0; i < childrenCount; i++)
-        {
-            if (FoodTextHolder.transform.GetChild(i).name == Objname)
-            {
-                if (!FoodEngine.Instance.buildFood("Tea", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
+		if(childrenCount==0)
+		{
+			 if (!FoodEngine.Instance.buildFood("Tea", count))
                 {
 
                     StartCoroutine("ShowCookWarning");
-                   
                     return;
                 }
-                FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
-                DisableCookWarning();
-                MakeAmount();
-                return;
-            }
-        }
-		CurrSlots = childrenCount;
-        if (CurrSlots < MaxSlots)
-        {
-            GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
-            ItemManager.name = Objname;
-            ItemManager.GetComponent<ItemHandler>().name = Objname;
-            ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=11>");
-            ItemManager.GetComponent<ItemHandler>().AssignPrice(10); //Price to be changed
-            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
-			MakeAmount();
-        }
-        else
-        {
-            StartCoroutine(ShowFoodWarning());
-        }
+				GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
+				ItemManager.name = Objname;
+				ItemManager.GetComponent<ItemHandler>().name = Objname;
+				ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=11>");
+				ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
+				ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
+		}
+		else
+		{
+			for (int i = 0; i < childrenCount; i++)
+			{
+				
+				if (FoodTextHolder.transform.GetChild(i).name == Objname)
+				{
+					
+					if (!FoodEngine.Instance.buildFood("Tea", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
+					{
+
+						StartCoroutine("ShowCookWarning");
+						return;
+					}
+					FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+					DisableCookWarning();
+					return;
+				}
+			}
+				
+			if (!FoodEngine.Instance.buildFood("Tea", count)) ///Applied when Slot is more then 1
+			{
+
+				StartCoroutine("ShowCookWarning");
+				return;
+			}
+		
+			CurrSlots = childrenCount;
+			if (CurrSlots < MaxSlots)
+			{
+				GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
+				ItemManager.name = Objname;
+				ItemManager.GetComponent<ItemHandler>().name = Objname;
+				ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=11>");
+				ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
+				ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
+			}
+			else
+			{
+				StartCoroutine(ShowFoodWarning());
+			}
+
+		}
 
     }
 
     public void AddSamosa(int count)
     {
        
-        
+        DisableCookWarning();
         string Objname = "Samosa";
         int childrenCount = FoodTextHolder.transform.childCount;
-        for (int i = 0; i < childrenCount; i++)
-        {
-            if (FoodTextHolder.transform.GetChild(i).name == Objname)
-            {
-                
-                if (!FoodEngine.Instance.buildFood("Samosa", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
+		if(childrenCount==0)
+		{
+			 if (!FoodEngine.Instance.buildFood("Samosa", count))
                 {
 
                     StartCoroutine("ShowCookWarning");
                     return;
                 }
-                FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
-                DisableCookWarning();
-                return;
-            }
-        }
-		CurrSlots = childrenCount;
-        if (CurrSlots < MaxSlots)
-        {
-            GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
-            ItemManager.name = Objname;
-            ItemManager.GetComponent<ItemHandler>().name = Objname;
-            ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=08>");
-            ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
-            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
-        }
-        else
-        {
-            StartCoroutine(ShowFoodWarning());
-        }
+				GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
+				ItemManager.name = Objname;
+				ItemManager.GetComponent<ItemHandler>().name = Objname;
+				ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=08>");
+				ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
+				ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
+		}
+		else
+		{
+			for (int i = 0; i < childrenCount; i++)
+			{
+				
+				if (FoodTextHolder.transform.GetChild(i).name == Objname)
+				{
+					
+					if (!FoodEngine.Instance.buildFood("Samosa", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
+					{
 
+						StartCoroutine("ShowCookWarning");
+						return;
+					}
+					FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+					DisableCookWarning();
+					return;
+				}
+			}
+				
+			if (!FoodEngine.Instance.buildFood("Samosa", count)) ///Applied when Slot is more then 1
+			{
+
+				StartCoroutine("ShowCookWarning");
+				return;
+			}
+		
+			CurrSlots = childrenCount;
+			if (CurrSlots < MaxSlots)
+			{
+				GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
+				ItemManager.name = Objname;
+				ItemManager.GetComponent<ItemHandler>().name = Objname;
+				ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=08>");
+				ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
+				ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
+			}
+			else
+			{
+				StartCoroutine(ShowFoodWarning());
+			}
+
+		}
     }
 
     public void AddPakori(int count)
     {
+       
+        DisableCookWarning();
         string Objname = "Pakori";
         int childrenCount = FoodTextHolder.transform.childCount;
-        for (int i = 0; i < childrenCount; i++)
-        {
-            if (FoodTextHolder.transform.GetChild(i).name == Objname)
-            {
-                if (!FoodEngine.Instance.buildFood("Pakori", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count  ))
+		if(childrenCount==0)
+		{
+			 if (!FoodEngine.Instance.buildFood("Pakori", count))
                 {
+
                     StartCoroutine("ShowCookWarning");
                     return;
                 }
-                FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
-                DisableCookWarning();
-                return;
-            }
-        }
-		CurrSlots = childrenCount;
-        if (CurrSlots < MaxSlots)
-        {
-            GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
-            ItemManager.name = Objname;
-            ItemManager.GetComponent<ItemHandler>().name = Objname;
-            ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=10>");
-            ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
-            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
-        }
-        else
-        {
-            StartCoroutine(ShowFoodWarning());
-        }
+				GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
+				ItemManager.name = Objname;
+				ItemManager.GetComponent<ItemHandler>().name = Objname;
+				ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=10>");
+				ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
+				ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
+		}
+		else
+		{
+			for (int i = 0; i < childrenCount; i++)
+			{
+				
+				if (FoodTextHolder.transform.GetChild(i).name == Objname)
+				{
+					
+					if (!FoodEngine.Instance.buildFood("Pakori", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
+					{
 
+						StartCoroutine("ShowCookWarning");
+						return;
+					}
+					FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+					DisableCookWarning();
+					return;
+				}
+			}
+				
+			if (!FoodEngine.Instance.buildFood("Pakori", count)) ///Applied when Slot is more then 1
+			{
+
+				StartCoroutine("ShowCookWarning");
+				return;
+			}
+		
+			CurrSlots = childrenCount;
+			if (CurrSlots < MaxSlots)
+			{
+				GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
+				ItemManager.name = Objname;
+				ItemManager.GetComponent<ItemHandler>().name = Objname;
+				ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=10>");
+				ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
+				ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
+			}
+			else
+			{
+				StartCoroutine(ShowFoodWarning());
+			}
+
+		}
     }
 
     public void AddPaneerTikka(int count)
     {
+        
+        DisableCookWarning();
         string Objname = "PaneerTikka";
         int childrenCount = FoodTextHolder.transform.childCount;
-        for (int i = 0; i < childrenCount; i++)
-        {
-            if (FoodTextHolder.transform.GetChild(i).name == Objname)
-            {
-                if (!FoodEngine.Instance.buildFood("PaneerTikka", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
+		if(childrenCount==0)
+		{
+			 if (!FoodEngine.Instance.buildFood("PaneerTikka", count))
                 {
+
                     StartCoroutine("ShowCookWarning");
                     return;
                 }
-                FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
-                DisableCookWarning();
-                return;
-            }
-        }
-		CurrSlots = childrenCount;
-        if (CurrSlots < MaxSlots)
-        {
-            GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
-            ItemManager.name = Objname;
-            ItemManager.GetComponent<ItemHandler>().name = Objname;
-            ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=09>");
-            ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
-            ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
-        }
-        else
-        {
-            StartCoroutine(ShowFoodWarning());
-        }
+				GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
+				ItemManager.name = Objname;
+				ItemManager.GetComponent<ItemHandler>().name = Objname;
+				ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=09>");
+				ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
+				ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
+		}
+		else
+		{
+			for (int i = 0; i < childrenCount; i++)
+			{
+				
+				if (FoodTextHolder.transform.GetChild(i).name == Objname)
+				{
+					
+					if (!FoodEngine.Instance.buildFood("PaneerTikka", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
+					{
+
+						StartCoroutine("ShowCookWarning");
+						return;
+					}
+					FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+					DisableCookWarning();
+					return;
+				}
+			}
+				
+			if (!FoodEngine.Instance.buildFood("PaneerTikka", count)) ///Applied when Slot is more then 1
+			{
+
+				StartCoroutine("ShowCookWarning");
+				return;
+			}
+		
+			CurrSlots = childrenCount;
+			if (CurrSlots < MaxSlots)
+			{
+				GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
+				ItemManager.name = Objname;
+				ItemManager.GetComponent<ItemHandler>().name = Objname;
+				ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=09>");
+				ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
+				ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
+			}
+			else
+			{
+				StartCoroutine(ShowFoodWarning());
+			}
+
+		}
 
     }
     
