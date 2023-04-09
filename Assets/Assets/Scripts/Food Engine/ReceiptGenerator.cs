@@ -14,6 +14,7 @@ public class ReceiptGenerator : MonoBehaviour
     public int amount = 0;
     public GameObject limitWarning;
     public GameObject limitWarning2;
+    public GameObject cannotCookWarning;
     
 
     public static ReceiptGenerator Instance { get; set; }
@@ -311,11 +312,14 @@ public class ReceiptGenerator : MonoBehaviour
             {
                 if (!FoodEngine.Instance.buildFood("Tea", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
                 {
-                    Debug.Log("cannot build food");
+
+                    StartCoroutine("ShowCookWarning");
+                   
                     return;
                 }
-                FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count); 
-				MakeAmount();
+                FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+                DisableCookWarning();
+                MakeAmount();
                 return;
             }
         }
@@ -350,10 +354,12 @@ public class ReceiptGenerator : MonoBehaviour
                 
                 if (!FoodEngine.Instance.buildFood("Samosa", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
                 {
-                    Debug.Log("cannot build food");
+
+                    StartCoroutine("ShowCookWarning");
                     return;
                 }
-                FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count); 
+                FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+                DisableCookWarning();
                 return;
             }
         }
@@ -384,10 +390,11 @@ public class ReceiptGenerator : MonoBehaviour
             {
                 if (!FoodEngine.Instance.buildFood("Pakori", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count  ))
                 {
-                    Debug.Log("cannot build food");
+                    StartCoroutine("ShowCookWarning");
                     return;
                 }
-                FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count); 
+                FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+                DisableCookWarning();
                 return;
             }
         }
@@ -418,10 +425,11 @@ public class ReceiptGenerator : MonoBehaviour
             {
                 if (!FoodEngine.Instance.buildFood("PaneerTikka", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
                 {
-                    Debug.Log("cannot build food");
+                    StartCoroutine("ShowCookWarning");
                     return;
                 }
                 FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().IncreaseQuantity(count);
+                DisableCookWarning();
                 return;
             }
         }
@@ -465,4 +473,18 @@ public class ReceiptGenerator : MonoBehaviour
 	{
 		limitWarning2.SetActive(false);
 	}
+
+    public IEnumerator ShowCookWarning()
+    {
+        cannotCookWarning.SetActive(true);
+        yield return new WaitForSeconds(4);
+        cannotCookWarning.SetActive(false);
+    }
+
+    public void DisableCookWarning()
+    {
+        cannotCookWarning.SetActive(false);
+    }
+
+
 }

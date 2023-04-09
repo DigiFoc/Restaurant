@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   levelNum: 1
-  totalCustomers: 1
-  consecCustomers: 2
+  totalCustomers: 5
+  consecCustomers: 5
   CustomersPresent: 0
   timeForCustomers: 10
   totalLevelTime: 190

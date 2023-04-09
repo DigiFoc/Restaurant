@@ -54,7 +54,7 @@ public class ItemHandler : MonoBehaviour
 	
 	public void OnDestroy()
 	{
-		Debug.Log("Destoryedgfhrh");
+	
 		ReceiptGenerator.Instance.MakeAmount();
 	}
  

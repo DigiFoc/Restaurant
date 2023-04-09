@@ -252,6 +252,20 @@ public class CustomerAI : MonoBehaviour
             hutManager.hut3.hutMarker.GetComponent<MarkerTrigger>().quntity = AI_Information.quantity;
             hutManager.hut3.hutMarker.GetComponent<MarkerTrigger>().customer = this;
         }
+        if (AI_Information.hutNo == 4)
+        {
+            hutManager.hut4.hutMarker.SetActive(true);
+            hutManager.hut4.hutMarker.GetComponent<MarkerTrigger>().foodName = AI_Information.foodOrder;
+            hutManager.hut4.hutMarker.GetComponent<MarkerTrigger>().quntity = AI_Information.quantity;
+            hutManager.hut4.hutMarker.GetComponent<MarkerTrigger>().customer = this;
+        }
+        if (AI_Information.hutNo == 5)
+        {
+            hutManager.hut5.hutMarker.SetActive(true);
+            hutManager.hut5.hutMarker.GetComponent<MarkerTrigger>().foodName = AI_Information.foodOrder;
+            hutManager.hut5.hutMarker.GetComponent<MarkerTrigger>().quntity = AI_Information.quantity;
+            hutManager.hut5.hutMarker.GetComponent<MarkerTrigger>().customer = this;
+        }
     }
 
 
