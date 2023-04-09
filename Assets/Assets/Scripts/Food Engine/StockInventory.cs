@@ -74,15 +74,13 @@ public class StockInventory : MonoBehaviour
 
     public FoodStock currentFoodStocks;
 
-    public int coins = 100;
-    public Text coinText;
 
 
     public static StockInventory Instance { get; set; }
     void Start()
     {
-        coinText.text = coins.ToString();
-		Time.timeScale=3f;
+      
+		
     }
 
     private void Awake()
@@ -135,24 +133,26 @@ public class StockInventory : MonoBehaviour
 
     public string GenerateRandomFood()
     {
-        int foodNo = Random.Range(1, 4);
-        string foodItem = "";
-        switch(foodNo)
-        { 
-            case 1:
-            foodItem = "samosa";
-            break;
-            case 2:
-                foodItem = "paneerTikka";
-                break;
-            case 3:
-                foodItem = "tea";
-                break;
-            case 4:
-                foodItem = "pakora";
-                break;
-        }
+		
+		int maxSamosa = LevelManager.Instance.currentLevel.maxSamosa;
+		int maxTea = LevelManager.Instance.currentLevel.maxTea;
+		int maxPaneerTikka = LevelManager.Instance.currentLevel.maxPaneerTikka;
+		int maxPakori = LevelManager.Instance.currentLevel.maxPakori;
+		List<string> itemsAvaible = new List<string>();
+		
+		if(maxSamosa>0)
+			itemsAvaible.Add("Samosa");
+		if(maxTea>0)
+			itemsAvaible.Add("Tea");
+		if(maxPaneerTikka>0)
+			itemsAvaible.Add("PaneerTikka");
+		if(maxPakori>0)
+			itemsAvaible.Add("Pakori");
+		
+        int foodNo = Random.Range(0,itemsAvaible.Count);
 
+        string foodItem = itemsAvaible[foodNo];
+        
         return foodItem;
 
       
@@ -232,14 +232,7 @@ public class StockInventory : MonoBehaviour
     }
 
 
-    public void ChangeCoinsTo(int newCoins)
-    {
-        float temp;
-        temp = Mathf.Lerp(coins, newCoins, 1.0f);
-
-        coinText.text = temp.ToString();
-        coins = newCoins;
-    }
+    
 
     public bool CheckCurrentFoodStock(string foodName, int quantity)
     {

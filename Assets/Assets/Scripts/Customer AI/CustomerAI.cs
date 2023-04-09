@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -220,7 +221,24 @@ public class CustomerAI : MonoBehaviour
     {
         
         AI_Information.foodOrder = StockInventory.Instance.GenerateRandomFood();
-        AI_Information.quantity = Random.Range(1, 5);
+		Debug.Log(AI_Information.foodOrder);
+		if(AI_Information.foodOrder.Equals("Samosa",StringComparison.OrdinalIgnoreCase))
+		{
+			 AI_Information.quantity = UnityEngine.Random.Range(1, LevelManager.Instance.currentLevel.maxSamosa+1);
+		}
+		if(AI_Information.foodOrder.Equals("PaneerTikka",StringComparison.OrdinalIgnoreCase))
+		{
+			 AI_Information.quantity = UnityEngine.Random.Range(1, LevelManager.Instance.currentLevel.maxPaneerTikka+1);
+		}
+		if(AI_Information.foodOrder.Equals("Pakori",StringComparison.OrdinalIgnoreCase))
+		{
+			 AI_Information.quantity = UnityEngine.Random.Range(1, LevelManager.Instance.currentLevel.maxPakori+1);
+		}
+		if(AI_Information.foodOrder.Equals("Tea",StringComparison.OrdinalIgnoreCase))
+		{
+			 AI_Information.quantity = UnityEngine.Random.Range(1, LevelManager.Instance.currentLevel.maxTea+1);
+		}
+       
         AI_Information.amountToPay = StockInventory.Instance.CalculateAmount(AI_Information.foodOrder, AI_Information.quantity);
 
 		//PlayOrderFoodSound(AI_Information.foodOrder);
@@ -276,19 +294,19 @@ public class CustomerAI : MonoBehaviour
         TextManager.Instance.ShowToast("New Customer", 5);
         TextManager.Instance.ShowToast("Please Check", 2);
         string foodString = "";
-        if (food == "samosa")
+        if (food == "Samosa")
         {
             foodString = "<sprite=8>";
         }
-        if (food == "paneerTikka")
+        if (food == "PaneerTikka")
         {
             foodString = "<sprite=9>";
         }
-        if (food == "pakori")
+        if (food == "Pakori")
         {
             foodString = "<sprite=10>";
         }
-        if (food == "tea")
+        if (food == "Tea")
         {
             foodString = "<sprite=11>";
         }
@@ -300,35 +318,33 @@ public class CustomerAI : MonoBehaviour
 
     public void ServeFood()
     {
-        int newCoins = StockInventory.Instance.coins;
+        int newCoins = LevelManager.Instance.coins;
      
         countTime = false;
-        if (WaitingTime <= 15.0f)
+        if (WaitingTime <= 30.0f)
         {
             ratingStar = 3;
          
-            TextManager.Instance.ShowToast("Order Served,100%", 3);
         }
-        if (WaitingTime > 15.0f && WaitingTime <= 30.0f)
+        if (WaitingTime > 30.0f && WaitingTime <= 60.0f)
         {
 
             ratingStar = 2;
           
-            TextManager.Instance.ShowToast("Order Served,75%", 3);
+         
         }
 
-        if (WaitingTime > 30.0f)
+        if (WaitingTime > 60.0f)
         {
             ratingStar = 1;
-          
-            TextManager.Instance.ShowToast("Order Served,50%",3);
+        
         }
 
         Debug.Log("New coins are" + newCoins);
         newCoins += AI_Information.amountToPay;
         newCoins += CoinsIncreaseDueToUpgrade();//To Increase Amount Due To Upgrade
-        TextManager.Instance.ShowToast("Rs." + AI_Information.amountToPay + " transffered from A/C 5747575 to your Bank Account./n Total Bal: Rs." + newCoins + " CR",3);
-        StockInventory.Instance.ChangeCoinsTo(newCoins);
+        TextManager.Instance.ShowToast("Rs." + AI_Information.amountToPay + " transferred from A/C 5747575xxxx to your Bank Account./n Total Bal: Rs." + newCoins + " CR",3);
+        LevelManager.Instance.ChangeCoinsTo(newCoins);
 
         Invoke("CurtainOut", 5);
 

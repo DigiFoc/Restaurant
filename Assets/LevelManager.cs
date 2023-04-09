@@ -53,6 +53,8 @@ public class LevelManager : MonoBehaviour
 public TMP_Text statusText;
     public Sprite passTextures;
     public Sprite failTextures;
+	public int coins;
+	public Text coinsText;
 
     private void Awake()
     {
@@ -79,6 +81,7 @@ public TMP_Text statusText;
 
     void Start()
     {
+		coins=0;
 		CustNeedToSpawn=0;
         levelStarted = false;
         //SetLevel(LevelNo);
@@ -100,6 +103,35 @@ public TMP_Text statusText;
                 levelStarted = false; }
 			}
     }
+	public void AddCoins(int increaseBy)
+	{
+		ChangeCoinsTo(coins+increaseBy);
+	}
+	
+	public void ChangeCoinsTo(int newCoins)
+    {
+	int temp=coins;
+	coins=newCoins;
+		StartCoroutine(changeValueOverTime(temp, newCoins, 2f));
+	}
+	
+	IEnumerator changeValueOverTime(float fromVal, float toVal, float duration)
+{
+    float counter = 0f;
+
+    while (counter < duration)
+    {
+        if (Time.timeScale == 0)
+            counter += Time.unscaledDeltaTime;
+        else
+            counter += Time.deltaTime;
+
+        float val = Mathf.Lerp(fromVal, toVal, counter / duration);
+        Debug.Log("Val: " + val);
+		coinsText.text=((int)val).ToString();
+        yield return null;
+    }
+}
     // Update is called once per frame
 	public void ShuruKrvaao()
 	{
@@ -126,9 +158,11 @@ public TMP_Text statusText;
 	}
     public void SetLevel(int levelNumber)
     {
+		
         SoundManager.Instance.PlaySound("tap");
         int currentNumber = levelNumber - 1;
         currentLevel = levels[currentNumber];
+		AddCoins(currentLevel.givenCoins);
         Debug.Log(currentLevel);
         min = Mathf.Floor(currentLevel.totalLevelTime / 60);
         sec = currentLevel.totalLevelTime % 60;
@@ -157,7 +191,10 @@ public TMP_Text statusText;
         yield return new WaitForSeconds(currentLevel.totalLevelTime);
         string levelStatus = ((isLevelCompleted()) ? "Level Passes" : "Level Failed");
         if (levelStatus.Equals("Level Failed"))
+	
             ShowTimeOutScreen();
+			StopAllCoroutines();
+		
     }
 
 
@@ -245,6 +282,8 @@ public TMP_Text statusText;
 			statusText.text="LEVEL PASSED!";
 			Debug.Log(currentLevel.levelNum);
 			GameManager.Instance.SaveLevel(currentLevel.levelNum);
+			StopAllCoroutines();
+			
 		}
         
     }

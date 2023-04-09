@@ -989,7 +989,7 @@ public class ExtShopManager : MonoBehaviour
     #region BasicFunction
     public int GetTotalCoins()
     {
-        return StockInventory.Instance.coins;
+        return LevelManager.Instance.coins;
     }
     public int GetCurrentLevel()
     {

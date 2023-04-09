@@ -19,6 +19,7 @@ public class OrderGoods : MonoBehaviour
         private void Start()
     {
         VehicleSlider.value=0;
+		Time.timeScale=3f;
 
     }
     public void OrderGooods()
@@ -62,9 +63,9 @@ public class OrderGoods : MonoBehaviour
         else
         {
             TextManager.Instance.ShowToast("Ordered", 2);
-            int newCoins = StockInventory.Instance.coins - totalPrice;
-
-            StockInventory.Instance.ChangeCoinsTo(newCoins);
+            int newCoins = LevelManager.Instance.coins- totalPrice;
+			totalPrice=0;
+            LevelManager.Instance.ChangeCoinsTo(newCoins);
             GetVehicle.Instance.StartRide();
 			SetButtonStatus(true);
            
@@ -114,15 +115,18 @@ public class OrderGoods : MonoBehaviour
 
         }
 
-        if (totalPrice > StockInventory.Instance.coins)
+        if (totalPrice >LevelManager.Instance.coins)
         {
+			Debug.Log("TotalPrice"+totalPrice+"HumpeCoins"+LevelManager.Instance.coins);
+			
+			
             return false;
         }
 
        // yield return new WaitForSeconds((GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1] / 25f) * 2);
        
 
-
+		
 
         return true;
 

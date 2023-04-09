@@ -24,6 +24,7 @@ public class CustomerGenerator : MonoBehaviour
     
     void Start()
     {
+		
     }
 
     // Update is called once per frame
@@ -43,6 +44,9 @@ public class CustomerGenerator : MonoBehaviour
             }
             if (Gender == 2)
                 GenerateFemale();
+			
+			if(Gender ==3)
+				GenerateCustomer();
 		
     }
                                                   
