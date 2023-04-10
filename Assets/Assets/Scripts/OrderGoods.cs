@@ -18,8 +18,8 @@ public class OrderGoods : MonoBehaviour
 	public UnityEngine.UI.Slider VehicleSlider;
         private void Start()
     {
-        VehicleSlider.value=0;
-		Time.timeScale=3f;
+        VehicleSlider.value=100f;
+		
 
     }
     public void OrderGooods()

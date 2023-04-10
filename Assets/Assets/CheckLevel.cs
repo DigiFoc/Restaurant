@@ -12,6 +12,7 @@ public class CheckLevel : MonoBehaviour
     void OnEnable()
     {
         GetComponent<Button>().interactable = false;
+		Frame=transform.GetChild(1).GetComponent<Image>();
         StartCoroutine(CheckMe());
 
     }

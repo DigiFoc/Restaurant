@@ -15,12 +15,14 @@ public class BuildFood : MonoBehaviour
     public Slider foodSlider;
 	public KitchenPanel kPanel;
 	
+	
     void Start()
     {
         foodingUI.SetActive(true);
 		nonFoodingUI.SetActive(false);
         delayTime = 30f;
-        foodSlider.value = 0;
+        foodSlider.value = 100f;
+		
     }
 
 
@@ -35,6 +37,11 @@ public class BuildFood : MonoBehaviour
 
     public void BuildFoood()
     {
+		items = ItemHolder.GetComponentsInChildren<ItemHandler>();
+		if(items.Length==0)
+		{
+			return;
+		}
         SetDelayTime();
 		StartCoroutine(foodDelay());
 		
@@ -57,7 +64,7 @@ public class BuildFood : MonoBehaviour
 		foodSlider.maxValue=(int)delayTime;
 		 for (int i = 0; i < items.Length; i++)
         {		
-                FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);
+               FoodEngine.Instance.RemoveFoodIngre(foodNames[i], quantities[i]);	 
         }
 		for(int i=0;i<delayTime;i++)
 		{
@@ -67,7 +74,8 @@ public class BuildFood : MonoBehaviour
 		
 		
         for (int i = 0; i < items.Length; i++)
-        {				
+        {			
+				FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);	
 				FoodCounter.Instance.AddFood(foodNames[i], quantities[i]);
                
         }

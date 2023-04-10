@@ -15,7 +15,7 @@ public class ReceiptGenerator : MonoBehaviour
     public GameObject limitWarning;
     public GameObject limitWarning2;
     public GameObject cannotCookWarning;
-    
+    public GameObject buildBtn;
 
     public static ReceiptGenerator Instance { get; set; }
     private void Awake()
@@ -33,9 +33,10 @@ public class ReceiptGenerator : MonoBehaviour
     void Start()
     {
         GrandTotal.text = "Total Rs. 0";
+		buildBtn.SetActive(false);
     }
 
-    public void MakeAmount()
+    public void MakeAmount() 
     {
         StartCoroutine(FetchAmount());
     }
@@ -52,11 +53,24 @@ public class ReceiptGenerator : MonoBehaviour
         }
         GrandTotal.text = "Total Rs. " + amount.ToString();
         CurrSlots = childrenCount;
-
+		CheckBtn();
 		
     }
 
+	public void CheckBtn()
+	{
+		int childrenCount = FoodTextHolder.transform.childCount;
+		if(childrenCount>0)
+		{
+			buildBtn.SetActive(true);	
+		}
+		else
+		{
+			buildBtn.SetActive(false);
+		}
 	
+	
+	}
 
 
     

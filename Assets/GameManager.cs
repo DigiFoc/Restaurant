@@ -1,7 +1,8 @@
-
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; set; }
@@ -12,10 +13,14 @@ public class GameManager : MonoBehaviour
     public int currentWallArtUpgrade;
     public int currentVehicleUpgrade;
     public int currentMachineUpgrade;
-   
+	public int gamePlayCount;
+	
+	
+	
     public int globalCoins;
     public int lastUnlockedLevel;
-
+	public TMP_Text coinText;
+	
     public GameObject ExtShopManager;
     private void Awake()
     {
@@ -33,7 +38,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         LoadUpgrades();
-        
+        SaveGamePlay();
     }
     public void SaveLevel(int level)
     {
@@ -41,8 +46,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Saved level"+level);
 
     }
-
-  
+	public void SaveGamePlay()
+	{
+		int temp=PlayerPrefs.GetInt("GamePlayCount",0);
+		PlayerPrefs.SetInt("GamePlayCount", temp+1);
+	}
 
     public void SaveTVUpgrade(int level)
     {
@@ -85,6 +93,10 @@ public class GameManager : MonoBehaviour
 		LoadUpgrades();
 
     }
+	public void SaveLearnt()
+	{
+		PlayerPrefs.SetInt("isLearnt",1);
+	}
     public bool CheckLevel(int levelNo)
     {
         if (levelNo <= lastUnlockedLevel)
@@ -94,6 +106,18 @@ public class GameManager : MonoBehaviour
         else
             return false;
     }
+	
+	public bool isLearnt()
+    {
+        if (PlayerPrefs.GetInt("isLearnt",0)==0)
+        {
+            return false;
+        }
+        else
+            return true;
+    }
+	
+	
     public void LoadUpgrades()
     {
       
@@ -111,6 +135,39 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+	
+	
+	public void AddCoins(int increaseBy)
+	{
+		ChangeCoinsTo(globalCoins+increaseBy);
+	}
+	
+	public void ChangeCoinsTo(int newCoins)
+    {
+	int temp=globalCoins;
+	globalCoins=newCoins;
+	SaveGlobalCoins(globalCoins);
+		StartCoroutine(changeValueOverTime(temp, newCoins, 2f));
+	}
+	
+	IEnumerator changeValueOverTime(float fromVal, float toVal, float duration)
+{
+    float counter = 0f;
+
+    while (counter < duration)
+    {
+        if (Time.timeScale == 0)
+            counter += Time.unscaledDeltaTime;
+        else
+            counter += Time.deltaTime;
+
+        float val = Mathf.Lerp(fromVal, toVal, counter / duration);
+        Debug.Log("Val: " + val);
+		coinText.text=((int)val).ToString();
+        yield return null;
+    }
+	
+}
 
 }
 

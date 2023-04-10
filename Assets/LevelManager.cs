@@ -55,6 +55,7 @@ public TMP_Text statusText;
     public Sprite failTextures;
 	public int coins;
 	public Text coinsText;
+	public TMP_Text coinTextBoxinFinal;
 
     private void Awake()
     {
@@ -75,6 +76,7 @@ public TMP_Text statusText;
         currentRating += opinion;
         CheckLevel();
         Debug.Log(currentRating);
+		
     }
 
     
@@ -83,6 +85,7 @@ public TMP_Text statusText;
     {
 		coins=0;
 		CustNeedToSpawn=0;
+		coinTextBoxinFinal.text= "";
         levelStarted = false;
         //SetLevel(LevelNo);
         //customerGenerator.GenerateCustomer(currentLevel.totalCustomers);
@@ -162,7 +165,7 @@ public TMP_Text statusText;
         SoundManager.Instance.PlaySound("tap");
         int currentNumber = levelNumber - 1;
         currentLevel = levels[currentNumber];
-		AddCoins(currentLevel.givenCoins);
+		ChangeCoinsTo(currentLevel.givenCoins);
         Debug.Log(currentLevel);
         min = Mathf.Floor(currentLevel.totalLevelTime / 60);
         sec = currentLevel.totalLevelTime % 60;
@@ -273,14 +276,16 @@ public TMP_Text statusText;
 		if(currentTime > currentLevel.totalLevelTime||currentReached < currentLevel.totalCustomers||currentRating < currentLevel.avgRatingReq)
 		{
 			SoundManager.Instance.PlaySound("fail");
-			statusText.text="LEVEL FAILED!";
+			statusText.text="Level Failed";
+			coinTextBoxinFinal.text="+ 100";
 		}
 		if(currentTime < currentLevel.totalLevelTime&&currentReached >= currentLevel.totalCustomers&&currentRating >= currentLevel.avgRatingReq)
 		{
 			
 			SoundManager.Instance.PlaySound("success");
-			statusText.text="LEVEL PASSED!";
+			statusText.text="Level Passed";
 			Debug.Log(currentLevel.levelNum);
+			coinTextBoxinFinal.text="+ 500";
 			GameManager.Instance.SaveLevel(currentLevel.levelNum);
 			StopAllCoroutines();
 			

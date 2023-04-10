@@ -108,7 +108,30 @@ public class FoodEngine : MonoBehaviour
 
     }
 
+	public void RemoveFoodIngre(string food, int quantity)
+	{
+		if(food.Equals("Samosa",System.StringComparison.OrdinalIgnoreCase))
+        {
+          removeSamosaIngredients(quantity); 
+        }
 
+        if (food.Equals("PaneerTikka",System.StringComparison.OrdinalIgnoreCase))
+        {
+           removePaneerTikkaIngredients(quantity);
+        }
+
+
+        if (food.Equals("Tea",System.StringComparison.OrdinalIgnoreCase))
+        {
+          removeTeaIngredients(quantity);
+        }
+
+        if(food.Equals("Pakora",System.StringComparison.OrdinalIgnoreCase))
+        {
+           removePakoraIngredients(quantity);
+        }
+		StockInventory.Instance.UpdateIngredientStockUI();
+	}
     public void AddFood(string food,int quantity)
     {
         SoundManager.Instance.PlaySound("ting");
@@ -117,7 +140,7 @@ public class FoodEngine : MonoBehaviour
 
             StockInventory.Instance.currentFoodStocks.samosa += quantity;
             currenttFoodUI.SamosaText.text = StockInventory.Instance.currentFoodStocks.samosa.ToString();
-            removeSamosaIngredients(quantity);
+           // removeSamosaIngredients(quantity);
             
         }
 
@@ -125,7 +148,7 @@ public class FoodEngine : MonoBehaviour
         {
             StockInventory.Instance.currentFoodStocks.paneerTikka += quantity;
             currenttFoodUI.PaneerTikka.text = StockInventory.Instance.currentFoodStocks.paneerTikka.ToString();
-            removePaneerTikkaIngredients(quantity);
+           // removePaneerTikkaIngredients(quantity);
         }
 
 
@@ -134,14 +157,14 @@ public class FoodEngine : MonoBehaviour
             Debug.Log("Tea is added");
             StockInventory.Instance.currentFoodStocks.tea += quantity;
             currenttFoodUI.TeaText.text = StockInventory.Instance.currentFoodStocks.tea.ToString();
-            removeTeaIngredients(quantity);
+          //  removeTeaIngredients(quantity);
         }
 
         if(food.Equals("Pakora",System.StringComparison.OrdinalIgnoreCase))
         {
             StockInventory.Instance.currentFoodStocks.pakora += quantity;
             currenttFoodUI.PakoraText.text = StockInventory.Instance.currentFoodStocks.pakora.ToString();
-            removePakoraIngredients(quantity);
+           // removePakoraIngredients(quantity);
             
         }
 

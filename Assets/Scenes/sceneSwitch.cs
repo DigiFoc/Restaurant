@@ -14,5 +14,11 @@ public class sceneSwitch : MonoBehaviour
             SceneManager.LoadScene(1);
         }
     }
+	
+	public void QuitButton()
+	{
+		Debug.LogWarning("Application Quit");
+		Application.Quit();
+	}
 
 }
