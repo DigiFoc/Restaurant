@@ -18,6 +18,7 @@ public class CustomerAI : MonoBehaviour
 	SoundCollection mySounds;
 	AudioSource src;
 	bool isMoving;
+	
 
     [System.Serializable]
     public class Information
@@ -125,6 +126,7 @@ public class CustomerAI : MonoBehaviour
     }
     public int FindEmptyHut()
     {
+		
         if (!hutManager.hut1.isOccupied)
         {
             SetDestination(hutManager.hut1.locationOfHut);

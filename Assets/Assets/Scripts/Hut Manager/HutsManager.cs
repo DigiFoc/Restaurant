@@ -5,7 +5,9 @@ using TMPro;
 
 public class HutsManager : MonoBehaviour
 {
-
+	public GameObject FTManager;
+public TMP_Text TimeLeft2;
+        public TMP_Text Statusorder2;
     [System.Serializable]
     public class HutsInfo
     {
@@ -75,16 +77,20 @@ public class HutsManager : MonoBehaviour
             if (time1 < 10)
             {
                 hut1.TimeLeft.color = Color.green;
+                TimeLeft2.color = Color.green;
             }
             if (time1 > 10 && time1<=20)
             {
                 hut1.TimeLeft.color = Color.yellow;
+                TimeLeft2.color = Color.yellow;
             }
             if (time1 > 20)
             {
                 hut1.TimeLeft.color = Color.red;
+                TimeLeft2.color = Color.red;
             }
             hut1.TimeLeft.text = time1.ToString();
+            TimeLeft2.text = time1.ToString();
         }
 
         //For HUt2
@@ -167,12 +173,15 @@ public class HutsManager : MonoBehaviour
 
     public void SetHutStatus(int hutNo, string food, int quantity)
     {
-       
+		if(GameManager.Instance.isLearnt()==false)
+		{
+       FTManager.GetComponent<FirstTimeManager>().NextBtn();
+		}
         if (hutNo == 1)
         {
             hut1.order.text = food + quantity;
             hut1.Statusorder.text = food + quantity;
-
+		           Statusorder2.text = food + quantity;
         }
         if (hutNo == 2)
         {
@@ -205,6 +214,8 @@ public class HutsManager : MonoBehaviour
         {
             hut1.order.text ="Empty";
             hut1.Statusorder.text = "";
+            Statusorder2.text = "";
+			
 
         }
         if (hutNo == 2)

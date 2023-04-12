@@ -200,7 +200,21 @@ public TMP_Text statusText;
 		
     }
 
-
+	public void StartLevelforFirstTime()
+    {
+        PC.GetComponent<PlayerController>().enabled = true;
+        MenuManager.Instance.ChangeMenu("side");
+    }
+	public void CustSpawnforFirstTime()
+    {
+        StartCoroutine(SpawnCust());
+    }
+	public void FirstTimeLevelStarter()
+	{
+		levelStarted = true;
+        StartCoroutine(CountTime());
+	}
+	
 
 
 

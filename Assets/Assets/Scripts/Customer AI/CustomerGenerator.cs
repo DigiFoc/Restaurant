@@ -54,6 +54,7 @@ public class CustomerGenerator : MonoBehaviour
     {
         int randomMaleNo = Random.Range(0, customerDatabase.maleCustomersModel.Length);
         GameObject AI = Instantiate(customerDatabase.maleCustomersModel[randomMaleNo], customerGenratingPoint.position, Quaternion.identity) as GameObject;
+		AI.name="AICustomer";
 		
         int randomNameNo = Random.Range(0, customerDatabase.maleCustomerNames.Length);
         string randomName = customerDatabase.maleCustomerNames[randomNameNo];
@@ -75,7 +76,7 @@ public class CustomerGenerator : MonoBehaviour
     {
         int randomMaleNo = Random.Range(0, customerDatabase.femaleCustomersModel.Length);
         GameObject AI = Instantiate(customerDatabase.femaleCustomersModel[randomMaleNo], customerGenratingPoint.position, Quaternion.identity) as GameObject;
-
+		AI.name="AICustomer";
         int randomNameNo = Random.Range(0, customerDatabase.femaleCustomersNames.Length);
         string randomName = customerDatabase.femaleCustomersNames[randomNameNo];
 

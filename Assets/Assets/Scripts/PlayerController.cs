@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
     public bool trackPath = false;
     int currentDestination = 0;
-    bool isMoving;
+    public bool isMoving;
     [Header("Array Of Destinations")]
     public Transform[] Destinations;
     void Start()
