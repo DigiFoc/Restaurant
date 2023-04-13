@@ -13,9 +13,11 @@ public class FirstTimeManager : MonoBehaviour
 	public Transform[] ArrowPlaceHolder;
 	public GameObject NextBtnGO;
 	public GameObject CameraScript;
+	public GameObject GoodsBuyButton;
 	int Part=0;
     void Start()
     {
+		Time.timeScale=4f;
        ArrowHandler.SetActive(false);
 	   NextBtnGO.SetActive(true);
 	   StartCoroutine(StartTutorial());
@@ -176,11 +178,83 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==12)
 		{
+			
+			TextHolder.transform.position=PlaceHolder[2].transform.position;
+			TextHolder.SetActive(true);
+			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Sorry, But Right Now You dont have Stock to Make Samosa. Tap on Shop to Purchase Goods " ;	
+			
+			ButtonObjects[9].SetActive(true);
+			yield return new WaitForSeconds(5f);
+			ButtonObjects[10].SetActive(true);
+			ShowHandle(ArrowPlaceHolder[5]);
+			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0, 180,0));
 		}
-		
+		if(Part==13)
+		{
+			
+			TextHolder.transform.position=PlaceHolder[2].transform.position;
+			TextHolder.SetActive(true);
+			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="This is your Shop Menu, You can Purchase Raw Goods from Here! " ;	
+			
+			ButtonObjects[11].SetActive(true);
+			yield return new WaitForSeconds(5f);
+			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Order Ingredients that is used to make Samosa " ;	
+			
+			ArrowHandler.transform.position=new Vector2(ArrowPlaceHolder[6].transform.GetChild(0).position.x-175,ArrowPlaceHolder[6].transform.GetChild(0).position.y);
+			ArrowHandler.SetActive(true);
+			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0, 180,0));
+			//ButtonObjects[10].SetActive(true);
+			//ShowHandle(ArrowPlaceHolder[6]);
+			//ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0, 180,0));
+		}
+		if(Part==14)
+		{
+			
+			ArrowHandler.SetActive(true);
+			ButtonObjects[11].SetActive(true);
+						ArrowHandler.transform.position=new Vector2(ArrowPlaceHolder[6].transform.GetChild(0).position.x-175,ArrowPlaceHolder[6].transform.GetChild(0).position.y-80);
+
+		}
+		if(Part==15)
+		{
+			ArrowHandler.SetActive(true);
+			ButtonObjects[11].SetActive(true);
+						ArrowHandler.transform.position=new Vector2(ArrowPlaceHolder[6].transform.GetChild(0).position.x-175,ArrowPlaceHolder[6].transform.GetChild(0).position.y-160);
+
+		}
+		if(Part==16)
+		{
+			ArrowHandler.SetActive(true);
+			ButtonObjects[11].SetActive(true);
+						ArrowHandler.transform.position=new Vector2(ArrowPlaceHolder[6].transform.GetChild(0).position.x-175,ArrowPlaceHolder[6].transform.GetChild(0).position.y-240);
+
+		}
+		if(Part==17)
+		{
+			ArrowHandler.SetActive(true);
+			ButtonObjects[11].SetActive(true);
+			GoodsBuyButton.SetActive(true);
+			ShowHandle(ArrowPlaceHolder[7]);
+			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0, 0,28));
+
+		}
+		if(Part==18)
+		{
+			TextHolder.transform.position=PlaceHolder[2].transform.position;
+			TextHolder.SetActive(true);
+			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="You can see our Vehicle is out to Purchase Goods! Till then You can wait or Do other things! " ;	
+			
+			ButtonObjects[12].SetActive(true);
+			ButtonObjects[12].transform.GetChild(0).GetComponent<GetVehicle>().StartRide();
+			yield return new WaitForSeconds(50 / (GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1]));
+			Debug.Log("PahuchGye");
+			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Items Reached, you can them in Stock Menu " ;	
+
+		}
 		}
 	public void ShowHandle(Transform FocusPoint)
 	{
+
 		ArrowHandler.SetActive(true);
 		ArrowHandler.transform.position=new Vector2(FocusPoint.transform.GetChild(0).position.x+75,FocusPoint.transform.GetChild(0).position.y+70);
 	}
