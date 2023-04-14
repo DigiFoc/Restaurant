@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 
 public class FirstTimeManager : MonoBehaviour
@@ -14,10 +15,14 @@ public class FirstTimeManager : MonoBehaviour
 	public GameObject NextBtnGO;
 	public GameObject CameraScript;
 	public GameObject GoodsBuyButton;
+	public Slider VehicleSlider;
+	public Slider foodSlider;
+	[Range(1,5)]
+	public int timeSpeed;
 	int Part=0;
     void Start()
     {
-		Time.timeScale=4f;
+		Time.timeScale=timeSpeed;
        ArrowHandler.SetActive(false);
 	   NextBtnGO.SetActive(true);
 	   StartCoroutine(StartTutorial());
@@ -246,11 +251,76 @@ public class FirstTimeManager : MonoBehaviour
 			
 			ButtonObjects[12].SetActive(true);
 			ButtonObjects[12].transform.GetChild(0).GetComponent<GetVehicle>().StartRide();
-			yield return new WaitForSeconds(50 / (GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1]));
-			Debug.Log("PahuchGye");
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Items Reached, you can them in Stock Menu " ;	
+			float reachTime=50 / (GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1]);
+			VehicleSlider.maxValue=(int)reachTime;
+			for(int i=0;i<(int)reachTime;i++)
+				{
+					yield return new WaitForSeconds(1);
+					VehicleSlider.value=i+1;
+				}
+				NextBtn();
 
 		}
+		if(Part==19)
+		{
+			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Items Reached, you can them in Stock Menu " ;
+			TextHolder.transform.position=PlaceHolder[2].transform.position;
+			TextHolder.SetActive(true);
+			ButtonObjects[13].SetActive(true);
+			ShowHandle(ArrowPlaceHolder[8]);
+			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0, 180,0));
+		}
+		if(Part==20)
+		{
+			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="You Can See all the Stock We Have! " ;
+			TextHolder.transform.position=PlaceHolder[2].transform.position;
+			TextHolder.SetActive(true);
+			ButtonObjects[14].SetActive(true);
+			yield return new WaitForSeconds(5f);
+			NextBtn();
+		}
+		if(Part==21)
+		{
+			TextHolder.transform.position=PlaceHolder[2].transform.position;
+			TextHolder.SetActive(true);
+			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Again, As You can See Customer wants One Samosa. Tap On Food Engine Menu, Because Customers are waiting!" ;	
+			ButtonObjects[8].SetActive(true);
+			ShowHandle(ArrowPlaceHolder[3]);
+			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,180,0));
+			yield return new WaitForSeconds(5f);
+		}
+		if(Part==22)
+		{
+			ArrowHandler.transform.position=new Vector2(ArrowPlaceHolder[6].transform.GetChild(0).position.x-175,ArrowPlaceHolder[6].transform.GetChild(0).position.y);
+			ArrowHandler.SetActive(true);
+			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0, 180,0));
+			ButtonObjects[9].SetActive(true);
+			TextHolder.transform.position=PlaceHolder[0].transform.position;
+			TextHolder.SetActive(true);
+			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Tap on One Samosa";
+			ButtonObjects[9].transform.GetChild(0).GetChild(1).GetChild(1).GetChild(0).GetChild(0).GetComponent<UnityEngine.UI.Button>().interactable=true;
+	
+		}
+		if(Part==23)
+		{
+		ButtonObjects[9].SetActive(true);
+		ShowHandle(ArrowPlaceHolder[4]);
+			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,0,28));
+		}
+		if(Part==24)
+		{
+			foodSlider.maxValue=(int)5;
+		
+			for(int i=0;i<5;i++)
+			{
+			yield return new WaitForSeconds(1);
+			foodSlider.value=i+1;
+			}
+		ButtonObjects[9].SetActive(true);
+		ShowHandle(ArrowPlaceHolder[4]);
+			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,0,28));
+		}
+	
 		}
 	public void ShowHandle(Transform FocusPoint)
 	{
