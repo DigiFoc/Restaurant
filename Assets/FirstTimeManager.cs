@@ -19,7 +19,7 @@ public class FirstTimeManager : MonoBehaviour
 	public Slider foodSlider;
 	[Range(1,5)]
 	public int timeSpeed;
-	int Part=0;
+	public int Part=0;
     void Start()
     {
 		Time.timeScale=timeSpeed;
@@ -291,8 +291,7 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==22)
 		{
-			ArrowHandler.transform.position=new Vector2(ArrowPlaceHolder[6].transform.GetChild(0).position.x-175,ArrowPlaceHolder[6].transform.GetChild(0).position.y);
-			ArrowHandler.SetActive(true);
+			ShowHandle(ArrowPlaceHolder[4]);
 			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0, 180,0));
 			ButtonObjects[9].SetActive(true);
 			TextHolder.transform.position=PlaceHolder[0].transform.position;
@@ -304,7 +303,7 @@ public class FirstTimeManager : MonoBehaviour
 		if(Part==23)
 		{
 		ButtonObjects[9].SetActive(true);
-		ShowHandle(ArrowPlaceHolder[4]);
+		ShowHandle(ArrowPlaceHolder[7]);
 			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,0,28));
 		}
 		if(Part==24)
@@ -316,11 +315,122 @@ public class FirstTimeManager : MonoBehaviour
 			yield return new WaitForSeconds(1);
 			foodSlider.value=i+1;
 			}
-		ButtonObjects[9].SetActive(true);
-		ShowHandle(ArrowPlaceHolder[4]);
-			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,0,28));
+		ButtonObjects[15].SetActive(true);
+		ShowHandle(ArrowPlaceHolder[9]);
+			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,0,-90));
+			NextBtnGO.SetActive(true);
 		}
-	
+		if(Part==25)
+		{
+						ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,0,30));
+
+			TextHolder.transform.position=PlaceHolder[2].transform.position;
+			TextHolder.SetActive(true);
+			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Now, Tap on \"Move To\" Button" ;
+			ButtonObjects[4].SetActive(true);
+			ShowHandle(ArrowPlaceHolder[1]);
+		}
+		if(Part==26)
+		{
+			
+			TextHolder.transform.position=PlaceHolder[2].transform.position;
+			TextHolder.SetActive(true);
+			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Here are the places you can walk to serve or make Food. Tap On Any Button to see your Player moving!" ;
+			
+			ButtonObjects[5].SetActive(true);
+			for(int i=0;i<7;i++)
+			{
+				if(i!=5)
+					ButtonObjects[5].transform.GetChild(2).GetChild(i).GetComponent<UnityEngine.UI.Button>().interactable=false;
+			}
+			RemoveHandle();
+			
+			
+		}
+		if(Part==27)
+		{
+			yield return new WaitForSeconds(2f);
+			bool done = false;
+			while(!done) 
+			{
+				if(Player.GetComponent<PlayerController>().isMoving==false)
+					{
+						done = true; 
+					}
+						yield return null; 
+			}
+			 
+			TextHolder.transform.position=PlaceHolder[2].transform.position;
+			TextHolder.SetActive(true);
+			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="That's Amazing! You Know how to move! Tap on Next Button to Continue!" ;
+			
+			NextBtn();
+			
+		}
+		if(Part==28)
+		{
+			ButtonObjects[16].SetActive(true);
+			ButtonObjects[17].SetActive(true);
+		}
+		if(Part==29)
+		{
+			
+			PlayerFoodHandling.Instance.PickFood("UniversalFood");
+		
+						ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,0,30));
+
+			TextHolder.transform.position=PlaceHolder[2].transform.position;
+			TextHolder.SetActive(true);
+			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Now, Tap on \"Move To\" Button" ;
+			ButtonObjects[4].SetActive(true);
+			ShowHandle(ArrowPlaceHolder[1]);
+		}
+		if(Part==30)
+		{
+			
+			TextHolder.transform.position=PlaceHolder[2].transform.position;
+			TextHolder.SetActive(true);
+			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Here are the places you can walk to serve or make Food. Tap On Any Button to see your Player moving!" ;
+			
+			ButtonObjects[5].SetActive(true);
+			for(int i=0;i<7;i++)
+			{
+				if(i==0)
+					ButtonObjects[5].transform.GetChild(2).GetChild(i).GetComponent<UnityEngine.UI.Button>().interactable=true;
+				else
+										ButtonObjects[5].transform.GetChild(2).GetChild(i).GetComponent<UnityEngine.UI.Button>().interactable=false;
+
+			}
+			RemoveHandle();
+			
+			
+		}
+		if(Part==31)
+		{
+			yield return new WaitForSeconds(2f);
+			bool done = false;
+			while(!done) 
+			{
+				if(Player.GetComponent<PlayerController>().isMoving==false)
+					{
+						done = true; 
+					}
+						yield return null; 
+			}
+			 
+			TextHolder.transform.position=PlaceHolder[2].transform.position;
+			TextHolder.SetActive(true);
+			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="That's Amazing! You Know how to move! Tap on Next Button to Continue!" ;
+			PlayerFoodHandling.Instance.RemoveFood("UniversalFood");
+			NextBtn();
+			
+		}
+		if(Part==32)
+		{
+			ButtonObjects[18].SetActive(true);
+						NextBtnGO.SetActive(true);
+
+		}
 		}
 	public void ShowHandle(Transform FocusPoint)
 	{
@@ -339,6 +449,19 @@ public class FirstTimeManager : MonoBehaviour
 			ButtonObjects[i].SetActive(false);		
 		}
 		NextBtnGO.SetActive(false);
+	}
+	public void finalString(string streeng)
+	{
+		if(streeng=="restart")
+		{
+			GameManager.Instance.Reset();
+		}
+		if(streeng=="next")
+		{
+			
+			GameManager.Instance.SaveLearnt();
+			GameManager.Instance.Reset();
+		}
 	}
 
 }
