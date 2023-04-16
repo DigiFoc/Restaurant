@@ -15,8 +15,8 @@ public class FirstTimeManager : MonoBehaviour
 	public GameObject NextBtnGO;
 	public GameObject CameraScript;
 	public GameObject GoodsBuyButton;
-	public Slider VehicleSlider;
-	public Slider foodSlider;
+	public GameObject VehicleSlider;
+	public GameObject foodSlider;
 	[Range(1,5)]
 	public int timeSpeed;
 	public int Part=0;
@@ -110,6 +110,14 @@ public class FirstTimeManager : MonoBehaviour
 			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Now, Tap on \"Move To\" Button" ;
 			ButtonObjects[4].SetActive(true);
 			ShowHandle(ArrowPlaceHolder[1]);
+			for(int i=0;i<7;i++)
+			{
+				if(i==5)
+					ButtonObjects[5].transform.GetChild(2).GetChild(i).GetComponent<UnityEngine.UI.Button>().interactable=false;
+				else
+										ButtonObjects[5].transform.GetChild(2).GetChild(i).GetComponent<UnityEngine.UI.Button>().interactable=true;
+
+			}
 		}
 		if(Part==7)
 		{
@@ -248,17 +256,18 @@ public class FirstTimeManager : MonoBehaviour
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="You can see our Vehicle is out to Purchase Goods! Till then You can wait or Do other things! " ;	
-			
 			ButtonObjects[12].SetActive(true);
 			ButtonObjects[12].transform.GetChild(0).GetComponent<GetVehicle>().StartRide();
-			float reachTime=50 / (GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1]);
-			VehicleSlider.maxValue=(int)reachTime;
+			float reachTime=50f;
+			VehicleSlider.SetActive(true);
+			VehicleSlider.GetComponent<Slider>().maxValue=(int)reachTime;
 			for(int i=0;i<(int)reachTime;i++)
 				{
 					yield return new WaitForSeconds(1);
-					VehicleSlider.value=i+1;
+					VehicleSlider.GetComponent<Slider>().value=i+1;
 				}
-				NextBtn();
+			VehicleSlider.SetActive(false);
+			NextBtn();
 
 		}
 		if(Part==19)
@@ -308,14 +317,16 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==24)
 		{
-			foodSlider.maxValue=(int)5;
+			foodSlider.SetActive(true);
+			foodSlider.GetComponent<Slider>().maxValue=(int)5;
 		
 			for(int i=0;i<5;i++)
 			{
 			yield return new WaitForSeconds(1);
-			foodSlider.value=i+1;
+			foodSlider.GetComponent<Slider>().value=i+1;
 			}
 		ButtonObjects[15].SetActive(true);
+		foodSlider.SetActive(false);
 		ShowHandle(ArrowPlaceHolder[9]);
 			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,0,-90));
 			NextBtnGO.SetActive(true);
@@ -458,7 +469,6 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(streeng=="next")
 		{
-			
 			GameManager.Instance.SaveLearnt();
 			GameManager.Instance.Reset();
 		}
