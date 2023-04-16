@@ -6,6 +6,9 @@ public class TextManager : MonoBehaviour
 {
     public string tempText= string.Empty;
         public int tempTime=0;
+    public RectTransform rt;
+    public TMPro.TMP_Text txt;
+    public int OffSet;
     public static TextManager Instance { get; set; }
     
     private void Awake()
@@ -78,5 +81,52 @@ public class TextManager : MonoBehaviour
         tempText = string.Empty;
         tempTime = 0;
     
+    }
+
+    public void CaptionTextHandler(string incomingText)
+    {
+        StartCoroutine(RevealText(incomingText));
+    }
+
+    IEnumerator RevealText(string texty)
+    {
+        var originalString = texty.ToString();
+        txt.text = "";
+        string rand;
+        var numCharsRevealed = 0;
+        while (numCharsRevealed < originalString.Length)
+        {
+            int j = Random.Range(0, 6);
+            switch (j)
+            {
+                case 5:
+                    rand = "@";
+                    break;
+                case 4:
+                    rand = "#";
+                    break;
+                case 3:
+                    rand = "$";
+                    break;
+                case 2:
+                    rand = "%";
+                    break;
+                case 1:
+                    rand = "^";
+                    break;
+                default:
+                    rand = "&";
+                    break;
+            }
+            ++numCharsRevealed;
+            txt.text = originalString.Substring(0, numCharsRevealed)+rand+"|";
+            CaptionsCheck();
+            yield return new WaitForSeconds(0.03f);
+        }
+        txt.text= texty.ToString();
+    }
+    void CaptionsCheck()
+    {
+        rt.sizeDelta = new Vector2(rt.rect.width, txt.preferredHeight + OffSet);
     }
 }

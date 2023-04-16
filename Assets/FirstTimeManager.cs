@@ -49,7 +49,7 @@ public class FirstTimeManager : MonoBehaviour
 			ButtonObjects[0].SetActive(true);
 			TextHolder.transform.position=PlaceHolder[0].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="This is Level Selection Menu where you can Select any Unlocked Level. Tap on Next Button to Continue!";
+			TextManager.Instance.CaptionTextHandler("This is Level Selection Menu where you can Select any Unlocked Level. Tap on Next Button to Continue!");
 			NextBtnGO.SetActive(true);
 		}
 		if(Part==2)	
@@ -57,7 +57,7 @@ public class FirstTimeManager : MonoBehaviour
 			TextHolder.transform.position=PlaceHolder[1].transform.position;
 			TextHolder.SetActive(true);
 			ButtonObjects[1].SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="This is Shop Where You can Upgrade Items After Collecting Coins by Playing Levels. Tap on Next Button to Continue!";
+			TextManager.Instance.CaptionTextHandler("This is Shop Where You can Upgrade Items After Collecting Coins by Playing Levels. Tap on Next Button to Continue!");
 			NextBtnGO.SetActive(true);
 		}
 		if(Part==3)	
@@ -67,7 +67,7 @@ public class FirstTimeManager : MonoBehaviour
 			TextHolder.transform.position=PlaceHolder[0].transform.position;
 			TextHolder.SetActive(true);
 			ButtonObjects[2].SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Tap on Level 1 to Start your first Level of Game! Let's Go!";
+			TextManager.Instance.CaptionTextHandler("Tap on Level 1 to Start your first Level of Game! Let's Go!");
 		}
 		if(Part==4)	
 		{
@@ -75,7 +75,7 @@ public class FirstTimeManager : MonoBehaviour
 			TextHolder.transform.position=PlaceHolder[0].transform.position;
 			TextHolder.SetActive(true);
 		
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="These are Your Objectives. Read it Carefully and then Tap on Start Button to Start Level";
+			TextManager.Instance.CaptionTextHandler("These are Your Objectives. Read it Carefully and then Tap on Start Button to Start Level");
 		}
 		if(Part==5)	
 		{
@@ -88,7 +88,7 @@ public class FirstTimeManager : MonoBehaviour
 			//Time.timeScale=0f;
 			TextHolder.transform.position=PlaceHolder[0].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Rotate Player's Camera by Swiping on Screen!";
+			TextManager.Instance.CaptionTextHandler"Rotate Player's Camera by Swiping on Screen!";
 			bool done = false;
 			int temp = 0;
 			while(!done) // essentially a "while true", but with a bool to break out naturally
@@ -107,7 +107,7 @@ public class FirstTimeManager : MonoBehaviour
 		{
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Now, Tap on \"Move To\" Button" ;
+			TextManager.Instance.CaptionTextHandler("Now, Tap on \"Move To\" Button" );
 			ButtonObjects[4].SetActive(true);
 			ShowHandle(ArrowPlaceHolder[1]);
 			for(int i=0;i<7;i++)
@@ -123,7 +123,7 @@ public class FirstTimeManager : MonoBehaviour
 		{
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Here are the places you can walk to serve or make Food. Tap On Any Button to see your Player moving!" ;
+			TextManager.Instance.CaptionTextHandler("Here are the places you can walk to serve or make Food. Tap On Any Button to see your Player moving!" );
 			
 			ButtonObjects[5].SetActive(true);
 			RemoveHandle();
@@ -145,7 +145,7 @@ public class FirstTimeManager : MonoBehaviour
 			 
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="That's Amazing! You Know how to move! Tap on Next Button to Continue!" ;
+			TextManager.Instance.CaptionTextHandler("That's Amazing! You Know how to move! Tap on Next Button to Continue!" );
 			
 			NextBtnGO.SetActive(true);
 			
@@ -158,11 +158,11 @@ public class FirstTimeManager : MonoBehaviour
 			CameraScript.GetComponent<CameraController>().target=GameObject.Find("AICustomer").transform.GetChild(0);
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="A Customer is Coming, Make Sure to Fulfill thier Demands!" ;
+			TextManager.Instance.CaptionTextHandler("A Customer is Coming, Make Sure to Fulfill thier Demands!" );
 			yield return new WaitForSeconds(8f);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Customer will Sit in any Vacant Hut and will Order thier desired food! " ;
+			TextManager.Instance.CaptionTextHandler("Customer will Sit in any Vacant Hut and will Order thier desired food! " );
 			yield return new WaitForSeconds(8f);
-			TextHolder.SetActive(false);
+			TextManager.Instance.CaptionTextHandler("Please Wait!");
 			CameraScript.GetComponent<CameraController>().target=GameObject.Find("Player").transform.GetChild(0);
 			yield return new WaitForSeconds(5f);
 			
@@ -171,9 +171,9 @@ public class FirstTimeManager : MonoBehaviour
 		{
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="We have our First Customer in Hut 1" ;	
+			TextManager.Instance.CaptionTextHandler("We have our First Customer in Hut 1" );	
 			yield return new WaitForSeconds(5f);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Tap on Status Menu to check what are their Requirements!" ;	
+			TextManager.Instance.CaptionTextHandler("Tap on Status Menu to check what are their Requirements!" );	
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			ShowHandle(ArrowPlaceHolder[2]);
 			ButtonObjects[6].SetActive(true);
@@ -182,7 +182,7 @@ public class FirstTimeManager : MonoBehaviour
 		{
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="As You can See, Customer wants One Samosa. Tap On Food Engine Menu, Because Customers are waiting!" ;	
+			TextManager.Instance.CaptionTextHandler("As You can See, Customer wants One Samosa. Tap On Food Engine Menu, Because Customers are waiting!" );	
 			ButtonObjects[7].SetActive(true);
 			ButtonObjects[8].SetActive(true);
 			ShowHandle(ArrowPlaceHolder[3]);
@@ -194,7 +194,7 @@ public class FirstTimeManager : MonoBehaviour
 			
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Sorry, But Right Now You dont have Stock to Make Samosa. Tap on Shop to Purchase Goods " ;	
+			TextManager.Instance.CaptionTextHandler("Sorry, But Right Now You dont have Stock to Make Samosa. Tap on Shop to Purchase Goods " );	
 			
 			ButtonObjects[9].SetActive(true);
 			yield return new WaitForSeconds(5f);
@@ -207,11 +207,11 @@ public class FirstTimeManager : MonoBehaviour
 			
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="This is your Shop Menu, You can Purchase Raw Goods from Here! " ;	
+			TextManager.Instance.CaptionTextHandler("This is your Shop Menu, You can Purchase Raw Goods from Here! " );	
 			
 			ButtonObjects[11].SetActive(true);
 			yield return new WaitForSeconds(5f);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Order Ingredients that is used to make Samosa " ;	
+			TextManager.Instance.CaptionTextHandler("Order Ingredients that is used to make Samosa " );	
 			
 			ArrowHandler.transform.position=new Vector2(ArrowPlaceHolder[6].transform.GetChild(0).position.x-175,ArrowPlaceHolder[6].transform.GetChild(0).position.y);
 			ArrowHandler.SetActive(true);
@@ -255,7 +255,7 @@ public class FirstTimeManager : MonoBehaviour
 		{
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="You can see our Vehicle is out to Purchase Goods! Till then You can wait or Do other things! " ;	
+			TextManager.Instance.CaptionTextHandler("You can see our Vehicle is out to Purchase Goods! Till then You can wait! " );	
 			ButtonObjects[12].SetActive(true);
 			ButtonObjects[12].transform.GetChild(0).GetComponent<GetVehicle>().StartRide();
 			float reachTime=50f;
@@ -264,6 +264,10 @@ public class FirstTimeManager : MonoBehaviour
 			for(int i=0;i<(int)reachTime;i++)
 				{
 					yield return new WaitForSeconds(1);
+				if (i == 25)
+				{
+					TextManager.Instance.CaptionTextHandler("You can Check the Current Vehicle Status in Bottom Left Box and in the Shop Slider at the Middle Right of Screen!   ");
+				}
 					VehicleSlider.GetComponent<Slider>().value=i+1;
 				}
 			VehicleSlider.SetActive(false);
@@ -272,7 +276,7 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==19)
 		{
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Items Reached, you can them in Stock Menu " ;
+			TextManager.Instance.CaptionTextHandler("Items Reached, you can Check them in Storage Menu " );
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			ButtonObjects[13].SetActive(true);
@@ -281,7 +285,7 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==20)
 		{
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="You Can See all the Stock We Have! " ;
+			TextManager.Instance.CaptionTextHandler("Here, You Can See all the Stock We Have! " );
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			ButtonObjects[14].SetActive(true);
@@ -292,7 +296,7 @@ public class FirstTimeManager : MonoBehaviour
 		{
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Again, As You can See Customer wants One Samosa. Tap On Food Engine Menu, Because Customers are waiting!" ;	
+			TextManager.Instance.CaptionTextHandler("Again, As You can See Customer want One Samosa. Tap On Food Engine Menu") ;	
 			ButtonObjects[8].SetActive(true);
 			ShowHandle(ArrowPlaceHolder[3]);
 			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,180,0));
@@ -305,18 +309,24 @@ public class FirstTimeManager : MonoBehaviour
 			ButtonObjects[9].SetActive(true);
 			TextHolder.transform.position=PlaceHolder[0].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Tap on One Samosa";
+			TextManager.Instance.CaptionTextHandler("Tap on +1 ");
 			ButtonObjects[9].transform.GetChild(0).GetChild(1).GetChild(1).GetChild(0).GetChild(0).GetComponent<UnityEngine.UI.Button>().interactable=true;
 	
 		}
 		if(Part==23)
 		{
-		ButtonObjects[9].SetActive(true);
-		ShowHandle(ArrowPlaceHolder[7]);
+			ButtonObjects[9].SetActive(true);
+			TextHolder.transform.position = PlaceHolder[2].transform.position;
+			TextHolder.SetActive(true);
+			TextManager.Instance.CaptionTextHandler("Tap on Cook Button! ");
+			ShowHandle(ArrowPlaceHolder[7]);
 			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,0,28));
 		}
 		if(Part==24)
 		{
+			TextHolder.transform.position = PlaceHolder[2].transform.position;
+			TextHolder.SetActive(true);
+			TextManager.Instance.CaptionTextHandler("You can Check Cooking Status in the Slider at the Right Bottom Button Named FOOD MAKER ");
 			foodSlider.SetActive(true);
 			foodSlider.GetComponent<Slider>().maxValue=(int)5;
 		
@@ -326,7 +336,10 @@ public class FirstTimeManager : MonoBehaviour
 			foodSlider.GetComponent<Slider>().value=i+1;
 			}
 		ButtonObjects[15].SetActive(true);
-		foodSlider.SetActive(false);
+			TextHolder.transform.position = PlaceHolder[2].transform.position;
+			TextHolder.SetActive(true);
+			TextManager.Instance.CaptionTextHandler("You can See! Now, We have 1 Samosa Ready To Serve! Tap on Next ");
+			foodSlider.SetActive(false);
 		ShowHandle(ArrowPlaceHolder[9]);
 			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,0,-90));
 			NextBtnGO.SetActive(true);
@@ -337,7 +350,7 @@ public class FirstTimeManager : MonoBehaviour
 
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Now, Tap on \"Move To\" Button" ;
+			TextManager.Instance.CaptionTextHandler("Now, Tap on \"Move To\" Button and Go to Kitchen " );
 			ButtonObjects[4].SetActive(true);
 			ShowHandle(ArrowPlaceHolder[1]);
 		}
@@ -346,13 +359,15 @@ public class FirstTimeManager : MonoBehaviour
 			
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Here are the places you can walk to serve or make Food. Tap On Any Button to see your Player moving!" ;
+			TextManager.Instance.CaptionTextHandler("Tap on Kitchen" );
 			
 			ButtonObjects[5].SetActive(true);
 			for(int i=0;i<7;i++)
 			{
 				if(i!=5)
 					ButtonObjects[5].transform.GetChild(2).GetChild(i).GetComponent<UnityEngine.UI.Button>().interactable=false;
+				else
+					ButtonObjects[5].transform.GetChild(2).GetChild(i).GetComponent<UnityEngine.UI.Button>().interactable = true;
 			}
 			RemoveHandle();
 			
@@ -373,13 +388,16 @@ public class FirstTimeManager : MonoBehaviour
 			 
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="That's Amazing! You Know how to move! Tap on Next Button to Continue!" ;
+			TextManager.Instance.CaptionTextHandler("That's Amazing! You Know how to move! Tap on Next Button to Continue!") ;
 			
 			NextBtn();
 			
 		}
 		if(Part==28)
 		{
+			TextHolder.transform.position = PlaceHolder[0].transform.position;
+			TextHolder.SetActive(true);
+			TextManager.Instance.CaptionTextHandler("As You can See Customer in Hut 1 want 1 Samosa which is ready to Serve, Tap on Build to Create a Tray");
 			ButtonObjects[16].SetActive(true);
 			ButtonObjects[17].SetActive(true);
 		}
@@ -392,7 +410,7 @@ public class FirstTimeManager : MonoBehaviour
 
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Now, Tap on \"Move To\" Button" ;
+			TextManager.Instance.CaptionTextHandler("Now, Tap on \"Move To\" Button" );
 			ButtonObjects[4].SetActive(true);
 			ShowHandle(ArrowPlaceHolder[1]);
 		}
@@ -401,7 +419,7 @@ public class FirstTimeManager : MonoBehaviour
 			
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="Here are the places you can walk to serve or make Food. Tap On Any Button to see your Player moving!" ;
+			TextManager.Instance.CaptionTextHandler("Move to Hut 1 and Serve the food" );
 			
 			ButtonObjects[5].SetActive(true);
 			for(int i=0;i<7;i++)
@@ -431,7 +449,7 @@ public class FirstTimeManager : MonoBehaviour
 			 
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextHolder.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text="That's Amazing! You Know how to move! Tap on Next Button to Continue!" ;
+			TextManager.Instance.CaptionTextHandler("That's Amazing! You Know how to move! Tap on Next Button to Continue!") ;
 			PlayerFoodHandling.Instance.RemoveFood("UniversalFood");
 			NextBtn();
 			
