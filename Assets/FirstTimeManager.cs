@@ -347,6 +347,7 @@ public class FirstTimeManager : MonoBehaviour
 		if(Part==25)
 		{
 						ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,0,30));
+			ButtonObjects[15].SetActive(true);
 
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
@@ -356,7 +357,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==26)
 		{
-			
+			ButtonObjects[15].SetActive(true);
+
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			TextManager.Instance.CaptionTextHandler("Tap on Kitchen" );
@@ -460,7 +462,12 @@ public class FirstTimeManager : MonoBehaviour
 						NextBtnGO.SetActive(true);
 
 		}
+		if (Part == 33)
+        {
+			ButtonObjects[19].SetActive(true);
+
 		}
+	}
 	public void ShowHandle(Transform FocusPoint)
 	{
 

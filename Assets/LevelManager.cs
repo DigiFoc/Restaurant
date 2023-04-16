@@ -56,7 +56,7 @@ public TMP_Text statusText;
 	public int coins;
 	public Text coinsText;
 	public TMP_Text coinTextBoxinFinal;
-
+    public GameObject TutorialGO;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -83,6 +83,10 @@ public TMP_Text statusText;
 
     void Start()
     {
+        if (GameManager.Instance.isLearnt() == false)
+        {
+            TutorialGO.SetActive(true); 
+        }
 		coins=0;
 		CustNeedToSpawn=0;
 		coinTextBoxinFinal.text= "";
