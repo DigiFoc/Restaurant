@@ -20,6 +20,6 @@ MonoBehaviour:
   isCompleted: 0
   givenCoins: 30
   maxTea: 0
-  maxSamosa: 2
+  maxSamosa: 1
   maxPaneerTikka: 0
   maxPakori: 0

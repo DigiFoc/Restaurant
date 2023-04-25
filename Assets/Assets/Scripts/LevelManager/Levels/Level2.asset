@@ -15,11 +15,11 @@ MonoBehaviour:
   levelNum: 2
   totalCustomers: 2
   consecCustomers: 1
-  totalLevelTime: 350
-  avgRatingReq: 2
+  totalLevelTime: 150
+  avgRatingReq: 5
   isCompleted: 0
-  givenCoins: 0
+  givenCoins: 15
   maxTea: 0
-  maxSamosa: 0
+  maxSamosa: 1
   maxPaneerTikka: 0
   maxPakori: 0

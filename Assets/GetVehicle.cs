@@ -5,12 +5,17 @@ using UnityEngine.UI;
 
 public class GetVehicle : MonoBehaviour
 {
-   public int currentVehicle;
+    public int currentVehicle;
     public ExtShopManager shopManager;
     public int[] speeds;
     public int speed;
+    bool speeding;
+    public float acceleration = 0.5f;
     public static GetVehicle Instance { get; set; }
     public GameObject[] CurrVehicle;
+    public UnityEngine.UI.Slider VehicleSlider;
+    public UnityEngine.UI.Image FillImage;
+    public OrderGoods OG;
 
     private void Awake()
     {
@@ -31,7 +36,7 @@ public class GetVehicle : MonoBehaviour
         CurrVehicle[currentVehicle - 1].SetActive(true);
         this.GetComponent<Animator>().speed = speeds[currentVehicle - 1];
     }
-		public void Restart()
+    public void Restart()
     {
         currentVehicle = GameManager.Instance.currentVehicleUpgrade;
         Debug.Log(currentVehicle);
@@ -41,6 +46,52 @@ public class GetVehicle : MonoBehaviour
     public void StartRide()
     {
         this.GetComponent<Animator>().Play("VehicleAnim");
-		Debug.Log("AnimationStart");
+        Debug.Log("AnimationStart");
     }
+
+    public void IncreaseVehicleSpeed()
+    {
+        StartCoroutine(IncreaseSpeed());
+
+
+    }
+
+    public void SetSlider(float comingValue)
+    {
+        VehicleSlider.value = comingValue;
+    }
+
+    IEnumerator IncreaseSpeed()
+    {
+        if (!speeding)
+        {
+            speeding = true;
+            float temp = this.GetComponent<Animator>().speed;
+            Debug.Log(temp);
+            this.GetComponent<Animator>().speed += acceleration;
+            yield return new WaitForSeconds(0.2f);
+            this.GetComponent<Animator>().speed = temp;
+            speeding = false;
+        }
+    }
+    void CallReached()
+    {
+        OG.VehicleReached();
+    }
+
+    public void SliderEffect()
+    {
+        Color color = Color.white;
+        color.a = 0.5f;
+        Color color2 = Color.white;
+        color2.a = 0f;
+        
+
+        while (FillImage.color.a != 0.5f)
+        {
+            Debug.Log("Chal");
+            FillImage.color = Color.Lerp(color, color2, 0.2f);
+        }
+    }
+
 }

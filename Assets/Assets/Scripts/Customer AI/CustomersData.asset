@@ -14,17 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maleCustomersModel:
   - {fileID: 6993640964980137232, guid: ed8b5e2b6faf9cf4597a12f5ddda22f2, type: 3}
-  - {fileID: 2160134580012471889, guid: 107c7799824644b44ae9a36d55f0aaa0, type: 3}
   - {fileID: 4720068814739451242, guid: 546442acc34832d47ba7e2bd6db0c96a, type: 3}
   femaleCustomersModel:
   - {fileID: 6628254730503938855, guid: 001e5ead11c4ed64cae883d68a7c0f88, type: 3}
   - {fileID: 4027236719965073879, guid: aa80eabd487a05643b200c7e8593ef61, type: 3}
   maleCustomerNames:
-  - Balveer
-  - Nitin
-  - Paras
-  - Amman
-  - Ayush
+  - Saurabh
+  - Ravi
+  - Rahul
+  - Tanmay
+  - Nikhil
   femaleCustomersNames:
   - xyz
   - Radhika

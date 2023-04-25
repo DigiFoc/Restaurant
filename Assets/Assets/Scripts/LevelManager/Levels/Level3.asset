@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Level3
   m_EditorClassIdentifier: 
   levelNum: 3
-  totalCustomers: 0
-  consecCustomers: 0
-  timeForCustomers: 0
+  totalCustomers: 2
+  consecCustomers: 1
   totalLevelTime: 0
-  avgRatingReq: 0
+  avgRatingReq: 6
   isCompleted: 0
+  givenCoins: 20
+  maxTea: 0
+  maxSamosa: 1
+  maxPaneerTikka: 1
+  maxPakori: 0

@@ -15,10 +15,8 @@ public class OrderGoods : MonoBehaviour
 	bool isOnRoad;
 	 public GameObject button;
 	 public ReceiptGenerator currSlots;
-	public UnityEngine.UI.Slider VehicleSlider;
         private void Start()
     {
-        VehicleSlider.value=100f;
 		
 
     }
@@ -48,8 +46,8 @@ public class OrderGoods : MonoBehaviour
         MenuManager.Instance.ChangeMenu("side");
         yield return new WaitForSeconds(0.5f);
         bool temp = BuildFoood();
-		currSlots.CurrSlots = 0;
-       
+        currSlots.CurrSlots = 0;
+
         if (!temp)
         {
             TextManager.Instance.ShowToast("Coins are not enough", 2);
@@ -63,24 +61,31 @@ public class OrderGoods : MonoBehaviour
         else
         {
             TextManager.Instance.ShowToast("Ordered", 2);
-            int newCoins = LevelManager.Instance.coins- totalPrice;
-			totalPrice=0;
+            int newCoins = LevelManager.Instance.coins - totalPrice;
+            totalPrice = 0;
             LevelManager.Instance.ChangeCoinsTo(newCoins);
             GetVehicle.Instance.StartRide();
-			SetButtonStatus(true);
-           
+            SetButtonStatus(true);
+
             foreach (Transform child in ItemHolder.transform)
             {
                 child.gameObject.GetComponent<ItemHandler>().RemoveMe();
 
             }
-			float reachTime=50 / (GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1]);
+        }
+    }
+
+   
+
+    public void VehicleReached()
+    {/*
+        float reachTime=50 / (GetVehicle.Instance.speeds[GetVehicle.Instance.currentVehicle - 1]);
 			VehicleSlider.maxValue=(int)reachTime;
 			for(int i=0;i<(int)reachTime;i++)
 				{
 					yield return new WaitForSeconds(1);
 					VehicleSlider.value=i+1;
-				}
+				}*/
             TextManager.Instance.ShowToast("Recieved", 2);
 			SetButtonStatus(false);
             SoundManager.Instance.PlaySound("horn");
@@ -92,10 +97,7 @@ public class OrderGoods : MonoBehaviour
             TextManager.Instance.ShowToast(quantities[i] + " " + itemNames[i] + " Ordered Recieved",2);
         }
 
-        }
-
-       
-
+  
 
     }
 

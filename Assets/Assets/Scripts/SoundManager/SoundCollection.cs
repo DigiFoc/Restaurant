@@ -3,11 +3,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SoundManager/AddSounds",fileName ="SoundCollection")]
 public class SoundCollection : ScriptableObject
 {
-    public AudioClip[] angry;
-    public AudioClip[] happy;
-    public AudioClip[] satisfied;
-    public AudioClip[] notSatisfied;
-    public AudioClip[] interaction;
+    public AudioClip[] rating1;
+    public AudioClip[] rating2;
+    public AudioClip[] rating3;
+    public AudioClip[] rating4;
+    public AudioClip[] rating5;
     public AudioClip[] askingForPaneerTikka,askingForSamosa,askingForTea,askingForPakori;
 
 

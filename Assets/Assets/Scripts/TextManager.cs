@@ -9,6 +9,7 @@ public class TextManager : MonoBehaviour
     public RectTransform rt;
     public TMPro.TMP_Text txt;
     public int OffSet;
+    public TMPro.TMP_Text Heading;
     public static TextManager Instance { get; set; }
     
     private void Awake()
@@ -67,8 +68,7 @@ public class TextManager : MonoBehaviour
     void ChangePriority()
     {
         ShowToast(tempText, tempTime);
-       
-}
+    }
 
     void FadeOut()
     {
@@ -83,13 +83,15 @@ public class TextManager : MonoBehaviour
     
     }
 
-    public void CaptionTextHandler(string incomingText)
+    public void CaptionTextHandler(string headingText,string incomingText,Color shadee)
     {
-        StartCoroutine(RevealText(incomingText));
+        StartCoroutine(RevealText(headingText,incomingText, shadee));
     }
 
-    IEnumerator RevealText(string texty)
+    IEnumerator RevealText(string headeen,string texty,Color shade)
     {
+        Heading.text = headeen;
+        Heading.color = shade;
         var originalString = texty.ToString();
         txt.text = "";
         string rand;
@@ -127,6 +129,6 @@ public class TextManager : MonoBehaviour
     }
     void CaptionsCheck()
     {
-        rt.sizeDelta = new Vector2(rt.rect.width, txt.preferredHeight + OffSet);
+        rt.sizeDelta = new Vector2(rt.rect.width, txt.preferredHeight + Heading.preferredHeight+OffSet);
     }
 }

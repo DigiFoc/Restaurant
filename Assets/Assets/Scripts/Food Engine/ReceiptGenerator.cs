@@ -5,7 +5,8 @@ using TMPro;
 
 public class ReceiptGenerator : MonoBehaviour
 {
-    int MaxSlots = 2;
+    int FoodMaxSlots = 2;
+    int ShopMaxSlots = 2;
     public int CurrSlots = 0;
     public Transform TextHolder;
     public Transform FoodTextHolder;
@@ -34,8 +35,16 @@ public class ReceiptGenerator : MonoBehaviour
     {
         GrandTotal.text = "Total Rs. 0";
 		buildBtn.SetActive(false);
+        StartCoroutine(DetectSlots());
     }
-
+    IEnumerator DetectSlots()
+    {
+        yield return new WaitForSeconds(1f);
+        ShopMaxSlots = GameManager.Instance.currentVehicleUpgrade + 1;
+        FoodMaxSlots = GameManager.Instance.currentMachineUpgrade + 2;
+        Debug.Log("Shop Slots=" + ShopMaxSlots + " and Food Slots=" + FoodMaxSlots);
+    }
+ 
     public void MakeAmount() 
     {
         StartCoroutine(FetchAmount());
@@ -92,7 +101,7 @@ public class ReceiptGenerator : MonoBehaviour
         }
 		Debug.Log("Yoo");
 		CurrSlots = childrenCount;
-        if (CurrSlots < MaxSlots)
+        if (CurrSlots < ShopMaxSlots)
         {
 			Debug.Log("Yooo");
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
@@ -123,7 +132,7 @@ public class ReceiptGenerator : MonoBehaviour
             }
         }
 		CurrSlots = childrenCount;
-        if (CurrSlots < MaxSlots)
+        if (CurrSlots < ShopMaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
             ItemManager.name = Objname;
@@ -152,7 +161,7 @@ public class ReceiptGenerator : MonoBehaviour
                 return;
             }
         }CurrSlots = childrenCount;
-        if (CurrSlots < MaxSlots)
+        if (CurrSlots < ShopMaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
             ItemManager.name = Objname;
@@ -183,7 +192,7 @@ public class ReceiptGenerator : MonoBehaviour
             }
         }
 		CurrSlots = childrenCount;
-        if (CurrSlots < MaxSlots)
+        if (CurrSlots < ShopMaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
             ItemManager.name = Objname;
@@ -213,7 +222,7 @@ public class ReceiptGenerator : MonoBehaviour
             }
         }
 		CurrSlots = childrenCount;
-        if (CurrSlots < MaxSlots)
+        if (CurrSlots < ShopMaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
             ItemManager.name = Objname;
@@ -242,7 +251,7 @@ public class ReceiptGenerator : MonoBehaviour
             }
         }
 		CurrSlots = childrenCount;
-        if (CurrSlots < MaxSlots)
+        if (CurrSlots < ShopMaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
             ItemManager.name = Objname;
@@ -270,7 +279,7 @@ public class ReceiptGenerator : MonoBehaviour
             }
         }
 		CurrSlots = childrenCount;
-        if (CurrSlots < MaxSlots)
+        if (CurrSlots < ShopMaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
             ItemManager.name = Objname;
@@ -298,7 +307,7 @@ public class ReceiptGenerator : MonoBehaviour
             }
         }
 		CurrSlots = childrenCount;
-        if (CurrSlots < MaxSlots)
+        if (CurrSlots < ShopMaxSlots)
         {
             GameObject ItemManager = Instantiate(ItemPrefab, TextHolder.transform);
             ItemManager.name = Objname;
@@ -365,7 +374,7 @@ public class ReceiptGenerator : MonoBehaviour
 			}
 		
 			CurrSlots = childrenCount;
-			if (CurrSlots < MaxSlots)
+			if (CurrSlots < FoodMaxSlots)
 			{
 				GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
 				ItemManager.name = Objname;
@@ -432,7 +441,7 @@ public class ReceiptGenerator : MonoBehaviour
 			}
 		
 			CurrSlots = childrenCount;
-			if (CurrSlots < MaxSlots)
+			if (CurrSlots < FoodMaxSlots)
 			{
 				GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
 				ItemManager.name = Objname;
@@ -498,7 +507,7 @@ public class ReceiptGenerator : MonoBehaviour
 			}
 		
 			CurrSlots = childrenCount;
-			if (CurrSlots < MaxSlots)
+			if (CurrSlots < FoodMaxSlots)
 			{
 				GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
 				ItemManager.name = Objname;
@@ -564,7 +573,7 @@ public class ReceiptGenerator : MonoBehaviour
 			}
 		
 			CurrSlots = childrenCount;
-			if (CurrSlots < MaxSlots)
+			if (CurrSlots < FoodMaxSlots)
 			{
 				GameObject ItemManager = Instantiate(ItemPrefab, FoodTextHolder.transform);
 				ItemManager.name = Objname;

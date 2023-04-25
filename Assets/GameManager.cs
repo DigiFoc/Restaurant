@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
         currentVaseUpgrade = PlayerPrefs.GetInt("VaseUpgrade", 0);
         currentVehicleUpgrade = PlayerPrefs.GetInt("VehicleUpgrade", 1);
         currentWallArtUpgrade = PlayerPrefs.GetInt("WallArtUpgrade", 0);
-        globalCoins = PlayerPrefs.GetInt("globalCoins", 0);
+        globalCoins = PlayerPrefs.GetInt("globalCoins", 10000);
         lastUnlockedLevel = PlayerPrefs.GetInt("Level",1);
     }
     public void Reset()

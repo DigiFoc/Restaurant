@@ -989,10 +989,11 @@ public class ExtShopManager : MonoBehaviour
     #region BasicFunction
     public int GetTotalCoins()
     {
-        return LevelManager.Instance.coins;
+        return GameManager.Instance.globalCoins;
     }
     public int GetCurrentLevel()
     {
+        //return GameManager.Instance.lastUnlockedLevel;
         return 500;
     }
     public void SetFoodSpeed(int speed)
