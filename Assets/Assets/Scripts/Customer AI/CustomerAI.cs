@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using TextSpeech;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -23,6 +24,7 @@ public class CustomerAI : MonoBehaviour
     [System.Serializable]
     public class Information
     {
+        public int custNumber;
         public string Gender;
         public string name;
         public int hutNo;
@@ -221,26 +223,58 @@ public class CustomerAI : MonoBehaviour
 
     public void OrderFood()
     {
-        
-        AI_Information.foodOrder = StockInventory.Instance.GenerateRandomFood();
-		Debug.Log(AI_Information.foodOrder);
-		if(AI_Information.foodOrder.Equals("Samosa",StringComparison.OrdinalIgnoreCase))
-		{
-			 AI_Information.quantity = UnityEngine.Random.Range(1, LevelManager.Instance.currentLevel.maxSamosa+1);
-		}
-		if(AI_Information.foodOrder.Equals("PaneerTikka",StringComparison.OrdinalIgnoreCase))
-		{
-			 AI_Information.quantity = UnityEngine.Random.Range(1, LevelManager.Instance.currentLevel.maxPaneerTikka+1);
-		}
-		if(AI_Information.foodOrder.Equals("Pakori",StringComparison.OrdinalIgnoreCase))
-		{
-			 AI_Information.quantity = UnityEngine.Random.Range(1, LevelManager.Instance.currentLevel.maxPakori+1);
-		}
-		if(AI_Information.foodOrder.Equals("Tea",StringComparison.OrdinalIgnoreCase))
-		{
-			 AI_Information.quantity = UnityEngine.Random.Range(1, LevelManager.Instance.currentLevel.maxTea+1);
-		}
-       
+
+        #region OlDCODE
+        /** AI_Information.foodOrder = StockInventory.Instance.GenerateRandomFood();
+          Debug.Log(AI_Information.foodOrder);
+          if(AI_Information.foodOrder.Equals("Samosa",StringComparison.OrdinalIgnoreCase))
+          {
+               AI_Information.quantity = UnityEngine.Random.Range(1, LevelManager.Instance.currentLevel.maxSamosa+1);
+          }
+          if(AI_Information.foodOrder.Equals("PaneerTikka",StringComparison.OrdinalIgnoreCase))
+          {
+               AI_Information.quantity = UnityEngine.Random.Range(1, LevelManager.Instance.currentLevel.maxPaneerTikka+1);
+          }
+          if(AI_Information.foodOrder.Equals("Pakori",StringComparison.OrdinalIgnoreCase))
+          {
+               AI_Information.quantity = UnityEngine.Random.Range(1, LevelManager.Instance.currentLevel.maxPakori+1);
+          }
+          if(AI_Information.foodOrder.Equals("Tea",StringComparison.OrdinalIgnoreCase))
+          {
+               AI_Information.quantity = UnityEngine.Random.Range(1, LevelManager.Instance.currentLevel.maxTea+1);
+          }
+
+          **/
+        #endregion
+        int custNo = AI_Information.custNumber - 1;
+        Level currentLevel = LevelManager.Instance.currentLevel;
+
+        if (currentLevel.Requirements[custNo].samosa > 0)
+        {
+            AI_Information.foodOrder = "Samosa";
+            AI_Information.quantity = currentLevel.Requirements[custNo].samosa;
+        }
+        else if (currentLevel.Requirements[custNo].paneerTikka > 0)
+        {
+            AI_Information.foodOrder = "PaneerTikka";
+            AI_Information.quantity = currentLevel.Requirements[custNo].paneerTikka;
+        }
+        else if (currentLevel.Requirements[custNo].pakori > 0)
+        {
+            AI_Information.foodOrder = "Pakori";
+            AI_Information.quantity = currentLevel.Requirements[custNo].pakori;
+        }
+        else if (currentLevel.Requirements[custNo].tea > 0)
+        {
+            AI_Information.foodOrder = "Tea";
+            AI_Information.quantity = currentLevel.Requirements[custNo].tea;
+        }
+        else
+        {
+            TextSpeech.TextToSpeech.Instance.StartSpeak("Enteries in level Manager misMatch" + currentLevel.levelNum);
+        }
+
+
         AI_Information.amountToPay = StockInventory.Instance.CalculateAmount(AI_Information.foodOrder, AI_Information.quantity);
 
 		//PlayOrderFoodSound(AI_Information.foodOrder);

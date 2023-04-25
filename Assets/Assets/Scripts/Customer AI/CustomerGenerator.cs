@@ -21,7 +21,9 @@ public class CustomerGenerator : MonoBehaviour
 
     public CurrentCustomersData currentData;
     public int startingCustomers = 1;
-    
+    public int customerCount = 0;
+
+
     void Start()
     {
 		
@@ -52,6 +54,7 @@ public class CustomerGenerator : MonoBehaviour
                                                   
     public void GenerateMale()
     {
+        customerCount++;
         int randomMaleNo = Random.Range(0, customerDatabase.maleCustomersModel.Length);
         GameObject AI = Instantiate(customerDatabase.maleCustomersModel[randomMaleNo], customerGenratingPoint.position, Quaternion.identity) as GameObject;
 		AI.name="AICustomer";
@@ -64,6 +67,7 @@ public class CustomerGenerator : MonoBehaviour
         AI.GetComponent<CustomerAI>().AI_Information.Gender = "Male";
         AI.GetComponent<CustomerAI>().destinations.endPlace= customerEndingPoint.transform;
 
+        AI.GetComponent<CustomerAI>().AI_Information.custNumber = customerCount;
 
 
         currentData.totalCustomersPresent += 1;

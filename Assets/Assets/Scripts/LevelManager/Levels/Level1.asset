@@ -19,7 +19,12 @@ MonoBehaviour:
   avgRatingReq: 1
   isCompleted: 0
   givenCoins: 30
-  maxTea: 0
-  maxSamosa: 1
-  maxPaneerTikka: 0
-  maxPakori: 0
+  Requirements:
+  - paneerTikka: 0
+    samosa: 4
+    pakori: 0
+    tea: 0
+  - paneerTikka: 0
+    samosa: 4
+    pakori: 0
+    tea: 0

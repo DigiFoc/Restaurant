@@ -13,7 +13,12 @@ public class Level : ScriptableObject
     public float avgRatingReq;
     public bool isCompleted;
     public int givenCoins;
-	[Range(0,10)]
-	public int maxTea,maxSamosa,maxPaneerTikka,maxPakori;
+    [SerializeField]public List<CustomerRequirement> Requirements;
 
+}
+
+[System.Serializable]
+public class CustomerRequirement
+{
+    [SerializeField]public int paneerTikka =0, samosa=0, pakori=0, tea=0;
 }

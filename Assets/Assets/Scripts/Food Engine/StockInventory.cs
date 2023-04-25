@@ -133,8 +133,9 @@ public class StockInventory : MonoBehaviour
 
     public string GenerateRandomFood()
     {
-		
-		int maxSamosa = LevelManager.Instance.currentLevel.maxSamosa;
+        #region OLDCODE
+        /**
+        int maxSamosa = LevelManager.Instance.currentLevel.maxSamosa;
 		int maxTea = LevelManager.Instance.currentLevel.maxTea;
 		int maxPaneerTikka = LevelManager.Instance.currentLevel.maxPaneerTikka;
 		int maxPakori = LevelManager.Instance.currentLevel.maxPakori;
@@ -150,10 +151,12 @@ public class StockInventory : MonoBehaviour
 			itemsAvaible.Add("Pakori");
 		
         int foodNo = Random.Range(0,itemsAvaible.Count);
+        **/
+        #endregion
+        // string foodItem = itemsAvaible[foodNo];
 
-        string foodItem = itemsAvaible[foodNo];
-        
-        return foodItem;
+        // return foodItem;
+        return "";
 
       
 
