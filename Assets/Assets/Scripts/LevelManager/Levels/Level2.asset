@@ -16,10 +16,15 @@ MonoBehaviour:
   totalCustomers: 2
   consecCustomers: 1
   totalLevelTime: 150
-  avgRatingReq: 5
+  avgRatingReq: 2.5
   isCompleted: 0
   givenCoins: 15
-  maxTea: 0
-  maxSamosa: 1
-  maxPaneerTikka: 0
-  maxPakori: 0
+  Requirements:
+  - paneerTikka: 0
+    samosa: 5
+    pakori: 5
+    tea: 0
+  - paneerTikka: 4
+    samosa: 2
+    pakori: 0
+    tea: 3

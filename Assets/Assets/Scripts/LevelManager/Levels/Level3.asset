@@ -16,10 +16,7 @@ MonoBehaviour:
   totalCustomers: 2
   consecCustomers: 1
   totalLevelTime: 0
-  avgRatingReq: 6
+  avgRatingReq: 3
   isCompleted: 0
   givenCoins: 20
-  maxTea: 0
-  maxSamosa: 1
-  maxPaneerTikka: 1
-  maxPakori: 0
+  Requirements: []

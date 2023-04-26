@@ -67,7 +67,7 @@ public TMP_Text statusText;
         {
             _instance = this;
         }
-
+        Debuggg();
         
     }
     public void CustomerReached(int opinion)
@@ -291,20 +291,22 @@ public TMP_Text statusText;
         }
         PC.GetComponent<PlayerController>().enabled = false;
         MenuManager.Instance.ResetAll();
-		if(currentTime > currentLevel.totalLevelTime||currentReached < currentLevel.totalCustomers||currentRating < currentLevel.avgRatingReq)
+		if(currentRating < currentLevel.avgRatingReq)
 		{
 			SoundManager.Instance.PlaySound("fail");
 			statusText.text="Level Failed";
 			coinTextBoxinFinal.text="+ 100";
+            GameManager.Instance.AddCoins(200*currentLevel.levelNum);
 		}
-		if(currentTime < currentLevel.totalLevelTime&&currentReached >= currentLevel.totalCustomers&&currentRating >= currentLevel.avgRatingReq)
+		if(currentRating >= currentLevel.avgRatingReq)
 		{
 			
 			SoundManager.Instance.PlaySound("success");
 			statusText.text="Level Passed";
 			Debug.Log(currentLevel.levelNum);
 			coinTextBoxinFinal.text="+ 500";
-			GameManager.Instance.SaveLevel(currentLevel.levelNum);
+            GameManager.Instance.AddCoins(500 * currentLevel.levelNum);
+            GameManager.Instance.SaveLevel(currentLevel.levelNum);
 			StopAllCoroutines();
 			
 		}
@@ -347,4 +349,86 @@ public TMP_Text statusText;
         MenuManager.Instance.ResetAll();
     }
 
+    void Debuggg()
+    {
+        int tott=0;
+        int ggg=0;
+        for (int i = 1; i < 31; i++)
+        {
+            if (i == 4)
+            {
+                tott = tott - 5000;              
+            }
+            if (i == 5)
+            {
+                tott = tott - 2000;
+            }
+            if (i == 6)
+            {
+                tott = tott - 2500;
+            }
+            if (i == 7)
+            {
+                tott = tott - 1000;
+            }
+            if (i == 8)
+            {
+                tott = tott - 7000;
+            }
+            if (i == 9)
+            {
+                tott = tott - 1000;
+            }
+            if (i == 10)
+            {
+                tott = tott - 5000;
+            }
+            if (i == 11)
+            {
+                tott = tott - 4000;
+            }
+            if (i == 12)
+            {
+                tott = tott - 5000;
+            }
+            if (i == 13)
+            {
+                tott = tott - 4000;
+            }
+            if (i == 14)
+            {
+                tott = tott - 2000;
+
+            }
+            if (i == 15)
+            {
+                tott = tott - 18000;
+            }
+            if (i == 17)
+            {
+                tott = tott - 10000;
+            }
+            if (i == 18)
+            {
+                tott = tott - 2000;
+            }
+            if (i == 19)
+            {
+                tott = tott - 10000;
+            }
+            if (i == 20)
+            {
+                tott = tott - 15000;
+            }
+            if (i == 21)
+            {
+                tott = tott - 5000;
+            }
+           
+            ggg = 500 * i;
+            tott = tott + ggg;
+            Debug.Log("Level Number " + i + " Coins "+(tott));
+            
+        }
+    }
 }

@@ -494,6 +494,7 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(streeng=="next")
 		{
+			GameManager.Instance.ChangeCoinsTo(500);
 			GameManager.Instance.SaveLevel(1);
 			GameManager.Instance.SaveLearnt();
 			GameManager.Instance.Reset();

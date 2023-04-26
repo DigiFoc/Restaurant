@@ -123,12 +123,13 @@ public class GameManager : MonoBehaviour
       
         currentHeartUpgrade = PlayerPrefs.GetInt("HeartUpgrade",0);
         currentTVUpgrade = PlayerPrefs.GetInt("TVUpgrade", 0);
-        currentMachineUpgrade = PlayerPrefs.GetInt("MachineUpgrade", 0);
+        currentMachineUpgrade = PlayerPrefs.GetInt("MachineUpgrade", 1);
         currentSpeakerUpgrade = PlayerPrefs.GetInt("SpeakerUpgrade", 0);
         currentVaseUpgrade = PlayerPrefs.GetInt("VaseUpgrade", 0);
         currentVehicleUpgrade = PlayerPrefs.GetInt("VehicleUpgrade", 1);
         currentWallArtUpgrade = PlayerPrefs.GetInt("WallArtUpgrade", 0);
-        globalCoins = PlayerPrefs.GetInt("globalCoins", 10000);
+        globalCoins = PlayerPrefs.GetInt("globalCoins", 100);
+        ShowCoins(globalCoins);
         lastUnlockedLevel = PlayerPrefs.GetInt("Level",1);
     }
     public void Reset()
@@ -141,16 +142,18 @@ public class GameManager : MonoBehaviour
 	{
 		ChangeCoinsTo(globalCoins+increaseBy);
 	}
-	
-	public void ChangeCoinsTo(int newCoins)
+
+    public void ShowCoins(int newCoins)
     {
-	int temp=globalCoins;
-	globalCoins=newCoins;
-	SaveGlobalCoins(globalCoins);
-		StartCoroutine(changeValueOverTime(temp, newCoins, 2f));
+        coinText.text = newCoins.ToString();
+    }
+    public void ChangeCoinsTo(int newCoins)
+    {
+        coinText.text = newCoins.ToString();
+        SaveGlobalCoins(newCoins);
 	}
 	
-	IEnumerator changeValueOverTime(float fromVal, float toVal, float duration)
+	/*IEnumerator changeValueOverTime(float fromVal, float toVal, float duration)
 {
     float counter = 0f;
 
@@ -167,7 +170,7 @@ public class GameManager : MonoBehaviour
         yield return null;
     }
 	
-}
+}*/
 
 }
 
