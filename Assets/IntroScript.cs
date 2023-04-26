@@ -113,5 +113,9 @@ public class IntroScript : MonoBehaviour
         {
             TextManager.Instance.CaptionTextHandler("Toshi", "Thank You Brother, Thank You So Much!", Color.blue);
         }
+        if (incrementor == 24)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        }
     }
 }

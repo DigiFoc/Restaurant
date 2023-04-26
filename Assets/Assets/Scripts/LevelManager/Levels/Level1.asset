@@ -18,7 +18,7 @@ MonoBehaviour:
   totalLevelTime: 900
   avgRatingReq: 1
   isCompleted: 0
-  givenCoins: 30
+  givenCoins: 15
   Requirements:
   - paneerTikka: 0
     samosa: 1
