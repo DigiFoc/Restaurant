@@ -57,6 +57,8 @@ public TMP_Text statusText;
 	public Text coinsText;
 	public TMP_Text coinTextBoxinFinal;
     public GameObject TutorialGO;
+
+    public VehicleStarter[] vehicleStarer;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -182,6 +184,12 @@ public TMP_Text statusText;
     }
     public void StartLevel()
     {
+        foreach (VehicleStarter starter in vehicleStarer)
+        {
+            starter.GenerateNextVehicle();
+        
+        }
+        Debug.Log("Traffic started");
         PC.GetComponent<PlayerController>().enabled = true;
         MenuManager.Instance.ChangeMenu("side");
         StartCoroutine(SpawnCust());
@@ -190,6 +198,7 @@ public TMP_Text statusText;
     }
     IEnumerator CountTime()
     {
+       
         yield return new WaitForSeconds(1); //To Remove the Glitch of Divide by Zero\
         Debug.Log(currentLevel.totalLevelTime);
         ObjtimeRequired.text = min.ToString("00") + ":" + sec.ToString("00");
