@@ -14,9 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNum: 8
   totalCustomers: 4
-  consecCustomers: 0
-  totalLevelTime: 0
+  consecCustomers: 2
+  totalLevelTime: 180
   avgRatingReq: 3.5
   isCompleted: 0
   givenCoins: 0
-  Requirements: []
+  Requirements:
+  - paneerTikka: 0
+    samosa: 2
+    pakori: 0
+    tea: 0
+  - paneerTikka: 0
+    samosa: 0
+    pakori: 2
+    tea: 0
+  - paneerTikka: 0
+    samosa: 0
+    pakori: 0
+    tea: 2
+  - paneerTikka: 1
+    samosa: 0
+    pakori: 0
+    tea: 0

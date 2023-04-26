@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNum: 18
   totalCustomers: 5
-  consecCustomers: 0
-  totalLevelTime: 0
+  consecCustomers: 3
+  totalLevelTime: 240
   avgRatingReq: 3.5
   isCompleted: 0
   givenCoins: 0

@@ -21,6 +21,6 @@ MonoBehaviour:
   givenCoins: 30
   Requirements:
   - paneerTikka: 0
-    samosa: 4
+    samosa: 1
     pakori: 0
     tea: 0

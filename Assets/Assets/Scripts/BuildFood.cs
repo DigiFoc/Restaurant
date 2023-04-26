@@ -9,7 +9,7 @@ public class BuildFood : MonoBehaviour
     ItemHandler[] items;
     public string[] foodNames;
     public int[] quantities;
-	public float delayTime=10f;
+	public float delayTime;
     public GameObject ItemHolder;
 	public GameObject foodingUI,nonFoodingUI;
     public Slider foodSlider;

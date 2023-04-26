@@ -394,8 +394,8 @@ public class ExtShopManager : MonoBehaviour
         for (int i = 1; i <= decoration.prefabs.Length; i++)
         {
 
-            if (i == upgradeNo) decoration.prefabs[i - 1].SetActive(true);
-            else decoration.prefabs[i - 1].SetActive(false);
+            if (i == upgradeNo || i<upgradeNo) decoration.prefabs[i - 1].SetActive(true);
+          
         }
 
         if (upgradeNo < decoration.totalUpdates)
@@ -604,8 +604,8 @@ public class ExtShopManager : MonoBehaviour
         for (int i = 1; i <= vegetation.prefab.Length; i++)
         {
 
-            if (i == upgradeNo) vegetation.prefab[i - 1].SetActive(true);
-            else vegetation.prefab[i - 1].SetActive(false);
+            if (i == upgradeNo ||i<upgradeNo) vegetation.prefab[i - 1].SetActive(true);
+            
         }
 
         if (upgradeNo < vegetation.totalUpdates)
@@ -834,15 +834,16 @@ public class ExtShopManager : MonoBehaviour
 
     void WriteVehicleVisuals(int upgradeNo)
     {
-        for (int i = 1; i <= vehicle.prefabs.Length; i++)
+       
+        for (int i = 0; i < vehicle.prefabs.Length; i++)
         {
             if (i == upgradeNo)
             {
-               // Debug.Log("Vehcile pic changed");
-                vehicle.prefabs[i - 1].transform.gameObject.SetActive(true);
-                vehicle.currentSpeed = vehicle.speeds[i - 1];
+                Debug.LogWarning("Upgrande no is " + upgradeNo);
+                vehicle.prefabs[i ].transform.gameObject.SetActive(true);
+                vehicle.currentSpeed = vehicle.speeds[i];
             }
-            else vehicle.prefabs[i - 1].transform.gameObject.SetActive(false);
+            else vehicle.prefabs[i].transform.gameObject.SetActive(false);
         }
        // Debug.Log(vehicle.totalUpdates);
         //Changing Model Of TV
@@ -853,8 +854,8 @@ public class ExtShopManager : MonoBehaviour
 
         if (upgradeNo < vehicle.totalUpdates)
         {
-            vehicle.priceText.text = vehicle.coinsRequired[vehicle.currentUpgradeNo - 1].ToString();
-            vehicle.upgradeImageField.sprite = vehicle.upgradeSprites[upgradeNo - 1];
+            vehicle.priceText.text = vehicle.coinsRequired[vehicle.currentUpgradeNo ].ToString();
+            vehicle.upgradeImageField.sprite = vehicle.upgradeSprites[upgradeNo];
         }
         else if (upgradeNo == vehicle.totalUpdates)
         {
