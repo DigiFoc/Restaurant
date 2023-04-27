@@ -88,17 +88,17 @@ public class MarkerTrigger : MonoBehaviour
 
     void SubtractFoodItems()
     {
-        if (foodName == "samosa")
+        if (foodName == "Samosa")
             StockInventory.Instance.currentFoodStocks.samosa -= quntity;
 
-        if (foodName == "tea")
+        if (foodName == "Tea")
             StockInventory.Instance.currentFoodStocks.tea -= quntity;
 
 
-        if (foodName == "paneerTikka")
+        if (foodName == "PaneerTikka")
             StockInventory.Instance.currentFoodStocks.paneerTikka -= quntity;
 
-        if (foodName == "pakori")
+        if (foodName == "Pakori")
             StockInventory.Instance.currentFoodStocks.pakora -= quntity;
             
                

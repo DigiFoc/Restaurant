@@ -169,19 +169,19 @@ public class StockInventory : MonoBehaviour
     public int CalculateAmount(string foodItem, int quantity)
     {
 
-        if(foodItem == "samosa")
+        if(foodItem == "Samosa")
         {
             return quantity * costOfFoods.samosa;
         }
-        if (foodItem == "pakora")
+        if (foodItem == "Pakori")
         {
             return quantity * costOfFoods.pakora;
         }
-        if (foodItem == "paneerTikka")
+        if (foodItem == "PaneerTikka")
         {
             return quantity * costOfFoods.paneerTikka;
         }
-        if (foodItem == "tea")
+        if (foodItem == "Tea")
         {
             return quantity * costOfFoods.tea;
         }

@@ -357,12 +357,12 @@ public class CustomerAI : MonoBehaviour
         int newCoins = LevelManager.Instance.coins;
      
         countTime = false;
-        if (WaitingTime <= 30.0f)
+        if (WaitingTime <= 300.0f)
         {
             ratingStar = 3;
          
         }
-        if (WaitingTime > 30.0f && WaitingTime <= 60.0f)
+        if (WaitingTime > 300.0f && WaitingTime <= 500.0f)
         {
 
             ratingStar = 2;
@@ -370,7 +370,7 @@ public class CustomerAI : MonoBehaviour
          
         }
 
-        if (WaitingTime > 60.0f)
+        if (WaitingTime > 500.0f)
         {
             ratingStar = 1;
         

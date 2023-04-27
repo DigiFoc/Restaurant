@@ -80,15 +80,16 @@ public class FirstTimeManager : MonoBehaviour
 		if(Part==5)	
 		{
 			
-				NextBtn();
-				yield return null;///REMOVE WHEN BUILD
+				//NextBtn();
+				//yield return null;
+				//REMOVE WHEN BUILD
 			
-			/*yield return new WaitForSeconds(3f);
+			yield return new WaitForSeconds(3f);
 			
 			//Time.timeScale=0f;
 			TextHolder.transform.position=PlaceHolder[0].transform.position;
 			TextHolder.SetActive(true);
-			TextManager.Instance.CaptionTextHandler"Rotate Player's Camera by Swiping on Screen!";
+			TextManager.Instance.CaptionTextHandler("Tutorial","Rotate Player's Camera by Swiping on Screen!",Color.cyan);
 			bool done = false;
 			int temp = 0;
 			while(!done) // essentially a "while true", but with a bool to break out naturally
@@ -101,7 +102,7 @@ public class FirstTimeManager : MonoBehaviour
 					}
 						yield return null; // wait until next frame, then continue execution from here (loop continues)
 			}
-			NextBtnGO.SetActive(true);*/
+			NextBtnGO.SetActive(true);
 		}
 		if(Part==6)
 		{
