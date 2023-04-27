@@ -13,11 +13,11 @@ public class sceneSwitch : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("isLearnt", 0) == 0)
             {
-                SceneManager.LoadScene(1);
+                GetComponent<LoadASCENE>().OnStart(1);
             }
             else
             {
-                SceneManager.LoadScene(2);
+                GetComponent<LoadASCENE>().OnStart(2);
             }
         }
     }

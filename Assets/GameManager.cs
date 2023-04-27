@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-       
+        ChangeCoinsTo(60000);
     }
     
 

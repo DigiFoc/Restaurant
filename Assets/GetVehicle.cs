@@ -31,15 +31,25 @@ public class GetVehicle : MonoBehaviour
 
     void Start()
     {
+        ResetGaadi();
         currentVehicle = GameManager.Instance.currentVehicleUpgrade;
         Debug.Log(currentVehicle);
         CurrVehicle[currentVehicle - 1].SetActive(true);
         this.GetComponent<Animator>().speed = speeds[currentVehicle - 1];
     }
+    void ResetGaadi()
+    {
+        for (int i = 0; i < CurrVehicle.Length; i++)
+        {
+            CurrVehicle[i].SetActive(false);
+        }
+    }
     public void Restart()
     {
+        ResetGaadi();
         currentVehicle = GameManager.Instance.currentVehicleUpgrade;
         Debug.Log(currentVehicle);
+        
         CurrVehicle[currentVehicle - 1].SetActive(true);
         this.GetComponent<Animator>().speed = speeds[currentVehicle - 1];
     }

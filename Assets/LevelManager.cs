@@ -84,10 +84,10 @@ public TMP_Text statusText;
 
     void Start()
     {
-        if (GameManager.Instance.isLearnt() == false)
+        /*if (GameManager.Instance.isLearnt() == false)
         {
             TutorialGO.SetActive(true); 
-        }
+        }*/
 		coins=0;
 		CustNeedToSpawn=0;
 		coinTextBoxinFinal.text= "";
@@ -135,7 +135,7 @@ public TMP_Text statusText;
             counter += Time.deltaTime;
 
         float val = Mathf.Lerp(fromVal, toVal, counter / duration);
-        Debug.Log("Val: " + val);
+ 
 		coinsText.text=((int)val).ToString();
         yield return null;
     }
@@ -155,9 +155,8 @@ public TMP_Text statusText;
 			{
 			customerGenerator.GenerateCustomer();
 			}
-			//Debug.Log("Total Customers:"+currentLevel.totalCustomers + "Total Needed " +CustNeedToSpawn);
 			CustNeedToSpawn--;
-			Debug.Log("Total Customers:"+currentLevel.totalCustomers + "Total Needed " +CustNeedToSpawn);
+		
 
 
 			yield return new WaitForSeconds(Random.Range(3,7));
@@ -188,7 +187,6 @@ public TMP_Text statusText;
             starter.GenerateNextVehicle();
         
         }
-        Debug.Log("Traffic started");
         PC.GetComponent<PlayerController>().enabled = true;
         MenuManager.Instance.ChangeMenu("side");
         StartCoroutine(SpawnCust());

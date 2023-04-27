@@ -8,12 +8,19 @@ public class IntroScript : MonoBehaviour
     public GameObject Car;
     public GameObject Toshi;
     public GameObject Camera;
+    public GameObject SkipBtn;
+    public UnityEngine.Playables.PlayableDirector Director;
     int incrementor; 
     public void ChangeAyushParent()
     {
         Ayush.transform.parent = null;
     }
 
+    private void Start()
+    {
+        SkipBtn.SetActive(false);
+        Director.Play();
+    }
     public void ShowText()
     
     {
@@ -23,6 +30,8 @@ public class IntroScript : MonoBehaviour
             //TextSpeech.TextToSpeech.Instance.Setting("en-US", 0.9f, 1);
             //TextSpeech.TextToSpeech.Instance.StartSpeak( "Yes, Mom! I Have Reached!");
             TextManager.Instance.CaptionTextHandler("Nitin","Yes, Mom! I Have Reached!", Color.red);
+            SkipBtn.SetActive(true);
+
         }
         if (incrementor == 2)
         {
@@ -115,7 +124,13 @@ public class IntroScript : MonoBehaviour
         }
         if (incrementor == 24)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+            GetComponent<LoadASCENE>().OnStart(2);
         }
+    }
+
+    public void SkipScene()
+    {
+        Director.Stop();
+        GetComponent<LoadASCENE>().OnStart(2);
     }
 }

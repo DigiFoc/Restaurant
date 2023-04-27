@@ -784,6 +784,7 @@ public class ExtShopManager : MonoBehaviour
                 UpdateVehicleVisuals(vehicle.currentUpgradeNo);
                 vehicle.currentUpgradeNo++;
                 GameManager.Instance.SaveVehicleUpgrade(vehicle.currentUpgradeNo);
+                GetVehicle.Instance.Restart();
                 AdmobController.Instance.ShowInterstitialAd();
             }
             else
@@ -803,6 +804,7 @@ public class ExtShopManager : MonoBehaviour
         {
             if (i == upgradeNo)
             {
+                Debug.Log("Update number on Update function is" + upgradeNo);
                 vehicle.prefabs[i].transform.gameObject.SetActive(true);
                 vehicle.currentSpeed = vehicle.speeds[i];
             }
@@ -828,18 +830,17 @@ public class ExtShopManager : MonoBehaviour
             vehicle.allUpdatesDone.gameObject.SetActive(true);
 
         }
-		
+      
 
     }
-
     void WriteVehicleVisuals(int upgradeNo)
     {
        
         for (int i = 0; i < vehicle.prefabs.Length; i++)
         {
-            if (i == upgradeNo)
+            if (i == upgradeNo-1)
             {
-                Debug.LogWarning("Upgrande no is " + upgradeNo);
+                Debug.Log("Update number on Write function is" + upgradeNo);
                 vehicle.prefabs[i ].transform.gameObject.SetActive(true);
                 vehicle.currentSpeed = vehicle.speeds[i];
             }
@@ -876,7 +877,7 @@ public class ExtShopManager : MonoBehaviour
 
         }
 
-
+        GetVehicle.Instance.Restart();
     }
     #endregion
 
