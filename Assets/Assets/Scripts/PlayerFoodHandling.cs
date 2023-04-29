@@ -21,6 +21,7 @@ public class PlayerFoodHandling : MonoBehaviour
 
     public FoodPrefabs foodItems;
 
+
     [System.Serializable]
     public class IKConstraints
     {
@@ -33,11 +34,12 @@ public class PlayerFoodHandling : MonoBehaviour
     public IKConstraints PaneerTikkaIK;
     public IKConstraints PakoriIK;
     public IKConstraints UniversalTrayIK;
+    public IKConstraints broomIK;
 
     public static PlayerFoodHandling Instance { get; set; }
 
      Animator anim;
-
+    public bool broomIk = false;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -96,7 +98,7 @@ public class PlayerFoodHandling : MonoBehaviour
             anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
         }
 
-        if (currentFood == "Pakori")
+        if (currentFood == "Pakora")
         {
             //For Right Hand
             anim.SetIKPosition(AvatarIKGoal.RightHand, PakoriIK.RightHandEffector.transform.position);
@@ -138,6 +140,18 @@ public class PlayerFoodHandling : MonoBehaviour
             anim.SetIKRotation(AvatarIKGoal.LeftHand, UniversalTrayIK.LeftHandEffector.transform.rotation);
             anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
         }
+        if(broomIk)
+        {
+            anim.SetIKPosition(AvatarIKGoal.RightHand, broomIK.RightHandEffector.transform.position);
+            anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
+            anim.SetIKRotation(AvatarIKGoal.RightHand, broomIK.RightHandEffector.transform.rotation);
+            anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+            //For Left Hand
+            anim.SetIKPosition(AvatarIKGoal.LeftHand, broomIK.LeftHandEffector.transform.position);
+            anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
+            anim.SetIKRotation(AvatarIKGoal.LeftHand, broomIK.LeftHandEffector.transform.rotation);
+            anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
+        }
         else
         {
         
@@ -169,7 +183,7 @@ public class PlayerFoodHandling : MonoBehaviour
            
         }
 
-        if (food == "Pakori")
+        if (food == "Pakora")
         {
             foodItems.Pakora.SetActive(true);
            
@@ -208,7 +222,7 @@ public class PlayerFoodHandling : MonoBehaviour
 
         }
 
-        if (food == "Pakori")
+        if (food == "Pakora")
         {
             foodItems.Pakora.SetActive(false);
 
@@ -229,6 +243,12 @@ public class PlayerFoodHandling : MonoBehaviour
         }
 
     }
+
+
+
+    
+
+
 
 
 }

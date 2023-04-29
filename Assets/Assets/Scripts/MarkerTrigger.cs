@@ -74,10 +74,10 @@ public class MarkerTrigger : MonoBehaviour
                 return true;
             }
 
-        if (foodName == "Pakori")
+        if (foodName == "Pakora")
             if (StockInventory.Instance.currentFoodStocks.pakora >= quntity)
             {
-				Debug.Log("Pakori is less than needed");
+				Debug.Log("Pakora is less than needed");
                 return true;
             }
 
@@ -98,7 +98,7 @@ public class MarkerTrigger : MonoBehaviour
         if (foodName == "PaneerTikka")
             StockInventory.Instance.currentFoodStocks.paneerTikka -= quntity;
 
-        if (foodName == "Pakori")
+        if (foodName == "Pakora")
             StockInventory.Instance.currentFoodStocks.pakora -= quntity;
             
                

@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 using TextSpeech;
+using UnityEditor;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -16,10 +17,10 @@ public class CustomerAI : MonoBehaviour
     NavMeshAgent theAgent;
     CapsuleCollider theCollider;
     Animator anim;
-	SoundCollection mySounds;
-	AudioSource src;
-	bool isMoving;
-	
+    SoundCollection mySounds;
+    AudioSource src;
+    bool isMoving;
+
 
     [System.Serializable]
     public class Information
@@ -33,8 +34,9 @@ public class CustomerAI : MonoBehaviour
         public int quantity;
         public int amountToPay;
         public GameObject currentDestination;
+        public bool isServed = false;
+        public float cointDeduction = 0.0f;
 
-     
     }
     [SerializeField]
 
@@ -52,13 +54,13 @@ public class CustomerAI : MonoBehaviour
     public DestinationsInfo destinations;
     public HutsManager hutManager;
 
-
+    public GameObject[] dirtMakers;
     public int amount;
-  bool countTime = false;
+    bool countTime = false;
     public float WaitingTime;
     public int ratingStar;
     GameObject currentdestination;
-   
+
 
     private void Awake()
     {
@@ -73,23 +75,23 @@ public class CustomerAI : MonoBehaviour
 
         //SetDestination(destinations.RandomPlaces[0]);
         FindHut();
-		mySounds = this.GetComponent<AboutMe>().sounds;
-		src = this.GetComponent<AudioSource>();
-		theAgent.updateRotation = false;
+        mySounds = this.GetComponent<AboutMe>().sounds;
+        src = this.GetComponent<AudioSource>();
+        theAgent.updateRotation = false;
 
     }
 
 
     void Update()
     {
-        HandleAnimations();	
-		if (theAgent.velocity.sqrMagnitude > Mathf.Epsilon)
-{
-    transform.rotation = Quaternion.LookRotation(theAgent.velocity.normalized);
-}
+        HandleAnimations();
+        if (theAgent.velocity.sqrMagnitude > Mathf.Epsilon)
+        {
+            transform.rotation = Quaternion.LookRotation(theAgent.velocity.normalized);
+        }
 
-		
-		 
+
+
         if (countTime)
         {
             WaitingTime += Time.deltaTime;
@@ -108,14 +110,14 @@ public class CustomerAI : MonoBehaviour
     {
         if (theAgent.velocity != Vector3.zero)
         {
-			isMoving = true;
+            isMoving = true;
             anim.SetBool("Move", true);
         }
         else
-		{
-			isMoving=  false;
+        {
+            isMoving = false;
             anim.SetBool("Move", false);
-		}
+        }
     }
 
     public void FindHut()
@@ -128,7 +130,7 @@ public class CustomerAI : MonoBehaviour
     }
     public int FindEmptyHut()
     {
-		
+
         if (!hutManager.hut1.isOccupied)
         {
             SetDestination(hutManager.hut1.locationOfHut);
@@ -141,7 +143,7 @@ public class CustomerAI : MonoBehaviour
         if (!hutManager.hut2.isOccupied)
         {
             SetDestination(hutManager.hut2.locationOfHut);
-           hutManager.hut2.isOccupied = true;
+            hutManager.hut2.isOccupied = true;
             hutManager.hut2.customer = this.gameObject;
             hutManager.hut2.customerName = AI_Information.name;
             return 2;
@@ -181,9 +183,9 @@ public class CustomerAI : MonoBehaviour
 
         //Here we are also changing the values of huts occupied
         switch (AI_Information.hutNo)
-            {
+        {
             case 1:
-                hutManager.hut1.isAvailable = false ;
+                hutManager.hut1.isAvailable = false;
                 break;
             case 2:
                 hutManager.hut2.isAvailable = false;
@@ -235,7 +237,7 @@ public class CustomerAI : MonoBehaviour
           {
                AI_Information.quantity = UnityEngine.Random.Range(1, LevelManager.Instance.currentLevel.maxPaneerTikka+1);
           }
-          if(AI_Information.foodOrder.Equals("Pakori",StringComparison.OrdinalIgnoreCase))
+          if(AI_Information.foodOrder.Equals("Pakora",StringComparison.OrdinalIgnoreCase))
           {
                AI_Information.quantity = UnityEngine.Random.Range(1, LevelManager.Instance.currentLevel.maxPakori+1);
           }
@@ -261,7 +263,7 @@ public class CustomerAI : MonoBehaviour
         }
         else if (currentLevel.Requirements[custNo].pakori > 0)
         {
-            AI_Information.foodOrder = "Pakori";
+            AI_Information.foodOrder = "Pakora";
             AI_Information.quantity = currentLevel.Requirements[custNo].pakori;
         }
         else if (currentLevel.Requirements[custNo].tea > 0)
@@ -277,10 +279,10 @@ public class CustomerAI : MonoBehaviour
 
         AI_Information.amountToPay = StockInventory.Instance.CalculateAmount(AI_Information.foodOrder, AI_Information.quantity);
 
-		//PlayOrderFoodSound(AI_Information.foodOrder);
-		
+        //PlayOrderFoodSound(AI_Information.foodOrder);
+
         SetFoodOrderDisplay(AI_Information.foodOrder, AI_Information.quantity);
-		LevelManager.Instance.ShuruKrvaao();
+        LevelManager.Instance.ShuruKrvaao();
 
         if (AI_Information.hutNo == 1)
         {
@@ -338,7 +340,7 @@ public class CustomerAI : MonoBehaviour
         {
             foodString = "<sprite=9>";
         }
-        if (food == "Pakori")
+        if (food == "Pakora")
         {
             foodString = "<sprite=10>";
         }
@@ -355,31 +357,41 @@ public class CustomerAI : MonoBehaviour
     public void ServeFood()
     {
         int newCoins = LevelManager.Instance.coins;
-     
+
         countTime = false;
         if (WaitingTime <= 300.0f)
         {
             ratingStar = 3;
-         
+
         }
         if (WaitingTime > 300.0f && WaitingTime <= 500.0f)
         {
 
             ratingStar = 2;
-          
-         
+
+
         }
 
         if (WaitingTime > 500.0f)
         {
             ratingStar = 1;
-        
+
         }
 
+
+        AI_Information.isServed = true;
         Debug.Log("New coins are" + newCoins);
+        if (GameManager.Instance.garbageStatus != 0)
+        {
+            DirtDetected(GameManager.Instance.garbageStatus);
+        int coinsDedecuted = (int)(AI_Information.amountToPay * (AI_Information.cointDeduction / 100));
+        AI_Information.amountToPay = AI_Information.amountToPay - coinsDedecuted;
+        if (coinsDedecuted > 0)
+            TextManager.Instance.ShowToast("Coins dedecuted due to dirt" + coinsDedecuted, 2);
+        }
         newCoins += AI_Information.amountToPay;
         newCoins += CoinsIncreaseDueToUpgrade();//To Increase Amount Due To Upgrade
-        TextManager.Instance.ShowToast("Rs." + AI_Information.amountToPay + " transferred from A/C 5747575xxxx to your Bank Account./n Total Bal: Rs." + newCoins + " CR",3);
+        TextManager.Instance.ShowToast("Rs." + AI_Information.amountToPay + " transferred from A/C 5747575xxxx to your Bank Account./n Total Bal: Rs." + newCoins + " CR", 3);
         LevelManager.Instance.ChangeCoinsTo(newCoins);
 
         Invoke("CurtainOut", 5);
@@ -391,7 +403,7 @@ public class CustomerAI : MonoBehaviour
         anim.SetBool("Sit", false);
         currentdestination.GetComponent<BenchLocation>().curtainOff();
         Invoke("GetOut", 2);
-     
+
 
     }
     public void GetOut()
@@ -487,25 +499,45 @@ public class CustomerAI : MonoBehaviour
     {
         LevelManager.Instance.CustomerReached(ratingStar);
     }
-	
-	public void PlayOrderFoodSound(string food)
-	{
-		if(food.Equals("Samosa",  System.StringComparison.OrdinalIgnoreCase))
-		{
-			src.PlayOneShot(mySounds.askingForSamosa[0]);
-		}
-		if(food.Equals("paneerTikka",  System.StringComparison.OrdinalIgnoreCase))
-		{
-			src.PlayOneShot(mySounds.askingForPaneerTikka[0]);
-		}
-		if(food.Equals("pakori",  System.StringComparison.OrdinalIgnoreCase))
-		{
-			src.PlayOneShot(mySounds.askingForPakori[0]);
-		}
-			if(food.Equals("tea",  System.StringComparison.OrdinalIgnoreCase))
-		{
-			src.PlayOneShot(mySounds.askingForTea[0]);
-		}
-	}
-   
+
+    public void PlayOrderFoodSound(string food)
+    {
+        if (food.Equals("Samosa", System.StringComparison.OrdinalIgnoreCase))
+        {
+            src.PlayOneShot(mySounds.askingForSamosa[0]);
+        }
+        if (food.Equals("paneerTikka", System.StringComparison.OrdinalIgnoreCase))
+        {
+            src.PlayOneShot(mySounds.askingForPaneerTikka[0]);
+        }
+        if (food.Equals("pakori", System.StringComparison.OrdinalIgnoreCase))
+        {
+            src.PlayOneShot(mySounds.askingForPakori[0]);
+        }
+        if (food.Equals("tea", System.StringComparison.OrdinalIgnoreCase))
+        {
+            src.PlayOneShot(mySounds.askingForTea[0]);
+        }
+    }
+
+    public void DirtDetected(int count)
+    {
+            switch (count)
+            {
+                case 2:
+                case 3:
+                    AI_Information.cointDeduction = 0.25f;
+                    break;
+                case 4:
+                case 5:
+                    AI_Information.cointDeduction = 0.5f;
+                    break;
+                case 6:
+                case 7:
+                    AI_Information.cointDeduction = 0.75f;
+                    break;
+
+            }
+        
+    }
 }

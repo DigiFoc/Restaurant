@@ -30,15 +30,19 @@ public class BenchLocation : MonoBehaviour
     {
         if (other.tag == "Customer")
         {
-            theAgent = other.GetComponent<NavMeshAgent>();
-            anim = other.GetComponent<Animator>();
-            theAgent.enabled = false;
-            lookAt = true;
-            this.other = other.gameObject;
-            anim.SetBool("Sit", true);
-            curtain.GetComponent<Animator>().enabled = true;
-            curtain.GetComponent<Animator>().SetBool("true",true);
-            StartCoroutine(ThinkAndOrder(other));
+            if (other.GetComponent<CustomerAI>().AI_Information.isServed == false)
+            {
+                Debug.Log("This", gameObject);
+                theAgent = other.GetComponent<NavMeshAgent>();
+                anim = other.GetComponent<Animator>();
+                theAgent.enabled = false;
+                lookAt = true;
+                this.other = other.gameObject;
+                anim.SetBool("Sit", true);
+                curtain.GetComponent<Animator>().enabled = true;
+                curtain.GetComponent<Animator>().SetBool("true", true);
+                StartCoroutine(ThinkAndOrder(other));
+            }
          
         }
     }

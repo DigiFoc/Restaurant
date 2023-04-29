@@ -458,15 +458,15 @@ public class ReceiptGenerator : MonoBehaviour
 		}
     }
 
-    public void AddPakori(int count)
+    public void AddPakora(int count)
     {
        
         DisableCookWarning();
-        string Objname = "Pakori";
+        string Objname = "Pakora";
         int childrenCount = FoodTextHolder.transform.childCount;
 		if(childrenCount==0)
 		{
-			 if (!FoodEngine.Instance.buildFood("Pakori", count))
+			 if (!FoodEngine.Instance.buildFood("Pakora", count))
                 {
 
                     StartCoroutine("ShowCookWarning");
@@ -487,7 +487,7 @@ public class ReceiptGenerator : MonoBehaviour
 				if (FoodTextHolder.transform.GetChild(i).name == Objname)
 				{
 					
-					if (!FoodEngine.Instance.buildFood("Pakori", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
+					if (!FoodEngine.Instance.buildFood("Pakora", FoodTextHolder.transform.GetChild(i).GetComponent<ItemHandler>().quantity + count ))
 					{
 
 						StartCoroutine("ShowCookWarning");
@@ -499,7 +499,7 @@ public class ReceiptGenerator : MonoBehaviour
 				}
 			}
 				
-			if (!FoodEngine.Instance.buildFood("Pakori", count)) ///Applied when Slot is more then 1
+			if (!FoodEngine.Instance.buildFood("Pakora", count)) ///Applied when Slot is more then 1
 			{
 
 				StartCoroutine("ShowCookWarning");

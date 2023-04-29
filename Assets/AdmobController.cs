@@ -48,6 +48,7 @@ public class AdmobController : MonoBehaviour
     }
     void Start()
     {
+        AdScriptStarter();
     }
     void AdScriptStarter()
     { 
@@ -392,9 +393,9 @@ public class AdmobController : MonoBehaviour
             {
                 UnityMainThread.wkr.AddJob(() =>
                 {
-                    //GameManager.Instance.IncreaseCoin(100);
+                    GameManager.Instance.AddCoins(50);
                     //ErrorText.text = ErrorText.text + "Worked";
-                    newCoinsGetText.text = "+200";
+                    newCoinsGetText.text = "+50";
                     newCoinsGetBox.SetActive(true);
                     adsCounter++;
                     PlayerPrefs.SetInt("AdsCounter", adsCounter);

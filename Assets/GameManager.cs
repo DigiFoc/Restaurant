@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public int globalCoins;
     public int lastUnlockedLevel;
 	public TMP_Text coinText;
+    public int garbageStatus = 0;
 	
     public GameObject ExtShopManager;
     private void Awake()
@@ -32,7 +33,6 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-        ChangeCoinsTo(60000);
     }
     
 
@@ -43,6 +43,10 @@ public class GameManager : MonoBehaviour
     }
     public void SaveLevel(int level)
     {
+       if(level < PlayerPrefs.GetInt("Level"))
+        {
+            return;
+        }
         PlayerPrefs.SetInt("Level", level+1);
         Debug.Log("Saved level"+level);
 

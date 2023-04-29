@@ -10,7 +10,7 @@ public class DirtMaker : MonoBehaviour
     public Material HighDirt;
 	
 	public MeshRenderer myMesh;
-	int count=0;
+	public int count=0;
     void Start()
     {
         myMesh=GetComponent<MeshRenderer>();
@@ -47,6 +47,10 @@ public class DirtMaker : MonoBehaviour
 	{
 		if(actor.tag=="Customer"||actor.tag=="Player")
 		{
+			if(actor.tag == "Customer")
+            {
+				actor.gameObject.GetComponent<CustomerAI>().DirtDetected(count);
+            }
 			count++;
 			 CheckCount();
 		}
@@ -54,6 +58,9 @@ public class DirtMaker : MonoBehaviour
 		{
 			count=0;
 			 CheckCount();
+			GameManager.Instance.garbageStatus = 00000;
 		}
+		if(GameManager.Instance.garbageStatus <count)
+		GameManager.Instance.garbageStatus = count;
 	}
 }

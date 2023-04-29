@@ -88,7 +88,7 @@ public class FoodEngine : MonoBehaviour
 
         }
 
-        if (food == "Pakori")
+        if (food == "Pakora")
         {
             bool isValid = checkConditionForPakora(quantity);
             //Debug.Log("Pakora valid" + isValid);

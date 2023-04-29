@@ -20,7 +20,7 @@ public class BuildFood : MonoBehaviour
     {
         foodingUI.SetActive(true);
 		nonFoodingUI.SetActive(false);
-        delayTime = 30f;
+       
         foodSlider.value = 100f;
 		
     }
@@ -91,7 +91,7 @@ public class BuildFood : MonoBehaviour
     }
     public void SetDelayTime()
     {
-        delayTime = delayTime/(GameManager.Instance.currentMachineUpgrade+1);
+        delayTime = 30f/(GameManager.Instance.currentMachineUpgrade+1);
 		Debug.Log("DelayTime"+delayTime);
     }
 

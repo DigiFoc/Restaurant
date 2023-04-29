@@ -148,7 +148,7 @@ public class StockInventory : MonoBehaviour
 		if(maxPaneerTikka>0)
 			itemsAvaible.Add("PaneerTikka");
 		if(maxPakori>0)
-			itemsAvaible.Add("Pakori");
+			itemsAvaible.Add("Pakora");
 		
         int foodNo = Random.Range(0,itemsAvaible.Count);
         **/
@@ -173,7 +173,7 @@ public class StockInventory : MonoBehaviour
         {
             return quantity * costOfFoods.samosa;
         }
-        if (foodItem == "Pakori")
+        if (foodItem == "Pakora")
         {
             return quantity * costOfFoods.pakora;
         }
@@ -247,7 +247,7 @@ public class StockInventory : MonoBehaviour
                 return false;
         }
 
-        if (foodName.Equals("Pakori", System.StringComparison.OrdinalIgnoreCase))
+        if (foodName.Equals("Pakora", System.StringComparison.OrdinalIgnoreCase))
         {
             if (currentFoodStocks.pakora >= quantity)
                 return true;

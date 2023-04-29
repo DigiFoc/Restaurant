@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class PlayerController : MonoBehaviour
 {
-    [HideInInspector()]
+   
     public NavMeshAgent theAgent;
     [HideInInspector()]
     public Animator anim;
@@ -145,7 +145,9 @@ public class PlayerController : MonoBehaviour
     {
         trackPath = true;
        transform.LookAt(destination.transform.position);
+        Debug.Log("This", gameObject);
         theAgent.SetDestination(destination.position);
+       
     }
 
    

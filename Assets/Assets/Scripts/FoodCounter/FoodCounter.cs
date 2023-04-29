@@ -67,7 +67,7 @@ public class FoodCounter : MonoBehaviour
 			teaReady=true;
         }
 
-        else if (food == "Pakori")
+        else if (food == "Pakora")
         {
             if (pakoriReady)
             {
@@ -125,7 +125,7 @@ public class FoodCounter : MonoBehaviour
 			teaReady=false;
         }
 
-        else if (food == "Pakori"&&pakoriReady== true)
+        else if (food == "Pakora"&&pakoriReady== true)
         {
             Destroy(GameObject.Find("PakoriModel"));
 			pakoriReady=false;

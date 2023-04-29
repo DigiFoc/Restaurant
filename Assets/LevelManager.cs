@@ -57,6 +57,7 @@ public TMP_Text statusText;
 	public Text coinsText;
 	public TMP_Text coinTextBoxinFinal;
     public GameObject TutorialGO;
+    public int timeSpeed;
 
     public VehicleStarter[] vehicleStarer;
     private void Awake()
@@ -88,10 +89,11 @@ public TMP_Text statusText;
         {
             TutorialGO.SetActive(true); 
         }*/
-		coins=0;
+        coins =0;
 		CustNeedToSpawn=0;
 		coinTextBoxinFinal.text= "";
         levelStarted = false;
+        Time.timeScale = timeSpeed;
         //SetLevel(LevelNo);
         //customerGenerator.GenerateCustomer(currentLevel.totalCustomers);
     }

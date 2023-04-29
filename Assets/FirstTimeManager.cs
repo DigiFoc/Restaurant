@@ -18,11 +18,11 @@ public class FirstTimeManager : MonoBehaviour
 	public GameObject VehicleSlider;
 	public GameObject foodSlider;
 	[Range(1,5)]
-	public int timeSpeed;
+	
 	public int Part=0;
     void Start()
     {
-		Time.timeScale=timeSpeed;
+		
        ArrowHandler.SetActive(false);
 	   NextBtnGO.SetActive(true);
 	   StartCoroutine(StartTutorial());

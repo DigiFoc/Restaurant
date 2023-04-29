@@ -274,7 +274,7 @@ public class KitchenPanel : MonoBehaviour
             return "<sprite=08>";
         if (food.Equals("PaneerTikka", System.StringComparison.OrdinalIgnoreCase))
             return "<sprite=09>";
-        if (food.Equals("Pakori", System.StringComparison.OrdinalIgnoreCase))
+        if (food.Equals("Pakora", System.StringComparison.OrdinalIgnoreCase))
             return "<sprite=10>";
         if (food.Equals("Tea", System.StringComparison.OrdinalIgnoreCase))
             return "<sprite=11>";
