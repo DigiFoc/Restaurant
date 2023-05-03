@@ -44,7 +44,7 @@ public class PlayerPrefsManager : MonoBehaviour
         }
         if (name == "speed")
         {
-            Time.timeScale =int.Parse(speed.Desired.text);
+            Time.timeScale =float.Parse(speed.Desired.text);
             speed.current.text = Time.timeScale.ToString();
         }
     }

@@ -44,12 +44,14 @@ public class OrderGoods : MonoBehaviour
     IEnumerator OrderGoooods()
     {
         MenuManager.Instance.ChangeMenu("side");
+        totalPrice = 0;
         yield return new WaitForSeconds(0.5f);
         bool temp = BuildFoood();
         currSlots.CurrSlots = 0;
 
         if (!temp)
         {
+            totalPrice = 0;
             TextManager.Instance.ShowToast("Coins are not enough", 2);
             yield return new WaitForSeconds(0.1f);
             foreach (Transform child in ItemHolder.transform)

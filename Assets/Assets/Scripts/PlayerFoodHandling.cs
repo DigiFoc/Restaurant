@@ -84,7 +84,7 @@ public class PlayerFoodHandling : MonoBehaviour
             anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
         }
 
-        if (currentFood == "PaneerTikka")
+        else if (currentFood == "PaneerTikka")
         {
             //For Right Hand
             anim.SetIKPosition(AvatarIKGoal.RightHand, PaneerTikkaIK.RightHandEffector.transform.position);
@@ -98,7 +98,7 @@ public class PlayerFoodHandling : MonoBehaviour
             anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
         }
 
-        if (currentFood == "Pakora")
+        else if (currentFood == "Pakora")
         {
             //For Right Hand
             anim.SetIKPosition(AvatarIKGoal.RightHand, PakoriIK.RightHandEffector.transform.position);
@@ -113,7 +113,7 @@ public class PlayerFoodHandling : MonoBehaviour
 
         }
 
-        if (currentFood == "Tea")
+        else if (currentFood == "Tea")
         {
             //For Right Hand
             anim.SetIKPosition(AvatarIKGoal.RightHand, TeaIK.RightHandEffector.transform.position);
@@ -127,7 +127,7 @@ public class PlayerFoodHandling : MonoBehaviour
             anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
 
         }
-        if (currentFood == "UniversalFood")
+        else if (currentFood == "UniversalFood")
         {
             //For Right Hand
             anim.SetIKPosition(AvatarIKGoal.RightHand, UniversalTrayIK.RightHandEffector.transform.position);
@@ -140,7 +140,7 @@ public class PlayerFoodHandling : MonoBehaviour
             anim.SetIKRotation(AvatarIKGoal.LeftHand, UniversalTrayIK.LeftHandEffector.transform.rotation);
             anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
         }
-        if(broomIk)
+        else if(broomIk)
         {
             anim.SetIKPosition(AvatarIKGoal.RightHand, broomIK.RightHandEffector.transform.position);
             anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);

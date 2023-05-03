@@ -51,14 +51,17 @@ public class DirtMaker : MonoBehaviour
             {
 				actor.gameObject.GetComponent<CustomerAI>().DirtDetected(count);
             }
-			count++;
-			 CheckCount();
+			if (count < 7)
+			{
+				count++;
+			}
+				CheckCount();
 		}
 		if(actor.tag=="Cleaner")
 		{
 			count=0;
 			 CheckCount();
-			GameManager.Instance.garbageStatus = 00000;
+			GameManager.Instance.garbageStatus = 0;
 		}
 		if(GameManager.Instance.garbageStatus <count)
 		GameManager.Instance.garbageStatus = count;

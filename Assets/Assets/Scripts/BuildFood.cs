@@ -10,9 +10,11 @@ public class BuildFood : MonoBehaviour
     public string[] foodNames;
     public int[] quantities;
 	public float delayTime;
+    public GameObject AOSliderHolder;
     public GameObject ItemHolder;
 	public GameObject foodingUI,nonFoodingUI;
     public Slider foodSlider;
+    public Slider foodSlider2;
 	public KitchenPanel kPanel;
 	
 	
@@ -22,7 +24,8 @@ public class BuildFood : MonoBehaviour
 		nonFoodingUI.SetActive(false);
        
         foodSlider.value = 100f;
-		
+        foodSlider2.value = 100f;
+        AOSliderHolder.SetActive(false);
     }
 
 
@@ -60,8 +63,10 @@ public class BuildFood : MonoBehaviour
         }
 		foodingUI.SetActive(false);
 		nonFoodingUI.SetActive(true);
-		TextManager.Instance.ShowToast("Starts Cooking", 2);
+        AOSliderHolder.SetActive(true);
+        TextManager.Instance.ShowToast("Starts Cooking", 2);
 		foodSlider.maxValue=(int)delayTime;
+		foodSlider2.maxValue=(int)delayTime;
 		 for (int i = 0; i < items.Length; i++)
         {		
                FoodEngine.Instance.RemoveFoodIngre(foodNames[i], quantities[i]);	 
@@ -70,9 +75,10 @@ public class BuildFood : MonoBehaviour
 		{
 		yield return new WaitForSeconds(1);
 		foodSlider.value=i+1;
+		foodSlider2.value=i+1;
 		}
-		
-		
+
+        AOSliderHolder.SetActive(false);
         for (int i = 0; i < items.Length; i++)
         {			
 				FoodEngine.Instance.AddFood(foodNames[i], quantities[i]);	

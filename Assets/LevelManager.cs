@@ -58,6 +58,9 @@ public TMP_Text statusText;
 	public TMP_Text coinTextBoxinFinal;
     public GameObject TutorialGO;
     public int timeSpeed;
+    public int totalPayable, totalDeducted, finalAmount,coinsDueToUpgrade;
+    public TMP_Text totalPayabletext, totalDeductedtext, finalAmountexy,coinsDueToUpgradetext;
+    public List<int> customerId = new List<int>();
 
     public VehicleStarter[] vehicleStarer;
     private void Awake()
@@ -254,7 +257,10 @@ public TMP_Text statusText;
 
     void ShowEndScreen()
     {
-        
+        totalDeductedtext.text = totalDeducted.ToString();
+        totalPayabletext.text = totalPayable.ToString();
+        coinsDueToUpgradetext.text = coinsDueToUpgrade.ToString();
+        finalAmountexy.text = finalAmount.ToString();
         EndScreen.SetActive(true);
         EndScreentimeCurrent.text = currMin.ToString("00") + ":" + currSec.ToString("00");
         EndScreentimeRequired.text = min.ToString("00") + ":" + sec.ToString("00");

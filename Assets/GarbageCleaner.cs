@@ -14,7 +14,6 @@ public class GarbageCleaner : MonoBehaviour
     }
 
     // Update is called once per frame
-    [System.Obsolete]
     private void OnTriggerEnter(Collider other)
     {
        
@@ -25,8 +24,7 @@ public class GarbageCleaner : MonoBehaviour
                 Player = other.gameObject;
                 other.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled=false;
                 other.gameObject.GetComponent<PlayerFoodHandling>().broomIk = true;
-                GarbageObj.SetActive(true);
-                garbageWala.Play();
+                
                 StartCoroutine(StartGarbage());
             }
             else
@@ -39,6 +37,9 @@ public class GarbageCleaner : MonoBehaviour
 
     IEnumerator StartGarbage()
     {
+        yield return new WaitForSeconds(0.2f);
+        GarbageObj.SetActive(true);
+        garbageWala.Play();
         isRecentlyUsed = true;
         yield return new WaitForSeconds(30f);
         isRecentlyUsed = false;

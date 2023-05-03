@@ -356,7 +356,7 @@ public class CustomerAI : MonoBehaviour
 
     public void ServeFood()
     {
-        int newCoins = LevelManager.Instance.coins;
+        //int newCoins = LevelManager.Instance.coins;
 
         countTime = false;
         if (WaitingTime <= 300.0f)
@@ -378,23 +378,47 @@ public class CustomerAI : MonoBehaviour
 
         }
 
-
+        if (!LevelManager.Instance.customerId.Contains(AI_Information.custNumber))
+        {
+            LevelManager.Instance.totalPayable += AI_Information.amountToPay;
+            Debug.Log("TotalPayableSent" + AI_Information.custNumber);
+            LevelManager.Instance.customerId.Add(AI_Information.custNumber);
+        }
         AI_Information.isServed = true;
-        Debug.Log("New coins are" + newCoins);
+       // Debug.Log("New coins are" + newCoins);
         if (GameManager.Instance.garbageStatus != 0)
         {
             DirtDetected(GameManager.Instance.garbageStatus);
         int coinsDedecuted = (int)(AI_Information.amountToPay * (AI_Information.cointDeduction / 100));
+            Debug.Log(coinsDedecuted);
+            //Sirf Amount
         AI_Information.amountToPay = AI_Information.amountToPay - coinsDedecuted;
         if (coinsDedecuted > 0)
             TextManager.Instance.ShowToast("Coins dedecuted due to dirt" + coinsDedecuted, 2);
+            if (LevelManager.Instance.customerId.Contains(AI_Information.custNumber))
+            {
+                LevelManager.Instance.totalDeducted += coinsDedecuted;
+            }
         }
-        newCoins += AI_Information.amountToPay;
-        newCoins += CoinsIncreaseDueToUpgrade();//To Increase Amount Due To Upgrade
-        TextManager.Instance.ShowToast("Rs." + AI_Information.amountToPay + " transferred from A/C 5747575xxxx to your Bank Account./n Total Bal: Rs." + newCoins + " CR", 3);
-        LevelManager.Instance.ChangeCoinsTo(newCoins);
+        //Amount + Deduction
+        //newCoins += AI_Information.amountToPay;
+        AI_Information.amountToPay += CoinsIncreaseDueToUpgrade();//To Increase Amount Due To Upgrade
+        //Amount with Upgrades and Deductions
 
+        //AI_Information.amountToPay += CoinsIncreaseDueToUpgrade();
+        if (LevelManager.Instance.customerId.Contains(AI_Information.custNumber))
+        {
+            LevelManager.Instance.coinsDueToUpgrade += CoinsIncreaseDueToUpgrade();
+        }
+        TextSpeech.TextToSpeech.Instance.StartSpeak(AI_Information.amountToPay+ " Coins Received from "+ AI_Information.name);
+        TextManager.Instance.ShowToast("Rs." + AI_Information.amountToPay + " transferred from A/C 5747575xxxx to your Bank Account./n Total Bal: Rs." + AI_Information.amountToPay + " CR", 3);
+        LevelManager.Instance.AddCoins(AI_Information.amountToPay);
+        if (LevelManager.Instance.customerId.Contains(AI_Information.custNumber))
+        {
+            LevelManager.Instance.finalAmount += AI_Information.amountToPay;
+        }
         Invoke("CurtainOut", 5);
+
 
     }
 
@@ -526,15 +550,15 @@ public class CustomerAI : MonoBehaviour
             {
                 case 2:
                 case 3:
-                    AI_Information.cointDeduction = 0.25f;
+                    AI_Information.cointDeduction = 10f;
                     break;
                 case 4:
                 case 5:
-                    AI_Information.cointDeduction = 0.5f;
+                    AI_Information.cointDeduction = 15f;
                     break;
                 case 6:
                 case 7:
-                    AI_Information.cointDeduction = 0.75f;
+                    AI_Information.cointDeduction = 20f;
                     break;
 
             }
