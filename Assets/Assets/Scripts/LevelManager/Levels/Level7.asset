@@ -16,7 +16,7 @@ MonoBehaviour:
   totalCustomers: 4
   consecCustomers: 2
   totalLevelTime: 360
-  avgRatingReq: 3.5
+  avgRatingReq: 9
   isCompleted: 0
   givenCoins: 60
   Requirements:

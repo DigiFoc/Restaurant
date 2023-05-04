@@ -137,10 +137,21 @@ public class PlayerController : MonoBehaviour
                 SetDestination(Destinations[6]);
             }
         }
+        if (placeName == "Garbage")
+        {
+            if (Destinations.Length > 2 && Destinations[2] != null)
+            {
+                currentDestination = 7;
+                SetDestination(Destinations[8]);
+            }
+        }
 
-       
+
     }
-
+    public void GoToGarbage(Transform destination)
+    {
+        MoveTo("Garbage");
+    }
     public void SetDestination(Transform destination)
     {
         trackPath = true;

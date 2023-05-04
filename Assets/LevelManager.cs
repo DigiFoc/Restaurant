@@ -61,7 +61,7 @@ public TMP_Text statusText;
     public int totalPayable, totalDeducted, finalAmount,coinsDueToUpgrade;
     public TMP_Text totalPayabletext, totalDeductedtext, finalAmountexy,coinsDueToUpgradetext;
     public List<int> customerId = new List<int>();
-
+    public GameObject BGSound;
     public VehicleStarter[] vehicleStarer;
     private void Awake()
     {
@@ -73,7 +73,7 @@ public TMP_Text statusText;
         {
             _instance = this;
         }
-        
+        BGSound.SetActive(false);
     }
     public void CustomerReached(int opinion)
     {
@@ -170,8 +170,9 @@ public TMP_Text statusText;
 	}
     public void SetLevel(int levelNumber)
     {
-		
+        ReceiptGenerator.Instance.StartUpgradeCheck();
         SoundManager.Instance.PlaySound("tap");
+        BGSound.SetActive(true);
         int currentNumber = levelNumber - 1;
         currentLevel = levels[currentNumber];
 		ChangeCoinsTo(currentLevel.givenCoins);

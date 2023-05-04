@@ -11,7 +11,7 @@ public class TextManager : MonoBehaviour
     public int OffSet;
     public TMPro.TMP_Text Heading;
     public GameObject TextHolder;
-    public int CaptiontextTime=5;
+    public float CaptiontextTime=5f;
 
     string tempHeading;
     string tempIncomingText;
@@ -116,7 +116,7 @@ public class TextManager : MonoBehaviour
             tempIncomingText = incomingText;
             tempColorShad = shadee;
             tempPopup = popup;
-            Invoke("StartCaption", 5);
+            Invoke("StartCaption", 5f);
         }
     }
 

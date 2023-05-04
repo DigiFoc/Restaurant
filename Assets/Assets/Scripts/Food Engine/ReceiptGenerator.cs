@@ -23,7 +23,7 @@ public class ReceiptGenerator : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            //Destroy(this);
+            Destroy(this);
         }
         else
         {
@@ -35,6 +35,11 @@ public class ReceiptGenerator : MonoBehaviour
     {
         GrandTotal.text = "Total Rs. 0";
 		buildBtn.SetActive(false);
+        StartCoroutine(DetectSlots());
+    }
+
+    public void StartUpgradeCheck()
+    {
         StartCoroutine(DetectSlots());
     }
     IEnumerator DetectSlots()
