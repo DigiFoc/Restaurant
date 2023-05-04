@@ -87,7 +87,9 @@ public class BuildFood : MonoBehaviour
         }
 		kPanel.CalculateHutInfo();
 		kPanel.SetHutInfo();
-		TextManager.Instance.ShowToast( "Cooking Done", 2);	
+        TextManager.Instance.CaptiontextTime = 2;
+        TextManager.Instance.CaptionTextHandler("Notification","Cooking Done! Check Kitchen to Serve!", Color.blue, true);
+
         StockInventory.Instance.UpdateFoodStockUI();
 		closeButton();        
 		foodingUI.SetActive(true);

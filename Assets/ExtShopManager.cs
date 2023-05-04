@@ -20,6 +20,7 @@ public class ExtShopManager : MonoBehaviour
         public GameObject priceShowingObject;
         public TMP_Text priceText;
         public Image[] updateDots;
+        public GameObject bellIcon;
         public Sprite updateCompleteDot, updateNotCompletedDot;
     }
     [SerializeField]
@@ -39,28 +40,13 @@ public class ExtShopManager : MonoBehaviour
         public GameObject priceShowingObject;
         public TMP_Text priceText;
         public Image[] updateDots;
+        public GameObject bellIcon;
         public Sprite updateCompleteDot, updateNotCompletedDot;
     }
     [SerializeField]
 
 
-    [System.Serializable]
-    public class StorageUpgrade
-    {
-        public GameObject[] prefabs;
-        public int[] levelsReq;
-        public int currentUpgradeNo = 0;
-        public int totalUpdates;
-        public int[] coinsRequired;
-        public Image upgradeImageField;
-        public Sprite[] upgradeSprites;
-        public Image allUpdatesDone;
-        public GameObject priceShowingObject;
-        public TMP_Text priceText;
-        public Image[] updateDots;
-        public Sprite updateCompleteDot, updateNotCompletedDot;
-    }
-    [SerializeField]
+    
 
 
     [System.Serializable]
@@ -77,6 +63,7 @@ public class ExtShopManager : MonoBehaviour
         public GameObject priceShowingObject;
         public TMP_Text priceText;
         public Image[] updateDots;
+        public GameObject bellIcon;
         public Sprite updateCompleteDot, updateNotCompletedDot;
     }
     [SerializeField]
@@ -95,6 +82,7 @@ public class ExtShopManager : MonoBehaviour
         public GameObject priceShowingObject;
         public TMP_Text priceText;
         public Image[] updateDots;
+        public GameObject bellIcon;
         public Sprite updateCompleteDot, updateNotCompletedDot;
 
     }
@@ -114,6 +102,7 @@ public class ExtShopManager : MonoBehaviour
         public GameObject priceShowingObject;
         public TMP_Text priceText;
         public Image[] updateDots;
+        public GameObject bellIcon;
         public Sprite updateCompleteDot, updateNotCompletedDot;
     }
     [SerializeField]
@@ -135,6 +124,7 @@ public class ExtShopManager : MonoBehaviour
         public GameObject priceShowingObject;
         public TMP_Text priceText;
         public Image[] updateDots;
+        public GameObject bellIcon;
         public Sprite updateCompleteDot, updateNotCompletedDot;
     }
     [SerializeField]
@@ -153,6 +143,7 @@ public class ExtShopManager : MonoBehaviour
         public GameObject priceShowingObject;
         public TMP_Text priceText;
         public Image[] updateDots;
+        public GameObject bellIcon;
         public Sprite updateCompleteDot, updateNotCompletedDot;
     }
     [SerializeField]
@@ -179,7 +170,9 @@ public class ExtShopManager : MonoBehaviour
     public FoodMachineUpdate foodMachine;
     [Space(5)]
     [Header("Storage Update")]
-    public StorageUpgrade storage;
+    
+
+    public GameObject updateAvailbleImage;
 
 
 
@@ -210,6 +203,8 @@ public class ExtShopManager : MonoBehaviour
         WriteVehicleVisuals(vehicle.currentUpgradeNo);
         WriteFoodMachineVisuals(foodMachine.currentUpgradeNo);
        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+        CheckInAnyUpgradeAvailable();
     }
 
 
@@ -219,8 +214,8 @@ public class ExtShopManager : MonoBehaviour
 
         if (tv.currentUpgradeNo >= tv.totalUpdates)
         {
-           // Debug.Log("CHAL GYAA TV");
-            ShowMessage("All Updates Done", 2);
+            TextManager.Instance.CaptiontextTime = 3;
+            TextManager.Instance.CaptionTextHandler("Alert", "You already have Latest Upgrades!", Color.blue, true);
             return;
         }
 
@@ -233,20 +228,24 @@ public class ExtShopManager : MonoBehaviour
             {
 
                 UpdateTVVisuals(tv.currentUpgradeNo);
+                GameManager.Instance.AddCoins(-tv.coinsRequired[tv.currentUpgradeNo]);
                 tv.currentUpgradeNo++;
                 GameManager.Instance.SaveTVUpgrade(tv.currentUpgradeNo);
+                CheckInAnyUpgradeAvailable();
                 AdmobController.Instance.ShowInterstitialAd();
             }
             else
             {
                 //Debug.Log("Coins not sufficinet");
-                ShowMessage("Coins Are Not Suffiecient", 2);
+                TextManager.Instance.CaptiontextTime = 3;
+                TextManager.Instance.CaptionTextHandler("Alert", "No Enough Coins to Purchase!", Color.blue, true);
+
             }
         }
         else
         {
-           // Debug.Log("Levels not Sufficient");
-            ShowMessage("Levels Required :" + tv.levelsReq[0], 2);
+            TextManager.Instance.CaptiontextTime = 3;
+            TextManager.Instance.CaptionTextHandler("Alert", "You Need Level "+tv.levelsReq[tv.currentUpgradeNo], Color.blue, true);
         }
     }
 
@@ -327,7 +326,8 @@ public class ExtShopManager : MonoBehaviour
     {
         if (decoration.currentUpgradeNo >= decoration.totalUpdates)
         {
-            ShowMessage("All Updates Done", 2);
+            TextManager.Instance.CaptiontextTime = 3;
+            TextManager.Instance.CaptionTextHandler("Alert", "You already have Latest Upgrades!", Color.blue, true);
             return;
         }
 
@@ -339,20 +339,22 @@ public class ExtShopManager : MonoBehaviour
             {
 
                 UpdatedecorationVisuals(decoration.currentUpgradeNo);
+                GameManager.Instance.AddCoins(-decoration.coinsRequired[decoration.currentUpgradeNo]);
                 decoration.currentUpgradeNo++;
                 GameManager.Instance.SaveHeartUpgrade(decoration.currentUpgradeNo);
+                CheckInAnyUpgradeAvailable();
                 AdmobController.Instance.ShowInterstitialAd();
             }
             else
             {
-              //  Debug.Log("Coins Not Sufficient");
-                ShowMessage("Coins Are Not Suffiecient", 2);
+                TextManager.Instance.CaptiontextTime = 3;
+                TextManager.Instance.CaptionTextHandler("Alert", "No Enough Coins to Purchase!", Color.blue, true);
             }
         }
         else
         {
-          //  Debug.Log("Levels Not Sufficient");
-            ShowMessage("Levels Required :" + decoration.levelsReq[0], 2);
+            TextManager.Instance.CaptiontextTime = 3;
+            TextManager.Instance.CaptionTextHandler("Alert", "You Need Level " + decoration.levelsReq[decoration.currentUpgradeNo], Color.blue, true);
         }
     }
 
@@ -434,7 +436,8 @@ public class ExtShopManager : MonoBehaviour
     {
         if (soundSystem.currentUpgradeNo >= soundSystem.totalUpdates)
         {
-            ShowMessage("All Updates Done", 2);
+            TextManager.Instance.CaptiontextTime = 3;
+            TextManager.Instance.CaptionTextHandler("Alert", "You already have Latest Upgrades!", Color.blue, true);
             return;
         }
 
@@ -446,20 +449,22 @@ public class ExtShopManager : MonoBehaviour
             {
 
                 UpdateSoundSystemVisuals(soundSystem.currentUpgradeNo);
+                GameManager.Instance.AddCoins(-soundSystem.coinsRequired[soundSystem.currentUpgradeNo]);
                 soundSystem.currentUpgradeNo++;
                 GameManager.Instance.SaveSpeakerUpgrade(soundSystem.currentUpgradeNo);
+                CheckInAnyUpgradeAvailable();
                 AdmobController.Instance.ShowInterstitialAd();
             }
             else
             {
-              //  Debug.Log("Coins are not sufficient");
-                ShowMessage("Coins Are Not Suffiecient", 2);
+                TextManager.Instance.CaptiontextTime = 3;
+                TextManager.Instance.CaptionTextHandler("Alert", "No Enough Coins to Purchase!", Color.blue, true);
             }
         }
         else
         {
-           // Debug.Log("Levels are not sufficient");
-            ShowMessage("Levels Required :" + decoration.levelsReq[0], 2);
+            TextManager.Instance.CaptiontextTime = 3;
+            TextManager.Instance.CaptionTextHandler("Alert", "You Need Level " + soundSystem.levelsReq[soundSystem.currentUpgradeNo], Color.blue, true);
         }
     }
 
@@ -538,7 +543,8 @@ public class ExtShopManager : MonoBehaviour
     {
         if (vegetation.currentUpgradeNo >= vegetation.totalUpdates)
         {
-            ShowMessage("All Updates Done", 2);
+            TextManager.Instance.CaptiontextTime = 3;
+            TextManager.Instance.CaptionTextHandler("Alert", "You already have Latest Upgrades!", Color.blue, true);
             return;
         }
 
@@ -550,20 +556,23 @@ public class ExtShopManager : MonoBehaviour
             {
 
                 UpdateVegetationVisuals(vegetation.currentUpgradeNo);
+                GameManager.Instance.AddCoins(-vegetation.coinsRequired[vegetation.currentUpgradeNo]);
                 vegetation.currentUpgradeNo++;
                 GameManager.Instance.SaveVaseUpgrade(vegetation.currentUpgradeNo);
+                CheckInAnyUpgradeAvailable();
                 AdmobController.Instance.ShowInterstitialAd();
             }
             else
             {
-                Debug.Log("Coins are not sufficient");
-                ShowMessage("Coins Are Not Suffiecient", 2);
+                TextManager.Instance.CaptiontextTime = 3;
+                TextManager.Instance.CaptionTextHandler("Alert", "No Enough Coins to Purchase!", Color.blue, true);
             }
         }
         else
         {
-          //  Debug.Log("Levels are not sufficient");
-            ShowMessage("Levels Required :" + decoration.levelsReq[0], 2);
+            TextManager.Instance.CaptiontextTime = 3;
+            TextManager.Instance.CaptionTextHandler("Alert", "You Need Level " + vegetation.levelsReq[vegetation.currentUpgradeNo], Color.blue, true);
+
         }
     }
 
@@ -641,7 +650,8 @@ public class ExtShopManager : MonoBehaviour
     {
         if (wallArt.currentUpgradeNo >= wallArt.totalUpdates)
         {
-            ShowMessage("All Updates Done", 2);
+            TextManager.Instance.CaptiontextTime = 3;
+            TextManager.Instance.CaptionTextHandler("Alert", "You already have Latest Upgrades!", Color.blue, true);
             return;
         }
 
@@ -653,20 +663,23 @@ public class ExtShopManager : MonoBehaviour
             {
 
                 UpdateWallArtVisuals(wallArt.currentUpgradeNo);
+                GameManager.Instance.AddCoins(-wallArt.coinsRequired[wallArt.currentUpgradeNo]);
                 wallArt.currentUpgradeNo++;
                 GameManager.Instance.SaveWallArtUpgrade(wallArt.currentUpgradeNo);
+                CheckInAnyUpgradeAvailable();
                 AdmobController.Instance.ShowInterstitialAd();
             }
             else
 			{
-                Debug.Log("Coins are not sufficient");
-                ShowMessage("Coins Are Not Suffiecient", 2);
+                TextManager.Instance.CaptiontextTime = 3;
+                TextManager.Instance.CaptionTextHandler("Alert", "No Enough Coins to Purchase!", Color.blue, true);
             }
         }
         else
         {
-            Debug.Log("Levels are not sufficient");
-            ShowMessage("Levels Required :" + decoration.levelsReq[0], 2);
+            TextManager.Instance.CaptiontextTime = 3;
+            TextManager.Instance.CaptionTextHandler("Alert", "You Need Level " + wallArt.levelsReq[wallArt.currentUpgradeNo], Color.blue, true);
+
         }
     }
 
@@ -770,7 +783,8 @@ public class ExtShopManager : MonoBehaviour
     {
         if (vehicle.currentUpgradeNo >= vehicle.totalUpdates)
         {
-            ShowMessage("All Updates Done", 2);
+            TextManager.Instance.CaptiontextTime = 3;
+            TextManager.Instance.CaptionTextHandler("Alert", "You already have Latest Upgrades!", Color.blue, true);
             return;
         }
 
@@ -782,19 +796,24 @@ public class ExtShopManager : MonoBehaviour
             {
 
                 UpdateVehicleVisuals(vehicle.currentUpgradeNo);
+                GameManager.Instance.AddCoins(-vehicle.coinsRequired[vehicle.currentUpgradeNo]);
                 vehicle.currentUpgradeNo++;
                 GameManager.Instance.SaveVehicleUpgrade(vehicle.currentUpgradeNo);
                 GetVehicle.Instance.Restart();
+                CheckInAnyUpgradeAvailable();
                 AdmobController.Instance.ShowInterstitialAd();
             }
             else
             {
-                ShowMessage("Coins Are Not Suffiecient", 2);
+                TextManager.Instance.CaptiontextTime = 3;
+                TextManager.Instance.CaptionTextHandler("Alert", "No Enough Coins to Purchase!", Color.blue, true);
             }
         }
         else
-            ShowMessage("Levels Required :" + decoration.levelsReq[0], 2);
-
+        {
+            TextManager.Instance.CaptiontextTime = 3;
+            TextManager.Instance.CaptionTextHandler("Alert", "You Need Level " + vehicle.levelsReq[vehicle.currentUpgradeNo], Color.blue, true);
+        }
     }
 
     void UpdateVehicleVisuals(int upgradeNo)
@@ -886,7 +905,8 @@ public class ExtShopManager : MonoBehaviour
     {
         if (foodMachine.currentUpgradeNo >= foodMachine.totalUpdates)
         {
-            ShowMessage("All Updates Done", 2);
+            TextManager.Instance.CaptiontextTime = 3;
+            TextManager.Instance.CaptionTextHandler("Alert", "You already have Latest Upgrades!", Color.blue, true);
             return;
         }
 
@@ -898,20 +918,22 @@ public class ExtShopManager : MonoBehaviour
             {
 
                 UpdateFoodMachineVisuals(foodMachine.currentUpgradeNo);
+                GameManager.Instance.AddCoins(-foodMachine.coinsRequired[foodMachine.currentUpgradeNo]);
                 foodMachine.currentUpgradeNo++;
                 GameManager.Instance.SaveMachineUpgrade(foodMachine.currentUpgradeNo);
+                CheckInAnyUpgradeAvailable();
                 AdmobController.Instance.ShowInterstitialAd();
             }
             else
             {
-                Debug.Log("Coins are not sufficient");
-                ShowMessage("Coins Are Not Suffiecient", 2);
+                TextManager.Instance.CaptiontextTime = 3;
+                TextManager.Instance.CaptionTextHandler("Alert", "No Enough Coins to Purchase!", Color.blue, true);
             }
         }
         else
         {
-            Debug.Log("Levels are not sufficient");
-            ShowMessage("Levels Required :" + decoration.levelsReq[0], 2);
+            TextManager.Instance.CaptiontextTime = 3;
+            TextManager.Instance.CaptionTextHandler("Alert", "You Need Level " + foodMachine.levelsReq[foodMachine.currentUpgradeNo], Color.blue, true);
         }
     }
 
@@ -986,7 +1008,102 @@ public class ExtShopManager : MonoBehaviour
 
     #endregion
 
+    #region CheckUpgrades
 
+    public void CheckInAnyUpgradeAvailable()
+    {
+        if (CheckAnyIfAnyUpgradeAvailableCoditions())
+            updateAvailbleImage.SetActive(true);
+        else
+            updateAvailbleImage.SetActive(false); 
+    }
+    public bool CheckAnyIfAnyUpgradeAvailableCoditions()
+    {
+        int temp = 0;
+        if (tv.levelsReq[tv.currentUpgradeNo ] <= GetCurrentLevel())
+        {
+            if (tv.coinsRequired[tv.currentUpgradeNo] <= GetTotalCoins())
+            {
+                tv.bellIcon.SetActive(true);
+                Debug.LogWarning("TV");
+                temp++;
+            }
+        }
+        else tv.bellIcon.SetActive(false);
+
+        if (vehicle.levelsReq[vehicle.currentUpgradeNo ] <= GetCurrentLevel())
+        {
+            if (vehicle.coinsRequired[vehicle.currentUpgradeNo ] <= GetTotalCoins())
+            {
+                Debug.LogWarning("Vehcile");
+                vehicle.bellIcon.SetActive(true);
+                temp++;
+            }
+        }
+        else vehicle.bellIcon.SetActive(false);
+
+        if (decoration.levelsReq[decoration.currentUpgradeNo ] <= GetCurrentLevel())
+        {
+            if (decoration.coinsRequired[decoration.currentUpgradeNo ] <= GetTotalCoins())
+            {
+                Debug.LogWarning("Dec");
+                decoration.bellIcon.SetActive(true);
+                temp++;
+            }
+        }
+        else decoration.bellIcon.SetActive(false);
+
+        if (wallArt.levelsReq[wallArt.currentUpgradeNo ] <= GetCurrentLevel())
+        {
+            if (wallArt.coinsRequired[wallArt.currentUpgradeNo] <= GetTotalCoins())
+            {
+                Debug.LogWarning("WA");
+                wallArt.bellIcon.SetActive(true);
+                temp++;
+            }
+        }
+        else  wallArt.bellIcon.SetActive(false);
+
+
+        if (vegetation.levelsReq[vegetation.currentUpgradeNo +1] <= GetCurrentLevel())
+        {
+            if (vegetation.coinsRequired[vegetation.currentUpgradeNo +1] <= GetTotalCoins())
+            {
+                Debug.LogWarning("Veg");
+                vegetation.bellIcon.SetActive(true);
+                temp++;
+            }
+        }
+        else vegetation.bellIcon.SetActive(false);
+
+        if (soundSystem.levelsReq[soundSystem.currentUpgradeNo] <= GetCurrentLevel())
+        {
+            if (soundSystem.coinsRequired[soundSystem.currentUpgradeNo] <= GetTotalCoins())
+            {
+                Debug.LogWarning("SS");
+                soundSystem.bellIcon.SetActive(true);
+                temp++;
+            }
+        }
+        else soundSystem.bellIcon.SetActive(false);
+
+
+        if (foodMachine.levelsReq[foodMachine.currentUpgradeNo ] <= GetCurrentLevel())
+        {
+            if (foodMachine.coinsRequired[foodMachine.currentUpgradeNo ] <= GetTotalCoins())
+            {
+                Debug.LogWarning("FM");
+                foodMachine.bellIcon.SetActive(true);
+                temp++;
+            }
+        }
+        else foodMachine.bellIcon.SetActive(false);
+
+        if (temp > 0)
+            return true;
+        return false;
+    }
+    #endregion
 
     #region BasicFunction
     public int GetTotalCoins()
@@ -995,8 +1112,8 @@ public class ExtShopManager : MonoBehaviour
     }
     public int GetCurrentLevel()
     {
-        //return GameManager.Instance.lastUnlockedLevel;
-        return 500;
+        return GameManager.Instance.lastUnlockedLevel;
+        
     }
     public void SetFoodSpeed(int speed)
     {

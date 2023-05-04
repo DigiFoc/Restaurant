@@ -20,6 +20,7 @@ public class CustomerAI : MonoBehaviour
     SoundCollection mySounds;
     AudioSource src;
     bool isMoving;
+    int coinsDedecuted;
 
 
     [System.Serializable]
@@ -276,6 +277,7 @@ public class CustomerAI : MonoBehaviour
             TextSpeech.TextToSpeech.Instance.StartSpeak("Enteries in level Manager misMatch" + currentLevel.levelNum);
         }
 
+        TextManager.Instance.CaptionTextHandler("Alert","New Order Recieved from Hut No."+ AI_Information.hutNo+ "<br> Name- "+AI_Information.name+ "<br>Order- " + AI_Information.foodOrder + " <br>Quantity- " + AI_Information.quantity +" . ", Color.red,true);
 
         AI_Information.amountToPay = StockInventory.Instance.CalculateAmount(AI_Information.foodOrder, AI_Information.quantity);
 
@@ -383,13 +385,16 @@ public class CustomerAI : MonoBehaviour
             LevelManager.Instance.totalPayable += AI_Information.amountToPay;
             Debug.Log("TotalPayableSent" + AI_Information.custNumber);
             LevelManager.Instance.customerId.Add(AI_Information.custNumber);
+
         }
+        int FoodCost= AI_Information.amountToPay;
+       
         AI_Information.isServed = true;
        // Debug.Log("New coins are" + newCoins);
         if (GameManager.Instance.garbageStatus != 0)
         {
             DirtDetected(GameManager.Instance.garbageStatus);
-        int coinsDedecuted = (int)(AI_Information.amountToPay * (AI_Information.cointDeduction / 100));
+        coinsDedecuted = (int)(AI_Information.amountToPay * (AI_Information.cointDeduction / 100));
             Debug.Log(coinsDedecuted);
             //Sirf Amount
         AI_Information.amountToPay = AI_Information.amountToPay - coinsDedecuted;
@@ -411,7 +416,9 @@ public class CustomerAI : MonoBehaviour
             LevelManager.Instance.coinsDueToUpgrade += CoinsIncreaseDueToUpgrade();
         }
         TextSpeech.TextToSpeech.Instance.StartSpeak(AI_Information.amountToPay+ " Coins Received from "+ AI_Information.name);
-        TextManager.Instance.ShowToast("Rs." + AI_Information.amountToPay + " transferred from A/C 5747575xxxx to your Bank Account./n Total Bal: Rs." + AI_Information.amountToPay + " CR", 3);
+       
+        
+        TextManager.Instance.CaptionTextHandler(AI_Information.name," Food Cost- " + FoodCost +" Coins"+ "<br> Rating- " + ratingStar + "<br>Deduction- " + coinsDedecuted + " <br> Extra Vibes- " + CoinsIncreaseDueToUpgrade() + "<br> Total Paid- " + AI_Information.amountToPay, Color.red, true);
         LevelManager.Instance.AddCoins(AI_Information.amountToPay);
         if (LevelManager.Instance.customerId.Contains(AI_Information.custNumber))
         {

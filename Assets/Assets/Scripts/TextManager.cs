@@ -10,6 +10,16 @@ public class TextManager : MonoBehaviour
     public TMPro.TMP_Text txt;
     public int OffSet;
     public TMPro.TMP_Text Heading;
+    public GameObject TextHolder;
+    public int CaptiontextTime=5;
+
+    string tempHeading;
+    string tempIncomingText;
+    Color tempColorShad;
+    bool tempPopup;
+
+
+    bool isCaptionBusy;
     public static TextManager Instance { get; set; }
     
     private void Awake()
@@ -25,8 +35,10 @@ public class TextManager : MonoBehaviour
     }
 
     void Start()
-    { 
-    
+    {
+        TextHolder.SetActive(false);
+        txt.text = "";
+        Heading.text = "";
     }
     public void ShowToast(string incomingText, int time)
     {
@@ -82,14 +94,37 @@ public class TextManager : MonoBehaviour
         tempTime = 0;
     
     }
-
-    public void CaptionTextHandler(string headingText,string incomingText,Color shadee)
+    void StartCaption()
     {
-        StartCoroutine(RevealText(headingText,incomingText, shadee));
+
+        CaptionTextHandler(tempHeading, tempIncomingText, tempColorShad, tempPopup);
+    }
+    public void CaptionTextHandler(string headingText,string incomingText,Color shadee, bool popup)
+    {
+        if (!popup)
+        {
+            StartCoroutine(RevealText(headingText, incomingText, shadee, popup));
+            return;
+        }
+        if (!isCaptionBusy)
+        {
+            StartCoroutine(RevealText(headingText, incomingText, shadee, popup));
+        }
+        else
+        {
+            tempHeading = headingText;
+            tempIncomingText = incomingText;
+            tempColorShad = shadee;
+            tempPopup = popup;
+            Invoke("StartCaption", 5);
+        }
     }
 
-    IEnumerator RevealText(string headeen,string texty,Color shade)
+    IEnumerator RevealText(string headeen,string texty,Color shade, bool popup)
     {
+        yield return new WaitForSeconds(0.1f);
+        isCaptionBusy = true;
+        TextHolder.SetActive(true);
         Heading.text = headeen;
         Heading.color = shade;
         var originalString = texty.ToString();
@@ -126,9 +161,20 @@ public class TextManager : MonoBehaviour
             yield return new WaitForSeconds(0.03f);
         }
         txt.text= texty.ToString();
+        if (popup)
+        {
+            yield return new WaitForSeconds(CaptiontextTime);
+            txt.text = "";
+            Heading.text = "";
+            TextHolder.SetActive(false);
+            isCaptionBusy = false;
+        }
+        CaptiontextTime = 5;
     }
     void CaptionsCheck()
     {
         rt.sizeDelta = new Vector2(rt.rect.width, txt.preferredHeight + Heading.preferredHeight+OffSet);
     }
+
+    
 }
