@@ -50,10 +50,12 @@ public class GarbageCleaner : MonoBehaviour
     {
 
         Player.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+        GameManager.Instance.CleanEverything();
+        GameManager.Instance.garbageStatus = 0;
         Player.gameObject.GetComponent<PlayerFoodHandling>().broomIk = false;
         garbageWala.Stop();
         GarbageObj.SetActive(false);
-      
+        
 
     }
 }

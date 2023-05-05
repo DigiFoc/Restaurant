@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviour
     public int lastUnlockedLevel;
 	public TMP_Text coinText;
     public int garbageStatus = 0;
-	
+
+
+    public GameObject GarbageLayersParent;
     public GameObject ExtShopManager;
     private void Awake()
     {
@@ -157,8 +159,8 @@ public class GameManager : MonoBehaviour
         coinText.text = newCoins.ToString();
         SaveGlobalCoins(newCoins);
 	}
-	
-	/*IEnumerator changeValueOverTime(float fromVal, float toVal, float duration)
+
+    /*IEnumerator changeValueOverTime(float fromVal, float toVal, float duration)
 {
     float counter = 0f;
 
@@ -177,6 +179,17 @@ public class GameManager : MonoBehaviour
 	
 }*/
 
+
+    public void CleanEverything()
+    {
+        for (int i =1; i <= GarbageLayersParent.transform.childCount; i++)
+        {
+            GarbageLayersParent.transform.GetChild(i-1).GetComponent<DirtMaker>().Cleaner();
+        }
+
+
+    
+    }
 }
 
 

@@ -12,7 +12,7 @@ public class TextManager : MonoBehaviour
     public TMPro.TMP_Text Heading;
     public GameObject TextHolder;
     public float CaptiontextTime=5f;
-
+    public GameObject CloseBtn;
     string tempHeading;
     string tempIncomingText;
     Color tempColorShad;
@@ -32,11 +32,13 @@ public class TextManager : MonoBehaviour
         {
             Instance = this;
         }
+        
     }
 
     void Start()
     {
         TextHolder.SetActive(false);
+        CloseBtn.SetActive(false);
         txt.text = "";
         Heading.text = "";
     }
@@ -101,6 +103,7 @@ public class TextManager : MonoBehaviour
     }
     public void CaptionTextHandler(string headingText,string incomingText,Color shadee, bool popup)
     {
+        CloseBtn.SetActive(false);
         if (!popup)
         {
             StartCoroutine(RevealText(headingText, incomingText, shadee, popup));
@@ -163,6 +166,7 @@ public class TextManager : MonoBehaviour
         txt.text= texty.ToString();
         if (popup)
         {
+            CloseBtn.SetActive(true);
             yield return new WaitForSeconds(CaptiontextTime);
             txt.text = "";
             Heading.text = "";
@@ -174,6 +178,16 @@ public class TextManager : MonoBehaviour
     void CaptionsCheck()
     {
         rt.sizeDelta = new Vector2(rt.rect.width, txt.preferredHeight + Heading.preferredHeight+OffSet);
+    }
+
+    public void CloseCaptions()
+    {
+        txt.text = "";
+        Heading.text = "";
+        TextHolder.SetActive(false);
+        isCaptionBusy = false;
+
+        CaptiontextTime = 5f;
     }
 
     

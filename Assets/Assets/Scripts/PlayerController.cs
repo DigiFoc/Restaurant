@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Destinations.Length > 2 && Destinations[2] != null)
             {
-                currentDestination = 7;
+                currentDestination = 8;
                 SetDestination(Destinations[8]);
             }
         }
@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour
     public void SetDestination(Transform destination)
     {
         trackPath = true;
-       transform.LookAt(destination.transform.position);
+       //transform.LookAt(destination.transform.position);
         Debug.Log("This", gameObject);
         theAgent.SetDestination(destination.position);
        

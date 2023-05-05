@@ -170,6 +170,7 @@ public TMP_Text statusText;
 	}
     public void SetLevel(int levelNumber)
     {
+        TextManager.Instance.CloseCaptions();
         ReceiptGenerator.Instance.StartUpgradeCheck();
         SoundManager.Instance.PlaySound("tap");
         BGSound.SetActive(true);

@@ -1013,13 +1013,21 @@ public class ExtShopManager : MonoBehaviour
     public void CheckInAnyUpgradeAvailable()
     {
         if (CheckAnyIfAnyUpgradeAvailableCoditions())
+        {
             updateAvailbleImage.SetActive(true);
+            TextManager.Instance.CaptiontextTime = 6f;
+            TextManager.Instance.CaptionTextHandler("Alert", "New Upgrades are Avaiable! <br> If You Don't Update , It may increase the Level time and may results in Level Failure!", Color.blue, true);
+
+        }
         else
-            updateAvailbleImage.SetActive(false); 
+        {
+            updateAvailbleImage.SetActive(false);
+        }
     }
     public bool CheckAnyIfAnyUpgradeAvailableCoditions()
     {
         int temp = 0;
+        if(tv.currentUpgradeNo < tv.levelsReq.Length)
         if (tv.levelsReq[tv.currentUpgradeNo ] <= GetCurrentLevel())
         {
             if (tv.coinsRequired[tv.currentUpgradeNo] <= GetTotalCoins())
@@ -1031,7 +1039,8 @@ public class ExtShopManager : MonoBehaviour
         }
         else tv.bellIcon.SetActive(false);
 
-        if (vehicle.levelsReq[vehicle.currentUpgradeNo ] <= GetCurrentLevel())
+        if (vehicle.currentUpgradeNo < vehicle.levelsReq.Length)
+            if (vehicle.levelsReq[vehicle.currentUpgradeNo ] <= GetCurrentLevel())
         {
             if (vehicle.coinsRequired[vehicle.currentUpgradeNo ] <= GetTotalCoins())
             {
@@ -1041,8 +1050,8 @@ public class ExtShopManager : MonoBehaviour
             }
         }
         else vehicle.bellIcon.SetActive(false);
-
-        if (decoration.levelsReq[decoration.currentUpgradeNo ] <= GetCurrentLevel())
+        if (decoration.currentUpgradeNo < decoration.levelsReq.Length)
+            if (decoration.levelsReq[decoration.currentUpgradeNo ] <= GetCurrentLevel())
         {
             if (decoration.coinsRequired[decoration.currentUpgradeNo ] <= GetTotalCoins())
             {
@@ -1052,8 +1061,8 @@ public class ExtShopManager : MonoBehaviour
             }
         }
         else decoration.bellIcon.SetActive(false);
-
-        if (wallArt.levelsReq[wallArt.currentUpgradeNo ] <= GetCurrentLevel())
+        if (wallArt.currentUpgradeNo < wallArt.levelsReq.Length)
+            if (wallArt.levelsReq[wallArt.currentUpgradeNo ] <= GetCurrentLevel())
         {
             if (wallArt.coinsRequired[wallArt.currentUpgradeNo] <= GetTotalCoins())
             {
@@ -1064,8 +1073,8 @@ public class ExtShopManager : MonoBehaviour
         }
         else  wallArt.bellIcon.SetActive(false);
 
-
-        if (vegetation.levelsReq[vegetation.currentUpgradeNo +1] <= GetCurrentLevel())
+        if (vegetation.currentUpgradeNo < vegetation.levelsReq.Length)
+            if (vegetation.levelsReq[vegetation.currentUpgradeNo +1] <= GetCurrentLevel())
         {
             if (vegetation.coinsRequired[vegetation.currentUpgradeNo +1] <= GetTotalCoins())
             {
@@ -1075,8 +1084,8 @@ public class ExtShopManager : MonoBehaviour
             }
         }
         else vegetation.bellIcon.SetActive(false);
-
-        if (soundSystem.levelsReq[soundSystem.currentUpgradeNo] <= GetCurrentLevel())
+        if (soundSystem.currentUpgradeNo < soundSystem.levelsReq.Length)
+            if (soundSystem.levelsReq[soundSystem.currentUpgradeNo] <= GetCurrentLevel())
         {
             if (soundSystem.coinsRequired[soundSystem.currentUpgradeNo] <= GetTotalCoins())
             {
@@ -1087,8 +1096,8 @@ public class ExtShopManager : MonoBehaviour
         }
         else soundSystem.bellIcon.SetActive(false);
 
-
-        if (foodMachine.levelsReq[foodMachine.currentUpgradeNo ] <= GetCurrentLevel())
+        if (foodMachine.currentUpgradeNo < foodMachine.levelsReq.Length)
+            if (foodMachine.levelsReq[foodMachine.currentUpgradeNo ] <= GetCurrentLevel())
         {
             if (foodMachine.coinsRequired[foodMachine.currentUpgradeNo ] <= GetTotalCoins())
             {
