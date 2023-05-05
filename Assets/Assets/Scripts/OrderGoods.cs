@@ -91,8 +91,8 @@ public class OrderGoods : MonoBehaviour
             TextManager.Instance.ShowToast("Recieved", 2);
 			SetButtonStatus(false);
             SoundManager.Instance.PlaySound("horn");
-        TextManager.Instance.CaptiontextTime = 2;
-        TextManager.Instance.CaptionTextHandler("Notification", "Vehicle Reached! Check Inventory.", Color.blue, true);
+            TextManager.Instance.CaptiontextTime = 2;
+            TextManager.Instance.CaptionTextHandler("Notification", "Vehicle Reached! Check Inventory.", Color.blue, true);
         for (int i = 0; i < items.Length; i++)
         {
             StockInventory.Instance.AddStocks(itemNames[i], quantities[i]);

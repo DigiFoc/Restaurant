@@ -17,6 +17,8 @@ public class ReceiptGenerator : MonoBehaviour
     public GameObject limitWarning2;
     public GameObject cannotCookWarning;
     public GameObject buildBtn;
+    public TMP_Text CurrFoodSlotsText;
+    public TMP_Text CurrShopSlotsText;
 
     public static ReceiptGenerator Instance { get; set; }
     private void Awake()
@@ -35,6 +37,7 @@ public class ReceiptGenerator : MonoBehaviour
     {
         GrandTotal.text = "Total Rs. 0";
 		buildBtn.SetActive(false);
+       
         StartCoroutine(DetectSlots());
     }
 
@@ -46,8 +49,17 @@ public class ReceiptGenerator : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         ShopMaxSlots = GameManager.Instance.currentVehicleUpgrade + 1;
-        FoodMaxSlots = GameManager.Instance.currentMachineUpgrade + 2;
+        if (GameManager.Instance.currentMachineUpgrade == 1 || GameManager.Instance.currentMachineUpgrade == 2)
+        {
+            FoodMaxSlots = 1;
+        }
+        else if (GameManager.Instance.currentMachineUpgrade == 3)
+        {
+            FoodMaxSlots = 2;
+        }
         Debug.Log("Shop Slots=" + ShopMaxSlots + " and Food Slots=" + FoodMaxSlots);
+        CurrShopSlotsText.text = "Free Slots:- " + (ShopMaxSlots);
+        CurrFoodSlotsText.text = "Free Slots:- " + (FoodMaxSlots);
     }
  
     public void MakeAmount() 
@@ -67,14 +79,18 @@ public class ReceiptGenerator : MonoBehaviour
         }
         GrandTotal.text = "Total Rs. " + amount.ToString();
         CurrSlots = childrenCount;
-		CheckBtn();
+        CurrShopSlotsText.text = "Free Slots:- " + (ShopMaxSlots - CurrSlots);
+
+        CheckBtn();
 		
     }
 
 	public void CheckBtn()
 	{
 		int childrenCount = FoodTextHolder.transform.childCount;
-		if(childrenCount>0)
+        CurrFoodSlotsText.text = "Slots- " + (FoodMaxSlots - childrenCount);
+
+        if (childrenCount>0)
 		{
 			buildBtn.SetActive(true);	
 		}
@@ -386,8 +402,9 @@ public class ReceiptGenerator : MonoBehaviour
 				ItemManager.GetComponent<ItemHandler>().name = Objname;
 				ItemManager.GetComponent<ItemHandler>().AssignIcon("<sprite=11>");
 				ItemManager.GetComponent<ItemHandler>().AssignPrice(10);
-				ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count); 
-			}
+				ItemManager.GetComponent<ItemHandler>().IncreaseQuantity(count);
+                CurrFoodSlotsText.text = "Slots- " + (FoodMaxSlots - CurrSlots);
+            }
 			else
 			{
 				StartCoroutine(ShowFoodWarning());
