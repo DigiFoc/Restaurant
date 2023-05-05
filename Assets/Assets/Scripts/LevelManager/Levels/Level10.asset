@@ -15,10 +15,10 @@ MonoBehaviour:
   levelNum: 10
   totalCustomers: 5
   consecCustomers: 2
-  totalLevelTime: 360
+  totalLevelTime: 300
   avgRatingReq: 3
   isCompleted: 0
-  givenCoins: 0
+  givenCoins: 45
   Requirements:
   - paneerTikka: 0
     samosa: 3

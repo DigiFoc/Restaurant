@@ -18,5 +18,5 @@ MonoBehaviour:
   totalLevelTime: 240
   avgRatingReq: 4
   isCompleted: 0
-  givenCoins: 0
+  givenCoins: 35
   Requirements: []
