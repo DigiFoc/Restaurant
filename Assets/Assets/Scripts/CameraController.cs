@@ -50,7 +50,7 @@ public class CameraController : MonoBehaviour
         transform.eulerAngles = targetRotation;
 
 
-        transform.position = target.position - transform.forward * distanceFromPlayer;
+      //  transform.position = target.position - transform.forward * distanceFromPlayer;
     }
      
     public void RagdollEnabled()

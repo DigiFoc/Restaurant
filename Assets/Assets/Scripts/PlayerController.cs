@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
 
-    public bool enableMobileControls = false;
+   
     public Transform playerCamera;
     public FixedJoystick joystick;
     public NavMeshAgent theAgent;
@@ -48,16 +48,15 @@ public class PlayerController : MonoBehaviour
              }
         }
 
-        Vector2 input = Vector2.zero;
-        if (enableMobileControls)
-        {
-            input = new Vector2(joystick.input.x ,joystick.input.y);
-        }
-        else
-        {
-            input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        }
-        Vector2 inputDir = input.normalized;
+        Vector2 joystickInput = Vector2.zero;
+        Vector2 keyboardInput = Vector2.zero;
+        
+         joystickInput = new Vector2(joystick.input.x ,joystick.input.y);
+        
+      
+            keyboardInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        
+        Vector2 inputDir = joystickInput.normalized + keyboardInput.normalized;
 
         if(inputDir != Vector2.zero)
         {
