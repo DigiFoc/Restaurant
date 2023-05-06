@@ -23,6 +23,7 @@ public class FootStepsManager : MonoBehaviour
 
     void PlayFootStepSound()
     {
+      
         source.volume = volume;
         source.PlayOneShot(audioClip);
     }

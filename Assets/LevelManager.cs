@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance { get { return _instance; } }
     public CustomerGenerator customerGenerator;
     public PlayerController PC;
+    public GameObject joyStick;
     public List<Level> levels;
     public Level currentLevel;
     public int currentRating;
@@ -195,6 +196,7 @@ public TMP_Text statusText;
         
         }
         PC.GetComponent<PlayerController>().enabled = true;
+        joyStick.SetActive(true);
         MenuManager.Instance.ChangeMenu("side");
         StartCoroutine(SpawnCust());
         levelStarted = true;
@@ -306,6 +308,7 @@ public TMP_Text statusText;
             statusesEndScreen[2].GetComponent<Image>().sprite = failTextures;
         }
         PC.GetComponent<PlayerController>().enabled = false;
+        joyStick.SetActive(false);
         MenuManager.Instance.ResetAll();
 		if(currentRating < currentLevel.avgRatingReq)
 		{

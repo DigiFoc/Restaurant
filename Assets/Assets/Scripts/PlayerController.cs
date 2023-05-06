@@ -6,36 +6,75 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class PlayerController : MonoBehaviour
 {
-   
+
+    public bool enableMobileControls = false;
+    public Transform playerCamera;
+    public FixedJoystick joystick;
     public NavMeshAgent theAgent;
     [HideInInspector()]
     public Animator anim;
     public bool trackPath = false;
+    public bool agentActive = false;
     int currentDestination = 0;
     public bool isMoving;
     [Header("Array Of Destinations")]
     public Transform[] Destinations;
+
+    [Header("Movement Settings")]
+    public float runSpeed = 2.0f;
+    public float smoothRotationTime = 0.25f;
+    float currentVelocity , currentSpeed,speedVelocity; //Just required by a function for calculation purposes
+    Rigidbody rb;
+
     void Start()
     {
+       playerCamera = Camera.main.transform;
         theAgent = this.GetComponent<NavMeshAgent>();
         anim = this.GetComponent<Animator>();
         SetDestination(Destinations[7]);
         transform.rotation = new Quaternion(0, 180, 0,1);
-
+        rb = this.GetComponent<Rigidbody>();
        theAgent.updateRotation = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isMoving)
+        if (isMoving && agentActive)
         {
             if(Vector3.Distance(Destinations[currentDestination].transform.position,transform.position)>0.1f)
             { 
-            transform.LookAt(Destinations[currentDestination].transform.position);
+                    transform.LookAt(Destinations[currentDestination].transform.position);
              }
         }
-        if (theAgent.velocity != Vector3.zero)
+
+        Vector2 input = Vector2.zero;
+        if (enableMobileControls)
+        {
+            input = new Vector2(joystick.input.x ,joystick.input.y);
+        }
+        else
+        {
+            input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        }
+        Vector2 inputDir = input.normalized;
+
+        if(inputDir != Vector2.zero)
+        {
+            agentActive = false;
+            theAgent.enabled = false;
+
+            float rotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
+            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, rotation, ref currentVelocity, smoothRotationTime);
+        }
+
+        float targetSpeed = runSpeed * inputDir.magnitude;
+         currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedVelocity, 0.1f);
+
+        transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World) ;
+
+        
+        if (theAgent.velocity != Vector3.zero  || inputDir != Vector2.zero)
         {
             anim.SetBool("Move", true);
             isMoving = true;
@@ -74,6 +113,8 @@ public class PlayerController : MonoBehaviour
 
     public void MoveTo(string placeName)
     {
+        agentActive = true;
+        theAgent.enabled = true;
         if (placeName == "Hut1")
         {
             if (Destinations.Length > 0 && Destinations[0] != null)
@@ -154,6 +195,7 @@ public class PlayerController : MonoBehaviour
     }
     public void SetDestination(Transform destination)
     {
+        
         trackPath = true;
        //transform.LookAt(destination.transform.position);
         Debug.Log("This", gameObject);

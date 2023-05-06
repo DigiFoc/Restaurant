@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    
+
+    public FixedTouchField touchField;
+    public bool enableMobileInputs = true;
     float YAxis,XAxis;
     [Range(0.5f,2.0f)]
     public float RotationSensitivity = 8.0f;
@@ -28,9 +30,19 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        YAxis += Input.GetAxis("Mouse X")*RotationSensitivity;
 
-        XAxis -= Input.GetAxis("Mouse Y")*RotationSensitivity; 
+        if (enableMobileInputs)
+        {
+            YAxis += touchField.TouchDist.x * RotationSensitivity;
+
+            XAxis -= touchField.TouchDist.y * RotationSensitivity;
+        }
+        else
+        {
+            YAxis += Input.GetAxis("Mouse X") * RotationSensitivity;
+
+            XAxis -= Input.GetAxis("Mouse Y") * RotationSensitivity;
+        }
 
         XAxis = Mathf.Clamp(XAxis,RotationMin,RotationMax);
 
