@@ -24,7 +24,9 @@ public class GarbageCleaner : MonoBehaviour
                 Player = other.gameObject;
                 other.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled=false;
                 other.gameObject.GetComponent<PlayerFoodHandling>().broomIk = true;
-                
+                other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                other.gameObject.GetComponent<PlayerController>().enableMobileControls = false;
+                other.gameObject.GetComponent<PlayerController>().joystick.gameObject.SetActive(false);
                 StartCoroutine(StartGarbage());
             }
             else
@@ -52,7 +54,11 @@ public class GarbageCleaner : MonoBehaviour
         Player.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
         GameManager.Instance.CleanEverything();
         GameManager.Instance.garbageStatus = 0;
+        Player.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         Player.gameObject.GetComponent<PlayerFoodHandling>().broomIk = false;
+        Player.gameObject.GetComponent<PlayerController>().enableMobileControls = true;
+        Player.gameObject.GetComponent<PlayerController>().joystick.gameObject.SetActive(true);
+
         garbageWala.Stop();
         GarbageObj.SetActive(false);
         
