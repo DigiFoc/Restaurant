@@ -19,4 +19,24 @@ MonoBehaviour:
   avgRatingReq: 3.5
   isCompleted: 0
   givenCoins: 35
-  Requirements: []
+  Requirements:
+  - paneerTikka: 0
+    samosa: 4
+    pakori: 0
+    tea: 0
+  - paneerTikka: 0
+    samosa: 2
+    pakori: 0
+    tea: 0
+  - paneerTikka: 0
+    samosa: 3
+    pakori: 0
+    tea: 0
+  - paneerTikka: 0
+    samosa: 0
+    pakori: 0
+    tea: 4
+  - paneerTikka: 0
+    samosa: 5
+    pakori: 0
+    tea: 0
