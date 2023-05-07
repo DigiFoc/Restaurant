@@ -37,7 +37,7 @@ public class CustomerAI : MonoBehaviour
         public GameObject currentDestination;
         public bool isServed = false;
         public float cointDeduction = 0.0f;
-
+        public bool isKid;
     }
     [SerializeField]
 
@@ -62,9 +62,9 @@ public class CustomerAI : MonoBehaviour
     public int ratingStar;
     GameObject currentdestination;
 
-
     private void Awake()
     {
+       
         anim = GetComponent<Animator>();
         theAgent = GetComponent<NavMeshAgent>();
         this.gameObject.tag = "Customer";
@@ -76,7 +76,7 @@ public class CustomerAI : MonoBehaviour
 
         //SetDestination(destinations.RandomPlaces[0]);
         FindHut();
-        mySounds = this.GetComponent<AboutMe>().sounds;
+        
         src = this.GetComponent<AudioSource>();
         theAgent.updateRotation = false;
 
@@ -330,9 +330,6 @@ public class CustomerAI : MonoBehaviour
 
     public void SetFoodOrderDisplay(string food, int quantity)
     {
-
-        TextManager.Instance.ShowToast("New Customer", 5);
-        TextManager.Instance.ShowToast("Please Check", 2);
         string foodString = "";
         if (food == "Samosa")
         {
@@ -353,8 +350,37 @@ public class CustomerAI : MonoBehaviour
 
         hutManager.SetHutStatus(AI_Information.hutNo, foodString, AI_Information.quantity);
         countTime = true;
+        PlayRequirementSound();
     }
 
+
+    public void PlayRequirementSound()
+    {
+        if (AI_Information.Gender == "Male")
+        {
+            if (AI_Information.isKid)
+            {
+                SoundManager.Instance.PlayAISound("Male", true);
+            }
+            else
+            {
+                SoundManager.Instance.PlayAISound("Male", false);
+            }
+        }
+        if (AI_Information.Gender == "Female")
+        {
+            if (AI_Information.isKid)
+            {
+                SoundManager.Instance.PlayAISound("Female", true);
+            }
+            else
+            {
+                SoundManager.Instance.PlayAISound("Female", false);
+            }
+        }
+
+
+    }
 
     public void ServeFood()
     {

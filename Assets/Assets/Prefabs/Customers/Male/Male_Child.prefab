@@ -3303,6 +3303,7 @@ MonoBehaviour:
     currentDestination: {fileID: 0}
     isServed: 0
     cointDeduction: 0
+    isKid: 1
   destinations:
     endPlace: {fileID: 0}
     RandomPlaces: []
@@ -3323,7 +3324,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc53aee506f55e043aadeee6e00eada9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: {fileID: 11400000, guid: 9c8be902263846c43a396ea41a23e9b1, type: 2}
 --- !u!82 &4476293884727946904
 AudioSource:
   m_ObjectHideFlags: 0

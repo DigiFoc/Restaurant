@@ -12,10 +12,10 @@ public class SoundManager : MonoBehaviour
     public AudioClip ErrorSound;
     public AudioClip HornSound;
 	[Header("Male Sound Collections")]
-	public SoundCollection maleYoungCollection,maleKidCollection,maleOldCollection;
+	public SoundCollection maleYoungCollection,maleKidCollection;
 	[Space(5)]
 	[Header("Female Sound Collection")]
-	public SoundCollection femaleYoungCollection,femaleKidCollection,femaleOldCollection;
+	public SoundCollection femaleYoungCollection,femaleKidCollection;
     public static SoundManager Instance { get; set; }
     private void Awake()
     {
@@ -61,5 +61,31 @@ public class SoundManager : MonoBehaviour
             player.clip = HornSound;
         }
         player.Play();
+    }
+
+    public void PlayAISound(string Gender,bool isKid)
+    {
+        if (Gender == "Male")
+        {
+            if (isKid == true)
+            {
+                player.clip=maleKidCollection.
+            }
+            else
+            { 
+            
+            }
+        }
+        if(Gender == "Female")
+        {
+            if (isKid == true)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
     }
 }
