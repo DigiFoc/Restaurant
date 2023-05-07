@@ -74,17 +74,17 @@ public TMP_Text TimeLeft2;
         {
             int time1 = (int)hut1.customer.GetComponent<CustomerAI>().WaitingTime;
 
-            if (time1 < 10)
+            if (time1 < 100)
             {
                 hut1.TimeLeft.color = Color.green;
                 TimeLeft2.color = Color.green;
             }
-            if (time1 > 10 && time1<=20)
+            if (time1 > 100 && time1<=200)
             {
                 hut1.TimeLeft.color = Color.yellow;
                 TimeLeft2.color = Color.yellow;
             }
-            if (time1 > 20)
+            if (time1 > 200)
             {
                 hut1.TimeLeft.color = Color.red;
                 TimeLeft2.color = Color.red;
@@ -98,15 +98,15 @@ public TMP_Text TimeLeft2;
         {
             int time2 = (int)hut2.customer.GetComponent<CustomerAI>().WaitingTime;
 
-            if (time2 < 10)
+            if (time2 < 100)
             {
                 hut2.TimeLeft.color = Color.green;
             }
-            if (time2 > 10 && time2 <= 20)
+            if (time2 > 100 && time2 <= 200)
             {
                 hut2.TimeLeft.color = Color.yellow;
             }
-            if (time2 > 20)
+            if (time2 > 200)
             {
                 hut2.TimeLeft.color = Color.red;
             }
@@ -117,15 +117,15 @@ public TMP_Text TimeLeft2;
         {
             int time3 = (int)hut3.customer.GetComponent<CustomerAI>().WaitingTime;
 
-            if (time3 < 10)
+            if (time3 < 100)
             {
                 hut3.TimeLeft.color = Color.green;
             }
-            if (time3 > 10 && time3 <= 20)
+            if (time3 > 100 && time3 <= 200)
             {
                 hut3.TimeLeft.color = Color.yellow;
             }
-            if (time3 > 20)
+            if (time3 > 200)
             {
                 hut3.TimeLeft.color = Color.red;
             }
@@ -136,15 +136,15 @@ public TMP_Text TimeLeft2;
         {
             int time4 = (int)hut4.customer.GetComponent<CustomerAI>().WaitingTime;
 
-            if (time4 < 10)
+            if (time4 < 100)
             {
                 hut4.TimeLeft.color = Color.green;
             }
-            if (time4 > 10 && time4 <= 20)
+            if (time4 > 100 && time4 <= 200)
             {
                 hut4.TimeLeft.color = Color.yellow;
             }
-            if (time4 > 20)
+            if (time4 > 200)
             {
                 hut4.TimeLeft.color = Color.red;
             }
@@ -155,15 +155,15 @@ public TMP_Text TimeLeft2;
         {
             int time5 = (int)hut5.customer.GetComponent<CustomerAI>().WaitingTime;
 
-            if (time5 < 10)
+            if (time5 < 100)
             {
                 hut5.TimeLeft.color = Color.green;
             }
-            if (time5 > 10 && time5 <= 20)
+            if (time5 > 100 && time5 <= 200)
             {
                 hut5.TimeLeft.color = Color.yellow;
             }
-            if (time5 > 20)
+            if (time5 > 200)
             {
                 hut5.TimeLeft.color = Color.red;
             }
@@ -213,30 +213,40 @@ public TMP_Text TimeLeft2;
         if (hutNo == 1)
         {
             hut1.order.text ="Empty";
-            hut1.Statusorder.text = "";
-            Statusorder2.text = "";
-			
+			Statusorder2.text = "";
+			hut1.Statusorder.color=Color.green;
+			hut1.TimeLeft.color=Color.green;
+            hut1.Statusorder.text = "Item";
+			hut1.TimeLeft.text="SERVED";
 
         }
         if (hutNo == 2)
         {
-            hut2.order.text = "Empty";
-            hut2.Statusorder.text ="";
+            hut2.Statusorder.color=Color.green;
+			hut2.TimeLeft.color=Color.green;
+            hut2.Statusorder.text = "Item";
+			hut2.TimeLeft.text="SERVED";
         }
         if (hutNo == 3)
         {
-            hut3.order.text ="Empty";
-            hut3.Statusorder.text = "";
+            hut3.Statusorder.color=Color.green;
+			hut3.TimeLeft.color=Color.green;
+            hut3.Statusorder.text = "Item";
+			hut3.TimeLeft.text="SERVED";
         }
         if (hutNo == 4)
         {
-            hut4.order.text = "Empty";
-            hut4.Statusorder.text = "";
+            hut4.Statusorder.color=Color.green;
+			hut4.TimeLeft.color=Color.green;
+            hut4.Statusorder.text = "Item";
+			hut4.TimeLeft.text="SERVED";
         }
         if (hutNo == 5)
         {
-            hut5.order.text = "Empty";
-            hut5.Statusorder.text = "";
+            hut5.Statusorder.color=Color.green;
+			hut5.TimeLeft.color=Color.green;
+            hut5.Statusorder.text = "Item";
+			hut5.TimeLeft.text="SERVED";
         }
 
     }

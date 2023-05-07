@@ -261,6 +261,7 @@ public TMP_Text statusText;
 
     void ShowEndScreen()
     {
+		BGSound.SetActive(false);
         totalDeductedtext.text = totalDeducted.ToString();
         totalPayabletext.text = totalPayable.ToString();
         coinsDueToUpgradetext.text = coinsDueToUpgrade.ToString();
@@ -335,6 +336,7 @@ public TMP_Text statusText;
 
     void ShowTimeOutScreen()
     {
+		BGSound.SetActive(false);
         SoundManager.Instance.PlaySound("fail");
         TimeOutScreen.SetActive(true);
        
@@ -367,5 +369,8 @@ public TMP_Text statusText;
         PC.GetComponent<PlayerController>().enabled = false;
         MenuManager.Instance.ResetAll();
     }
+	
+	
+	
 
 }

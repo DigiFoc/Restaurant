@@ -424,31 +424,8 @@ public class CustomerAI : MonoBehaviour
         {
             LevelManager.Instance.finalAmount += AI_Information.amountToPay;
         }
-        Invoke("CurtainOut", 5);
-
-
-    }
-
-    public void CurtainOut()
-    {
-        anim.SetBool("Sit", false);
-        currentdestination.GetComponent<BenchLocation>().curtainOff();
-        Invoke("GetOut", 2);
-
-
-    }
-    public void GetOut()
-    {
-        theAgent.enabled = true;
-        theAgent.SetDestination(destinations.endPlace.transform.position);
-        Invoke("ResetValues", 2);
-    }
-
-    public void ResetValues()
-    {
-
-        SendReachSignal();
-        if (AI_Information.hutNo == 1)
+		
+		 if (AI_Information.hutNo == 1)
         {
             hutManager.hut1.cashToPay = 0;
             hutManager.hut1.customer = null;
@@ -515,6 +492,31 @@ public class CustomerAI : MonoBehaviour
             hutManager.ResetHutStatus(5);
         }
 
+        Invoke("CurtainOut", 5);
+
+
+    }
+
+    public void CurtainOut()
+    {
+        anim.SetBool("Sit", false);
+        currentdestination.GetComponent<BenchLocation>().curtainOff();
+        Invoke("GetOut", 2);
+
+
+    }
+    public void GetOut()
+    {
+        theAgent.enabled = true;
+        theAgent.SetDestination(destinations.endPlace.transform.position);
+        Invoke("ResetValues", 2);
+    }
+
+    public void ResetValues()
+    {
+
+        SendReachSignal();
+       
 
     }
 

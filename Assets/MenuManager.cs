@@ -19,6 +19,7 @@ public class MenuManager : MonoBehaviour
 	public GameObject MapViewMenu;
 	public GameObject TextViewMenu;
 	public GameObject OpenkitchenMenu;
+	public GameObject PauseMenu;
 	
 	
 
@@ -38,7 +39,12 @@ public class MenuManager : MonoBehaviour
 	public void ChangeMenu(string name)
 	{
 		ResetAll();
-
+		if (name == "pause")
+		{
+			PauseMenu.SetActive(true);
+			Time.timeScale=0;
+		}
+		
 		if (name == "openkitchen")
 		{
 			OpenkitchenMenu.SetActive(true);
@@ -93,6 +99,8 @@ public class MenuManager : MonoBehaviour
 		MapViewMenu.SetActive(false);
 		TextViewMenu.SetActive(false);
 		OpenkitchenMenu.SetActive(false);
+		PauseMenu.SetActive(false);
+		Time.timeScale=1;
 	}
 
 }

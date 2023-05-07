@@ -112,6 +112,10 @@ public class PlayerController : MonoBehaviour
 
     public void MoveTo(string placeName)
     {
+		if(GetComponent<PlayerFoodHandling>().broomIk == true)
+		{
+			return;
+		}
         agentActive = true;
         theAgent.enabled = true;
         if (placeName == "Hut1")
