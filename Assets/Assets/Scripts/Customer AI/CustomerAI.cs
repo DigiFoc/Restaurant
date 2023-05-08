@@ -356,30 +356,11 @@ public class CustomerAI : MonoBehaviour
 
     public void PlayRequirementSound()
     {
-        if (AI_Information.Gender == "Male")
-        {
-            if (AI_Information.isKid)
-            {
-                SoundManager.Instance.PlayAISound("Male", true);
-            }
-            else
-            {
-                SoundManager.Instance.PlayAISound("Male", false);
-            }
-        }
-        if (AI_Information.Gender == "Female")
-        {
-            if (AI_Information.isKid)
-            {
-                SoundManager.Instance.PlayAISound("Female", true);
-            }
-            else
-            {
-                SoundManager.Instance.PlayAISound("Female", false);
-            }
-        }
-
-
+                SoundManager.Instance.PlayAISound(AI_Information.Gender, AI_Information.isKid, AI_Information.foodOrder);
+    }
+    public void PlayFeedbackSound()
+    {
+        SoundManager.Instance.PlayAIFeedback(AI_Information.Gender, AI_Information.isKid, ratingStar);
     }
 
     public void ServeFood()
@@ -518,8 +499,8 @@ public class CustomerAI : MonoBehaviour
             hutManager.ResetHutStatus(5);
         }
 
-        Invoke("CurtainOut", 5);
-
+        Invoke("ResetValues", 2);
+      
 
     }
 
@@ -535,14 +516,14 @@ public class CustomerAI : MonoBehaviour
     {
         theAgent.enabled = true;
         theAgent.SetDestination(destinations.endPlace.transform.position);
-        Invoke("ResetValues", 2);
+        
     }
 
     public void ResetValues()
     {
-
+        PlayFeedbackSound();
         SendReachSignal();
-       
+        Invoke("CurtainOut", 10);
 
     }
 
