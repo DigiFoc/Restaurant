@@ -15,7 +15,7 @@ MonoBehaviour:
   levelNum: 18
   totalCustomers: 5
   consecCustomers: 3
-  totalLevelTime: 240
+  totalLevelTime: 360
   avgRatingReq: 3.5
   isCompleted: 0
   givenCoins: 35

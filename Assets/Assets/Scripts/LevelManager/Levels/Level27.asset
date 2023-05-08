@@ -18,25 +18,25 @@ MonoBehaviour:
   totalLevelTime: 300
   avgRatingReq: 4.5
   isCompleted: 0
-  givenCoins: 0
+  givenCoins: 50
   Requirements:
   - paneerTikka: 0
+    samosa: 3
+    pakori: 0
+    tea: 0
+  - paneerTikka: 0
     samosa: 0
+    pakori: 3
+    tea: 0
+  - paneerTikka: 0
+    samosa: 2
     pakori: 0
     tea: 0
   - paneerTikka: 0
     samosa: 0
     pakori: 0
-    tea: 0
+    tea: 4
   - paneerTikka: 0
-    samosa: 0
-    pakori: 0
-    tea: 0
-  - paneerTikka: 0
-    samosa: 0
-    pakori: 0
-    tea: 0
-  - paneerTikka: 0
-    samosa: 0
+    samosa: 2
     pakori: 0
     tea: 0

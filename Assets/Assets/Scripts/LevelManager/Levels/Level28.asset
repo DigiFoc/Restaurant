@@ -15,28 +15,28 @@ MonoBehaviour:
   levelNum: 28
   totalCustomers: 5
   consecCustomers: 5
-  totalLevelTime: 300
+  totalLevelTime: 360
   avgRatingReq: 5
   isCompleted: 0
-  givenCoins: 0
+  givenCoins: 50
   Requirements:
   - paneerTikka: 0
+    samosa: 5
+    pakori: 0
+    tea: 0
+  - paneerTikka: 0
     samosa: 0
+    pakori: 4
+    tea: 0
+  - paneerTikka: 0
+    samosa: 0
+    pakori: 0
+    tea: 4
+  - paneerTikka: 0
+    samosa: 3
     pakori: 0
     tea: 0
   - paneerTikka: 0
     samosa: 0
     pakori: 0
-    tea: 0
-  - paneerTikka: 0
-    samosa: 0
-    pakori: 0
-    tea: 0
-  - paneerTikka: 0
-    samosa: 0
-    pakori: 0
-    tea: 0
-  - paneerTikka: 0
-    samosa: 0
-    pakori: 0
-    tea: 0
+    tea: 2

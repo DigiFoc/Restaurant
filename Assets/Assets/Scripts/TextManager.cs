@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class TextManager : MonoBehaviour
 {
-    public string tempText= string.Empty;
-        public int tempTime=0;
+    public string tempText = string.Empty;
+    public int tempTime = 0;
     public RectTransform rt;
     public TMPro.TMP_Text txt;
     public int OffSet;
     public TMPro.TMP_Text Heading;
     public GameObject TextHolder;
-    public float CaptiontextTime=5f;
+    public float CaptiontextTime = 5f;
     public GameObject CloseBtn;
     string tempHeading;
     string tempIncomingText;
     Color tempColorShad;
     bool tempPopup;
+    public Transform[] pos;
 
 
     bool isCaptionBusy;
     public static TextManager Instance { get; set; }
-    
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,7 +33,7 @@ public class TextManager : MonoBehaviour
         {
             Instance = this;
         }
-        
+
     }
 
     void Start()
@@ -41,6 +42,18 @@ public class TextManager : MonoBehaviour
         CloseBtn.SetActive(false);
         txt.text = "";
         Heading.text = "";
+    }
+
+    void ChangeCaptionPos(string posi)
+    {
+        if (posi == "left")
+        {
+            TextHolder.transform.position = pos[0].position;
+        }
+        if (posi == "right")
+        {
+            TextHolder.transform.position = pos[1].position;
+        }
     }
     public void ShowToast(string incomingText, int time)
     {
@@ -109,6 +122,11 @@ public class TextManager : MonoBehaviour
             StartCoroutine(RevealText(headingText, incomingText, shadee, popup));
             return;
         }
+        else
+        {
+
+            ChangeCaptionPos("right");
+        }
         if (!isCaptionBusy)
         {
             StartCoroutine(RevealText(headingText, incomingText, shadee, popup));
@@ -161,7 +179,7 @@ public class TextManager : MonoBehaviour
             ++numCharsRevealed;
             txt.text = originalString.Substring(0, numCharsRevealed)+rand+"|";
             CaptionsCheck();
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(0.015f);
         }
         txt.text= texty.ToString();
         if (popup)
@@ -186,7 +204,7 @@ public class TextManager : MonoBehaviour
         Heading.text = "";
         TextHolder.SetActive(false);
         isCaptionBusy = false;
-
+        ChangeCaptionPos("left");
         CaptiontextTime = 5f;
     }
 
