@@ -1074,9 +1074,9 @@ public class ExtShopManager : MonoBehaviour
         else  wallArt.bellIcon.SetActive(false);
 
         if (vegetation.currentUpgradeNo < vegetation.levelsReq.Length)
-            if (vegetation.levelsReq[vegetation.currentUpgradeNo +1] <= GetCurrentLevel())
+            if (vegetation.levelsReq[vegetation.currentUpgradeNo ] <= GetCurrentLevel())
         {
-            if (vegetation.coinsRequired[vegetation.currentUpgradeNo +1] <= GetTotalCoins())
+            if (vegetation.coinsRequired[vegetation.currentUpgradeNo ] <= GetTotalCoins())
             {
                 Debug.LogWarning("Veg");
                 vegetation.bellIcon.SetActive(true);

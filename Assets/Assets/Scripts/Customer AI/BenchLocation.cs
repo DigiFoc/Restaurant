@@ -30,7 +30,7 @@ public class BenchLocation : MonoBehaviour
     {
         if (other.tag == "Customer")
         {
-            if (other.GetComponent<CustomerAI>().AI_Information.isServed == false)
+            if (other.GetComponent<CustomerAI>().AI_Information.isServed == false && other.GetComponent<CustomerAI>().haveOrdered == false)
             {
                 Debug.Log("This", gameObject);
                 theAgent = other.GetComponent<NavMeshAgent>();

@@ -61,10 +61,10 @@ public class CustomerAI : MonoBehaviour
     public float WaitingTime;
     public int ratingStar;
     GameObject currentdestination;
-
+    public bool haveOrdered;
     private void Awake()
     {
-       
+        haveOrdered = false;
         anim = GetComponent<Animator>();
         theAgent = GetComponent<NavMeshAgent>();
         this.gameObject.tag = "Customer";
@@ -226,7 +226,7 @@ public class CustomerAI : MonoBehaviour
 
     public void OrderFood()
     {
-
+        haveOrdered = true;
         #region OlDCODE
         /** AI_Information.foodOrder = StockInventory.Instance.GenerateRandomFood();
           Debug.Log(AI_Information.foodOrder);
