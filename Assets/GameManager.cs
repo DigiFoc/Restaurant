@@ -49,6 +49,10 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
+        if (level > 29)
+        {
+            return;
+        }
         PlayerPrefs.SetInt("Level", level+1);
         Debug.Log("Saved level"+level);
 

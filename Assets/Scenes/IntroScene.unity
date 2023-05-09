@@ -10125,6 +10125,10 @@ PrefabInstance:
       propertyPath: Heading
       value: 
       objectReference: {fileID: 1930273397}
+    - target: {fileID: 3533442178349684600, guid: e1c2362df3cc0974fb753605d4c4b92f, type: 3}
+      propertyPath: TextHolder
+      value: 
+      objectReference: {fileID: 1454601880}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1c2362df3cc0974fb753605d4c4b92f, type: 3}
 --- !u!224 &253427166 stripped
@@ -13492,7 +13496,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingScreenObj: {fileID: 1891293192}
   slider: {fileID: 1180362836}
-  audiopl: {fileID: 1891293193}
 --- !u!1 &348420309
 GameObject:
   m_ObjectHideFlags: 0

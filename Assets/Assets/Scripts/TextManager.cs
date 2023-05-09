@@ -116,7 +116,7 @@ public class TextManager : MonoBehaviour
     }
     public void CaptionTextHandler(string headingText,string incomingText,Color shadee, bool popup)
     {
-        CloseBtn.SetActive(false);
+        
         if (!popup)
         {
             StartCoroutine(RevealText(headingText, incomingText, shadee, popup));
@@ -124,7 +124,9 @@ public class TextManager : MonoBehaviour
         }
         else
         {
+            CloseBtn.SetActive(false);
 
+            Debug.Log("RIGHTT");
             ChangeCaptionPos("right");
         }
         if (!isCaptionBusy)

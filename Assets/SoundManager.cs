@@ -63,7 +63,7 @@ public class SoundManager : MonoBehaviour
         player.Play();
     }
 
-    public void PlayAISound(string Gender,bool isKid,string order)
+    public void PlayAISound(string Gender, bool isKid, string order)
     {
         if (Gender == "Male")
         {
@@ -71,19 +71,19 @@ public class SoundManager : MonoBehaviour
             {
                 if (order == "Samosa")
                 {
-                    player.clip = maleKidCollection.askingForSamosa[0];
+                    player.PlayOneShot(maleKidCollection.askingForSamosa[0]);
                 }
                 if (order == "PaneerTikka")
                 {
-                    player.clip = maleKidCollection.askingForPaneerTikka[0];
+                    player.PlayOneShot(maleKidCollection.askingForPaneerTikka[0]);
                 }
                 if (order == "Pakora")
                 {
-                    player.clip = maleKidCollection.askingForPakori[0];
+                    player.PlayOneShot(maleKidCollection.askingForPakori[0]);
                 }
                 if (order == "Tea")
                 {
-                    player.clip = maleKidCollection.askingForTea[0];
+                    player.PlayOneShot(maleKidCollection.askingForTea[0]);
                 }
 
             }
@@ -91,19 +91,19 @@ public class SoundManager : MonoBehaviour
             {
                 if (order == "Samosa")
                 {
-                    player.clip = maleYoungCollection.askingForSamosa[0];
+                    player.PlayOneShot(maleYoungCollection.askingForSamosa[0]);
                 }
                 if (order == "PaneerTikka")
                 {
-                    player.clip = maleYoungCollection.askingForPaneerTikka[0];
+                    player.PlayOneShot(maleYoungCollection.askingForPaneerTikka[0]);
                 }
                 if (order == "Pakora")
                 {
-                    player.clip = maleYoungCollection.askingForPakori[0];
+                    player.PlayOneShot(maleYoungCollection.askingForPakori[0]);
                 }
                 if (order == "Tea")
                 {
-                    player.clip = maleYoungCollection.askingForTea[0];
+                    player.PlayOneShot(maleYoungCollection.askingForTea[0]);
                 }
             }
         }
@@ -113,19 +113,19 @@ public class SoundManager : MonoBehaviour
             {
                 if (order == "Samosa")
                 {
-                    player.clip = femaleKidCollection.askingForSamosa[0];
+                    player.PlayOneShot(femaleKidCollection.askingForSamosa[0]);
                 }
                 if (order == "PaneerTikka")
                 {
-                    player.clip = femaleKidCollection.askingForPaneerTikka[0];
+                    player.PlayOneShot(femaleKidCollection.askingForPaneerTikka[0]);
                 }
                 if (order == "Pakora")
                 {
-                    player.clip = femaleKidCollection.askingForPakori[0];
+                    player.PlayOneShot(femaleKidCollection.askingForPakori[0]);
                 }
                 if (order == "Tea")
                 {
-                    player.clip = femaleKidCollection.askingForTea[0];
+                    player.PlayOneShot(femaleKidCollection.askingForTea[0]);
                 }
 
             }
@@ -133,23 +133,22 @@ public class SoundManager : MonoBehaviour
             {
                 if (order == "Samosa")
                 {
-                    player.clip = femaleYoungCollection.askingForSamosa[0];
+                    player.PlayOneShot(femaleYoungCollection.askingForSamosa[0]);
                 }
                 if (order == "PaneerTikka")
                 {
-                    player.clip = femaleYoungCollection.askingForPaneerTikka[0];
+                    player.PlayOneShot(femaleYoungCollection.askingForPaneerTikka[0]);
                 }
                 if (order == "Pakora")
                 {
-                    player.clip = femaleYoungCollection.askingForPakori[0];
+                    player.PlayOneShot(femaleYoungCollection.askingForPakori[0]);
                 }
                 if (order == "Tea")
                 {
-                    player.clip = femaleYoungCollection.askingForTea[0];
+                    player.PlayOneShot(femaleYoungCollection.askingForTea[0]);
                 }
             }
         }
-        player.Play();
     }
 
     public void PlayAIFeedback(string Gender, bool isKid, int rating)

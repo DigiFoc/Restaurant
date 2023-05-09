@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour
     public TMP_Text TimeOutScreenRatingCurrent;
     public TMP_Text TimeOutScreenCustRequired;
     public TMP_Text TimeOutScreenCustCurrent;
+    public TMP_Text LevelNumb;
     float timecurrent = 0;
     float min = 0;
     float sec = 0;
@@ -89,10 +90,10 @@ public TMP_Text statusText;
 
     void Start()
     {
-        /*if (GameManager.Instance.isLearnt() == false)
+        if (GameManager.Instance.isLearnt() == false)
         {
             TutorialGO.SetActive(true); 
-        }*/
+        }
         coins =0;
 		CustNeedToSpawn=0;
 		coinTextBoxinFinal.text= "";
@@ -185,7 +186,9 @@ public TMP_Text statusText;
         totalCustomerstext.text = currentLevel.totalCustomers.ToString();
         ratingRequired.text = currentLevel.avgRatingReq.ToString();
         levelNumbertext.text = currentLevel.levelNum.ToString();
-		CustNeedToSpawn=currentLevel.totalCustomers;
+        LevelNumb.text = "LEVEL "+currentLevel.levelNum.ToString(); ;
+
+        CustNeedToSpawn = currentLevel.totalCustomers;
         AdmobController.Instance.ShowInterstitialAd();
     }
     public void StartLevel()

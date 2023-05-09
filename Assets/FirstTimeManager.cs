@@ -71,6 +71,9 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==4)	
 		{
+			NextBtnGO.SetActive(false);
+
+
 			ButtonObjects[3].SetActive(true);
 			TextHolder.transform.position=PlaceHolder[0].transform.position;
 			TextHolder.SetActive(true);
@@ -79,11 +82,12 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==5)	
 		{
-			
-				//NextBtn();
-				//yield return null;
-				//REMOVE WHEN BUILD
-			
+			NextBtnGO.SetActive(false);
+
+			//NextBtn();
+			//yield return null;
+			//REMOVE WHEN BUILD
+
 			yield return new WaitForSeconds(3f);
 			
 			//Time.timeScale=0f;
@@ -106,6 +110,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==6)
 		{
+			NextBtnGO.SetActive(false);
+
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			TextManager.Instance.CaptionTextHandler("Tutorial","Now, Tap on \"Move To\" Button", Color.cyan, false);
@@ -122,6 +128,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==7)
 		{
+			NextBtnGO.SetActive(false);
+
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			TextManager.Instance.CaptionTextHandler("Tutorial","Here are the places you can walk to serve or make Food. Tap On Any Button to see your Player moving!", Color.cyan, false);
@@ -133,6 +141,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==8)
 		{
+			NextBtnGO.SetActive(false);
+
 			yield return new WaitForSeconds(2f);
 			bool done = false;
 			while(!done) 
@@ -153,10 +163,11 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==9)
 		{
-			
+			NextBtnGO.SetActive(false);
+
 			LevelManager.Instance.CustSpawnforFirstTime();
 			yield return new WaitForSeconds(2f);
-			CameraScript.GetComponent<CameraController>().target=GameObject.Find("AICustomer").transform.GetChild(0);
+			CameraScript.GetComponent<CameraFollow>().target=GameObject.Find("AICustomer").transform.GetChild(0);
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			TextManager.Instance.CaptionTextHandler("Tutorial","A Customer is Coming, Make Sure to Fulfill thier Demands!", Color.cyan, false);
@@ -170,6 +181,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==10)
 		{
+			NextBtnGO.SetActive(false);
+
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			TextManager.Instance.CaptionTextHandler("Tutorial","We have our First Customer in Hut 1", Color.cyan, false);	
@@ -181,6 +194,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==11)
 		{
+			NextBtnGO.SetActive(false);
+
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			TextManager.Instance.CaptionTextHandler("Tutorial","As You can See, Customer wants One Samosa. Tap On Food Engine Menu, Because Customers are waiting!", Color.cyan, false);	
@@ -192,7 +207,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==12)
 		{
-			
+			NextBtnGO.SetActive(false);
+
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			TextManager.Instance.CaptionTextHandler("Tutorial","Sorry, But Right Now You dont have Stock to Make Samosa. Tap on Shop to Purchase Goods ", Color.cyan, false);	
@@ -205,7 +221,9 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==13)
 		{
-			
+			ButtonObjects[10].SetActive(false);
+			NextBtnGO.SetActive(false);
+
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			TextManager.Instance.CaptionTextHandler("Tutorial","This is your Shop Menu, You can Purchase Raw Goods from Here! ", Color.cyan, false);	
@@ -223,7 +241,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==14)
 		{
-			
+			NextBtnGO.SetActive(false);
+
 			ArrowHandler.SetActive(true);
 			ButtonObjects[11].SetActive(true);
 						ArrowHandler.transform.position=new Vector2(ArrowPlaceHolder[6].transform.GetChild(0).position.x-175,ArrowPlaceHolder[6].transform.GetChild(0).position.y-80);
@@ -231,6 +250,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==15)
 		{
+			NextBtnGO.SetActive(false);
+
 			ArrowHandler.SetActive(true);
 			ButtonObjects[11].SetActive(true);
 						ArrowHandler.transform.position=new Vector2(ArrowPlaceHolder[6].transform.GetChild(0).position.x-175,ArrowPlaceHolder[6].transform.GetChild(0).position.y-160);
@@ -238,13 +259,18 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==16)
 		{
+			NextBtnGO.SetActive(false);
+
 			ArrowHandler.SetActive(true);
 			ButtonObjects[11].SetActive(true);
 						ArrowHandler.transform.position=new Vector2(ArrowPlaceHolder[6].transform.GetChild(0).position.x-175,ArrowPlaceHolder[6].transform.GetChild(0).position.y-240);
 
 		}
 		if(Part==17)
+
 		{
+			NextBtnGO.SetActive(false);
+
 			ArrowHandler.SetActive(true);
 			ButtonObjects[11].SetActive(true);
 			GoodsBuyButton.SetActive(true);
@@ -254,6 +280,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==18)
 		{
+			NextBtnGO.SetActive(false);
+
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			TextManager.Instance.CaptionTextHandler("Tutorial","You can see our Vehicle is out to Purchase Goods! Till then You can wait! ", Color.cyan, false);	
@@ -277,6 +305,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==19)
 		{
+			NextBtnGO.SetActive(false);
+
 			TextManager.Instance.CaptionTextHandler("Tutorial","Items Reached, you can Check them in Storage Menu ", Color.cyan, false);
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
@@ -286,6 +316,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==20)
 		{
+			NextBtnGO.SetActive(false);
+
 			TextManager.Instance.CaptionTextHandler("Tutorial","Here, You Can See all the Stock We Have! ", Color.cyan, false);
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
@@ -295,6 +327,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==21)
 		{
+			NextBtnGO.SetActive(false);
+
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			TextManager.Instance.CaptionTextHandler("Tutorial","Again, As You can See Customer want One Samosa. Tap On Food Engine Menu", Color.cyan, false) ;	
@@ -305,6 +339,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==22)
 		{
+			NextBtnGO.SetActive(false);
+
 			ShowHandle(ArrowPlaceHolder[4]);
 			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0, 180,0));
 			ButtonObjects[9].SetActive(true);
@@ -316,6 +352,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==23)
 		{
+			NextBtnGO.SetActive(false);
+
 			ButtonObjects[9].SetActive(true);
 			TextHolder.transform.position = PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
@@ -325,6 +363,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==24)
 		{
+			NextBtnGO.SetActive(false);
+
 			TextHolder.transform.position = PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			TextManager.Instance.CaptionTextHandler("Tutorial","You can Check Cooking Status in the Slider at the Right Bottom Button Named FOOD MAKER ", Color.cyan, false);
@@ -347,7 +387,9 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==25)
 		{
-						ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,0,30));
+			NextBtnGO.SetActive(false);
+
+			ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,0,30));
 			ButtonObjects[15].SetActive(true);
 
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
@@ -357,7 +399,10 @@ public class FirstTimeManager : MonoBehaviour
 			ShowHandle(ArrowPlaceHolder[1]);
 		}
 		if(Part==26)
+
 		{
+			NextBtnGO.SetActive(false);
+
 			ButtonObjects[15].SetActive(true);
 
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
@@ -378,6 +423,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==27)
 		{
+			NextBtnGO.SetActive(false);
+
 			yield return new WaitForSeconds(2f);
 			bool done = false;
 			while(!done) 
@@ -398,6 +445,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==28)
 		{
+			NextBtnGO.SetActive(false);
+
 			TextHolder.transform.position = PlaceHolder[0].transform.position;
 			TextHolder.SetActive(true);
 			TextManager.Instance.CaptionTextHandler("Tutorial","As You can See Customer in Hut 1 want 1 Samosa which is ready to Serve, Tap on Build to Create a Tray", Color.cyan, false);
@@ -406,7 +455,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==29)
 		{
-			
+						NextBtnGO.SetActive(false);
+
 			PlayerFoodHandling.Instance.PickFood("UniversalFood");
 		
 						ArrowHandler.transform.rotation=Quaternion.Euler(new Vector3(0,0,30));
@@ -419,7 +469,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==30)
 		{
-			
+			NextBtnGO.SetActive(false);
+
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			TextManager.Instance.CaptionTextHandler("Tutorial","Move to Hut 1 and Serve the food", Color.cyan, false);
@@ -439,6 +490,8 @@ public class FirstTimeManager : MonoBehaviour
 		}
 		if(Part==31)
 		{
+			NextBtnGO.SetActive(false);
+
 			yield return new WaitForSeconds(2f);
 			bool done = false;
 			while(!done) 
@@ -452,19 +505,23 @@ public class FirstTimeManager : MonoBehaviour
 			 
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
-			TextManager.Instance.CaptionTextHandler("Tutorial","That's Amazing! You Know how to move! Tap on Next Button to Continue!",Color.cyan, false) ;
+			TextManager.Instance.CaptionTextHandler("Tutorial","That's Amazing! Tap on Next Button to Continue!",Color.cyan, false) ;
 			PlayerFoodHandling.Instance.RemoveFood("UniversalFood");
 			NextBtn();
 			
 		}
 		if(Part==32)
 		{
+			NextBtnGO.SetActive(false);
+
 			ButtonObjects[18].SetActive(true);
 						NextBtnGO.SetActive(true);
 
 		}
 		if (Part == 33)
         {
+			NextBtnGO.SetActive(false);
+
 			ButtonObjects[19].SetActive(true);
 
 		}

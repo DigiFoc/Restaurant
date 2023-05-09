@@ -43,6 +43,7 @@ public class MenuManager : MonoBehaviour
 		{
 			PauseMenu.SetActive(true);
 			Time.timeScale=0;
+			AudioListener.pause = true;
 		}
 		
 		if (name == "openkitchen")
@@ -101,6 +102,7 @@ public class MenuManager : MonoBehaviour
 		OpenkitchenMenu.SetActive(false);
 		PauseMenu.SetActive(false);
 		Time.timeScale=1;
+		AudioListener.pause = false;
 	}
 
 }
