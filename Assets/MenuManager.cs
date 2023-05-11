@@ -36,14 +36,20 @@ public class MenuManager : MonoBehaviour
 		
 	}
 
+	IEnumerator PlayPauseSound()
+	{
+		yield return new WaitForSeconds(1f);
+		AudioListener.pause = true;
+		Time.timeScale = 0;
+	}
 	public void ChangeMenu(string name)
 	{
 		ResetAll();
 		if (name == "pause")
 		{
 			PauseMenu.SetActive(true);
-			Time.timeScale=0;
-			AudioListener.pause = true;
+			
+			StartCoroutine(PlayPauseSound());
 		}
 		
 		if (name == "openkitchen")
