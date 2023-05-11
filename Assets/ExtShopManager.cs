@@ -216,6 +216,7 @@ public class ExtShopManager : MonoBehaviour
         {
             TextManager.Instance.CaptiontextTime = 3;
             TextManager.Instance.CaptionTextHandler("Alert", "You already have Latest Upgrades!", Color.blue, true);
+            CheckInAnyUpgradeAvailable();
             return;
         }
 
@@ -1027,83 +1028,100 @@ public class ExtShopManager : MonoBehaviour
     public bool CheckAnyIfAnyUpgradeAvailableCoditions()
     {
         int temp = 0;
-        if(tv.currentUpgradeNo < tv.levelsReq.Length)
-        if (tv.levelsReq[tv.currentUpgradeNo ] <= GetCurrentLevel())
+        if (tv.currentUpgradeNo < tv.levelsReq.Length)
         {
-            if (tv.coinsRequired[tv.currentUpgradeNo] <= GetTotalCoins())
+            if (tv.levelsReq[tv.currentUpgradeNo] <= GetCurrentLevel())
             {
-                tv.bellIcon.SetActive(true);
-                Debug.LogWarning("TV");
-                temp++;
+                if (tv.coinsRequired[tv.currentUpgradeNo] <= GetTotalCoins())
+                {
+                    tv.bellIcon.SetActive(true);
+                    Debug.LogWarning("TV");
+                    temp++;
+                }
             }
         }
         else tv.bellIcon.SetActive(false);
 
         if (vehicle.currentUpgradeNo < vehicle.levelsReq.Length)
-            if (vehicle.levelsReq[vehicle.currentUpgradeNo ] <= GetCurrentLevel())
         {
-            if (vehicle.coinsRequired[vehicle.currentUpgradeNo ] <= GetTotalCoins())
+            if (vehicle.levelsReq[vehicle.currentUpgradeNo] <= GetCurrentLevel())
             {
-                Debug.LogWarning("Vehcile");
-                vehicle.bellIcon.SetActive(true);
-                temp++;
+                if (vehicle.coinsRequired[vehicle.currentUpgradeNo] <= GetTotalCoins())
+                {
+                    Debug.LogWarning("Vehcile");
+                    vehicle.bellIcon.SetActive(true);
+                    temp++;
+                }
             }
         }
         else vehicle.bellIcon.SetActive(false);
+
         if (decoration.currentUpgradeNo < decoration.levelsReq.Length)
-            if (decoration.levelsReq[decoration.currentUpgradeNo ] <= GetCurrentLevel())
         {
-            if (decoration.coinsRequired[decoration.currentUpgradeNo ] <= GetTotalCoins())
+            if (decoration.levelsReq[decoration.currentUpgradeNo] <= GetCurrentLevel())
             {
-                Debug.LogWarning("Dec");
-                decoration.bellIcon.SetActive(true);
-                temp++;
+                if (decoration.coinsRequired[decoration.currentUpgradeNo] <= GetTotalCoins())
+                {
+                    Debug.LogWarning("Dec");
+                    decoration.bellIcon.SetActive(true);
+                    temp++;
+                }
             }
         }
         else decoration.bellIcon.SetActive(false);
+
         if (wallArt.currentUpgradeNo < wallArt.levelsReq.Length)
-            if (wallArt.levelsReq[wallArt.currentUpgradeNo ] <= GetCurrentLevel())
         {
-            if (wallArt.coinsRequired[wallArt.currentUpgradeNo] <= GetTotalCoins())
+            if (wallArt.levelsReq[wallArt.currentUpgradeNo] <= GetCurrentLevel())
             {
-                Debug.LogWarning("WA");
-                wallArt.bellIcon.SetActive(true);
-                temp++;
+                if (wallArt.coinsRequired[wallArt.currentUpgradeNo] <= GetTotalCoins())
+                {
+                    Debug.LogWarning("WA");
+                    wallArt.bellIcon.SetActive(true);
+                    temp++;
+                }
             }
         }
-        else  wallArt.bellIcon.SetActive(false);
+        else wallArt.bellIcon.SetActive(false);
 
         if (vegetation.currentUpgradeNo < vegetation.levelsReq.Length)
-            if (vegetation.levelsReq[vegetation.currentUpgradeNo ] <= GetCurrentLevel())
         {
-            if (vegetation.coinsRequired[vegetation.currentUpgradeNo ] <= GetTotalCoins())
+            if (vegetation.levelsReq[vegetation.currentUpgradeNo] <= GetCurrentLevel())
             {
-                Debug.LogWarning("Veg");
-                vegetation.bellIcon.SetActive(true);
-                temp++;
+                if (vegetation.coinsRequired[vegetation.currentUpgradeNo] <= GetTotalCoins())
+                {
+                    Debug.LogWarning("Veg");
+                    vegetation.bellIcon.SetActive(true);
+                    temp++;
+                }
             }
         }
         else vegetation.bellIcon.SetActive(false);
+
         if (soundSystem.currentUpgradeNo < soundSystem.levelsReq.Length)
-            if (soundSystem.levelsReq[soundSystem.currentUpgradeNo] <= GetCurrentLevel())
         {
-            if (soundSystem.coinsRequired[soundSystem.currentUpgradeNo] <= GetTotalCoins())
+            if (soundSystem.levelsReq[soundSystem.currentUpgradeNo] <= GetCurrentLevel())
             {
-                Debug.LogWarning("SS");
-                soundSystem.bellIcon.SetActive(true);
-                temp++;
+                if (soundSystem.coinsRequired[soundSystem.currentUpgradeNo] <= GetTotalCoins())
+                {
+                    Debug.LogWarning("SS");
+                    soundSystem.bellIcon.SetActive(true);
+                    temp++;
+                }
             }
         }
         else soundSystem.bellIcon.SetActive(false);
 
         if (foodMachine.currentUpgradeNo < foodMachine.levelsReq.Length)
-            if (foodMachine.levelsReq[foodMachine.currentUpgradeNo ] <= GetCurrentLevel())
         {
-            if (foodMachine.coinsRequired[foodMachine.currentUpgradeNo ] <= GetTotalCoins())
+            if (foodMachine.levelsReq[foodMachine.currentUpgradeNo] <= GetCurrentLevel())
             {
-                Debug.LogWarning("FM");
-                foodMachine.bellIcon.SetActive(true);
-                temp++;
+                if (foodMachine.coinsRequired[foodMachine.currentUpgradeNo] <= GetTotalCoins())
+                {
+                    Debug.LogWarning("FM");
+                    foodMachine.bellIcon.SetActive(true);
+                    temp++;
+                }
             }
         }
         else foodMachine.bellIcon.SetActive(false);

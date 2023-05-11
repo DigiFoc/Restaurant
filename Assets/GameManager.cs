@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
         currentVehicleUpgrade = PlayerPrefs.GetInt("VehicleUpgrade", 1);
         currentWallArtUpgrade = PlayerPrefs.GetInt("WallArtUpgrade", 0);
         globalCoins = PlayerPrefs.GetInt("globalCoins", 100);
+      
         ShowCoins(globalCoins);
         lastUnlockedLevel = PlayerPrefs.GetInt("Level",1);
     }

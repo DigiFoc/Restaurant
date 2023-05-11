@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraFollow : MonoBehaviour {
 
@@ -25,6 +26,7 @@ public class CameraFollow : MonoBehaviour {
 	private float rotX = 0.0f;
 	public Transform target;
 	public FixedTouchField touchField;
+	public Slider senstivitySlider;
 
 
 
@@ -69,5 +71,10 @@ public class CameraFollow : MonoBehaviour {
 		//move towards the game object that is the target
 		float step = CameraMoveSpeed * Time.deltaTime;
 		transform.position = Vector3.MoveTowards (transform.position, target.position, step);
+	}
+
+	public void changeSensitivity()
+	{
+		inputSensitivityPhone = senstivitySlider.value;
 	}
 }
