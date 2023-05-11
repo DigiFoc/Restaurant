@@ -3265,7 +3265,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4720068814739451242}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: 1479372276
   m_Radius: 0.01
   m_Speed: 0.29
   m_Acceleration: 60
@@ -3312,6 +3312,7 @@ MonoBehaviour:
   amount: 0
   WaitingTime: 0
   ratingStar: 0
+  haveOrdered: 0
 --- !u!114 &3338351219542013993
 MonoBehaviour:
   m_ObjectHideFlags: 0

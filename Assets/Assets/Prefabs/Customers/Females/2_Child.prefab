@@ -2672,6 +2672,7 @@ MonoBehaviour:
   amount: 0
   WaitingTime: 0
   ratingStar: 0
+  haveOrdered: 0
 --- !u!195 &4261240482331380865
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2680,7 +2681,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4027236719965073879}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: 1479372276
   m_Radius: 0.01
   m_Speed: 0.3
   m_Acceleration: 60

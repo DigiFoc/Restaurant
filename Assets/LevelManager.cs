@@ -90,10 +90,10 @@ public TMP_Text statusText;
 
     void Start()
     {
-        if (GameManager.Instance.isLearnt() == false)
-        {
-            TutorialGO.SetActive(true); 
-        }
+       // if (GameManager.Instance.isLearnt() == false)
+        //{
+        //    TutorialGO.SetActive(true); 
+       // }
         coins =0;
 		CustNeedToSpawn=0;
 		coinTextBoxinFinal.text= "";
