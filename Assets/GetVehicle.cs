@@ -16,6 +16,8 @@ public class GetVehicle : MonoBehaviour
     public UnityEngine.UI.Slider VehicleSlider;
     public UnityEngine.UI.Image FillImage;
     public OrderGoods OG;
+    public AudioSource tap;
+    public bool canPlay = false;
 
     private void Awake()
     {
@@ -56,13 +58,13 @@ public class GetVehicle : MonoBehaviour
     public void StartRide()
     {
         this.GetComponent<Animator>().Play("VehicleAnim");
-        Debug.Log("AnimationStart");
+        
+        canPlay = true;
     }
 
     public void IncreaseVehicleSpeed()
     {
         StartCoroutine(IncreaseSpeed());
-
 
     }
 
@@ -76,17 +78,22 @@ public class GetVehicle : MonoBehaviour
         if (!speeding)
         {
             speeding = true;
+            if(canPlay)
+                tap.Play();
             float temp = this.GetComponent<Animator>().speed;
             Debug.Log(temp);
             this.GetComponent<Animator>().speed += acceleration;
             yield return new WaitForSeconds(0.2f);
             this.GetComponent<Animator>().speed = temp;
+            
             speeding = false;
         }
+       
     }
     void CallReached()
     {
         OG.VehicleReached();
+        canPlay = false;
     }
 
     public void SliderEffect()

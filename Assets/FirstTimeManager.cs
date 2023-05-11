@@ -167,7 +167,7 @@ public class FirstTimeManager : MonoBehaviour
 
 			LevelManager.Instance.CustSpawnforFirstTime();
 			yield return new WaitForSeconds(2f);
-			CameraScript.GetComponent<CameraFollow>().target=GameObject.Find("AICustomer").transform.GetChild(0);
+			CameraScript.GetComponent<CameraFollow>().CameraFollowObj=GameObject.Find("AICustomer").transform.GetChild(0).gameObject;
 			TextHolder.transform.position=PlaceHolder[2].transform.position;
 			TextHolder.SetActive(true);
 			TextManager.Instance.CaptionTextHandler("Tutorial","A Customer is Coming, Make Sure to Fulfill thier Demands!", Color.cyan, false);
@@ -175,7 +175,8 @@ public class FirstTimeManager : MonoBehaviour
 			TextManager.Instance.CaptionTextHandler("Tutorial","Customer will Sit in any Vacant Hut and will Order thier desired food! ", Color.cyan, false);
 			yield return new WaitForSeconds(8f);
 			TextManager.Instance.CaptionTextHandler("Tutorial","Please Wait!", Color.cyan, false);
-			CameraScript.GetComponent<CameraController>().target=GameObject.Find("Player").transform.GetChild(0);
+			GameObject neckTarget = Player.GetComponent<Animator>().GetBoneTransform(HumanBodyBones.Neck).gameObject;
+			CameraScript.GetComponent<CameraFollow>().CameraFollowObj = neckTarget;
 			yield return new WaitForSeconds(5f);
 			
 		}

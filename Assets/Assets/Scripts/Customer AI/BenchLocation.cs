@@ -12,6 +12,7 @@ public class BenchLocation : MonoBehaviour
     bool lookAt;
     GameObject other;
     public GameObject curtain;
+    public bool temp = false;
     void Start()
     {
         
@@ -30,9 +31,10 @@ public class BenchLocation : MonoBehaviour
     {
         if (other.tag == "Customer")
         {
-            if (other.GetComponent<CustomerAI>().AI_Information.isServed == false && other.GetComponent<CustomerAI>().haveOrdered == false)
+            if (other.GetComponent<CustomerAI>().AI_Information.isServed == false && other.GetComponent<CustomerAI>().haveOrdered == false && !temp)
             {
                 Debug.Log("This", gameObject);
+                temp = true;
                 theAgent = other.GetComponent<NavMeshAgent>();
                 anim = other.GetComponent<Animator>();
                 theAgent.enabled = false;

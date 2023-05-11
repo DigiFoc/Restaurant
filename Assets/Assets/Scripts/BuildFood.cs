@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class BuildFood : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -16,7 +17,9 @@ public class BuildFood : MonoBehaviour
     public Slider foodSlider;
     public Slider foodSlider2;
 	public KitchenPanel kPanel;
-	
+
+    public AudioSource src;
+  
 	
     void Start()
     {
@@ -26,6 +29,8 @@ public class BuildFood : MonoBehaviour
         foodSlider.value = 100f;
         foodSlider2.value = 100f;
         AOSliderHolder.SetActive(false);
+
+        src = this.GetComponent<AudioSource>();
     }
 
 
@@ -65,6 +70,8 @@ public class BuildFood : MonoBehaviour
 		nonFoodingUI.SetActive(true);
         AOSliderHolder.SetActive(true);
         TextManager.Instance.ShowToast("Starts Cooking", 2);
+        src.Play();
+
 		foodSlider.maxValue=(int)delayTime;
 		foodSlider2.maxValue=(int)delayTime;
 		 for (int i = 0; i < items.Length; i++)
@@ -89,6 +96,7 @@ public class BuildFood : MonoBehaviour
 		kPanel.SetHutInfo();
         TextManager.Instance.CaptiontextTime = 2;
         TextManager.Instance.CaptionTextHandler("Notification","Cooking Done! Check Kitchen to Serve!", Color.blue, true);
+        src.Stop();
 
         StockInventory.Instance.UpdateFoodStockUI();
 		closeButton();        
